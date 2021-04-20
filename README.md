@@ -13,7 +13,7 @@ $ node index.js
 
 ## Features
 - No Internet connection needed
-- Generates Mnemonic & Private Key
+- Generate address with desired prefix
 
 ## Author
 [Yerofey S.](https://github.com/yerofey)
