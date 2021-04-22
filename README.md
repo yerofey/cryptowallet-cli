@@ -3,12 +3,21 @@
 > Simple Ethereum Wallet Generator Tool
 
 ## How to start
+### Install dependencies
 ```bash
-# install dependencies
+# via yarn
 $ yarn
+# or via npm
+$ npm install
+```
 
-# run script
+### Run script
+```bash
+# random wallet address
 $ node index.js
+
+# address with desired prefix
+$ node index.js aaa
 ```
 
 ## Features
