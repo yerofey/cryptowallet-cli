@@ -14,7 +14,7 @@ while (true) {
         const walletAddress = (account.address).toLowerCase();
 
         if (desiredPrefix.length === 0 || walletAddress.startsWith('0x' + desiredPrefix)) {
-            console.log('✨  Done! Here is your brand new Ethereum wallet' + (desiredPrefix != '' ? ' with "' + desiredPrefix + '" prefix' : '') + "\n");
+            console.log('✨  Done! Here is your brand new BEP-20/ERC-20 wallet' + (desiredPrefix != '' ? ' with "' + desiredPrefix + '" prefix' : '') + "\n");
             console.log('📄  ' + mnemonic);
             console.log('🔑  ' + privateKey);
             console.log('👛  ' + walletAddress);

@@ -1,5 +1,5 @@
 {
-  "name": "ethereum-wallet-generator",
+  "name": "bep20-erc20-wallet-generator",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

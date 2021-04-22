@@ -1,6 +1,6 @@
-# ethereum-wallet-generator
+# bep20-erc20-wallet-generator
 
-> Simple Ethereum Wallet Generator Tool
+> Simple Binance Smart Chain & Ethereum wallet generator tool
 
 ## How to start
 ### Install dependencies
@@ -28,4 +28,4 @@ $ node index.js aaa
 [Yerofey S.](https://github.com/yerofey)
 
 ## License
-This library licensed under [MIT](https://github.com/yerofey/ethereum-wallet-generator/blob/master/LICENSE).
+This library licensed under [MIT](https://github.com/yerofey/bep20-erc20-wallet-generator/blob/master/LICENSE).
