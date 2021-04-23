@@ -7,7 +7,7 @@ const desiredPrefix = (args.length === 1 ? args[0].toLowerCase() : '') || '';
 // check if prefix match hex format
 const desiredPrefixBadSymbolsArray = desiredPrefix.split('').filter(char => !/[0-9a-f]/g.test(char));
 if (desiredPrefix.length > 0 && desiredPrefixBadSymbolsArray.length > 0) {
-    console.log('Error: prefix contains non-hex characters!');
+    console.log('⛔️  Error: prefix contains non-hex characters!');
     process.exit(1);
 }
 
