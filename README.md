@@ -1,6 +1,6 @@
 # bep20-erc20-wallet-generator
 
-> Simple Binance Smart Chain & Ethereum wallet generator tool
+> Binance Smart Chain, Ethereum; Trust Wallet (multi wallet) wallet generator tool
 
 ## How to start
 ### Install dependencies
