@@ -1,6 +1,7 @@
 {
   "name": "bep20-erc20-wallet-generator",
   "version": "1.0.0",
+  "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
