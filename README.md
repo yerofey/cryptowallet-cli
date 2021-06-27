@@ -2,21 +2,24 @@
 
 > Binance Smart Chain, Ethereum; Trust Wallet (multi wallet) wallet generator tool
 
+![Example](https://i.imgur.com/rA10m0J.png)
+
 ## How to start
 ### Install dependencies
 ```bash
-# via yarn
+# via Yarn
 $ yarn
-# or via npm
+
+# or via NPM
 $ npm install
 ```
 
 ### Run script
 ```bash
-# random wallet address
+# random wallet
 $ node index.js
 
-# address with desired prefix
+# random wallet with desired prefix
 $ node index.js aaa
 ```
 
