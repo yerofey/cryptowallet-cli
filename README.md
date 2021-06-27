@@ -1,8 +1,8 @@
 # bep20-erc20-wallet-generator
 
-> Binance Smart Chain, Ethereum; Trust Wallet (multi wallet) wallet generator tool
+> Binance Smart Chain, Ethereum; MetaMask; Trust Wallet (multi wallet) wallet generator tool
 
-![Example](https://i.imgur.com/rA10m0J.png)
+![Example](https://i.imgur.com/p6D7foR.png)
 
 ## How to start
 ### Install dependencies
