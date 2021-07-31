@@ -1,6 +1,7 @@
 {
-  "name": "bep20-erc20-wallet-generator",
+  "name": "node-cli-crypto-wallet-generator",
   "version": "1.0.0",
+  "homepage": "https://github.com/yerofey/node-cli-crypto-wallet-generator",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "main": "index.js",
   "license": "MIT",

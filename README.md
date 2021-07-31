@@ -1,8 +1,8 @@
-# bep20-erc20-wallet-generator
+# node-cli-crypto-wallet-generator
 
-> Binance Smart Chain, Ethereum; MetaMask; Trust Wallet (multi wallet) wallet generator tool
+> Binance Smart Chain (BEP-20), Ethereum (ERC-20); MetaMask; Trust Wallet (multi wallet - all cryptos) CLI crypto wallet generator tool
 
-![Example](https://i.imgur.com/p6D7foR.png)
+![Screenshot](https://i.imgur.com/AZOYxRv.png)
 
 ## How to start
 ### Install dependencies
@@ -31,4 +31,4 @@ $ node index.js aaa
 [Yerofey S.](https://github.com/yerofey)
 
 ## License
-This library licensed under [MIT](https://github.com/yerofey/bep20-erc20-wallet-generator/blob/master/LICENSE).
+This library licensed under [MIT](https://github.com/yerofey/node-cli-crypto-wallet-generator/blob/master/LICENSE).
