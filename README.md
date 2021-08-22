@@ -2,7 +2,7 @@
 
 > Binance Smart Chain (BEP-20), Ethereum (ERC-20); MetaMask; Trust Wallet (multi wallet - all cryptos) CLI crypto wallet generator tool
 
-![Screenshot](https://i.imgur.com/AZOYxRv.png)
+![Screenshot](https://i.imgur.com/2lqppci.png)
 
 ## How to start
 ### Install dependencies
