@@ -1,9 +1,14 @@
-const args = process.argv.slice(2);
+const { program } = require('commander');
 const bip39 = require('bip39');
 const pkutils = require('ethereum-mnemonic-privatekey-utils');
 const { Account } = require('eth-lib/lib');
 
-const desiredPrefix = (args.length === 1 ? args[0].toLowerCase() : '') || '';
+program.option('-p, --prefix <prefix>', 'Desired wallet prefix');
+program.parse();
+
+const options = program.opts();
+const desiredPrefix = options.prefix || '';
+
 // check if prefix match hex format
 const desiredPrefixBadSymbolsArray = desiredPrefix.split('').filter(char => !/[0-9a-f]/g.test(char));
 if (desiredPrefix.length > 0 && desiredPrefixBadSymbolsArray.length > 0) {
@@ -21,9 +26,10 @@ while (true) {
 
         if (desiredPrefix.length === 0 || walletAddress.startsWith('0x' + desiredPrefix)) {
             console.log('✨  Done! Here is your brand new wallet (MetaMask, Trust Wallet, etc.)' + (desiredPrefix != '' ? ' with "' + desiredPrefix + '" prefix' : '') + "\n");
-            console.log('📄  ' + mnemonic);
-            console.log('🔑  ' + privateKey);
+            
             console.log('👛  ' + walletAddress);
+            console.log('🔑  ' + privateKey);
+            console.log('📄  ' + mnemonic);
 
             break;
         }

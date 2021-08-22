@@ -20,7 +20,7 @@ $ npm install
 $ node index.js
 
 # random wallet with desired prefix
-$ node index.js aaa
+$ node index.js -p aaa
 ```
 
 ## Features

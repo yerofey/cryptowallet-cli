@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "bip39": "^3.0.3",
+    "commander": "^8.1.0",
     "eth-lib": "^0.1.29",
     "ethereum-mnemonic-privatekey-utils": "^1.0.5"
   }
