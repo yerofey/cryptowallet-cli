@@ -26,8 +26,11 @@ $ cryptowallet -p aaa
 # generate random BTC wallet
 $ cryptowallet -c BTC
 
-# generate random BTC wallet with desired prefix
-$ cryptowallet -c BTC -p 11
+# generate random BTC wallet with desired prefix (case sensitive)
+$ cryptowallet -c BTC -p ABC
+
+# generate random BTC wallet with desired prefix (case insensitive)
+$ cryptowallet -c BTC -pi abc
 ```
 
 ## Cryptos supported

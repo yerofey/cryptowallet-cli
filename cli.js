@@ -8,12 +8,15 @@ const { generateWallet } = require('./src/wallet');
 const log = console.log;
 
 program.option('-c, --coin <ticker>', 'Wallet for specoinkeyfic coin', 'ETH');
-program.option('-p, --prefix <prefix>', 'Desired wallet prefix');
+program.option('-p, --prefix <prefix>', 'Desired wallet prefix (case sensitive)');
+program.option('-pi, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case insensitive)');
 program.parse();
 
 const options = program.opts();
 const coin = options.coin || '';
-const prefix = options.prefix || '';
+const prefix = options.prefix || options.prefixIgnorecase || '';
+const prefixIgnoreCase = options.prefixIgnorecase !== undefined;
+const regexpFlags = 'g' + (prefixIgnoreCase ? 'i' : '');
 
 async function run() {
     if (!Object.keys(supportedCoins).includes(coin)) {
@@ -27,8 +30,8 @@ async function run() {
     let prefixFound = false;
 
     if (prefix && typeof coinData === 'object' && 'startsWith' in coinData && 'prefixTest' in coinData) {
-        if (prefix.split('').filter(char => !RegExp(coinData.prefixTest, 'g').test(char)).length === 0) {
-            if (prefix.length > 1 || 'rareSymbols' in coinData && RegExp(coinData.rareSymbols, 'g').test(prefix)) {
+        if (prefix.split('').filter(char => !RegExp(coinData.prefixTest, regexpFlags).test(char)).length === 0) {
+            if (prefix.length > 1 || 'rareSymbols' in coinData && RegExp(coinData.rareSymbols, regexpFlags).test(prefix)) {
                 log(`⏳  Generating wallet with "${prefix}" prefix, this might take a while...`);
             }
             const startsWithSymbols = coinData.startsWith.split('|');
@@ -36,7 +39,7 @@ async function run() {
             while (true) {
                 wallet = await generateWallet(coin, coinData);
                 for (let firstSymbol of startsWithSymbols) {
-                    if (wallet.address.startsWith(firstSymbol + '' + prefix)) {
+                    if (!prefixIgnoreCase && wallet.address.startsWith(firstSymbol + '' + prefix) || prefixIgnoreCase && (wallet.address).toUpperCase().startsWith((firstSymbol + '' + prefix).toUpperCase())) {
                         prefixFound = true;
                         break loop;
                     }
@@ -55,8 +58,8 @@ async function run() {
 
     log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + (coinData.name || coin) + ' wallet' + (prefixFound ? ' with "' + prefix + '" prefix' : '') + ':')}\n`);
     if (prefixFound) {
-        const addressCutFrom = coinData.startsWith.length + prefix.length;
-        log(`👛  ${coinData.startsWith}${chalk.magenta(prefix)}${wallet.address.slice(addressCutFrom)}`);
+        const addressCutLength = coinData.startsWith.length + prefix.length;
+        log(`👛  ${coinData.startsWith}${chalk.magenta(wallet.address.slice(coinData.startsWith.length, addressCutLength))}${wallet.address.slice(addressCutLength)}`);
     } else {
         log(`👛  ${wallet.address}`);
     }
