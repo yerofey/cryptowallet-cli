@@ -1,0 +1,184 @@
+#!/usr/bin/env node
+'use strict';
+
+const { program } = require('commander');
+const chalk = require('chalk');
+const log = console.log;
+
+program.option('-c, --coin <ticker>', 'Wallet for specoinkeyfic coin', 'ETH');
+program.option('-p, --prefix <prefix>', 'Desired wallet prefix');
+program.parse();
+
+const options = program.opts();
+const coin = options.coin || '';
+const prefix = options.prefix || '';
+
+async function run() {
+    const supportedCoins = {
+        'BCH': {
+            'script': 'coinkey'
+        },
+        'BLK': {
+            'script': 'coinkey'
+        },
+        'BNB': {
+            'type': 'ERC',
+            'name': 'BNB-BEP20 (BSC) / ETH',
+            'multi': true,
+            'startsWith': '0x',
+            'prefixTest': /[0-9a-f]/g
+        },
+        'BTC': {
+            'script': 'coinkey'
+        },
+        'BTG': {
+            'script': 'coinkey'
+        },
+        'DASH': {
+            'script': 'coinkey'
+        },
+        'DCR': {
+            'script': 'coinkey'
+        },
+        'DGB': {
+            'script': 'coinkey'
+        },
+        'DOGE': {
+            'script': 'coinkey'
+        },
+        'ETH': {
+            'type': 'ERC',
+            'name': 'ETH / BNB-BEP20 (BSC)',
+            'multi': true,
+            'startsWith': '0x',
+            'prefixTest': /[0-9a-f]/g
+        },
+        'LTC': {
+            'script': 'coinkey'
+        },
+        'MONA': {
+            'script': 'coinkey'
+        },
+        'NBT': {
+            'script': 'coinkey'
+        },
+        'NMC': {
+            'script': 'coinkey'
+        },
+        'PPC': {
+            'script': 'coinkey'
+        },
+        'QTUM': {
+            'script': 'coinkey'
+        },
+        'RDD': {
+            'script': 'coinkey'
+        },
+        'TRX': {},
+        'VIA': {
+            'script': 'coinkey'
+        },
+        'VTC': {
+            'script': 'coinkey'
+        },
+        'XTZ': {},
+        'ZEC': {
+            'script': 'coinkey'
+        },
+    };
+
+    if (!Object.keys(supportedCoins).includes(coin)) {
+        log(chalk.red('⛔️  Error: coin not supported!'));
+        process.exit(1);
+    }
+
+    const coinData = supportedCoins[coin];
+
+    async function generateWallet(coin, coinData) {
+        if (coinData.script == 'coinkey') {
+            const CoinKey = require('coinkey');
+            const CoinInfo = require('coininfo');
+            const wallet = CoinKey.createRandom(CoinInfo(coin).versions);
+
+            return {
+                address: wallet.publicAddress,
+                key: wallet.privateWif,
+            }
+        } else if (coin == 'ETH' || coin == 'BNB') {
+            const bip39 = require('bip39');
+            const pkutils = require('ethereum-mnemonic-privatekey-utils');
+            const { Account } = require('eth-lib/lib');
+
+            const mnemonic = bip39.generateMnemonic();
+            const privateKey = pkutils.getPrivateKeyFromMnemonic(mnemonic);
+            const account = Account.fromPrivate('0x' + privateKey);
+            const walletAddress = (account.address).toLowerCase();
+
+            return {
+                address: walletAddress,
+                key: privateKey,
+                mnemonic
+            }
+        } else if (coin == 'TRX') {
+            const tronWeb = require('tronweb');
+
+            try {
+                const wallet = await tronWeb.createAccount();
+
+                return {
+                    address: wallet.address.base58,
+                    key: wallet.privateKey
+                }
+            } catch (error) {
+                return {
+                    error
+                }
+            }
+        } else if (coin == 'XTZ') {
+            const tezos = require('tezos-sign');
+            const wallet = tezos.generateKeysNoSeed();
+
+            return {
+                address: wallet.pkh,
+                key: wallet.sk,
+            }
+        } else {
+            
+        }
+    }
+    
+    let wallet = {};
+    let prefixFound = false;
+    if (prefix && typeof coinData === 'object' && 'startsWith' in coinData && 'prefixTest' in coinData) {
+        if (prefix.split('').filter(char => !(coinData.prefixTest).test(char)).length == 0) {
+            while (true) {
+                wallet = await generateWallet(coin, coinData);
+                if (wallet.address.startsWith(coinData.startsWith + '' + prefix)) {
+                    prefixFound = true;
+                    break;
+                }
+            }
+        } else {
+            log(chalk.red('⛔️  Error: prefix contains non-supported characters!'));
+            process.exit(1);
+        }
+    } else {
+        if (prefix) {
+            log('😢  ' + chalk.yellow('Sorry, ' + coin + ' doesn\'t support prefix yet...'));
+        }
+        wallet = await generateWallet(coin, coinData);
+    }
+
+    log('✨  ' + chalk.green('Done!') + ' ' + chalk.blueBright('Here is your brand new ' + (coinData.name || coin) + ' wallet' + (prefixFound ? ' with "' + prefix + '" prefix' : '') + ':') + "\n");
+    log('👛  ' + wallet.address);
+    log('🔑  ' + wallet.key);
+    if (wallet.mnemonic) {
+        log('📄  ' + wallet.mnemonic);
+    }
+    if (coinData.multi) {
+        log('');
+        log(chalk.greenBright('ℹ️   This wallet could be imported into MetaMask or Trust Wallet (multi wallet)'));
+    }  
+}
+
+run();

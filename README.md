@@ -1,34 +1,63 @@
-# node-cli-crypto-wallet-generator
+# cryptowallet-cli
 
-> Binance Smart Chain (BEP-20), Ethereum (ERC-20); MetaMask; Trust Wallet (multi wallet - all cryptos) CLI crypto wallet generator tool
+> Crypto wallet generator CLI tool
 
-![Screenshot](https://i.imgur.com/2lqppci.png)
+![Screenshot](https://i.imgur.com/fDXfWWK.png)
 
-## How to start
-### Install dependencies
+---
+
+## Install
 ```bash
 # via Yarn
-$ yarn
+$ yarn global add cryptowallet
 
 # or via NPM
-$ npm install
+$ npm install --global cryptowallet
 ```
 
-### Run script
+## Usage
 ```bash
-# random wallet
-$ node index.js
+# generate random ETH/BNB wallet
+$ cryptowallet
 
-# random wallet with desired prefix
-$ node index.js -p aaa
+# generate random ETH/BNB wallet with desired prefix
+$ cryptowallet -p aaa
+
+# generate random BTC wallet
+$ cryptowallet -c BTC
 ```
 
-## Features
-- No Internet connection needed
-- Generate address with desired prefix
+## Cryptos supported
+- `BTC` (Bitcoin)
+- `ETH` (Ethereum) [prefix supported]
+- `BNB` (Binance Coin - BEP20 BSC)  [prefix supported]
+- `DOGE` (Dogecoin)
+- `BCH` (Bitcoin Cash)
+- `LTC` (Litecoin)
+- `TRX` (Tron)
+- `XTZ` (Tezos)
+- `DASH` (Dash)
+- `DCR` (Decred)
+- `ZEC` (Zcash)
+- `QTUM` (Qtum)
+- `BTG` (Bitcoin Gold)
+- `DGB` (DigiByte)
+- `RDD` (ReddCoin)
+- `VTC` (Vertcoin)
+- `MONA` (MonaCoin)
+- `NMC` (NameCoin)
+- `PPC` (PeerCoin)
+- `BLK` (BlackCoin)
+- `VIA` (Viacoin)
+- `NBT` (NIX Bridge Token)
+
+## Highlights
+- Supports 22 cryptos
+- Supports address prefix
+- Works fully offline
 
 ## Author
 [Yerofey S.](https://github.com/yerofey)
 
 ## License
-This library licensed under [MIT](https://github.com/yerofey/node-cli-crypto-wallet-generator/blob/master/LICENSE).
+This library licensed under [MIT](https://github.com/yerofey/cryptowallet-cli/blob/master/LICENSE).

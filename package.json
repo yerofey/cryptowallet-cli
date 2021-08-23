@@ -1,14 +1,24 @@
 {
-  "name": "node-cli-crypto-wallet-generator",
-  "version": "1.0.0",
-  "homepage": "https://github.com/yerofey/node-cli-crypto-wallet-generator",
+  "name": "cryptowallet-cli",
+  "version": "1.1.0",
+  "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
-  "main": "index.js",
+  "bin": {
+		"cryptowallet": "cli.js"
+	},
+  "engines": {
+		"node": ">=6"
+	},
   "license": "MIT",
   "dependencies": {
     "bip39": "^3.0.3",
+    "chalk": "^4.1.2",
+    "coininfo": "^5.1.0",
+    "coinkey": "^3.0.0",
     "commander": "^8.1.0",
     "eth-lib": "^0.1.29",
-    "ethereum-mnemonic-privatekey-utils": "^1.0.5"
+    "ethereum-mnemonic-privatekey-utils": "^1.0.5",
+    "tezos-sign": "^1.4.1",
+    "tronweb": "^4.0.0"
   }
 }
