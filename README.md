@@ -25,10 +25,13 @@ $ cryptowallet -p aaa
 
 # generate random BTC wallet
 $ cryptowallet -c BTC
+
+# generate random BTC wallet with desired prefix
+$ cryptowallet -c BTC -p 11
 ```
 
 ## Cryptos supported
-- `BTC` (Bitcoin)
+- `BTC` (Bitcoin) [prefix supported]
 - `ETH` (Ethereum) [prefix supported]
 - `BNB` (Binance Coin: BEP20 - BSC) [prefix supported]
 - `DOGE` (Dogecoin)

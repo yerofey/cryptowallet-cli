@@ -16,74 +16,76 @@ const prefix = options.prefix || '';
 async function run() {
     const supportedCoins = {
         'BCH': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'BLK': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'BNB': {
-            'type': 'ERC',
-            'name': 'BNB-BEP20 (BSC) / ETH',
-            'multi': true,
-            'startsWith': '0x',
-            'prefixTest': /[0-9a-f]/g
+            type: 'ERC',
+            name: 'BNB-BEP20 (BSC) / ETH',
+            multi: true,
+            startsWith: '0x',
+            prefixTest: '[0-9a-f]'
         },
         'BTC': {
-            'script': 'coinkey'
+            script: 'coinkey',
+            startsWith: '1', // P2PKH
+            prefixTest: '(?![0oOiI])[1-9a-zA-Z]'
         },
         'BTG': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'DASH': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'DCR': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'DGB': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'DOGE': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'ETH': {
-            'type': 'ERC',
-            'name': 'ETH / BNB-BEP20 (BSC)',
-            'multi': true,
-            'startsWith': '0x',
-            'prefixTest': /[0-9a-f]/g
+            type: 'ERC',
+            name: 'ETH / BNB-BEP20 (BSC)',
+            multi: true,
+            startsWith: '0x',
+            prefixTest: '[0-9a-f]'
         },
         'LTC': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'MONA': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'NBT': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'NMC': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'PPC': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'QTUM': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'RDD': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'TRX': {},
         'VIA': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'VTC': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
         'XTZ': {},
         'ZEC': {
-            'script': 'coinkey'
+            script: 'coinkey'
         },
     };
 
@@ -102,7 +104,7 @@ async function run() {
 
             return {
                 address: wallet.publicAddress,
-                key: wallet.privateWif,
+                privateKey: wallet.privateWif,
             }
         } else if (coin == 'ETH' || coin == 'BNB') {
             const bip39 = require('bip39');
@@ -116,7 +118,7 @@ async function run() {
 
             return {
                 address: walletAddress,
-                key: privateKey,
+                privateKey: privateKey,
                 mnemonic
             }
         } else if (coin == 'TRX') {
@@ -127,7 +129,7 @@ async function run() {
 
                 return {
                     address: wallet.address.base58,
-                    key: wallet.privateKey
+                    privateKey: wallet.privateKey
                 }
             } catch (error) {
                 return {
@@ -140,7 +142,7 @@ async function run() {
 
             return {
                 address: wallet.pkh,
-                key: wallet.sk,
+                privateKey: wallet.sk,
             }
         } else {
             
@@ -149,8 +151,12 @@ async function run() {
     
     let wallet = {};
     let prefixFound = false;
+
     if (prefix && typeof coinData === 'object' && 'startsWith' in coinData && 'prefixTest' in coinData) {
-        if (prefix.split('').filter(char => !(coinData.prefixTest).test(char)).length == 0) {
+        if (prefix.split('').filter(char => !RegExp(coinData.prefixTestNew, 'g').test(char)).length === 0) {
+            if (prefix.length > 1) {
+                log('⏳  Generating wallet with "' + prefix + '" prefix, this might take a while...');
+            }
             while (true) {
                 wallet = await generateWallet(coin, coinData);
                 if (wallet.address.startsWith(coinData.startsWith + '' + prefix)) {
@@ -170,8 +176,13 @@ async function run() {
     }
 
     log('✨  ' + chalk.green('Done!') + ' ' + chalk.blueBright('Here is your brand new ' + (coinData.name || coin) + ' wallet' + (prefixFound ? ' with "' + prefix + '" prefix' : '') + ':') + "\n");
-    log('👛  ' + wallet.address);
-    log('🔑  ' + wallet.key);
+    if (prefixFound) {
+        const addressCutFrom = coinData.startsWith.length + prefix.length;
+        log(`👛  ${coinData.startsWith}${chalk.magenta(prefix)}${wallet.address.slice(addressCutFrom)}`);
+    } else {
+        log('👛  ' + wallet.address);
+    }
+    log('🔑  ' + wallet.privateKey);
     if (wallet.mnemonic) {
         log('📄  ' + wallet.mnemonic);
     }
