@@ -1,0 +1,134 @@
+{
+    "BCH": {
+        "script": "coinkey",
+        "startsWith": "1",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "BLK": {
+        "script": "coinkey",
+        "startsWith": "B",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "BNB": {
+        "type": "ERC",
+        "name": "BNB-BEP20 (BSC) / ETH",
+        "multi": true,
+        "startsWith": "0x",
+        "prefixTest": "[0-9a-f]"
+    },
+    "BTC": {
+        "script": "coinkey",
+        "startsWith": "1",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "BTG": {
+        "script": "coinkey",
+        "startsWith": "G",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "DASH": {
+        "script": "coinkey",
+        "startsWith": "X",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "DCR": {
+        "script": "coinkey",
+        "startsWith": "D",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "DGB": {
+        "script": "coinkey",
+        "startsWith": "D",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "DOGE": {
+        "script": "coinkey",
+        "startsWith": "D",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "ETH": {
+        "type": "ERC",
+        "name": "ETH / BNB-BEP20 (BSC)",
+        "multi": true,
+        "startsWith": "0x",
+        "prefixTest": "[0-9a-f]"
+    },
+    "LTC": {
+        "script": "coinkey",
+        "startsWith": "L",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "MONA": {
+        "script": "coinkey",
+        "startsWith": "M",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "NBT": {
+        "script": "coinkey",
+        "startsWith": "B",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "NMC": {
+        "script": "coinkey",
+        "startsWith": "M|N",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "PPC": {
+        "script": "coinkey",
+        "startsWith": "P",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "QTUM": {
+        "script": "coinkey",
+        "startsWith": "Q",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "RDD": {
+        "script": "coinkey",
+        "startsWith": "R",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "TRX": {
+        "startsWith": "T",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "VIA": {
+        "script": "coinkey",
+        "startsWith": "V",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "VTC": {
+        "script": "coinkey",
+        "startsWith": "V",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "XTZ": {
+        "startsWith": "tz1",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    },
+    "ZEC": {
+        "script": "coinkey",
+        "startsWith": "t1",
+        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+        "rareSymbols": "[1-9]"
+    }
+}
