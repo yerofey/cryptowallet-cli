@@ -3,7 +3,7 @@
 
 const { program } = require('commander');
 const chalk = require('chalk');
-const supportedCoins = require('./src/supportedCoins.json');
+const supportedCoins = require('./src/coins.json');
 const { generateWallet } = require('./src/wallet');
 const log = console.log;
 
