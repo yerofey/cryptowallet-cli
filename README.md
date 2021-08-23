@@ -17,10 +17,10 @@ $ npm i -g @yerofey/cryptowallet-cli
 
 ## Usage
 ```bash
-# generate random ETH/BNB wallet
+# generate random ETH/BNB-BEP20 wallet
 $ cryptowallet
 
-# generate random ETH/BNB wallet with desired prefix
+# generate random ETH/BNB-BEP20 wallet with desired prefix
 $ cryptowallet -p aaa
 
 # generate random BTC wallet
@@ -30,7 +30,7 @@ $ cryptowallet -c BTC
 ## Cryptos supported
 - `BTC` (Bitcoin)
 - `ETH` (Ethereum) [prefix supported]
-- `BNB` (Binance Coin - BEP20 BSC)  [prefix supported]
+- `BNB` (Binance Coin: BEP20 - BSC) [prefix supported]
 - `DOGE` (Dogecoin)
 - `BCH` (Bitcoin Cash)
 - `LTC` (Litecoin)
@@ -60,4 +60,4 @@ $ cryptowallet -c BTC
 [Yerofey S.](https://github.com/yerofey)
 
 ## License
-This library licensed under [MIT](https://github.com/yerofey/cryptowallet-cli/blob/master/LICENSE).
+[MIT](https://github.com/yerofey/cryptowallet-cli/blob/master/LICENSE).

@@ -4,19 +4,19 @@
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "bin": {
-		"cryptowallet": "cli.js"
-	},
+    "cryptowallet": "cli.js"
+  },
   "engines": {
-		"node": ">=6"
-	},
+    "node": ">=6"
+  },
   "files": [
-		"cli.js"
-	],
-	"keywords": [
+    "cli.js"
+  ],
+  "keywords": [
     "cli-app",
-		"cli",
+    "cli",
     "terminal",
-		"console",
+    "console",
     "command-line",
     "crypto",
     "cryptocurrency",
