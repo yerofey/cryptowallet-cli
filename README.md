@@ -9,10 +9,10 @@
 ## Install
 ```bash
 # via Yarn
-$ yarn global add cryptowallet
+$ yarn global add @yerofey/cryptowallet-cli
 
 # or via NPM
-$ npm install --global cryptowallet
+$ npm i -g @yerofey/cryptowallet-cli
 ```
 
 ## Usage
