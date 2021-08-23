@@ -29,7 +29,7 @@ async function run() {
     if (prefix && typeof coinData === 'object' && 'startsWith' in coinData && 'prefixTest' in coinData) {
         if (prefix.split('').filter(char => !RegExp(coinData.prefixTest, 'g').test(char)).length === 0) {
             if (prefix.length > 1 || 'rareSymbols' in coinData && RegExp(coinData.rareSymbols, 'g').test(prefix)) {
-                log(`⏳  Generating wallet with "' + prefix + '" prefix, this might take a while...`);
+                log(`⏳  Generating wallet with "${prefix}" prefix, this might take a while...`);
             }
             const startsWithSymbols = coinData.startsWith.split('|');
             loop:
