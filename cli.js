@@ -16,10 +16,16 @@ const prefix = options.prefix || '';
 async function run() {
     const supportedCoins = {
         'BCH': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: '1',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'BLK': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'B',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'BNB': {
             type: 'ERC',
@@ -30,23 +36,39 @@ async function run() {
         },
         'BTC': {
             script: 'coinkey',
-            startsWith: '1', // P2PKH
-            prefixTest: '(?![0oOiI])[1-9a-zA-Z]'
+            startsWith: '1',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'BTG': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'G',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'DASH': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'X',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'DCR': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'D',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'DGB': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'D',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'DOGE': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'D',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'ETH': {
             type: 'ERC',
@@ -56,36 +78,74 @@ async function run() {
             prefixTest: '[0-9a-f]'
         },
         'LTC': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'L',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'MONA': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'M',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'NBT': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'B',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'NMC': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'M|N',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'PPC': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'P',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'QTUM': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'Q',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'RDD': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'R',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
-        'TRX': {},
+        'TRX': {
+            startsWith: 'T',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
+        },
         'VIA': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'V',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
         'VTC': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 'V',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
-        'XTZ': {},
+        'XTZ': {
+            startsWith: 'tz1',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
+        },
         'ZEC': {
-            script: 'coinkey'
+            script: 'coinkey',
+            startsWith: 't1',
+            prefixTest: '(?![0OI])[1-9a-zA-Z]',
+            rareSymbols: '[1-9]'
         },
     };
 
@@ -154,14 +214,18 @@ async function run() {
 
     if (prefix && typeof coinData === 'object' && 'startsWith' in coinData && 'prefixTest' in coinData) {
         if (prefix.split('').filter(char => !RegExp(coinData.prefixTestNew, 'g').test(char)).length === 0) {
-            if (prefix.length > 1) {
+            if (prefix.length > 1 || 'rareSymbols' in coinData && RegExp(coinData.rareSymbols, 'g').test(prefix)) {
                 log('⏳  Generating wallet with "' + prefix + '" prefix, this might take a while...');
             }
+            const startsWithSymbols = coinData.startsWith.split('|');
+            loop:
             while (true) {
                 wallet = await generateWallet(coin, coinData);
-                if (wallet.address.startsWith(coinData.startsWith + '' + prefix)) {
-                    prefixFound = true;
-                    break;
+                for (let firstSymbol of startsWithSymbols) {
+                    if (wallet.address.startsWith(firstSymbol + '' + prefix)) {
+                        prefixFound = true;
+                        break loop;
+                    }
                 }
             }
         } else {

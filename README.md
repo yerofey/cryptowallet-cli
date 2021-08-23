@@ -31,9 +31,9 @@ $ cryptowallet -c BTC -p 11
 ```
 
 ## Cryptos supported
-- `BTC` (Bitcoin) [prefix supported]
-- `ETH` (Ethereum) [prefix supported]
-- `BNB` (Binance Coin: BEP20 - BSC) [prefix supported]
+- `BTC` (Bitcoin)
+- `ETH` (Ethereum)
+- `BNB` (Binance Coin: BEP20 - BSC)
 - `DOGE` (Dogecoin)
 - `BCH` (Bitcoin Cash)
 - `LTC` (Litecoin)
