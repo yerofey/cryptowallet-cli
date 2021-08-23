@@ -60,4 +60,4 @@ $ cryptowallet -c BTC
 [Yerofey S.](https://github.com/yerofey)
 
 ## License
-[MIT](https://github.com/yerofey/cryptowallet-cli/blob/master/LICENSE).
+[MIT](https://github.com/yerofey/cryptowallet-cli/blob/master/LICENSE)
