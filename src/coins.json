@@ -1,17 +1,20 @@
 {
     "BCH": {
+        "title": "Bitcoin Cash",
         "script": "coinkey",
         "startsWith": "1",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "BLK": {
+        "title": "BlackCoin",
         "script": "coinkey",
         "startsWith": "B",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "BNB": {
+        "title": "Binance Coin",
         "type": "ERC",
         "name": "BNB-BEP20 (BSC) / ETH",
         "multi": true,
@@ -19,42 +22,49 @@
         "prefixTest": "[0-9a-f]"
     },
     "BTC": {
+        "title": "Bitcoin",
         "script": "coinkey",
         "startsWith": "1",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "BTG": {
+        "title": "Bitcoin Gold",
         "script": "coinkey",
         "startsWith": "G",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "DASH": {
+        "title": "Dash",
         "script": "coinkey",
         "startsWith": "X",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "DCR": {
+        "title": "Decred",
         "script": "coinkey",
         "startsWith": "D",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "DGB": {
+        "title": "DigiByte",
         "script": "coinkey",
         "startsWith": "D",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "DOGE": {
+        "title": "Dogecoin",
         "script": "coinkey",
         "startsWith": "D",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "ETH": {
+        "title": "Ethereum",
         "type": "ERC",
         "name": "ETH / BNB-BEP20 (BSC)",
         "multi": true,
@@ -62,70 +72,82 @@
         "prefixTest": "[0-9a-f]"
     },
     "LTC": {
+        "title": "Litecoin",
         "script": "coinkey",
         "startsWith": "L",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "MONA": {
+        "title": "MonaCoin",
         "script": "coinkey",
         "startsWith": "M",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "NBT": {
+        "title": "NIX Bridge Token",
         "script": "coinkey",
         "startsWith": "B",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "NMC": {
+        "title": "NameCoin",
         "script": "coinkey",
         "startsWith": "M|N",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "PPC": {
+        "title": "PeerCoin",
         "script": "coinkey",
         "startsWith": "P",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "QTUM": {
+        "title": "Qtum",
         "script": "coinkey",
         "startsWith": "Q",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "RDD": {
+        "title": "ReddCoin",
         "script": "coinkey",
         "startsWith": "R",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "TRX": {
+        "title": "Tron",
         "startsWith": "T",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "VIA": {
+        "title": "Viacoin",
         "script": "coinkey",
         "startsWith": "V",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "VTC": {
+        "title": "Vertcoin",
         "script": "coinkey",
         "startsWith": "V",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "XTZ": {
+        "title": "Tezos",
         "startsWith": "tz1",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
     "ZEC": {
+        "title": "Zcash",
         "script": "coinkey",
         "startsWith": "t1",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",

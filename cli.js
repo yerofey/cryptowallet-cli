@@ -8,6 +8,7 @@ const { generateWallet } = require('./src/wallet');
 const log = console.log;
 
 program.option('-c, --coin <ticker>', 'Wallet for specoinkeyfic coin', 'ETH');
+program.option('-l, --list', 'List all supported cryptos');
 program.option('-p, --prefix <prefix>', 'Desired wallet prefix (case sensitive)');
 program.option('-pi, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case insensitive)');
 program.parse();
@@ -18,6 +19,16 @@ const prefix = options.prefix || options.prefixIgnorecase || '';
 const prefixIgnoreCase = options.prefixIgnorecase !== undefined;
 
 async function run() {
+    if (options.list !== undefined) {
+        log(`🔠  All supported cryptos:\n`);
+        for (const coin of Object.keys(supportedCoins)) {
+            console.log('    ' + chalk.blue(coin) + ' - ' + supportedCoins[coin].title);
+        }
+        log();
+        log(`ℹ️   Use flag "-c TICKER" to select specific coin`);
+        process.exit(1);
+    }
+
     if (!Object.keys(supportedCoins).includes(coin)) {
         log(chalk.red('⛔️  Error: coin not supported!'));
         process.exit(1);
