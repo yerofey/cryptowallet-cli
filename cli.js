@@ -16,7 +16,6 @@ const options = program.opts();
 const coin = options.coin || '';
 const prefix = options.prefix || options.prefixIgnorecase || '';
 const prefixIgnoreCase = options.prefixIgnorecase !== undefined;
-const regexpFlags = 'g' + (prefixIgnoreCase ? 'i' : '');
 
 async function run() {
     if (!Object.keys(supportedCoins).includes(coin)) {
@@ -28,10 +27,11 @@ async function run() {
 
     let wallet = {};
     let prefixFound = false;
+    const prefixBadSymbolsArray = (prefix != '' ? prefix.split('').filter(char => !RegExp(coinData.prefixTest, 'g').test(char)) : []);
 
     if (prefix && typeof coinData === 'object' && 'startsWith' in coinData && 'prefixTest' in coinData) {
-        if (prefix.split('').filter(char => !RegExp(coinData.prefixTest, regexpFlags).test(char)).length === 0) {
-            if (prefix.length > 1 || 'rareSymbols' in coinData && RegExp(coinData.rareSymbols, regexpFlags).test(prefix)) {
+        if (prefixBadSymbolsArray.length === 0) {
+            if (prefix.length > 1 || 'rareSymbols' in coinData && RegExp(coinData.rareSymbols, 'g').test(prefix)) {
                 log(`⏳  Generating wallet with "${prefix}" prefix, this might take a while...`);
             }
             const startsWithSymbols = coinData.startsWith.split('|');
@@ -46,7 +46,12 @@ async function run() {
                 }
             }
         } else {
-            log(chalk.red('⛔️  Error: prefix contains non-supported characters!'));
+            let prefixBadSymbolsString = '';
+            for (const symbol of prefixBadSymbolsArray) {
+                prefixBadSymbolsString += '"' + symbol + '", ';
+            }
+
+            log(chalk.red('⛔️  Error: prefix contains non-supported characters (' + prefixBadSymbolsString.substr(0, prefixBadSymbolsString.length - 2) + ')!'));
             process.exit(1);
         }
     } else {
@@ -54,6 +59,11 @@ async function run() {
             log(`😢  ${chalk.yellow('Sorry, ' + coin + ' doesn\'t support prefix yet...')}`);
         }
         wallet = await generateWallet(coin, coinData);
+    }
+
+    if (wallet.error !== undefined) {
+        log(`⛔️  ${chalk.red(`Error: ${wallet.error}`)}`);
+        return;
     }
 
     log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + (coinData.name || coin) + ' wallet' + (prefixFound ? ' with "' + prefix + '" prefix' : '') + ':')}\n`);
