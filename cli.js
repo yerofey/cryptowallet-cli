@@ -9,12 +9,14 @@ const log = console.log;
 
 program.option('-c, --coin <ticker>', 'Wallet for specoinkeyfic coin', 'ETH');
 program.option('-l, --list', 'List all supported cryptos');
+program.option('-m, --mnemonic <mnemonic>', 'Generate wallet from mnemonic string');
 program.option('-p, --prefix <prefix>', 'Desired wallet prefix (case sensitive)');
 program.option('-pi, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case insensitive)');
 program.parse();
 
 const options = program.opts();
 const coin = options.coin || '';
+const mnemonic = options.mnemonic || '';
 const prefix = options.prefix || options.prefixIgnorecase || '';
 const prefixIgnoreCase = options.prefixIgnorecase !== undefined;
 
@@ -48,7 +50,7 @@ async function run() {
             const startsWithSymbols = coinData.startsWith.split('|');
             loop:
             while (true) {
-                wallet = await generateWallet(coin, coinData);
+                wallet = await generateWallet(coin, coinData, mnemonic);
                 for (let firstSymbol of startsWithSymbols) {
                     if (!prefixIgnoreCase && wallet.address.startsWith(firstSymbol + '' + prefix) || prefixIgnoreCase && (wallet.address).toUpperCase().startsWith((firstSymbol + '' + prefix).toUpperCase())) {
                         prefixFound = true;
@@ -69,7 +71,7 @@ async function run() {
         if (prefix) {
             log(`😢  ${chalk.yellow('Sorry, ' + coin + ' doesn\'t support prefix yet...')}`);
         }
-        wallet = await generateWallet(coin, coinData);
+        wallet = await generateWallet(coin, coinData, mnemonic);
     }
 
     if (wallet.error !== undefined) {

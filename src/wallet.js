@@ -1,5 +1,6 @@
-async function generateWallet(coin, coinData) {
+async function generateWallet(coin, coinData, mnemonicString = '') {
     if (coinData.script == 'coinkey') {
+        // TODO: add mnemonic
         const CoinKey = require('coinkey');
         const CoinInfo = require('coininfo');
         const wallet = CoinKey.createRandom(CoinInfo(coin).versions);
@@ -13,7 +14,7 @@ async function generateWallet(coin, coinData) {
         const pkutils = require('ethereum-mnemonic-privatekey-utils');
         const { Account } = require('eth-lib/lib');
 
-        const mnemonic = bip39.generateMnemonic();
+        const mnemonic = mnemonicString || bip39.generateMnemonic();
         const privateKey = pkutils.getPrivateKeyFromMnemonic(mnemonic);
         const account = Account.fromPrivate('0x' + privateKey);
         const walletAddress = (account.address).toLowerCase();
@@ -24,6 +25,7 @@ async function generateWallet(coin, coinData) {
             mnemonic
         }
     } else if (coin == 'TRX') {
+        // TODO: add mnemonic
         const tronWeb = require('tronweb');
 
         try {
@@ -39,6 +41,7 @@ async function generateWallet(coin, coinData) {
             }
         }
     } else if (coin == 'XTZ') {
+        // TODO: add mnemonic
         const tezos = require('tezos-sign');
         const wallet = tezos.generateKeysNoSeed();
 
@@ -47,7 +50,9 @@ async function generateWallet(coin, coinData) {
             privateKey: wallet.sk,
         }
     } else {
-        
+        return {
+            error: 'coin is not supported yet'
+        }
     }
 }
 
