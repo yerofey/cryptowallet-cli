@@ -6,7 +6,7 @@ const chalk = require('chalk');
 const columnify = require('columnify');
 const supportedCoins = require('./src/coins.json');
 const { generateWallet } = require('./src/wallet');
-// const log = console.log;
+const log = console.log;
 
 program.option('-c, --coin <ticker>', 'Wallet for specific coin', 'ERC');
 program.option('-l, --list', 'List all supported cryptos');
@@ -23,7 +23,7 @@ const prefixIgnoreCase = options.prefixIgnorecase !== undefined;
 
 async function run() {
     if (options.list !== undefined) {
-        console.log(`🔠  All supported cryptos:\n`);
+        log(`🔠  All supported cryptos:\n`);
         let cryptos = {};
         for (const coin of Object.keys(supportedCoins)) {
             let title = supportedCoins[coin].title || '';
@@ -32,17 +32,17 @@ async function run() {
             }
             cryptos[chalk.blue(coin)] = supportedCoins[coin].title;
         }
-        console.log(columnify(cryptos, {
+        log(columnify(cryptos, {
             showHeaders: false,
             columnSplitter: ' - ',
         }));
-        console.log();
-        console.log(`ℹ️   Use flag "-c TICKER" to select specific coin`);
+        log();
+        log(`ℹ️   Use flag "-c TICKER" to select specific coin`);
         process.exit(1);
     }
 
     if (!Object.keys(supportedCoins).includes(coin)) {
-        console.log(chalk.red('⛔️  Error: coin not supported!'));
+        log(chalk.red('⛔️  Error: coin not supported!'));
         process.exit(1);
     }
 
@@ -55,7 +55,7 @@ async function run() {
     if (prefix && typeof coinData === 'object' && 'startsWith' in coinData && 'prefixTest' in coinData) {
         if (prefixBadSymbolsArray.length === 0) {
             if (prefix.length > 1 || 'rareSymbols' in coinData && RegExp(coinData.rareSymbols, 'g').test(prefix)) {
-                console.log(`⏳  Generating wallet with "${prefix}" prefix, this might take a while...`);
+                log(`⏳  Generating wallet with "${prefix}" prefix, this might take a while...`);
             }
             const startsWithSymbols = coinData.startsWith.split('|');
             loop:
@@ -74,43 +74,43 @@ async function run() {
                 prefixBadSymbolsString += '"' + symbol + '", ';
             }
 
-            console.log(chalk.red('⛔️  Error: prefix contains non-supported characters (' + prefixBadSymbolsString.substr(0, prefixBadSymbolsString.length - 2) + ')!'));
+            log(chalk.red('⛔️  Error: prefix contains non-supported characters (' + prefixBadSymbolsString.substr(0, prefixBadSymbolsString.length - 2) + ')!'));
             process.exit(1);
         }
     } else {
         if (prefix) {
-            console.log(`😢  ${chalk.yellow('Sorry, ' + coin + ' doesn\'t support prefix yet...')}`);
+            log(`😢  ${chalk.yellow('Sorry, ' + coin + ' doesn\'t support prefix yet...')}`);
         }
         wallet = await generateWallet(coin, coinData, mnemonic);
     }
 
     if (wallet.error !== undefined) {
-        console.log(`⛔️  ${chalk.red(`Error: ${wallet.error}`)}`);
+        log(`⛔️  ${chalk.red(`Error: ${wallet.error}`)}`);
         return;
     }
 
-    console.log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + (coinData.name || coin) + ' wallet' + (prefixFound ? ' with "' + prefix + '" prefix' : '') + ':')}\n`);
+    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + (coinData.name || coin) + ' wallet' + (prefixFound ? ' with "' + prefix + '" prefix' : '') + ':')}\n`);
     if (prefixFound) {
         const addressCutLength = coinData.startsWith.length + prefix.length;
-        console.log(`👛  ${coinData.startsWith}${chalk.magenta(wallet.address.slice(coinData.startsWith.length, addressCutLength))}${wallet.address.slice(addressCutLength)}`);
+        log(`👛  ${coinData.startsWith}${chalk.magenta(wallet.address.slice(coinData.startsWith.length, addressCutLength))}${wallet.address.slice(addressCutLength)}`);
     } else {
-        console.log(`👛  ${wallet.address}`);
+        log(`👛  ${wallet.address}`);
     }
-    console.log(`🔑  ${wallet.privateKey}`);
+    log(`🔑  ${wallet.privateKey}`);
     if (wallet.mnemonic) {
-        console.log(`📄  ${wallet.mnemonic}`);
+        log(`📄  ${wallet.mnemonic}`);
     }
 
     if (coinData.type == 'ERC' || coinData.multi) {
-        console.log();
+        log();
     }
 
     if (coinData.type == 'ERC') {
-        console.log(chalk.yellow('🆒  You can use this wallet in Ethereum, Binance Smart Chain, Polygon and few more networks (ERC-like)'));
+        log(chalk.yellow('🆒  You can use this wallet in Ethereum, Binance Smart Chain, Polygon and few more networks (ERC-like)'));
     }
 
     if (coinData.multi) {
-        console.log(chalk.greenBright('ℹ️   You can import this wallet into MetaMask, Trust Wallet (multi wallet) and many other apps'));
+        log(chalk.greenBright('ℹ️   You can import this wallet into MetaMask, Trust Wallet (multi wallet) and many other apps'));
     }  
 }
 
