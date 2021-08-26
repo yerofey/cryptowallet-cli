@@ -17,10 +17,10 @@ $ npm i -g @yerofey/cryptowallet-cli
 
 ## Usage
 ```bash
-# generate random ETH/BNB-BEP20 wallet
+# generate random ERC-like wallet
 $ cryptowallet
 
-# generate random ETH/BNB-BEP20 wallet with desired prefix
+# generate random ERC-like wallet with desired prefix
 $ cryptowallet -p aaa
 
 # generate random BTC wallet
@@ -43,6 +43,7 @@ $ cryptowallet -l
 - `DOGE` (Dogecoin)
 - `BCH` (Bitcoin Cash)
 - `LTC` (Litecoin)
+- `POLYGON` (Polygon)
 - `TRX` (Tron)
 - `XTZ` (Tezos)
 - `DASH` (Dash)

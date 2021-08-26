@@ -16,7 +16,6 @@
     "BNB": {
         "title": "Binance Coin",
         "type": "ERC",
-        "name": "BNB-BEP20 (BSC) / ETH",
         "multi": true,
         "startsWith": "0x",
         "prefixTest": "[0-9a-f]"
@@ -63,10 +62,15 @@
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
     },
+    "ERC": {
+        "type": "ERC",
+        "multi": true,
+        "startsWith": "0x",
+        "prefixTest": "[0-9a-f]"
+    },
     "ETH": {
         "title": "Ethereum",
         "type": "ERC",
-        "name": "ETH / BNB-BEP20 (BSC)",
         "multi": true,
         "startsWith": "0x",
         "prefixTest": "[0-9a-f]"
@@ -98,6 +102,13 @@
         "startsWith": "M|N",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
+    },
+    "POLYGON": {
+        "title": "Polygon",
+        "type": "ERC",
+        "multi": true,
+        "startsWith": "0x",
+        "prefixTest": "[0-9a-f]"
     },
     "PPC": {
         "title": "PeerCoin",

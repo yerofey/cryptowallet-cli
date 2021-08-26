@@ -9,7 +9,7 @@ async function generateWallet(coin, coinData, mnemonicString = '') {
             address: wallet.publicAddress,
             privateKey: wallet.privateWif,
         }
-    } else if (coin == 'ETH' || coin == 'BNB') {
+    } else if (coinData.type == 'ERC') {
         const bip39 = require('bip39');
         const pkutils = require('ethereum-mnemonic-privatekey-utils');
         const { Account } = require('eth-lib/lib');
