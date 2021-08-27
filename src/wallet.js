@@ -1,18 +1,43 @@
 async function generateWallet(coin, coinData, mnemonicString = '') {
     if (coinData.script == 'coinkey') {
-        // TODO: add mnemonic
         const CoinKey = require('coinkey');
         const CoinInfo = require('coininfo');
+
         const wallet = CoinKey.createRandom(CoinInfo(coin).versions);
 
         return {
             address: wallet.publicAddress,
             privateKey: wallet.privateWif,
         }
+    } else if (coinData.type == 'BEP2') {
+        const bip39 = require('bip39');
+        const bCrypto = require('@binance-chain/javascript-sdk/lib/crypto');
+
+        if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
+            return {
+                error: 'mnemonic is not valid'
+            }
+        }
+
+        // TODO: validate mnemonicString
+        const mnemonic = mnemonicString || bip39.generateMnemonic();
+        const privateKey = bCrypto.getPrivateKeyFromMnemonic(mnemonic, true, 0);
+
+        return {
+            address: bCrypto.getAddressFromPrivateKey(privateKey, 'bnb'),
+            privateKey,
+            mnemonic
+        }
     } else if (coinData.type == 'ERC') {
         const bip39 = require('bip39');
         const pkutils = require('ethereum-mnemonic-privatekey-utils');
         const { Account } = require('eth-lib/lib');
+
+        if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
+            return {
+                error: 'mnemonic is not valid'
+            }
+        }
 
         const mnemonic = mnemonicString || bip39.generateMnemonic();
         const privateKey = pkutils.getPrivateKeyFromMnemonic(mnemonic);

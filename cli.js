@@ -16,7 +16,7 @@ program.option('-pi, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case
 program.parse();
 
 const options = program.opts();
-const coin = options.coin || '';
+const coin = (options.coin).toUpperCase() || '';
 const mnemonic = options.mnemonic || '';
 const prefix = options.prefix || options.prefixIgnorecase || '';
 const prefixIgnoreCase = options.prefixIgnorecase !== undefined;

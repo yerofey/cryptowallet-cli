@@ -32,18 +32,25 @@ $ cryptowallet -c BTC -p ABC
 # generate random BTC wallet with desired prefix (case insensitive)
 $ cryptowallet -c BTC -pi abc
 
+# generate ERC-like wallet from mnemonic string
+$ cryptowallet -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
+
+# generate BNB-BEP2 wallet from mnemonic string
+$ cryptowallet -c BNB-BEP2 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
+
 # list all supported cryptos
 $ cryptowallet -l
 ```
 
 ## Cryptos supported
 - `BTC` (Bitcoin)
-- `ETH` (Ethereum)
-- `BNB` (Binance Coin: BEP20 - BSC)
+- `ETH` (Ethereum) *supports -m "mnemonic string"*
+- `BNB` (Binance Coin: BEP20 - BSC) *supports -m "mnemonic string"*
+- `BNB-BEP2` (Binance Coin: BEP2) *supports -m "mnemonic string"*
 - `DOGE` (Dogecoin)
 - `BCH` (Bitcoin Cash)
 - `LTC` (Litecoin)
-- `POLYGON` (Polygon)
+- `POLYGON` (Polygon) *supports -m "mnemonic string"*
 - `TRX` (Tron)
 - `XTZ` (Tezos)
 - `DASH` (Dash)

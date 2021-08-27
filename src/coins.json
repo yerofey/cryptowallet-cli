@@ -14,11 +14,18 @@
         "rareSymbols": "[1-9]"
     },
     "BNB": {
-        "title": "Binance Coin",
+        "title": "Binance Coin (BEP20) - BSC",
         "type": "ERC",
         "multi": true,
         "startsWith": "0x",
         "prefixTest": "[0-9a-f]"
+    },
+    "BNB-BEP2": {
+        "title": "Binance Coin (BEP2)",
+        "type": "BEP2",
+        "multi": true,
+        "startsWith": "bnb",
+        "prefixTest": "[0-9a-z]"
     },
     "BTC": {
         "title": "Bitcoin",

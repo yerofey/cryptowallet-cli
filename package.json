@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "bin": {
@@ -25,7 +25,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bip39": "^3.0.3",
+    "@binance-chain/javascript-sdk": "^4.1.1",
+    "bip39": "^3.0.4",
     "chalk": "^4.1.2",
     "coininfo": "^5.1.0",
     "coinkey": "^3.0.0",
@@ -35,5 +36,10 @@
     "ethereum-mnemonic-privatekey-utils": "^1.0.5",
     "tezos-sign": "^1.4.1",
     "tronweb": "^4.0.0"
+  },
+  "devDependencies": {
+    "bip32": "^2.0.6",
+    "bitcoinjs-lib": "^5.2.0",
+    "web3": "^1.5.2"
   }
 }
