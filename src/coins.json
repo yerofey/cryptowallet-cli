@@ -20,13 +20,15 @@
             "BEP2": {
                 "format": "BEP2",
                 "startsWith": "bnb",
-                "prefixTest": "[0-9a-z]"
+                "prefixTest": "[0-9a-z]",
+                "mnemonic": true
             },
             "BEP20": {
                 "format": "BEP20",
                 "type": "ERC",
                 "startsWith": "0x",
-                "prefixTest": "[0-9a-f]"
+                "prefixTest": "[0-9a-f]",
+                "mnemonic": true
             }
         },
         "multi": true
@@ -36,7 +38,6 @@
         "defaultFormat": "legacy",
         "formats": {
             "bech32": {
-                "script": "dev",
                 "startsWith": "bc1",
                 "prefixTest": "[0-9a-z]",
                 "rareSymbols": "[0-9]",
@@ -90,18 +91,20 @@
         "type": "ERC",
         "multi": true,
         "startsWith": "0x",
-        "prefixTest": "[0-9a-f]"
+        "prefixTest": "[0-9a-f]",
+        "mnemonic": true
     },
     "ETH": {
         "title": "Ethereum",
         "type": "ERC",
         "multi": true,
         "startsWith": "0x",
-        "prefixTest": "[0-9a-f]"
+        "prefixTest": "[0-9a-f]",
+        "mnemonic": true
     },
     "LTC": {
         "title": "Litecoin",
-        "script": "dev",
+        "script": "coinkey",
         "startsWith": "L",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"
@@ -132,7 +135,8 @@
         "type": "ERC",
         "multi": true,
         "startsWith": "0x",
-        "prefixTest": "[0-9a-f]"
+        "prefixTest": "[0-9a-f]",
+        "mnemonic": true
     },
     "PPC": {
         "title": "PeerCoin",

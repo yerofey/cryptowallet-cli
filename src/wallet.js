@@ -1,4 +1,9 @@
-async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
+async function generateWallet(coin, options = {}) {
+    let coinRow = options.coinRow || {};
+    let format = options.format || '';
+    let mnemonicString = options.mnemonic || '';
+    let number = options.number || 1;
+
     let coinData = [];
     let result = {};
 
@@ -34,12 +39,9 @@ async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
             address: wallet.publicAddress,
             privateKey: wallet.privateWif,
         });
-    } else if (coinData.script == 'dev') {
+    } else if (format == 'bech32') {
         const bip39 = require('bip39');
-        const cs = require('coinstring');
-        const CoinInfo = require('coininfo');
-        const HDKey = require('hdkey');
-        const { addressFromExtPubKey } = require('@swan-bitcoin/xpub-lib');
+        const bip84 = require('bip84');
 
         if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
             return {
@@ -48,23 +50,25 @@ async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
         }
 
         const mnemonic = mnemonicString || bip39.generateMnemonic();
-        const seed = bip39.mnemonicToSeedSync(mnemonic); // Buffer
-        const seedHex = seed.toString('hex');
-        const key = HDKey.fromMasterSeed(Buffer.from(seedHex, 'hex'));
-        const keyObj = key.toJSON();
-        const privateKeyHex = key._privateKey.toString('hex');
-        const wallet = addressFromExtPubKey({ extPubKey: keyObj.xpub, network: 'mainnet' });
-        const privateKeyHexFixed = privateKeyHex + '01';
-        const privateKeyHexBuf = Buffer.from(privateKeyHexFixed, 'hex');
-        const info = CoinInfo(coin).versions;
-        const version = info.private;
-        const privateKey = cs.encode(privateKeyHexBuf, version);
+        const root = new bip84.fromSeed(mnemonic);
+        const child = root.deriveAccount(0);
+        const account = new bip84.fromZPrv(child);
+
+        let addresses = [];
+        if (number >= 1) {
+            for (let i = 0; i < number; i++) {
+                addresses.push({
+                    index: i,
+                    address: account.getAddress(i),
+                    privateKey: account.getPrivateKey(i)
+                });
+            }
+        }
 
         Object.assign(result, {
             format: 'bech32',
-            address: wallet.address,
-            privateKey,
-            privateExtendedKey: keyObj.xpriv,
+            addresses,
+            privateExtendedKey: account.getAccountPrivateKey(),
             mnemonic
         });
     } else if (coinData.format == 'BEP2') {
@@ -137,6 +141,12 @@ async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
         return {
             error: 'coin is not supported yet'
         }
+    }
+
+    if (coinData.tested !== undefined && coinData.tested == false) {
+        Object.assign(result, {
+            tested: false
+        });
     }
 
     return result;
