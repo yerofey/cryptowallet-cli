@@ -80,10 +80,13 @@ $ cryptowallet -l
 - `NBT` (NIX Bridge Token) 
 
 ## Highlights
-- 22 cryptos supported
-- Wallet prefix supported
+- 23 cryptos supported
+- Desired wallet prefix
 - Wallet from mnemonic
 - Works fully offline
+
+## TODO
+- SegWit Bech32 wallet address support for all Bitcoin forks
 
 ## Author
 [Yerofey S.](https://github.com/yerofey)
