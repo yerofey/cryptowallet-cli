@@ -19,7 +19,7 @@ program.parse();
 
 const options = program.opts();
 const coin = (options.coin).toUpperCase() || '';
-const format = options.format || '';
+let format = options.format || '';
 const mnemonic = options.mnemonic || '';
 const number = options.number || 1;
 const prefix = options.prefix || options.prefixIgnorecase || '';
@@ -56,6 +56,7 @@ async function run() {
         if (coinRow.formats[format] !== undefined) {
             coinData = coinRow.formats[format];
         } else {
+            // format = coinRow.defaultFormat;
             format = coinRow.defaultFormat;
             coinData = coinRow.formats[format];
         }
@@ -124,7 +125,7 @@ async function run() {
         });
     }
 
-    let coinFullName = (coinRow.name || coin) + (wallet.format != undefined ? ' (' + wallet.format + ')' : '');
+    let coinFullName = (coinRow.name || coin) + (wallet.format !== undefined && wallet.format != '' ? ' (' + wallet.format + ')' : '');
 
     if (prefix && !prefixFound) {
         log(`😢  ${chalk.yellow('Sorry, ' + coinFullName + ' does not support prefix yet...')}`);

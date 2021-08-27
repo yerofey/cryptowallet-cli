@@ -88,7 +88,7 @@
         "rareSymbols": "[1-9]"
     },
     "ERC": {
-        "title": "ERC-like",
+        "name": "ERC-like",
         "type": "ERC",
         "multi": true,
         "startsWith": "0x",

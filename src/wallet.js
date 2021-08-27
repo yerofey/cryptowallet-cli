@@ -95,11 +95,10 @@ async function generateWallet(coin, options = {}) {
         const mnemonic = mnemonicString || bip39.generateMnemonic();
         const privateKey = pkutils.getPrivateKeyFromMnemonic(mnemonic);
         const account = Account.fromPrivate('0x' + privateKey);
-        const walletAddress = (account.address).toLowerCase();
 
         Object.assign(result, {
             format: coinData.format || '',
-            address: walletAddress,
+            address: account.address,
             privateKey: privateKey,
             mnemonic
         });
