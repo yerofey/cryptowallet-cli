@@ -14,25 +14,44 @@
         "rareSymbols": "[1-9]"
     },
     "BNB": {
-        "title": "Binance Coin (BEP20) - BSC",
-        "type": "ERC",
-        "multi": true,
-        "startsWith": "0x",
-        "prefixTest": "[0-9a-f]"
-    },
-    "BNB-BEP2": {
-        "title": "Binance Coin (BEP2)",
-        "type": "BEP2",
-        "multi": true,
-        "startsWith": "bnb",
-        "prefixTest": "[0-9a-z]"
+        "title": "Binance Coin",
+        "defaultFormat": "BEP20",
+        "formats": {
+            "BEP2": {
+                "format": "BEP2",
+                "startsWith": "bnb",
+                "prefixTest": "[0-9a-z]"
+            },
+            "BEP20": {
+                "format": "BEP20",
+                "type": "ERC",
+                "startsWith": "0x",
+                "prefixTest": "[0-9a-f]"
+            }
+        },
+        "multi": true
     },
     "BTC": {
         "title": "Bitcoin",
-        "script": "coinkey",
-        "startsWith": "1",
-        "prefixTest": "(?![0OI])[1-9a-zA-Z]",
-        "rareSymbols": "[1-9]"
+        "defaultFormat": "legacy",
+        "formats": {
+            "bech32": {
+                "format": "Bech32",
+                "script": "dev",
+                "startsWith": "bc1",
+                "prefixTest": "[0-9a-z]",
+                "rareSymbols": "[0-9]",
+                "mnemonic": true
+            },
+            "legacy": {
+                "format": "Legacy",
+                "script": "coinkey",
+                "startsWith": "1",
+                "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+                "rareSymbols": "[1-9]"
+            },
+            "segwit": {}
+        }
     },
     "BTG": {
         "title": "Bitcoin Gold",
@@ -84,7 +103,7 @@
     },
     "LTC": {
         "title": "Litecoin",
-        "script": "coinkey",
+        "script": "dev",
         "startsWith": "L",
         "prefixTest": "(?![0OI])[1-9a-zA-Z]",
         "rareSymbols": "[1-9]"

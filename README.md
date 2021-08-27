@@ -36,17 +36,19 @@ $ cryptowallet -c BTC -pi abc
 $ cryptowallet -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
 # generate BNB-BEP2 wallet from mnemonic string
-$ cryptowallet -c BNB-BEP2 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
+$ cryptowallet -c BNB -f BEP2 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
+
+# generate BNB-BEP20 wallet from mnemonic string
+$ cryptowallet -c BNB -f BEP20 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
 # list all supported cryptos
 $ cryptowallet -l
 ```
 
 ## Cryptos supported
-- `BTC` (Bitcoin)
+- `BTC` (Bitcoin) [legacy: 1...]
 - `ETH` (Ethereum) *supports -m "mnemonic string"*
-- `BNB` (Binance Coin: BEP20 - BSC) *supports -m "mnemonic string"*
-- `BNB-BEP2` (Binance Coin: BEP2) *supports -m "mnemonic string"*
+- `BNB` (Binance Coin: BEP2, BEP20 - BSC) [-f: BEP2, BEP20] *supports -m "mnemonic string"*
 - `DOGE` (Dogecoin)
 - `BCH` (Bitcoin Cash)
 - `LTC` (Litecoin)
