@@ -44,10 +44,10 @@ $ cryptowallet -c BTC -f bech32 -m "radio bright pizza pluck family crawl palm f
 # generate ERC-like wallet from mnemonic string
 $ cryptowallet -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
-# generate BNB-BEP2 wallet from mnemonic string
+# generate BNB (BEP2) wallet from mnemonic string
 $ cryptowallet -c BNB -f BEP2 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
-# generate BNB-BEP20 wallet from mnemonic string
+# generate BNB (BEP20) wallet from mnemonic string
 $ cryptowallet -c BNB -f BEP20 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
 # list all supported cryptos

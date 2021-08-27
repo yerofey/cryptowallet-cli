@@ -41,6 +41,7 @@
                 "startsWith": "bc1",
                 "prefixTest": "[0-9a-z]",
                 "rareSymbols": "[0-9]",
+                "path": "m/84",
                 "mnemonic": true
             },
             "legacy": {

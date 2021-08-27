@@ -1,25 +1,16 @@
 async function generateWallet(coin, options = {}) {
+    let coinData = options.coinData || {};
     let coinRow = options.coinRow || {};
     let format = options.format || '';
     let mnemonicString = options.mnemonic || '';
     let number = options.number || 1;
 
-    let coinData = [];
     let result = {};
 
     if (coinRow.formats !== undefined) {
-        if (coinRow.formats[format] !== undefined) {
-            coinData = coinRow.formats[format];
-        } else {
-            format = coinRow.defaultFormat;
-            coinData = coinRow.formats[format];
-        }
-
         Object.assign(result, {
             formats: Object.keys(coinRow.formats)
         });
-    } else {
-        coinData = coinRow;
     }
 
     if (coinData == []) {

@@ -51,31 +51,58 @@ async function run() {
     }
 
     const coinRow = supportedCoins[coin];
-    // TODO: prefix in formats
+    let coinData = [];
+    if (coinRow.formats !== undefined) {
+        if (coinRow.formats[format] !== undefined) {
+            coinData = coinRow.formats[format];
+        } else {
+            format = coinRow.defaultFormat;
+            coinData = coinRow.formats[format];
+        }
+    } else {
+        coinData = coinRow;
+    }
 
     let wallet = {};
     let prefixFound = false;
-    const prefixBadSymbolsArray = (prefix != '' ? prefix.split('').filter(char => !RegExp(coinRow.prefixTest, 'g').test(char)) : []);
+    let prefixFoundInWallets = [];
+    const prefixBadSymbolsArray = (prefix != '' ? prefix.split('').filter(char => !RegExp(coinData.prefixTest, 'g').test(char)) : []);
 
-    if (prefix && typeof coinRow === 'object' && 'startsWith' in coinRow && 'prefixTest' in coinRow) {
+    if (prefix && typeof coinData === 'object' && 'startsWith' in coinData && 'prefixTest' in coinData) {
         if (prefixBadSymbolsArray.length === 0) {
-            if (prefix.length > 1 || 'rareSymbols' in coinRow && RegExp(coinRow.rareSymbols, 'g').test(prefix)) {
+            if (prefix.length > 1 || 'rareSymbols' in coinData && RegExp(coinData.rareSymbols, 'g').test(prefix)) {
                 log(`⏳  Generating wallet with "${prefix}" prefix, this might take a while...`);
             }
-            const startsWithSymbols = coinRow.startsWith.split('|');
+            const startsWithSymbols = coinData.startsWith.split('|');
             loop:
             while (true) {
                 wallet = await generateWallet(coin, {
+                    coinData,
                     coinRow,
                     format,
                     mnemonic,
                     number
                 });
                 for (let firstSymbol of startsWithSymbols) {
-                    if (!prefixIgnoreCase && wallet.address.startsWith(firstSymbol + '' + prefix) || prefixIgnoreCase && (wallet.address).toUpperCase().startsWith((firstSymbol + '' + prefix).toUpperCase())) {
-                        prefixFound = true;
+                    if (wallet.address !== undefined) {
+                        if (!prefixIgnoreCase && wallet.address.startsWith(firstSymbol + '' + prefix) || prefixIgnoreCase && (wallet.address).toUpperCase().startsWith((firstSymbol + '' + prefix).toUpperCase())) {
+                            prefixFound = true;
+                            break loop;
+                        }
+                    } else if (wallet.addresses !== undefined) {
+                        for (let item of wallet.addresses) {
+                            if (!prefixIgnoreCase && (item.address).startsWith(firstSymbol + '' + prefix) || prefixIgnoreCase && (item.address).toUpperCase().startsWith((firstSymbol + '' + prefix).toUpperCase())) {
+                                prefixFound = true;
+                                prefixFoundInWallets.push(item.address);
+                            }
+                        }
+                        if (prefixFound) {
+                            break loop;
+                        }
+                    } else {
                         break loop;
                     }
+                    
                 }
             }
         } else {
@@ -88,10 +115,8 @@ async function run() {
             process.exit(1);
         }
     } else {
-        if (prefix) {
-            log(`😢  ${chalk.yellow('Sorry, ' + coin + ' doesn\'t support prefix yet...')}`);
-        }
         wallet = await generateWallet(coin, {
+            coinData,
             coinRow,
             format,
             mnemonic,
@@ -99,8 +124,14 @@ async function run() {
         });
     }
 
+    let coinFullName = (coinRow.name || coin) + (wallet.format != undefined ? ' (' + wallet.format + ')' : '');
+
+    if (prefix && !prefixFound) {
+        log(`😢  ${chalk.yellow('Sorry, ' + coinFullName + ' does not support prefix yet...')}`);
+    }
+
     if (mnemonic != '' && wallet.mnemonic == undefined) {
-        log(`😢  ${chalk.yellow('Sorry, ' + coin + (wallet.format != undefined ? ' (' + wallet.format + ')' : '') + ' doesn\'t support mnemonic yet...')}`);
+        log(`😢  ${chalk.yellow('Sorry, ' + coinFullName + ' does not support mnemonic yet...')}`);
     }
 
     if (wallet.error !== undefined) {
@@ -108,7 +139,7 @@ async function run() {
         return;
     }
 
-    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + (coinRow.name || coin) + (wallet.format ? (' (' + wallet.format + ')') : '') + ' wallet' + (prefixFound ? ' with "' + prefix + '" prefix' : '') + ':')}\n`);
+    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + coinFullName + ' wallet' + (prefixFound ? ' with "' + prefix + '" prefix' : '') + ':')}\n`);
     
     if (wallet.addresses !== undefined) {
         if (wallet.privateExtendedKey) {
@@ -121,16 +152,23 @@ async function run() {
         for (const item of wallet.addresses) {
             log();
             log(`🆔  ${item.index}`);
-            log(`👛  ${item.address}`);
+            if (prefixFound && prefixFoundInWallets.includes(item.address)) {
+                const addressCutLength = coinData.startsWith.length + prefix.length;
+                log(`👛  ${coinData.startsWith}${chalk.magenta(item.address.slice(coinData.startsWith.length, addressCutLength))}${item.address.slice(addressCutLength)}`);
+            } else {
+                log(`👛  ${item.address}`);
+            }
             log(`🔑  ${item.privateKey}`);
         }
 
-        log();
-        log(`wallet address path: m/84'/0'/0'/0/ID`);
+        if (coinData.path !== undefined) {
+            log();
+            log(`wallet address path: ${coinData.path}'/0'/0'/0/ID`);
+        }
     } else {
         if (prefixFound) {
-            const addressCutLength = coinRow.startsWith.length + prefix.length;
-            log(`👛  ${coinRow.startsWith}${chalk.magenta(wallet.address.slice(coinRow.startsWith.length, addressCutLength))}${wallet.address.slice(addressCutLength)}`);
+            const addressCutLength = coinData.startsWith.length + prefix.length;
+            log(`👛  ${coinData.startsWith}${chalk.magenta(wallet.address.slice(coinData.startsWith.length, addressCutLength))}${wallet.address.slice(addressCutLength)}`);
         } else {
             log(`👛  ${wallet.address}`);
         }
@@ -140,7 +178,7 @@ async function run() {
         }
     }
     
-    if (wallet.formats !== undefined || coinRow.type == 'ERC' || coinRow.multi || wallet.tested !== undefined) {
+    if (wallet.formats !== undefined || coinData.type == 'ERC' || coinData.multi || wallet.tested !== undefined) {
         log();
     }
 
