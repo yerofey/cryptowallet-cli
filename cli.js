@@ -29,7 +29,7 @@ async function run() {
         let cryptos = {};
         for (const coin of Object.keys(supportedCoins)) {
             let title = supportedCoins[coin].title || '';
-            if (title == '') {
+            if (title == '' || coin == 'ERC') {
                 continue;
             }
             cryptos[chalk.blue(coin)] = supportedCoins[coin].title;
@@ -106,8 +106,16 @@ async function run() {
         log(`📄  ${wallet.mnemonic}`);
     }
 
-    if (coinRow.type == 'ERC' || coinRow.multi) {
+    if (wallet.formats !== undefined || coinRow.type == 'ERC' || coinRow.multi) {
         log();
+    }
+
+    if (wallet.formats !== undefined) {
+        let formatsString = '';
+        for (const val of wallet.formats) {
+            formatsString += chalk.blue(val) + ', ';
+        }
+        log(chalk.yellow('🔢  You can create different types of wallets for this coin: ' + formatsString.substring(0, formatsString.length - 2) + ' (use it with -f flag)'));
     }
 
     if (coinRow.type == 'ERC') {

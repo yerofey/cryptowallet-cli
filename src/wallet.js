@@ -1,14 +1,18 @@
 async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
     let coinData = [];
+    let result = {};
 
     if (coinRow.formats !== undefined) {
-        //coinData = coinRow.formats[format || format.toLowerCase() || format.toUpperCase()] || coinRow.formats[coinRow.defaultFormat] || [];
-
         if (coinRow.formats[format] !== undefined) {
             coinData = coinRow.formats[format];
         } else {
-            coinData = coinRow.formats[coinRow.defaultFormat];
+            format = coinRow.defaultFormat;
+            coinData = coinRow.formats[format];
         }
+
+        Object.assign(result, {
+            formats: Object.keys(coinRow.formats)
+        });
     } else {
         coinData = coinRow;
     }
@@ -25,11 +29,11 @@ async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
 
         const wallet = CoinKey.createRandom(CoinInfo(coin).versions);
 
-        return {
+        result = Object.assign(result, {
             format,
             address: wallet.publicAddress,
             privateKey: wallet.privateWif,
-        }
+        });
     } else if (coinData.script == 'dev') {
         const bip39 = require('bip39');
         const cs = require('coinstring');
@@ -56,13 +60,13 @@ async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
         const version = info.private;
         const privateKey = cs.encode(privateKeyHexBuf, version);
 
-        return {
+        Object.assign(result, {
             format: 'bech32',
             address: wallet.address,
             privateKey,
             privateExtendedKey: keyObj.xpriv,
             mnemonic
-        }
+        });
     } else if (coinData.format == 'BEP2') {
         const bip39 = require('bip39');
         const bCrypto = require('@binance-chain/javascript-sdk/lib/crypto');
@@ -73,16 +77,15 @@ async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
             }
         }
 
-        // TODO: validate mnemonicString
         const mnemonic = mnemonicString || bip39.generateMnemonic();
         const privateKey = bCrypto.getPrivateKeyFromMnemonic(mnemonic, true, 0);
 
-        return {
+        Object.assign(result, {
             format: 'BEP2',
             address: bCrypto.getAddressFromPrivateKey(privateKey, 'bnb'),
             privateKey,
             mnemonic
-        }
+        });
     } else if (coinData.type == 'ERC') {
         const bip39 = require('bip39');
         const pkutils = require('ethereum-mnemonic-privatekey-utils');
@@ -99,12 +102,12 @@ async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
         const account = Account.fromPrivate('0x' + privateKey);
         const walletAddress = (account.address).toLowerCase();
 
-        return {
+        Object.assign(result, {
             format: coinData.format || '',
             address: walletAddress,
             privateKey: privateKey,
             mnemonic
-        }
+        });
     } else if (coin == 'TRX') {
         // TODO: add mnemonic
         const tronWeb = require('tronweb');
@@ -112,10 +115,10 @@ async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
         try {
             const wallet = await tronWeb.createAccount();
 
-            return {
+            Object.assign(result, {
                 address: wallet.address.base58,
                 privateKey: wallet.privateKey
-            }
+            });
         } catch (error) {
             return {
                 error
@@ -135,6 +138,8 @@ async function generateWallet(coin, coinRow, format = '', mnemonicString = '') {
             error: 'coin is not supported yet'
         }
     }
+
+    return result;
 }
 
 module.exports.generateWallet = generateWallet;
