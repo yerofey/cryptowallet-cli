@@ -181,7 +181,7 @@ async function run() {
 
         if (coinData.path !== undefined && geek) {
             log();
-            log(`🗂   wallet address path: ${coinData.path}'/0'/0'/0/ID`);
+            log(`🗂   wallet address path: ${coinData.path}'/0'/0/ID`);
         }
     } else {
         if (prefixFound) {

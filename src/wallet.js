@@ -30,7 +30,7 @@ async function generateWallet(coin, options = {}) {
             address: wallet.publicAddress,
             privateKey: wallet.privateWif,
         });
-    } else if (format == 'bech32') {
+    } else if (coinData.script == 'bip84') {
         const bip39 = require('bip39');
         const bip84 = require('bip84');
 
@@ -50,14 +50,14 @@ async function generateWallet(coin, options = {}) {
             for (let i = 0; i < number; i++) {
                 addresses.push({
                     index: i,
-                    address: account.getAddress(i),
+                    address: account.getAddress(i, false, coinData.purpose),
                     privateKey: account.getPrivateKey(i)
                 });
             }
         }
 
         Object.assign(result, {
-            format: 'bech32',
+            format: coinData.format,
             addresses,
             privateExtendedKey: account.getAccountPrivateKey(),
             mnemonic
