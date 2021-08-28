@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const columnify = require('columnify');
 const supportedCoins = require('./src/coins.json');
 const { generateWallet, generateMnemonicString } = require('./src/wallet');
+const selfInfo = require('./package.json');
 const log = console.log;
 
 program.option('-c, --coin <ticker>', 'Wallet for specific coin', 'ERC');
@@ -17,6 +18,7 @@ program.option('-mo, --mnemonic-only', 'Generate mnemonic string');
 program.option('-n, --number <number>', 'Number of wallets to generate (if supported)');
 program.option('-p, --prefix <prefix>', 'Desired wallet prefix (case sensitive)');
 program.option('-pi, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case insensitive)');
+program.option('-v, --version', 'Display cryptowallet version');
 program.parse();
 
 const options = program.opts();
@@ -51,6 +53,11 @@ async function run() {
     if (options.mnemonicOnly) {
         log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your randomly generated mnemonic string:')}\n`);
         log(`📄  ${generateMnemonicString()}`);
+        return;
+    }
+
+    if (options.version) {
+        log(`${selfInfo.version}`)
         return;
     }
 
