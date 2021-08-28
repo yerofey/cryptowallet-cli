@@ -17,13 +17,13 @@ $ npm i -g @yerofey/cryptowallet-cli
 
 ## Usage
 ```bash
-# generate random ERC-like wallet
+# generate random ERC-like wallet (ETH, BNB, POLYGON, ...)
 $ cryptowallet
 
 # generate random ERC-like wallet with desired prefix
 $ cryptowallet -p aaa
 
-# generate random BTC wallet
+# generate random BTC wallet (default format: bech32 - bc1...)
 $ cryptowallet -c BTC
 
 # generate random BTC wallet with desired prefix (case sensitive)
@@ -32,8 +32,11 @@ $ cryptowallet -c BTC -p ABC
 # generate random BTC wallet with desired prefix (case insensitive)
 $ cryptowallet -c BTC -pi abc
 
-# generate BTC bech32 wallet
-$ cryptowallet -c BTC -f bech32
+# generate BTC legacy wallet (1...)
+$ cryptowallet -c BTC -f legacy
+
+# generate BTC segwit wallet (3...)
+$ cryptowallet -c BTC -f segwit
 
 # generate BTC bech32 wallet from mnemonic string
 $ cryptowallet -c BTC -f bech32 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
@@ -58,7 +61,7 @@ $ cryptowallet -l
 ```
 
 ## Cryptos supported
-- `BTC` (Bitcoin) [legacy, bech32]
+- `BTC` (Bitcoin) [legacy, segwit, bech32]
 - `ETH` (Ethereum)
 - `BNB` (Binance Coin) [BEP2, BEP20]
 - `DOGE` (Dogecoin)
