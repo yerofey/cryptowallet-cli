@@ -50,6 +50,9 @@ $ cryptowallet -c BNB -f BEP2 -m "radio bright pizza pluck family crawl palm fla
 # generate BNB (BEP20) wallet from mnemonic string
 $ cryptowallet -c BNB -f BEP20 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
+# generate just a mnemonic string (12 words) to import in any wallet app
+$ cryptowallet -mo
+
 # list all supported cryptos
 $ cryptowallet -l
 ```

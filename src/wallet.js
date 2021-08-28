@@ -142,4 +142,11 @@ async function generateWallet(coin, options = {}) {
     return result;
 }
 
+function generateMnemonicString() {
+    const bip39 = require('bip39');
+
+    return bip39.generateMnemonic();
+}
+
 module.exports.generateWallet = generateWallet;
+module.exports.generateMnemonicString = generateMnemonicString;

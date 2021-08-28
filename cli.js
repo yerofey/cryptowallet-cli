@@ -5,13 +5,14 @@ const { program } = require('commander');
 const chalk = require('chalk');
 const columnify = require('columnify');
 const supportedCoins = require('./src/coins.json');
-const { generateWallet } = require('./src/wallet');
+const { generateWallet, generateMnemonicString } = require('./src/wallet');
 const log = console.log;
 
 program.option('-c, --coin <ticker>', 'Wallet for specific coin', 'ERC');
 program.option('-f, --format <format>', 'Wallet format type (for cryptos with multiple wallet formats)');
 program.option('-l, --list', 'List all supported cryptos');
 program.option('-m, --mnemonic <mnemonic>', 'Generate wallet from mnemonic string');
+program.option('-mo, --mnemonic-only', 'Generate mnemonic string');
 program.option('-n, --number <number>', 'Number of wallets to generate (if supported)');
 program.option('-p, --prefix <prefix>', 'Desired wallet prefix (case sensitive)');
 program.option('-pi, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case insensitive)');
@@ -42,12 +43,18 @@ async function run() {
         }));
         log();
         log(`ℹ️   Use flag "-c TICKER" to select specific coin`);
-        process.exit(1);
+        return;
+    }
+
+    if (options.mnemonicOnly) {
+        log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your randomly generated mnemonic string:')}\n`);
+        log(`📄  ${generateMnemonicString()}`);
+        return;
     }
 
     if (!Object.keys(supportedCoins).includes(coin)) {
         log(chalk.red('⛔️  Error: coin not supported!'));
-        process.exit(1);
+        return;
     }
 
     const coinRow = supportedCoins[coin];
@@ -56,7 +63,6 @@ async function run() {
         if (coinRow.formats[format] !== undefined) {
             coinData = coinRow.formats[format];
         } else {
-            // format = coinRow.defaultFormat;
             format = coinRow.defaultFormat;
             coinData = coinRow.formats[format];
         }
