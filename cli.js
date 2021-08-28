@@ -10,6 +10,7 @@ const log = console.log;
 
 program.option('-c, --coin <ticker>', 'Wallet for specific coin', 'ERC');
 program.option('-f, --format <format>', 'Wallet format type (for cryptos with multiple wallet formats)');
+program.option('-g, --geek', 'Display some more info (geeky)');
 program.option('-l, --list', 'List all supported cryptos');
 program.option('-m, --mnemonic <mnemonic>', 'Generate wallet from mnemonic string');
 program.option('-mo, --mnemonic-only', 'Generate mnemonic string');
@@ -21,6 +22,7 @@ program.parse();
 const options = program.opts();
 const coin = (options.coin).toUpperCase() || '';
 let format = options.format || '';
+const geek = options.geek || false;
 const mnemonic = options.mnemonic || '';
 const number = options.number || 1;
 const prefix = options.prefix || options.prefixIgnorecase || '';
@@ -75,7 +77,7 @@ async function run() {
     let prefixFoundInWallets = [];
     const prefixBadSymbolsArray = (prefix != '' ? prefix.split('').filter(char => !RegExp(coinData.prefixTest, 'g').test(char)) : []);
 
-    if (prefix && typeof coinData === 'object' && 'startsWith' in coinData && 'prefixTest' in coinData) {
+    if (prefix && coinData.flags['p'] !== undefined) {
         if (prefixBadSymbolsArray.length === 0) {
             if (prefix.length > 1 || 'rareSymbols' in coinData && RegExp(coinData.rareSymbols, 'g').test(prefix)) {
                 log(`⏳  Generating wallet with "${prefix}" prefix, this might take a while...`);
@@ -158,7 +160,9 @@ async function run() {
 
         for (const item of wallet.addresses) {
             log();
-            log(`🆔  ${item.index}`);
+            if (wallet.addresses.length > 1) {
+                log(`🆔  ${item.index}`);
+            }
             if (prefixFound && prefixFoundInWallets.includes(item.address)) {
                 const addressCutLength = coinData.startsWith.length + prefix.length;
                 log(`👛  ${coinData.startsWith}${chalk.magenta(item.address.slice(coinData.startsWith.length, addressCutLength))}${item.address.slice(addressCutLength)}`);
@@ -168,9 +172,9 @@ async function run() {
             log(`🔑  ${item.privateKey}`);
         }
 
-        if (coinData.path !== undefined) {
+        if (coinData.path !== undefined && geek) {
             log();
-            log(`wallet address path: ${coinData.path}'/0'/0'/0/ID`);
+            log(`🗂   wallet address path: ${coinData.path}'/0'/0'/0/ID`);
         }
     } else {
         if (prefixFound) {
@@ -185,7 +189,7 @@ async function run() {
         }
     }
     
-    if (wallet.formats !== undefined || coinData.type == 'ERC' || coinData.multi || wallet.tested !== undefined) {
+    if (wallet.formats !== undefined || coinData.network == 'EVM' || coinData.apps || wallet.tested !== undefined) {
         log();
     }
 
@@ -198,15 +202,33 @@ async function run() {
         for (const val of wallet.formats) {
             formatsString += chalk.blue(val) + ', ';
         }
-        log(chalk.yellow('🔢  You can create different wallet formats: ' + formatsString.substring(0, formatsString.length - 2) + ' (use it with -f flag)'));
+        log(chalk.yellow('*️⃣   You can create different wallet formats: ' + formatsString.substring(0, formatsString.length - 2) + ' (use it with -f flag)'));
     }
 
-    if (coinRow.type == 'ERC') {
-        log(chalk.yellow('🆒  You can use this wallet in Ethereum, Binance Smart Chain, Polygon and few more networks (ERC-like)'));
+    if (coinData.network == 'EVM' || false) {
+        log(chalk.yellow('🆒  You can use this wallet in Ethereum, Binance Smart Chain, Polygon and few more networks (EVM compatible)'));
     }
 
-    if (coinRow.multi) {
-        log(chalk.greenBright('ℹ️   You can import this wallet into MetaMask, Trust Wallet (multi wallet) and many other apps'));
+    if (coinData.apps !== undefined) {
+        let apps = {
+            "binance-chain-wallet": "Binance Chain Wallet",
+            "metamask": "MetaMask",
+            "tronlink": "TronLink",
+            "trustwallet": "Trust Wallet"
+        }
+        let appsArray = [];
+
+        for (let key of Object.keys(apps)) {
+            if (coinData.apps.includes(key)) {
+                appsArray.push(apps[key]);
+            }
+        }
+
+        let appsString = appsArray.join(', ');
+        if (coinData.apps.includes('other') || false) {
+            appsString += ' and many other wallet apps';
+        }
+        log(chalk.greenBright('ℹ️   You can import this wallet into ' + appsString));
     }  
 }
 

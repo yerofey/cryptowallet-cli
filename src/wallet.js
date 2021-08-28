@@ -81,7 +81,7 @@ async function generateWallet(coin, options = {}) {
             privateKey,
             mnemonic
         });
-    } else if (coinData.type == 'ERC') {
+    } else if (coinData.network == 'EVM') {
         const bip39 = require('bip39');
         const pkutils = require('ethereum-mnemonic-privatekey-utils');
         const { Account } = require('eth-lib/lib');

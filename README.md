@@ -89,7 +89,9 @@ $ cryptowallet -l
 - Works fully offline
 
 ## TODO
+- SegWit Bech32 BTC change addresses with additional flag, for geeks, like -g --geek
 - SegWit Bech32 wallet address support for all Bitcoin forks
+- EVM compatible cryptos
 
 ## Author
 [Yerofey S.](https://github.com/yerofey)
