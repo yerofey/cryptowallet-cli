@@ -2,7 +2,7 @@
 
 > Crypto wallet generator CLI tool
 
-![Screenshot](https://i.imgur.com/Dm8VdHn.png)
+![Screenshot](https://i.imgur.com/o1evaWp.png)
 
 ---
 
@@ -39,7 +39,7 @@ $ cryptowallet -c BTC -f bech32
 $ cryptowallet -c BTC -f bech32 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
 # generate N of BTC bech32 wallets from mnemonic string
-$ cryptowallet -c BTC -f bech32 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium" -n 10
+$ cryptowallet -c BTC -f bech32 -n 10 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
 # generate ERC-like wallet from mnemonic string
 $ cryptowallet -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
