@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 'use strict';
 
+const fs = require('node:fs');
 const { program } = require('commander');
 const chalk = require('chalk');
 const columnify = require('columnify');
-const supportedCoins = require('./src/coins.json');
+// const supportedCoins = require('./src/coins.json');
 const { generateWallet, generateMnemonicString } = require('./src/wallet');
 const selfInfo = require('./package.json');
 const log = console.log;
+
+const coinsFolder = './src/coins';
 
 program.option('-c, --coin <ticker>', 'Wallet for specific coin', 'ERC');
 program.option('-f, --format <format>', 'Wallet format type (for cryptos with multiple wallet formats)');

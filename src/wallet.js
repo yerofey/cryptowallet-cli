@@ -32,7 +32,6 @@ async function generateWallet(coin, options = {}) {
         });
     } else if (coinData.script == 'bip84') {
         const bip39 = require('bip39');
-        const bip84 = require('bip84');
 
         if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
             return {
@@ -41,7 +40,23 @@ async function generateWallet(coin, options = {}) {
         }
 
         const mnemonic = mnemonicString || bip39.generateMnemonic();
-        const root = new bip84.fromSeed(mnemonic);
+
+        console.log(coin)
+
+        if (coin == 'BTC') {
+            const bip84 = require('bip84');
+            const root = new bip84.fromSeed(mnemonic);
+        } else if (coin == 'LTC') {
+            const bip84 = require('litecoin-bip84');
+            const root = new bip84.fromMnemonic(mnemonic, '');
+        }
+
+        // if (!bip84 || !root) {
+        //     return {
+        //         error: 'unknown error occured'
+        //     }
+        // }
+
         const child = root.deriveAccount(0);
         const account = new bip84.fromZPrv(child);
 

@@ -1964,6 +1964,13 @@ libsodium@0.5.4:
   resolved "https://registry.yarnpkg.com/libsodium/-/libsodium-0.5.4.tgz#874413435ee40c512dd59ea6db9b75970f8aec02"
   integrity sha512-s1TQ2V23JvGby1gnCQEQncTNTGck/rtJPPA8c0TiBo9z9TpT4eUk5zThte8H1TkdoKQznneqZqyoqdrwu2btWw==
 
+litecoin-bip84@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/litecoin-bip84/-/litecoin-bip84-0.0.1.tgz#ff98e38b0bb9f2d10081f3f3b9878d6197e7b140"
+  integrity sha512-ESDAHoL2346OaGu3rRDGKUFsF6cMIVI1of3kAaJUIMtLILO7j685TrGyF2Bf4SH60IENRQfUG5jz2X4wDnD0hg==
+  dependencies:
+    bip84 "^0.2.5"
+
 lodash@^4.17.19, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"

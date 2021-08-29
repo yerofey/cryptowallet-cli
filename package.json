@@ -44,6 +44,7 @@
     "commander": "^8.1.0",
     "eth-lib": "^0.1.29",
     "ethereum-mnemonic-privatekey-utils": "^1.0.5",
+    "litecoin-bip84": "^0.0.1",
     "tezos-sign": "^1.4.1",
     "tronweb": "^4.0.0"
   },

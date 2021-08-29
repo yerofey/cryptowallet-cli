@@ -1,0 +1,39 @@
+{
+    "title": "Binance Coin",
+    "defaultFormat": "BEP20",
+    "formats": {
+        "BEP2": {
+            "format": "BEP2",
+            "startsWith": "bnb",
+            "prefixTest": "[0-9a-z]",
+            "apps": [
+                "binance-chain-wallet",
+                "metamask",
+                "trustwallet",
+                "other"
+            ],
+            "flags": [
+                "f",
+                "m",
+                "p"
+            ]
+        },
+        "BEP20": {
+            "format": "BEP20",
+            "network": "EVM",
+            "startsWith": "0x",
+            "prefixTest": "[0-9a-f]",
+            "apps": [
+                "binance-chain-wallet",
+                "metamask",
+                "trustwallet",
+                "other"
+            ],
+            "flags": [
+                "f",
+                "m",
+                "p"
+            ]
+        }
+    }
+}

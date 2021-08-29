@@ -1,0 +1,15 @@
+{
+    "title": "Polygon",
+    "network": "EVM",
+    "startsWith": "0x",
+    "prefixTest": "[0-9a-f]",
+    "apps": [
+        "metamask",
+        "trustwallet",
+        "other"
+    ],
+    "flags": [
+        "m",
+        "p"
+    ]
+}
