@@ -30,7 +30,7 @@ async function generateWallet(coin, options = {}) {
             address: wallet.publicAddress,
             privateKey: wallet.privateWif,
         });
-    } else if (coinData.script == 'bip84') {
+    } else if (coin == 'BTC') {
         const bip39 = require('bip39');
         const bip84 = require('bip84');
 
@@ -42,6 +42,38 @@ async function generateWallet(coin, options = {}) {
 
         const mnemonic = mnemonicString || bip39.generateMnemonic();
         const root = new bip84.fromSeed(mnemonic);
+        const child = root.deriveAccount(0);
+        const account = new bip84.fromZPrv(child);
+
+        let addresses = [];
+        if (number >= 1) {
+            for (let i = 0; i < number; i++) {
+                addresses.push({
+                    index: i,
+                    address: account.getAddress(i, false, coinData.purpose),
+                    privateKey: account.getPrivateKey(i)
+                });
+            }
+        }
+
+        Object.assign(result, {
+            format: coinData.format,
+            addresses,
+            privateExtendedKey: account.getAccountPrivateKey(),
+            mnemonic
+        });
+    } else if (coin == 'LTC') {
+        const bip39 = require('bip39');
+        const bip84 = require('litecoin-bip84');
+
+        if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
+            return {
+                error: 'mnemonic is not valid'
+            }
+        }
+
+        const mnemonic = mnemonicString || bip39.generateMnemonic();
+        const root = new bip84.fromMnemonic(mnemonic, '');
         const child = root.deriveAccount(0);
         const account = new bip84.fromZPrv(child);
 
