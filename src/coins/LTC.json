@@ -4,7 +4,7 @@
     "formats": {
         "bech32": {
             "format": "bech32",
-            "startsWith": "ltc1",
+            "startsWith": "ltc1q",
             "prefixTest": "[0-9a-z]",
             "rareSymbols": "[0-9]",
             "path": "m/84'/2",
