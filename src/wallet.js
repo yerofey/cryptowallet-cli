@@ -30,8 +30,9 @@ async function generateWallet(coin, options = {}) {
             address: wallet.publicAddress,
             privateKey: wallet.privateWif,
         });
-    } else if (coinData.script == 'bip84') {
+    } else if (coin == 'BTC') {
         const bip39 = require('bip39');
+        const bip84 = require('bip84');
 
         if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
             return {
@@ -40,23 +41,39 @@ async function generateWallet(coin, options = {}) {
         }
 
         const mnemonic = mnemonicString || bip39.generateMnemonic();
+        const root = new bip84.fromSeed(mnemonic);
+        const child = root.deriveAccount(0);
+        const account = new bip84.fromZPrv(child);
 
-        console.log(coin)
-
-        if (coin == 'BTC') {
-            const bip84 = require('bip84');
-            const root = new bip84.fromSeed(mnemonic);
-        } else if (coin == 'LTC') {
-            const bip84 = require('litecoin-bip84');
-            const root = new bip84.fromMnemonic(mnemonic, '');
+        let addresses = [];
+        if (number >= 1) {
+            for (let i = 0; i < number; i++) {
+                addresses.push({
+                    index: i,
+                    address: account.getAddress(i, false, coinData.purpose),
+                    privateKey: account.getPrivateKey(i)
+                });
+            }
         }
 
-        // if (!bip84 || !root) {
-        //     return {
-        //         error: 'unknown error occured'
-        //     }
-        // }
+        Object.assign(result, {
+            format: coinData.format,
+            addresses,
+            privateExtendedKey: account.getAccountPrivateKey(),
+            mnemonic
+        });
+    } else if (coin == 'LTC') {
+        const bip39 = require('bip39');
+        const bip84 = require('litecoin-bip84');
 
+        if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
+            return {
+                error: 'mnemonic is not valid'
+            }
+        }
+
+        const mnemonic = mnemonicString || bip39.generateMnemonic();
+        const root = new bip84.fromMnemonic(mnemonic, '');
         const child = root.deriveAccount(0);
         const account = new bip84.fromZPrv(child);
 

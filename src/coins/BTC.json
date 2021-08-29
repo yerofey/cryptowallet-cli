@@ -4,7 +4,6 @@
     "formats": {
         "bech32": {
             "format": "bech32",
-            "script": "bip84",
             "startsWith": "bc1",
             "prefixTest": "[0-9a-z]",
             "rareSymbols": "[0-9]",
@@ -24,7 +23,6 @@
         },
         "legacy": {
             "format": "legacy",
-            "script": "bip84",
             "startsWith": "1",
             "prefixTest": "(?![0OI])[1-9a-zA-Z]",
             "rareSymbols": "[1-9]",
@@ -40,7 +38,6 @@
         },
         "segwit": {
             "format": "segwit",
-            "script": "bip84",
             "startsWith": "3",
             "prefixTest": "(?![0OI])[1-9a-zA-Z]",
             "rareSymbols": "[1-9]",

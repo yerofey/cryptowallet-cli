@@ -2,15 +2,20 @@
 'use strict';
 
 const fs = require('node:fs');
+const path = require('node:path');
 const { program } = require('commander');
 const chalk = require('chalk');
 const columnify = require('columnify');
-// const supportedCoins = require('./src/coins.json');
 const { generateWallet, generateMnemonicString } = require('./src/wallet');
 const selfInfo = require('./package.json');
 const log = console.log;
-
-const coinsFolder = './src/coins';
+const filesList = (dir) => {
+    return fs.readdirSync(dir).reduce((list, file) => {
+        const name = path.join(dir, file);
+        const isDir = fs.statSync(name).isDirectory();
+        return list.concat(isDir ? fileList(name) : [name]);
+    }, []);
+}
 
 program.option('-c, --coin <ticker>', 'Wallet for specific coin', 'ERC');
 program.option('-f, --format <format>', 'Wallet format type (for cryptos with multiple wallet formats)');
@@ -33,16 +38,24 @@ const number = options.number || 1;
 const prefix = options.prefix || options.prefixIgnorecase || '';
 const prefixIgnoreCase = options.prefixIgnorecase !== undefined;
 
+let supportedCoins = [];
+const coinsFolder = './src/coins/';
+filesList(coinsFolder).forEach((item) => {
+    const name = item.replace('src/coins/', '').replace('.json', '');
+    supportedCoins.push(name);
+});
+
 async function run() {
     if (options.list !== undefined) {
         log(`🔠  All supported cryptos:\n`);
         let cryptos = {};
-        for (const coin of Object.keys(supportedCoins)) {
-            let title = supportedCoins[coin].title || '';
+        for (const coin of supportedCoins) {
+            const coinSettings = require('./src/coins/' + coin + '.json');
+            let title = coinSettings.title || '';
             if (title == '' || coin == 'ERC') {
                 continue;
             }
-            cryptos[chalk.blue(coin)] = supportedCoins[coin].title;
+            cryptos[chalk.blue(coin)] = title;
         }
         log(columnify(cryptos, {
             showHeaders: false,
@@ -64,12 +77,12 @@ async function run() {
         return;
     }
 
-    if (!Object.keys(supportedCoins).includes(coin)) {
+    if (!supportedCoins.includes(coin)) {
         log(chalk.red('⛔️  Error: coin not supported!'));
         return;
     }
 
-    const coinRow = supportedCoins[coin];
+    const coinRow = require('./src/coins/' + coin + '.json');
     let coinData = [];
     if (coinRow.formats !== undefined) {
         if (coinRow.formats[format] !== undefined) {
