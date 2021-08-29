@@ -62,9 +62,9 @@ async function generateWallet(coin, options = {}) {
             privateExtendedKey: account.getAccountPrivateKey(),
             mnemonic
         });
-    } else if (coin == 'LTC') {
+    } else if (coin == 'DOGE' || coin == 'LTC') {
         const bip39 = require('bip39');
-        const bip84 = require('litecoin-bip84');
+        const bip84 = require(coinRow.title.toLowerCase() + '-bip84');
 
         if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
             return {

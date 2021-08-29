@@ -1322,6 +1322,13 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
+dogecoin-bip84@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/dogecoin-bip84/-/dogecoin-bip84-0.0.4.tgz#2007066a48017e4b94eff3714a26fdddf5ec7e1a"
+  integrity sha512-snEC6rD4BMNaRudlaZkl483xw4DR4kxtYG7cVyk69oZjZJqZaAgmgfBnGXGPqAFi2ho/D5tgABKIiqG4vySG7Q==
+  dependencies:
+    bip84 "^0.2.5"
+
 dom-walk@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.2.tgz#0c548bef048f4d1f2a97249002236060daa3fd84"

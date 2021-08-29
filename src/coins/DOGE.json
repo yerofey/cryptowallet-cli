@@ -1,10 +1,51 @@
 {
     "title": "Dogecoin",
-    "script": "coinkey",
-    "startsWith": "D",
-    "prefixTest": "(?![0OI])[1-9a-zA-Z]",
-    "rareSymbols": "[1-9]",
-    "flags": [
-        "p"
-    ]
+    "defaultFormat": "legacy",
+    "formats": {
+        "bech32": {
+            "format": "bech32",
+            "startsWith": "dc1q",
+            "prefixTest": "[0-9a-z]",
+            "rareSymbols": "[0-9]",
+            "path": "m/84'/3",
+            "purpose": 84,
+            "flags": [
+                "f",
+                "g",
+                "m",
+                "n",
+                "p"
+            ]
+        },
+        "legacy": {
+            "format": "legacy",
+            "startsWith": "D",
+            "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+            "rareSymbols": "[1-9]",
+            "path": "m/44'/3",
+            "purpose": 44,
+            "flags": [
+                "f",
+                "g",
+                "m",
+                "n",
+                "p"
+            ]
+        },
+        "segwit": {
+            "format": "segwit",
+            "startsWith": "A",
+            "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+            "rareSymbols": "[1-9]",
+            "path": "m/49'/3",
+            "purpose": 49,
+            "flags": [
+                "f",
+                "g",
+                "m",
+                "n",
+                "p"
+            ]
+        }
+    }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.1.34",
+  "version": "1.1.35",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "bin": {
@@ -43,6 +43,7 @@
     "coinkey": "^3.0.0",
     "columnify": "^1.5.4",
     "commander": "^8.1.0",
+    "dogecoin-bip84": "^0.0.4",
     "eth-lib": "^0.1.29",
     "ethereum-mnemonic-privatekey-utils": "^1.0.5",
     "litecoin-bip84": "^0.0.1",
