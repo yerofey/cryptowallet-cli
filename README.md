@@ -66,7 +66,7 @@ $ cryptowallet -l
 - `BNB` (Binance Coin) [BEP2, BEP20]
 - `DOGE` (Dogecoin)
 - `BCH` (Bitcoin Cash)
-- `LTC` (Litecoin)
+- `LTC` (Litecoin) [legacy, segwit, bech32]
 - `POLYGON` (Polygon)
 - `TRX` (Tron) 
 - `XTZ` (Tezos) 
