@@ -39,9 +39,9 @@ const prefix = options.prefix || options.prefixIgnorecase || '';
 const prefixIgnoreCase = options.prefixIgnorecase !== undefined;
 
 let supportedCoins = [];
-const coinsFolder = 'src/coins/';
+const coinsFolder = __dirname + '/src/coins/';
 filesList(coinsFolder).forEach((item) => {
-    const name = item.replace('src/coins/', '').replace('.json', '');
+    const name = item.replace(coinsFolder, '').replace('.json', '');
     supportedCoins.push(name);
 });
 
