@@ -18,46 +18,46 @@ $ npm i -g @yerofey/cryptowallet-cli
 ## Usage
 ```bash
 # generate random ERC-like wallet (ETH, BNB, POLYGON, ...)
-$ cryptowallet
+$ cw
 
 # generate random ERC-like wallet with desired prefix
-$ cryptowallet -p aaa
+$ cw -p aaa
 
 # generate random BTC wallet (default format: bech32 - bc1...)
-$ cryptowallet -c BTC
+$ cw -c BTC
 
 # generate random BTC wallet with desired prefix (case sensitive)
-$ cryptowallet -c BTC -p ABC
+$ cw -c BTC -p ABC
 
 # generate random BTC wallet with desired prefix (case insensitive)
-$ cryptowallet -c BTC -P abc
+$ cw -c BTC -P abc
 
 # generate BTC legacy wallet (1...)
-$ cryptowallet -c BTC -f legacy
+$ cw -c BTC -f legacy
 
 # generate BTC segwit wallet (3...)
-$ cryptowallet -c BTC -f segwit
+$ cw -c BTC -f segwit
 
 # generate BTC bech32 wallet from mnemonic string
-$ cryptowallet -c BTC -f bech32 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
+$ cw -c BTC -f bech32 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
 # generate N of BTC bech32 wallets from mnemonic string
-$ cryptowallet -c BTC -f bech32 -n 10 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
+$ cw -c BTC -f bech32 -n 10 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
 # generate ERC-like wallet from mnemonic string
-$ cryptowallet -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
+$ cw -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
 # generate BNB (BEP2) wallet from mnemonic string
-$ cryptowallet -c BNB -f BEP2 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
+$ cw -c BNB -f BEP2 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
 # generate BNB (BEP20) wallet from mnemonic string
-$ cryptowallet -c BNB -f BEP20 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
+$ cw -c BNB -f BEP20 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
 # generate just a mnemonic string (12 words) to import in any wallet app
-$ cryptowallet -m
+$ cw -m
 
 # list all supported cryptos
-$ cryptowallet -l
+$ cw -l
 ```
 
 ## Blockchains supported
