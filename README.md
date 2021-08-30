@@ -2,7 +2,7 @@
 
 > Crypto wallet generator CLI tool
 
-![Screenshot](https://i.imgur.com/jaZ5SVi.png)
+![Screenshot](https://i.imgur.com/KBb7NqW.png)
 
 ---
 
