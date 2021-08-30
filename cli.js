@@ -21,11 +21,10 @@ program.option('-c, --coin <ticker>', 'Wallet for specific coin', 'ERC');
 program.option('-f, --format <format>', 'Wallet format type (for cryptos with multiple wallet formats)');
 program.option('-g, --geek', 'Display some more info (geeky)');
 program.option('-l, --list', 'List all supported cryptos');
-program.option('-m, --mnemonic <mnemonic>', 'Generate wallet from mnemonic string');
-program.option('-mo, --mnemonic-only', 'Generate mnemonic string');
+program.option('-m, --mnemonic [mnemonic]', 'Generate wallet from mnemonic string OR just a mnemonic string');
 program.option('-n, --number <number>', 'Number of wallets to generate (if supported)');
 program.option('-p, --prefix <prefix>', 'Desired wallet prefix (case sensitive)');
-program.option('-pi, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case insensitive)');
+program.option('-P, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case insensitive)');
 program.option('-v, --version', 'Display cryptowallet version');
 program.parse();
 
@@ -66,7 +65,7 @@ async function run() {
         return;
     }
 
-    if (options.mnemonicOnly) {
+    if (options.mnemonic == true) {
         log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your randomly generated mnemonic string:')}\n`);
         log(`📄  ${generateMnemonicString()}`);
         return;

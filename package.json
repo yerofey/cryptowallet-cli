@@ -1,10 +1,11 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.1.38",
+  "version": "1.1.39",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "bin": {
-    "cryptowallet": "cli.js"
+    "cryptowallet": "cli.js",
+    "cw": "cli.js"
   },
   "engines": {
     "node": ">=6"
