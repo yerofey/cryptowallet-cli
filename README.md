@@ -75,6 +75,7 @@ $ cryptowallet -l
 - `ZEC` (Zcash) 
 - `QTUM` (Qtum) 
 - `BTG` (Bitcoin Gold) 
+- `ONE` (Harmony)
 - `DGB` (DigiByte) 
 - `RDD` (ReddCoin) 
 - `VTC` (Vertcoin) 
@@ -86,7 +87,7 @@ $ cryptowallet -l
 - `NBT` (NIX Bridge Token) 
 
 ## Highlights
-- 23 cryptos supported
+- 24 cryptos supported
 - Desired wallet prefix
 - Wallet from mnemonic
 - Works fully offline

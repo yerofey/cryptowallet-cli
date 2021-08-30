@@ -1,0 +1,15 @@
+{
+    "title": "Harmony",
+    "startsWith": "one1",
+    "prefixTest": "(?![oi])[1-9a-z]",
+    "rareSymbols": "[a-z]",
+    "apps": [
+        "trustwallet",
+        "harmony-chrome-ext",
+        "other"
+    ],
+    "flags": [
+        "m",
+        "p"
+    ]
+}

@@ -237,7 +237,8 @@ async function run() {
             "binance-chain-wallet": "Binance Chain Wallet",
             "metamask": "MetaMask",
             "tronlink": "TronLink",
-            "trustwallet": "Trust Wallet"
+            "trustwallet": "Trust Wallet",
+            "harmony-chrome-ext": "Harmony Chrome Extension Wallet"
         }
         let appsArray = [];
 

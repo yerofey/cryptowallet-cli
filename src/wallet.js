@@ -134,6 +134,27 @@ async function generateWallet(coin, options = {}) {
             privateKey: privateKey,
             mnemonic
         });
+    } else if (coin == 'ONE') {
+        const bip39 = require('bip39');
+        const { Wallet } = require('@harmony-js/account');
+
+        if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
+            return {
+                error: 'mnemonic is not valid'
+            }
+        }
+
+        const wallet = new Wallet();
+        const mnemonic = mnemonicString || bip39.generateMnemonic();
+        wallet.addByMnemonic(mnemonic);
+        const publicKey = wallet.accounts[0];
+        const account = wallet.getAccount(publicKey);
+
+        Object.assign(result, {
+            address: account.bech32Address,
+            privateKey: account.privateKey,
+            mnemonic
+        });
     } else if (coin == 'TRX') {
         // TODO: add mnemonic
         const tronWeb = require('tronweb');
