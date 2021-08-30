@@ -86,7 +86,7 @@ $ cryptowallet -l
 - `VIA` (Viacoin)
 - `NBT` (NIX Bridge Token)
 
-*all cryptos that are tokens in the ecosystem like Ethereum, Binance Smart Chain or Polygon - are supported too, you just need to create ERC wallet*
+*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Smart Chain or Polygon and others (EVM compatible) are supported too, you just need to create ERC wallet (that is set by default)*
 ## Highlights
 - 24 blockchains supported
 - Generate wallet with desired prefix

@@ -172,13 +172,12 @@ async function generateWallet(coin, options = {}) {
             }
         }
     } else if (coin == 'XTZ') {
-        // TODO: add mnemonic
         const tezos = require('tezos-sign');
         const wallet = tezos.generateKeysNoSeed();
 
         return {
             address: wallet.pkh,
-            privateKey: wallet.sk,
+            privateKey: wallet.sk
         }
     } else {
         return {
