@@ -4,10 +4,9 @@
     "startsWith": "0x",
     "prefixTest": "[0-9a-f]",
     "apps": [
-        "binance-chain-wallet",
         "metamask",
         "trustwallet",
-        "other"
+        "binance-chain-wallet"
     ],
     "flags": [
         "m",

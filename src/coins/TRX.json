@@ -5,8 +5,7 @@
     "rareSymbols": "[1-9]",
     "apps": [
         "tronlink",
-        "trustwallet",
-        "other"
+        "trustwallet"
     ],
     "flags": [
         "p"

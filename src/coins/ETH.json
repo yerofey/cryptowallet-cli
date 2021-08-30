@@ -5,8 +5,7 @@
     "prefixTest": "[0-9a-f]",
     "apps": [
         "metamask",
-        "trustwallet",
-        "other"
+        "trustwallet"
     ],
     "flags": [
         "m",

@@ -249,7 +249,7 @@ async function run() {
         }
 
         let appsString = appsArray.join(', ');
-        if (coinData.apps.includes('other') || false) {
+        if (coinData.apps || false) {
             appsString += ' and many other wallet apps';
         }
         log(chalk.greenBright('ℹ️   You can import this wallet into ' + appsString));

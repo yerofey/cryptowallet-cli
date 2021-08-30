@@ -10,8 +10,7 @@
             "path": "m/84'/0",
             "purpose": 84,
             "apps": [
-                "trustwallet",
-                "other"
+                "trustwallet"
             ],
             "flags": [
                 "f",

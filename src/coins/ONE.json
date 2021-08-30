@@ -5,8 +5,7 @@
     "rareSymbols": "[a-z]",
     "apps": [
         "trustwallet",
-        "harmony-chrome-ext",
-        "other"
+        "harmony-chrome-ext"
     ],
     "flags": [
         "m",

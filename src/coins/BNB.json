@@ -7,10 +7,9 @@
             "startsWith": "bnb",
             "prefixTest": "[0-9a-z]",
             "apps": [
-                "binance-chain-wallet",
                 "metamask",
                 "trustwallet",
-                "other"
+                "binance-chain-wallet"
             ],
             "flags": [
                 "f",
@@ -24,10 +23,9 @@
             "startsWith": "0x",
             "prefixTest": "[0-9a-f]",
             "apps": [
-                "binance-chain-wallet",
                 "metamask",
                 "trustwallet",
-                "other"
+                "binance-chain-wallet"
             ],
             "flags": [
                 "f",
