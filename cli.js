@@ -220,7 +220,7 @@ async function run() {
         log(chalk.red('‼️   This wallet generation format was not tested yet, do not use it!'));
     }
 
-    if (wallet.formats !== undefined) {
+    if (wallet.formats !== undefined && wallet.formats.length > 1) {
         let formatsString = '';
         for (const val of wallet.formats) {
             formatsString += chalk.blue(val) + ', ';
@@ -234,11 +234,11 @@ async function run() {
 
     if (coinData.apps !== undefined) {
         let apps = {
-            "binance-chain-wallet": "Binance Chain Wallet",
             "metamask": "MetaMask",
             "tronlink": "TronLink",
             "trustwallet": "Trust Wallet",
-            "harmony-chrome-ext": "Harmony Chrome Extension Wallet"
+            "harmony-chrome-ext": "Harmony Chrome Extension Wallet",
+            "binance-chain-wallet": "Binance Chain Wallet"
         }
         let appsArray = [];
 

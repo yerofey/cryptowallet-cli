@@ -60,36 +60,38 @@ $ cryptowallet -mo
 $ cryptowallet -l
 ```
 
-## Cryptos supported
+## Blockchains supported
 - `BTC` (Bitcoin) [legacy, segwit, bech32]
 - `ETH` (Ethereum)
-- `BNB` (Binance Coin) [BEP2, BEP20]
+- `BNB` (Binance Coin) [BEP2, BEP20, ERC20]
 - `DOGE` (Dogecoin) [legacy, segwit, bech32]
 - `BCH` (Bitcoin Cash)
 - `LTC` (Litecoin) [legacy, segwit, bech32]
 - `POLYGON` (Polygon)
-- `TRX` (Tron) 
-- `XTZ` (Tezos) 
-- `DASH` (Dash) 
-- `DCR` (Decred) 
-- `ZEC` (Zcash) 
-- `QTUM` (Qtum) 
-- `BTG` (Bitcoin Gold) 
+- `TRX` (Tron)
+- `XTZ` (Tezos)
+- `DASH` (Dash)
+- `DCR` (Decred)
+- `ZEC` (Zcash)
+- `QTUM` (Qtum)
+- `BTG` (Bitcoin Gold)
 - `ONE` (Harmony)
-- `DGB` (DigiByte) 
-- `RDD` (ReddCoin) 
-- `VTC` (Vertcoin) 
-- `MONA` (MonaCoin) 
-- `NMC` (NameCoin) 
-- `PPC` (PeerCoin) 
-- `BLK` (BlackCoin) 
-- `VIA` (Viacoin) 
-- `NBT` (NIX Bridge Token) 
+- `DGB` (DigiByte)
+- `RDD` (ReddCoin)
+- `VTC` (Vertcoin)
+- `MONA` (MonaCoin)
+- `NMC` (NameCoin)
+- `PPC` (PeerCoin)
+- `BLK` (BlackCoin)
+- `VIA` (Viacoin)
+- `NBT` (NIX Bridge Token)
 
+*all cryptos that are tokens in the ecosystem like Ethereum, Binance Smart Chain or Polygon - are supported too, you just need to create ERC wallet*
 ## Highlights
-- 24 cryptos supported
-- Desired wallet prefix
-- Wallet from mnemonic
+- 24 blockchains supported
+- Generate wallet with desired prefix
+- Generate wallet from mnemonic
+- Generate just a mnemonic
 - Works fully offline
 
 ## TODO

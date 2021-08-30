@@ -32,6 +32,22 @@
                 "m",
                 "p"
             ]
+        },
+        "ERC20": {
+            "format": "ERC20",
+            "network": "EVM",
+            "startsWith": "0x",
+            "prefixTest": "[0-9a-f]",
+            "apps": [
+                "metamask",
+                "trustwallet",
+                "binance-chain-wallet"
+            ],
+            "flags": [
+                "f",
+                "m",
+                "p"
+            ]
         }
     }
 }
