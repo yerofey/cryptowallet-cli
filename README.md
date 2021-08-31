@@ -95,6 +95,7 @@ $ cw -l
 - Works fully offline
 
 ## TODO
+- Windows support
 - Show SegWit Bech32 BTC change addresses with additional flag
 - SegWit Bech32 wallet address support for all Bitcoin forks
 - More EVM compatible cryptos
