@@ -1,5 +1,5 @@
-const Coin = require('./coin');
-const { Wallet } = require('./wallet');
+const Coin = require('./Coin');
+const { Wallet } = require('./Wallet');
 
 class CW {
     constructor(coin, options = {}) {
@@ -9,9 +9,10 @@ class CW {
             geek: false,
             mnemonic: '',
             number: 1,
-            prefix: options.prefix || options.prefixIgnorecase || '',
+            prefix: options.prefixIgnorecase || '',
             prefixIgnoreCase: options.prefixIgnorecase !== undefined
         }
+
         for (const key of Object.keys(defaultValues)) {
             if (!options.hasOwnProperty(key)) {
                 options[key] = defaultValues[key];

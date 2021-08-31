@@ -7,20 +7,20 @@ class Wallet {
 
     async init() {
         const cw = this.cw;
-        const coinRow = cw.row;
+        const row = cw.row;
         const options = cw.options;
 
-        const prefixBadSymbolsArray = (options.prefix != '' ? options.prefix.split('').filter(char => !RegExp(coinRow.prefixTest, 'g').test(char)) : []);
+        const prefixBadSymbolsArray = (options.prefix != '' ? options.prefix.split('').filter(char => !RegExp(row.prefixTest, 'g').test(char)) : []);
         let wallet = {};
         let prefixFound = false;
         let prefixFoundInWallets = [];
 
-        if (options.prefix && coinRow.flags.includes('p')) {
+        if (options.prefix && row.flags.includes('p')) {
             if (prefixBadSymbolsArray.length === 0) {
-                if (options.prefix.length > 1 || 'rareSymbols' in coinRow && RegExp(coinRow.rareSymbols, 'g').test(options.prefix)) {
+                if (options.prefix.length > 1 || 'rareSymbols' in row && RegExp(row.rareSymbols, 'g').test(options.prefix)) {
                     log(`⏳  Generating wallet with "${options.prefix}" prefix, this might take a while...`);
                 }
-                const startsWithSymbols = coinRow.startsWith.split('|');
+                const startsWithSymbols = row.startsWith.split('|');
                 loop:
                 while (true) {
                     wallet = await this.createWallet();
@@ -69,7 +69,7 @@ class Wallet {
     async createWallet() {
         const cw = this.cw;
         const coin = cw.coin;
-        const coinRow = cw.row;
+        const row = cw.row;
         const options = cw.options;
         
         let format = options.format || '';
@@ -77,13 +77,13 @@ class Wallet {
         let number = options.number || 1;
         let result = {};
     
-        if (coinRow == []) {
+        if (row.length == 0) {
             return {
                 error: 'coin not found'
             }
         }
     
-        if (coinRow.script == 'coinkey') {
+        if (row.script == 'coinkey') {
             const CoinKey = require('coinkey');
             const CoinInfo = require('coininfo');
     
@@ -114,21 +114,21 @@ class Wallet {
                 for (let i = 0; i < number; i++) {
                     addresses.push({
                         index: i,
-                        address: account.getAddress(i, false, coinRow.purpose),
+                        address: account.getAddress(i, false, row.purpose),
                         privateKey: account.getPrivateKey(i)
                     });
                 }
             }
     
             Object.assign(result, {
-                format: coinRow.format,
+                format: row.format,
                 addresses,
                 privateExtendedKey: account.getAccountPrivateKey(),
                 mnemonic
             });
         } else if (coin == 'DOGE' || coin == 'LTC') {
             const bip39 = require('bip39');
-            const bip84 = require(coinRow.title.toLowerCase() + '-bip84');
+            const bip84 = require(row.title.toLowerCase() + '-bip84');
     
             if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
                 return {
@@ -146,19 +146,19 @@ class Wallet {
                 for (let i = 0; i < number; i++) {
                     addresses.push({
                         index: i,
-                        address: account.getAddress(i, false, coinRow.purpose),
+                        address: account.getAddress(i, false, row.purpose),
                         privateKey: account.getPrivateKey(i)
                     });
                 }
             }
     
             Object.assign(result, {
-                format: coinRow.format,
+                format: row.format,
                 addresses,
                 privateExtendedKey: account.getAccountPrivateKey(),
                 mnemonic
             });
-        } else if (coinRow.format == 'BEP2') {
+        } else if (row.format == 'BEP2') {
             const bip39 = require('bip39');
             const bCrypto = require('@binance-chain/javascript-sdk/lib/crypto');
     
@@ -177,7 +177,7 @@ class Wallet {
                 privateKey,
                 mnemonic
             });
-        } else if (coinRow.network == 'EVM') {
+        } else if (row.network == 'EVM') {
             const bip39 = require('bip39');
             const pkutils = require('ethereum-mnemonic-privatekey-utils');
             const { Account } = require('eth-lib/lib');
@@ -193,7 +193,7 @@ class Wallet {
             const account = Account.fromPrivate('0x' + privateKey);
     
             Object.assign(result, {
-                format: coinRow.format || '',
+                format: row.format || '',
                 address: account.address,
                 privateKey: privateKey,
                 mnemonic
@@ -248,7 +248,7 @@ class Wallet {
             }
         }
     
-        if (coinRow.tested !== undefined && coinRow.tested == false) {
+        if (row.tested !== undefined && row.tested == false) {
             Object.assign(result, {
                 tested: false
             });
