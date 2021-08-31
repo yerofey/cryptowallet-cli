@@ -33,8 +33,10 @@ class Method {
                 log(`ℹ️   Use flag "-c TICKER" to select specific coin`);
             },
             'mnemonic': () => {
-                log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your randomly generated mnemonic string:')}\n`);
+                log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your randomly generated 12 words mnemonic string:')}\n`);
                 log(`📄  ${generateMnemonicString()}`);
+                log();
+                log(chalk.greenBright('ℹ️   You can import this wallet into MetaMask, Trust Wallet and many other wallet apps'));
             },
             'version': () => {
                 log(selfInfo.version);
@@ -114,7 +116,7 @@ class Method {
                     for (const val of Object.keys(cw.row.formats)) {
                         formatsString += chalk.blue(val) + ', ';
                     }
-                    log(chalk.yellow('*️⃣   You can create different wallet formats: ' + formatsString.substring(0, formatsString.length - 2) + ' (use it with -f flag)'));
+                    log(chalk.yellow('*️⃣   You can create different wallet formats: ' + formatsString.substring(0, formatsString.length - 2) + ' (use it with ' + chalk.white('-f') + ' flag)'));
                 }
 
                 if (cw.row.network == 'EVM' || false) {
