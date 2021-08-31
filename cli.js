@@ -110,7 +110,7 @@ async function run() {
         }
     } else { // single address wallet
         if (cw.prefixFound) {
-            const addressCutLength = cw.row.startsWith.length + prefix.length;
+            const addressCutLength = cw.row.startsWith.length + cw.options.prefix.length;
             log(`👛  ${cw.row.startsWith}${chalk.magenta(cw.wallet.address.slice(cw.row.startsWith.length, addressCutLength))}${cw.wallet.address.slice(addressCutLength)}`);
         } else {
             log(`👛  ${cw.wallet.address}`);
@@ -129,9 +129,9 @@ async function run() {
         log(chalk.red('‼️   This wallet generation format was not tested yet, do not use it!'));
     }
 
-    if (cw.row.formats !== undefined && cw.row.formats.length > 1) {
+    if (cw.row.formats !== undefined && Object.keys(cw.row.formats).length > 1) {
         let formatsString = '';
-        for (const val of cw.row.formats) {
+        for (const val of Object.keys(cw.row.formats)) {
             formatsString += chalk.blue(val) + ', ';
         }
         log(chalk.yellow('*️⃣   You can create different wallet formats: ' + formatsString.substring(0, formatsString.length - 2) + ' (use it with -f flag)'));

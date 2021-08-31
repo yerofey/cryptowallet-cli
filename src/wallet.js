@@ -1,3 +1,5 @@
+const { log } = require('./utils');
+
 class Wallet {
     constructor(cw) {
         this.cw = cw;
