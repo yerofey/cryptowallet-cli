@@ -20,10 +20,10 @@ program.option('-P, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case 
 program.option('-v, --version', 'Display cryptowallet version');
 program.parse();
 
-const options = program.opts();
-const coin = (options.coin).toUpperCase() || '';
+(async function() {
+    const options = program.opts();
+    const coin = (options.coin).toUpperCase() || '';
 
-async function run() {
     if (options.list !== undefined) {
         log(`🔠  All supported cryptos:\n`);
         let cryptos = {};
@@ -61,9 +61,6 @@ async function run() {
     }
 
     const cw = await new CW(coin, options).init();
-
-    // log(cw)
-    // process.exit(1)
 
     let coinFullName = (cw.row.name || coin) + (cw.wallet.format !== undefined && cw.wallet.format != '' ? ' (' + cw.wallet.format + ')' : '');
 
@@ -162,7 +159,5 @@ async function run() {
             appsString += ' and many other wallet apps';
         }
         log(chalk.greenBright('ℹ️   You can import this wallet into ' + appsString));
-    }  
-}
-
-run();
+    }
+})();
