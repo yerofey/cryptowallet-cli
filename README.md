@@ -88,6 +88,17 @@ $ cw -l
 
 *\*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Smart Chain or Polygon and others (EVM compatible) are supported too, you just need to create ERC wallet (that is set by default)*
 
+## Options
+* `-c` or `--coin`: Specify the ticker of a coin to generate wallet for
+* `-f` or `--format`: Specify cryptocurrency wallet format (for BTC: legacy, segwit, bech32)
+* `-g` or `--geek`: Display some additional "geeky" info
+* `-l` or `--list`: List all supported cryptocurrencies
+* `-m` or `--mnemonic`: Use a bip39 mnemonic phrase (if is set) to generate wallet, or leave it empty to generate new one
+* `-n` or `--number`: Specify number of wallets to display (works for HD wallets only, like BTC/LTC/DOGE)
+* `-p` or `--prefix`: Specify desired prefix of an wallet address (case sensitive)
+* `-P` or `--prefix-ignorecase`: Specify desired prefix of an wallet address (case insensitive)
+* `-v` or `--version`: Display the version of CW tool
+
 ## Highlights
 - 24 blockchains supported
 - Generate wallet with desired prefix
