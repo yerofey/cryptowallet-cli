@@ -1,4 +1,5 @@
 const { log } = require('./utils');
+const chalk = require('chalk');
 
 class Wallet {
     constructor(cw) {
