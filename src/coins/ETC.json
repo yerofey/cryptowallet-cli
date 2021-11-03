@@ -6,7 +6,7 @@
             "format": "ERC20",
             "network": "EVM",
             "startsWith": "0x",
-            "prefixTest": "[0-9a-f]",
+            "prefixTest": "[0-9a-fA-F]",
             "apps": [
                 "metamask",
                 "trustwallet"

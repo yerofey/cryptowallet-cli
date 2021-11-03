@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "bin": {
@@ -58,21 +58,22 @@
   "dependencies": {
     "@binance-chain/javascript-sdk": "^4.1.1",
     "@harmony-js/account": "^0.1.57",
-    "bip39": "^3.0.4",
-    "bip84": "^0.2.5",
-    "chalk": "^4.1.2",
-    "coininfo": "^5.1.0",
-    "coinkey": "^3.0.0",
-    "columnify": "^1.5.4",
-    "commander": "^8.1.0",
-    "dogecoin-bip84": "^0.0.4",
-    "eth-lib": "^0.1.29",
-    "ethereum-mnemonic-privatekey-utils": "^1.0.5",
-    "litecoin-bip84": "^0.0.1",
-    "tezos-sign": "^1.4.1",
-    "tronweb": "^4.0.0"
+    "@yerofey/dogecoin-bip84": "^0.0.5",
+    "@yerofey/litecoin-bip84": "^0.0.5",
+    "bip39": "3.0.4",
+    "bip84": "0.2.5",
+    "chalk": "4.1.2",
+    "coininfo": "5.1.0",
+    "coinkey": "3.0.0",
+    "columnify": "1.5.4",
+    "commander": "8.1.0",
+    "eth-lib": "0.1.29",
+    "ethereum-mnemonic-privatekey-utils": "1.0.5",
+    "tezos-sign": "1.4.1",
+    "tronweb": "4.0.0"
   },
   "devDependencies": {
-    "ava": "^3.15.0"
+    "ava": "^3.15.0",
+    "ethereum-bip84": "0.0.2"
   }
 }
