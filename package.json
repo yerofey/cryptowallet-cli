@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "bin": {
@@ -61,7 +61,7 @@
     "@yerofey/dogecoin-bip84": "^0.0.5",
     "@yerofey/litecoin-bip84": "^0.0.5",
     "bip39": "3.0.4",
-    "bip84": "0.2.5",
+    "bip84": "^0.2.6",
     "chalk": "4.1.2",
     "coininfo": "5.1.0",
     "coinkey": "3.0.0",

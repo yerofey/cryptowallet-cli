@@ -97,7 +97,7 @@ class Wallet {
             });
         } else if (coin == 'BTC') {
             const bip39 = require('bip39');
-            const bip84 = require('bip84');
+            const { fromMnemonic, fromZPrv } = require('bip84');
     
             if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
                 return {
@@ -106,9 +106,9 @@ class Wallet {
             }
     
             const mnemonic = mnemonicString || bip39.generateMnemonic();
-            const root = new bip84.fromMnemonic(mnemonic);
+            const root = new fromMnemonic(mnemonic, '');
             const child = root.deriveAccount(0);
-            const account = new bip84.fromZPrv(child);
+            const account = new fromZPrv(child);
     
             let addresses = [];
             if (number >= 1) {
@@ -129,7 +129,7 @@ class Wallet {
             });
         } else if (coin == 'DOGE' || coin == 'LTC') {
             const bip39 = require('bip39');
-            const { fromMnemonic, fromZPrv } = require(row.title.toLowerCase() + '-bip84');
+            const { fromMnemonic, fromZPrv } = require('@yerofey/' + row.title.toLowerCase() + '-bip84');
     
             if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
                 return {

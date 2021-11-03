@@ -1192,16 +1192,7 @@ bip66@^1.1.0, bip66@^1.1.5:
   dependencies:
     safe-buffer "^5.0.1"
 
-bip84@0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/bip84/-/bip84-0.2.5.tgz#ca25915b49d06fae4b61681dd5455121deafd8f5"
-  integrity sha512-a3Yr1QqcC0SZSjwMZtZasAA4C1HAC12j2F8fUTfQTgvTIlI28anWrk5D5OkdBV7rke4qTpl33fxYb180Y/zD/w==
-  dependencies:
-    bip39 "^3.0.1"
-    bitcoinjs-lib "^5.0.3"
-    bs58check "^2.1.2"
-
-bip84@^0.2.5:
+bip84@^0.2.5, bip84@^0.2.6:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/bip84/-/bip84-0.2.6.tgz#0319fa8a61da835490b327f6bc6f0d42a6cd3f94"
   integrity sha512-hUjkkhQevMqcqc0Fp0EXlaUB6Fqj9wDQACfg1KvhCFcqV1Gtme12z9Po/mq7oJR2miVAfjm5EUJHfeIKXS9Y3w==
