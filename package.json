@@ -61,7 +61,7 @@
     "@yerofey/dogecoin-bip84": "^0.0.5",
     "@yerofey/litecoin-bip84": "^0.0.5",
     "bip39": "3.0.4",
-    "bip84": "^0.2.6",
+    "bip84": "0.2.6",
     "chalk": "4.1.2",
     "coininfo": "5.1.0",
     "coinkey": "3.0.0",
@@ -73,7 +73,6 @@
     "tronweb": "4.0.0"
   },
   "devDependencies": {
-    "ava": "^3.15.0",
-    "ethereum-bip84": "0.0.2"
+    "ava": "^3.15.0"
   }
 }
