@@ -1,5 +1,3 @@
 node_modules/
-dev.js
-test.js
+dev/
 yarn-error.log
-z.js
