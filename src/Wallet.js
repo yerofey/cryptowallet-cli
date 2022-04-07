@@ -169,19 +169,36 @@ class Wallet {
                 }
             }
     
+            let addresses = [];
             const mnemonic = mnemonicString || bip39.generateMnemonic();
-            const privateKey = bCrypto.getPrivateKeyFromMnemonic(mnemonic, true, 0);
-    
+
+            if (number == 1) {
+                const privateKey = bCrypto.getPrivateKeyFromMnemonic(mnemonic, true, 0);
+                addresses.push({
+                    address: bCrypto.getAddressFromPrivateKey(privateKey, 'bnb'),
+                    privateKey
+                });
+            } else {
+                for (let i = 0; i <= number; i++) {
+                    const privateKey = bCrypto.getPrivateKeyFromMnemonic(mnemonic, true, i);
+                    addresses.push({
+                        index: i,
+                        address: bCrypto.getAddressFromPrivateKey(privateKey, 'bnb'),
+                        privateKey
+                    });
+                }
+            }
+
             Object.assign(result, {
                 format: 'BEP2',
-                address: bCrypto.getAddressFromPrivateKey(privateKey, 'bnb'),
-                privateKey,
+                addresses,
                 mnemonic
             });
         } else if (row.network == 'EVM') {
             const bip39 = require('bip39');
             const pkutils = require('ethereum-mnemonic-privatekey-utils');
             const { Account } = require('eth-lib/lib');
+            const { fromMnemonic, fromZPrv } = require('ethereum-bip84');
     
             if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
                 return {
@@ -189,14 +206,37 @@ class Wallet {
                 }
             }
     
+            let addresses = [];
             const mnemonic = mnemonicString || bip39.generateMnemonic();
             const privateKey = pkutils.getPrivateKeyFromMnemonic(mnemonic);
-            const account = Account.fromPrivate('0x' + privateKey);
-    
+
+            if (number == 1) {
+                const account = Account.fromPrivate('0x' + privateKey);
+
+                addresses.push({
+                    address: account.address,
+                    privateKey
+                });
+            } else {
+                // TODO: add variable for accountId
+                const root = new fromMnemonic(mnemonic, '');
+                const child = root.deriveAccount(0);
+                const account = new fromZPrv(child);
+                for (let walletId = 0; walletId <= number; walletId++) {
+                    const walletAddress = account.getAddress(walletId);
+                    const privateKey = account.getPrivateKey(walletId);
+
+                    addresses.push({
+                        index: walletId,
+                        address: walletAddress,
+                        privateKey
+                    });
+                }
+            }
+            
             Object.assign(result, {
                 format: row.format || '',
-                address: account.address,
-                privateKey: privateKey,
+                addresses,
                 mnemonic
             });
         } else if (coin == 'ONE') {

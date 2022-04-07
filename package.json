@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "bin": {
@@ -68,6 +68,7 @@
     "columnify": "1.5.4",
     "commander": "8.1.0",
     "eth-lib": "0.1.29",
+    "ethereum-bip84": "0.0.3",
     "ethereum-mnemonic-privatekey-utils": "1.0.5",
     "tezos-sign": "1.4.1",
     "tronweb": "4.0.0"
