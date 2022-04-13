@@ -8,6 +8,7 @@
         "trustwallet"
     ],
     "flags": [
-        "p"
+        "p",
+        "s"
     ]
 }

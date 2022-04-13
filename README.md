@@ -23,7 +23,7 @@ $ cw
 # generate random ERC-like wallet with desired prefix
 $ cw -p aaa
 
-# generate random BTC wallet (default format: bech32 - bc1...)
+# generate random BTC wallet (default format: bech32 - "bc1q...")
 $ cw -c BTC
 
 # generate random BTC wallet with desired prefix (case sensitive)
@@ -32,10 +32,10 @@ $ cw -c BTC -p ABC
 # generate random BTC wallet with desired prefix (case insensitive)
 $ cw -c BTC -P abc
 
-# generate BTC legacy wallet (1...)
+# generate BTC legacy wallet ("1...")
 $ cw -c BTC -f legacy
 
-# generate BTC segwit wallet (3...)
+# generate BTC segwit wallet ("3...")
 $ cw -c BTC -f segwit
 
 # generate BTC bech32 wallet from mnemonic string
@@ -95,13 +95,15 @@ $ cw -l
 * `-l` or `--list`: List all supported cryptocurrencies
 * `-m` or `--mnemonic`: Use a bip39 mnemonic phrase (if is set) to generate wallet, or leave it empty to generate new one
 * `-n` or `--number`: Specify number of wallets to display (works for HD wallets only, like BTC/LTC/DOGE)
-* `-p` or `--prefix`: Specify desired prefix of an wallet address (case sensitive)
-* `-P` or `--prefix-ignorecase`: Specify desired prefix of an wallet address (case insensitive)
+* `-p` or `--prefix`: Specify desired prefix of an wallet address (**case-sensitive**)
+* `-P` or `--prefix-ignorecase`: Specify desired prefix of an wallet address (**case-insensitive**)
+* `-s` or `--suffix`: Specify desired suffix of an wallet address (**case-sensitive**)
+* `-S` or `--suffix-ignorecase`: Specify desired suffix of an wallet address (**case-insensitive**)
 * `-v` or `--version`: Display the version of CW tool
 
 ## Highlights
-- 24 blockchains supported
-- Generate wallet with desired prefix
+- 24+ blockchains supported
+- Generate wallet with desired prefix/suffix
 - Generate wallet from mnemonic
 - Generate just a mnemonic
 - Works fully offline

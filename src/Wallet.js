@@ -11,34 +11,79 @@ class Wallet {
         const row = cw.row;
         const options = cw.options;
 
-        const prefixBadSymbolsArray = (options.prefix != '' ? options.prefix.split('').filter(char => !RegExp(row.prefixTest, 'g').test(char)) : []);
+        const badSymbolsArray = (options.prefix != '' ? options.prefix.split('').filter(char => !RegExp(row.prefixTest, 'g').test(char)) : []);
         let wallet = {};
         let prefixFound = false;
         let prefixFoundInWallets = [];
+        let suffixFound = false;
+        let suffixFoundInWallets = [];
+        let onlyPrefix = false;
+        let onlySuffix = false;
+        let onlyBoth = false;
 
-        if (options.prefix && row.flags.includes('p')) {
-            if (prefixBadSymbolsArray.length === 0) {
-                if (options.prefix.length > 1 || 'rareSymbols' in row && RegExp(row.rareSymbols, 'g').test(options.prefix)) {
-                    log(`⏳  Generating wallet with "${options.prefix}" prefix, this might take a while...`);
+        const prefixFoundInAddress = (address, isIgnoringCase, prefix, symbol) => (!isIgnoringCase && address.startsWith(symbol + '' + prefix) || isIgnoringCase && (address).toUpperCase().startsWith((symbol + '' + prefix).toUpperCase()));
+        const suffixFoundInAddress = (address, isIgnoringCase, suffix) => (!isIgnoringCase && address.endsWith(suffix) || isIgnoringCase && (address).toUpperCase().endsWith(suffix));
+
+        if (options.prefix && row.flags.includes('p') || options.suffix && row.flags.includes('s')) {
+            if (badSymbolsArray.length === 0) {
+                if (options.prefix && options.suffix) {
+                    // prefix & suffix
+                    log(`⏳  Generating wallet with "${options.prefix}" prefix and "${options.suffix}" suffix, this for sure will take a while...`);
+                    onlyBoth = true;
+                } else {
+                    // prefix
+                    if (options.prefix.length > 0 || 'rareSymbols' in row && RegExp(row.rareSymbols, 'g').test(options.prefix)) {
+                        log(`⏳  Generating wallet with "${options.prefix}" prefix, this might take a while...`);
+                        onlyPrefix = true;
+                    }
+                    // suffix
+                    if (options.suffix.length > 0 || 'rareSymbols' in row && RegExp(row.rareSymbols, 'g').test(options.suffix)) {
+                        log(`⏳  Generating wallet with "${options.suffix}" suffix, this might take a while...`);
+                        onlySuffix = true;
+                    }
                 }
+                
                 const startsWithSymbols = row.startsWith.split('|');
                 loop:
                 while (true) {
                     wallet = await this.createWallet();
                     for (let firstSymbol of startsWithSymbols) {
-                        if (wallet.address !== undefined) {
-                            if (!options.prefixIgnoreCase && wallet.address.startsWith(firstSymbol + '' + options.prefix) || options.prefixIgnoreCase && (wallet.address).toUpperCase().startsWith((firstSymbol + '' + options.prefix).toUpperCase())) {
+                        if (wallet.address !== undefined) { // one address
+                            if (onlyPrefix && prefixFoundInAddress(wallet.address, options.prefixIgnoreCase, options.prefix, firstSymbol)) {
                                 prefixFound = true;
                                 break loop;
                             }
-                        } else if (wallet.addresses !== undefined) {
+
+                            if (onlySuffix && suffixFoundInAddress(wallet.address, options.suffixIgnoreCase, options.suffix)) {
+                                suffixFound = true;
+                                break loop;
+                            }
+
+                            if (onlyBoth && prefixFoundInAddress(wallet.address, options.prefixIgnoreCase, options.prefix, firstSymbol) && suffixFoundInAddress(wallet.address, options.suffixIgnoreCase, options.suffix)) {
+                                prefixFound = true;
+                                suffixFound = true;
+                                break loop;
+                            }
+                        } else if (wallet.addresses !== undefined) { // multiple addresses
                             for (let item of wallet.addresses) {
-                                if (!options.prefixIgnoreCase && (item.address).startsWith(firstSymbol + '' + options.prefix) || options.prefixIgnoreCase && (item.address).toUpperCase().startsWith((firstSymbol + '' + options.prefix).toUpperCase())) {
+                                if (onlyPrefix && prefixFoundInAddress(item.address, options.prefixIgnoreCase, options.prefix, firstSymbol)) {
                                     prefixFound = true;
                                     prefixFoundInWallets.push(item.address);
                                 }
+
+                                if (onlySuffix && suffixFoundInAddress(item.address, options.suffixIgnoreCase, options.suffix)) {
+                                    suffixFound = true;
+                                    suffixFoundInWallets.push(item.address);
+                                }
+
+                                if (onlyBoth && prefixFoundInAddress(item.address, options.prefixIgnoreCase, options.prefix, firstSymbol) && suffixFoundInAddress(item.address, options.suffixIgnoreCase, options.suffix)) {
+                                    prefixFound = true;
+                                    prefixFoundInWallets.push(item.address);
+                                    suffixFound = true;
+                                    suffixFoundInWallets.push(item.address);
+                                }
                             }
-                            if (prefixFound) {
+                            if (onlyPrefix && prefixFound || onlySuffix && suffixFound || onlyBoth && prefixFound && suffixFound) {
                                 break loop;
                             }
                         } else {
@@ -48,12 +93,13 @@ class Wallet {
                     }
                 }
             } else {
-                let prefixBadSymbolsString = '';
-                for (const symbol of prefixBadSymbolsArray) {
-                    prefixBadSymbolsString += '"' + symbol + '", ';
+                let badSymbolsString = '';
+                for (const symbol of badSymbolsArray) {
+                    badSymbolsString += '"' + symbol + '", ';
                 }
     
-                log(chalk.red('⛔️  Error: prefix contains non-supported characters (' + prefixBadSymbolsString.substr(0, prefixBadSymbolsString.length - 2) + ')!'));
+                // TODO: add prefix/suffix own message log
+                log(chalk.red('⛔️  Error: prefix or suffix contains non-supported characters (' + badSymbolsString.substr(0, badSymbolsString.length - 2) + ')!'));
                 process.exit(1);
             }
         } else {
@@ -63,7 +109,9 @@ class Wallet {
         return {
             wallet,
             prefixFound,
-            prefixFoundInWallets
+            prefixFoundInWallets,
+            suffixFound,
+            suffixFoundInWallets,
         };
     }
 
@@ -80,7 +128,7 @@ class Wallet {
     
         if (row.length == 0) {
             return {
-                error: 'coin not found'
+                error: 'coin not found',
             }
         }
     
@@ -92,8 +140,11 @@ class Wallet {
     
             result = Object.assign(result, {
                 format,
-                address: wallet.publicAddress,
-                privateKey: wallet.privateWif,
+                addresses: [{
+                    index: 0,
+                    address: wallet.publicAddress,
+                    privateKey: wallet.privateWif,
+                }]
             });
         } else if (coin == 'BTC') {
             const bip39 = require('bip39');
@@ -175,6 +226,7 @@ class Wallet {
             if (number == 1) {
                 const privateKey = bCrypto.getPrivateKeyFromMnemonic(mnemonic, true, 0);
                 addresses.push({
+                    index: 0,
                     address: bCrypto.getAddressFromPrivateKey(privateKey, 'bnb'),
                     privateKey
                 });
@@ -202,7 +254,7 @@ class Wallet {
     
             if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
                 return {
-                    error: 'mnemonic is not valid'
+                    error: 'mnemonic is not valid',
                 }
             }
     
@@ -214,8 +266,9 @@ class Wallet {
                 const account = Account.fromPrivate('0x' + privateKey);
 
                 addresses.push({
+                    index: 0,
                     address: account.address,
-                    privateKey
+                    privateKey,
                 });
             } else {
                 // TODO: add variable for accountId
@@ -229,7 +282,7 @@ class Wallet {
                     addresses.push({
                         index: walletId,
                         address: walletAddress,
-                        privateKey
+                        privateKey,
                     });
                 }
             }
@@ -237,7 +290,7 @@ class Wallet {
             Object.assign(result, {
                 format: row.format || '',
                 addresses,
-                mnemonic
+                mnemonic,
             });
         } else if (coin == 'ONE') {
             const bip39 = require('bip39');
@@ -256,9 +309,12 @@ class Wallet {
             const account = wallet.getAccount(publicKey);
     
             Object.assign(result, {
-                address: account.bech32Address,
-                privateKey: account.privateKey,
-                mnemonic
+                addresses: [{
+                    index: 0,
+                    address: account.bech32Address,
+                    privateKey: account.privateKey,
+                }],
+                mnemonic,
             });
         } else if (coin == 'TRX') {
             const tronWeb = require('tronweb');
@@ -267,8 +323,11 @@ class Wallet {
                 const wallet = await tronWeb.createAccount();
     
                 Object.assign(result, {
-                    address: wallet.address.base58,
-                    privateKey: wallet.privateKey
+                    addresses: [{
+                        index: 0,
+                        address: wallet.address.base58,
+                        privateKey: wallet.privateKey
+                    }],
                 });
             } catch (error) {
                 return {
@@ -280,8 +339,11 @@ class Wallet {
             const wallet = tezos.generateKeysNoSeed();
     
             Object.assign(result, {
-                address: wallet.pkh,
-                privateKey: wallet.sk
+                addresses: [{
+                    index: 0,
+                    address: wallet.pkh,
+                    privateKey: wallet.sk,
+                }],
             });
         } else {
             return {
@@ -291,7 +353,7 @@ class Wallet {
     
         if (row.tested !== undefined && row.tested == false) {
             Object.assign(result, {
-                tested: false
+                tested: false,
             });
         }
     

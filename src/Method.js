@@ -53,6 +53,10 @@ class Method {
                     log(`😢  ${chalk.yellow('Sorry, ' + coinFullName + ' does not support prefix yet...')}`);
                 }
 
+                if (cw.options.suffix && !cw.suffixFound) {
+                    log(`😢  ${chalk.yellow('Sorry, ' + coinFullName + ' does not support suffix yet...')}`);
+                }
+
                 if (cw.options.mnemonic != '' && cw.wallet.mnemonic == undefined) {
                     log(`😢  ${chalk.yellow('Sorry, ' + coinFullName + ' does not support mnemonic yet...')}`);
                 }
@@ -62,9 +66,19 @@ class Method {
                     return;
                 }
 
-                log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + coinFullName + ' wallet' + (cw.prefixFound ? ' with "' + cw.options.prefix + '" prefix' : '') + ':')}\n`);
-                
-                if (cw.wallet.addresses !== undefined) { // multiple addresses wallet
+                // prefix, suffix
+                if (cw.prefixFound && cw.suffixFound) {
+                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + coinFullName + ' wallet with "' + cw.options.prefix + '" prefix and "' + cw.options.suffix + '" suffix:')}\n`);
+                } else if (cw.prefixFound) {
+                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + coinFullName + ' wallet with "' + cw.options.prefix + '" prefix:')}\n`);
+                } else if (cw.suffixFound) {
+                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + coinFullName + ' wallet with "' + cw.options.suffix + '" suffix:')}\n`);
+                } else {
+                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + coinFullName + ' wallet:')}\n`);
+                }
+
+                // result
+                if (cw.wallet.addresses !== undefined) {
                     if (cw.wallet.privateExtendedKey) {
                         log(`🔐  ${cw.wallet.privateExtendedKey}`);
                     }
@@ -77,9 +91,21 @@ class Method {
                         if (cw.wallet.addresses.length > 1) {
                             log(`🆔  ${item.index}`);
                         }
-                        if (cw.prefixFound && cw.prefixFoundInWallets.includes(item.address)) {
+
+                        if (cw.prefixFound && cw.prefixFoundInWallets.includes(item.address) && cw.suffixFound && cw.suffixFoundInWallets.includes(item.address)) {
+                            // highlight found prefix
+                            // log(`👛  ${item.address}`);
+                            const addressCutPrefixLength = cw.row.startsWith.length + cw.options.prefix.length;
+                            const addressFirstPart = item.address.slice(cw.row.startsWith.length, addressCutPrefixLength);
+                            const addressLastPart = item.address.slice(item.address.length - cw.options.suffix.length);
+                            log(`👛  ${cw.row.startsWith}${chalk.magenta(addressFirstPart)}${item.address.substring(cw.row.startsWith.length + addressFirstPart.length, item.address.length - addressLastPart.length)}${chalk.magenta(addressLastPart)}`);
+                        } else if (cw.prefixFound && cw.prefixFoundInWallets.includes(item.address)) {
+                            // highlight found prefix
                             const addressCutLength = cw.row.startsWith.length + cw.options.prefix.length;
                             log(`👛  ${cw.row.startsWith}${chalk.magenta(item.address.slice(cw.row.startsWith.length, addressCutLength))}${item.address.slice(addressCutLength)}`);
+                        } else if (cw.suffixFound && cw.suffixFoundInWallets.includes(item.address)) {
+                            // highlight found suffix
+                            log(`👛  ${item.address.slice(0, item.address.length - cw.options.suffix.length)}${chalk.magenta(item.address.slice(item.address.length - cw.options.suffix.length))}`);
                         } else {
                             log(`👛  ${item.address}`);
                         }
@@ -89,17 +115,6 @@ class Method {
                     if (cw.row.path !== undefined && cw.options.geek) {
                         log();
                         log(`🗂   wallet address path: ${cw.row.path}'/0'/0/ID`);
-                    }
-                } else { // single address wallet
-                    if (cw.prefixFound) {
-                        const addressCutLength = cw.row.startsWith.length + cw.options.prefix.length;
-                        log(`👛  ${cw.row.startsWith}${chalk.magenta(cw.wallet.address.slice(cw.row.startsWith.length, addressCutLength))}${cw.wallet.address.slice(addressCutLength)}`);
-                    } else {
-                        log(`👛  ${cw.wallet.address}`);
-                    }
-                    log(`🔑  ${cw.wallet.privateKey}`);
-                    if (cw.wallet.mnemonic) {
-                        log(`📄  ${cw.wallet.mnemonic}`);
                     }
                 }
                 

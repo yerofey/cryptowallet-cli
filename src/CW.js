@@ -10,7 +10,9 @@ class CW {
             mnemonic: '',
             number: 1,
             prefix: options.prefixIgnorecase || '',
-            prefixIgnoreCase: options.prefixIgnorecase !== undefined
+            prefixIgnoreCase: options.prefixIgnorecase !== undefined,
+            suffix: options.suffixIgnorecase || '',
+            suffixIgnoreCase: options.suffixIgnorecase !== undefined,
         }
 
         for (const key of Object.keys(defaultValues)) {

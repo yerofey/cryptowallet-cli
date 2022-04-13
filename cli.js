@@ -14,6 +14,8 @@ program.option('-m, --mnemonic [mnemonic]', 'Generate wallet from mnemonic strin
 program.option('-n, --number <number>', 'Number of wallets to generate (if supported)');
 program.option('-p, --prefix <prefix>', 'Desired wallet prefix (case sensitive)');
 program.option('-P, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case insensitive)');
+program.option('-s, --suffix <suffix>', 'Desired wallet suffix (case sensitive)');
+program.option('-S, --suffix-ignorecase <suffix>', 'Desired wallet suffix (case insensitive)');
 program.option('-v, --version', 'Display cryptowallet version');
 program.parse();
 
