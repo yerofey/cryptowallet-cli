@@ -87,8 +87,8 @@ class Method {
                     }
 
                     for (const item of cw.wallet.addresses) {
-                        log();
                         if (cw.wallet.addresses.length > 1) {
+                            log();
                             log(`🆔  ${item.index}`);
                         }
 
