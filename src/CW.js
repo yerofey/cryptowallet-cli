@@ -1,10 +1,10 @@
-const Coin = require('./Coin');
+const Chain = require('./Chain');
 const { Wallet } = require('./Wallet');
 
 class CW {
-    constructor(coin, options = {}) {
+    constructor(chain, options = {}) {
         const defaultValues = {
-            coin: coin || options.coin || '',
+            chain: chain || options.chain || '',
             format: '',
             geek: false,
             mnemonic: '',
@@ -21,9 +21,9 @@ class CW {
             }
         }
 
-        this.coin = coin;
+        this.chain = chain;
         this.options = options;
-        this.row = new Coin(coin, options.format).row;
+        this.row = new Chain(chain, options.format).row;
     }
 
     async init() {

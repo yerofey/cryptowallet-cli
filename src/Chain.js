@@ -1,6 +1,6 @@
-class Coin {
-    constructor(coin, format) {
-        const content = require('./coins/' + coin + '.json') || {};
+class Chain {
+    constructor(chain, format) {
+        const content = require('./chains/' + chain + '.json') || {};
         const data = (() => {
             if (content.formats !== undefined) {
                 if (format != '' && format != content.defaultFormat) {
@@ -25,4 +25,4 @@ class Coin {
     }
 }
 
-module.exports = Coin;
+module.exports = Chain;

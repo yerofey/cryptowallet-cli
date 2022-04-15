@@ -13,13 +13,13 @@ const filesList = (dir) => {
 
 const objectHasAllKeys = (obj, keysArray) => keysArray.every(item => obj.hasOwnProperty(item));
 
-let supportedCoins = [];
-const coinsFolder = __dirname + '/coins/';
-filesList(coinsFolder).forEach((item) => {
-    const name = item.replace(coinsFolder, '').replace('.json', '');
-    supportedCoins.push(name);
+let supportedChains = [];
+const chainsFolder = __dirname + '/chains/';
+filesList(chainsFolder).forEach((item) => {
+    const name = item.replace(chainsFolder, '').replace('.json', '');
+    supportedChains.push(name);
 });
 
 module.exports.log = log;
 module.exports.objectHasAllKeys = objectHasAllKeys;
-module.exports.supportedCoins = supportedCoins;
+module.exports.supportedChains = supportedChains;

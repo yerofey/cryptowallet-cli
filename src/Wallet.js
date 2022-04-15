@@ -120,7 +120,7 @@ class Wallet {
 
     async createWallet() {
         const cw = this.cw;
-        const coin = cw.coin;
+        const chain = cw.chain;
         const row = cw.row;
         const options = cw.options;
         
@@ -131,7 +131,7 @@ class Wallet {
     
         if (row.length == 0) {
             return {
-                error: 'coin not found',
+                error: 'this blockchain is not found',
             }
         }
     
@@ -139,7 +139,7 @@ class Wallet {
             const CoinKey = require('coinkey');
             const CoinInfo = require('coininfo');
     
-            const wallet = CoinKey.createRandom(CoinInfo(coin).versions);
+            const wallet = CoinKey.createRandom(CoinInfo(chain).versions);
     
             result = Object.assign(result, {
                 format,
@@ -149,7 +149,7 @@ class Wallet {
                     privateKey: wallet.privateWif,
                 }]
             });
-        } else if (coin == 'BTC') {
+        } else if (chain == 'BTC') {
             const bip39 = require('bip39');
             const { fromMnemonic, fromZPrv } = require('bip84');
     
@@ -181,7 +181,7 @@ class Wallet {
                 privateExtendedKey: account.getAccountPrivateKey(),
                 mnemonic
             });
-        } else if (coin == 'DOGE' || coin == 'LTC') {
+        } else if (chain == 'DOGE' || chain == 'LTC') {
             const bip39 = require('bip39');
             const { fromMnemonic, fromZPrv } = require('@yerofey/' + row.title.toLowerCase() + '-bip84');
     
@@ -295,7 +295,7 @@ class Wallet {
                 addresses,
                 mnemonic,
             });
-        } else if (coin == 'ONE') {
+        } else if (chain == 'ONE') {
             const bip39 = require('bip39');
             const { Wallet } = require('@harmony-js/account');
     
@@ -319,7 +319,7 @@ class Wallet {
                 }],
                 mnemonic,
             });
-        } else if (coin == 'TRX') {
+        } else if (chain == 'TRX') {
             const tronWeb = require('tronweb');
     
             try {
@@ -337,7 +337,7 @@ class Wallet {
                     error
                 }
             }
-        } else if (coin == 'XTZ') {
+        } else if (chain == 'XTZ') {
             const tezos = require('tezos-sign');
             const wallet = tezos.generateKeysNoSeed();
     
@@ -350,7 +350,7 @@ class Wallet {
             });
         } else {
             return {
-                error: 'coin is not supported yet'
+                error: 'your desired blockchain is not supported yet'
             }
         }
     

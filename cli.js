@@ -3,10 +3,11 @@
 
 const { program } = require('commander');
 const chalk = require('chalk');
-const { log, supportedCoins } = require('./src/utils');
+const { log, supportedChains } = require('./src/utils');
 const Method = require('./src/Method');
 
-program.option('-c, --coin <ticker>', 'Wallet for specific coin', 'ERC');
+program.option('-b, --chain <ticker>', 'Wallet for specific blockchain', 'ERC');
+program.option('-c, --chain <ticker>', 'Wallet for specific blockchain', 'ERC');
 program.option('-f, --format <format>', 'Wallet format type (for cryptos with multiple wallet formats)');
 program.option('-g, --geek', 'Display some more info (geeky)');
 program.option('-l, --list', 'List all supported cryptos');
@@ -34,13 +35,13 @@ program.parse();
         return new Method('version').init();
     }
 
-    const coin = (options.coin).toUpperCase() || '';
-    if (supportedCoins.includes(coin)) {
+    const chain = (options.chain).toUpperCase() || '';
+    if (supportedChains.includes(chain)) {
         return new Method('wallet', {
-            coin,
-            options
+            chain,
+            options,
         }).init();
     }
 
-    log(chalk.red('⛔️  Error: coin not supported!'));
+    log(chalk.red('⛔️  Error: this blockchain is not supported!'));
 })();

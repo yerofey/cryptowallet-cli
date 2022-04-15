@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const columnify = require('columnify');
-const { log, supportedCoins } = require('./utils');
+const { log, supportedChains } = require('./utils');
 const { generateMnemonicString } = require('./Wallet');
 const selfInfo = require('../package.json');
 const CW = require('./CW');
@@ -15,10 +15,10 @@ class Method {
         const callMethod = {
             '_': () => {},
             'list': () => {
-                log(`🔠  All supported cryptos:\n`);
+                log(`🔠  All supported blockchains:\n`);
                 let cryptos = {};
-                for (const val of supportedCoins) {
-                    const data = require('./coins/' + val + '.json');
+                for (const val of supportedChains) {
+                    const data = require('./chains/' + val + '.json');
                     let title = data.title || '';
                     if (title == '' || val == 'ERC') {
                         continue;
@@ -30,7 +30,7 @@ class Method {
                     columnSplitter: ' - ',
                 }));
                 log();
-                log(`ℹ️   Use flag "-c TICKER" to select specific coin`);
+                log(`ℹ️   Use flag "-c TICKER" to select specific blockchain`);
             },
             'mnemonic': () => {
                 log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your randomly generated 12 words mnemonic string:')}\n`);
@@ -42,23 +42,23 @@ class Method {
                 log(selfInfo.version);
             },
             'wallet': async () => {
-                const coin = this.params.coin;
+                const chain = this.params.chain;
                 const options = this.params.options;
                 
-                const cw = await new CW(coin, options).init();
+                const cw = await new CW(chain, options).init();
 
-                let coinFullName = (cw.row.name || coin) + (cw.wallet.format !== undefined && cw.wallet.format != '' ? ' (' + cw.wallet.format + ')' : '');
+                let chainFullName = (cw.row.name || chain) + (cw.wallet.format !== undefined && cw.wallet.format != '' ? ' (' + cw.wallet.format + ')' : '');
 
                 if (cw.options.prefix && !cw.prefixFound) {
-                    log(`😢  ${chalk.yellow('Sorry, ' + coinFullName + ' does not support prefix yet...')}`);
+                    log(`😢  ${chalk.yellow('Sorry, ' + chainFullName + ' does not support prefix yet...')}`);
                 }
 
                 if (cw.options.suffix && !cw.suffixFound) {
-                    log(`😢  ${chalk.yellow('Sorry, ' + coinFullName + ' does not support suffix yet...')}`);
+                    log(`😢  ${chalk.yellow('Sorry, ' + chainFullName + ' does not support suffix yet...')}`);
                 }
 
                 if (cw.options.mnemonic != '' && cw.wallet.mnemonic == undefined) {
-                    log(`😢  ${chalk.yellow('Sorry, ' + coinFullName + ' does not support mnemonic yet...')}`);
+                    log(`😢  ${chalk.yellow('Sorry, ' + chainFullName + ' does not support mnemonic yet...')}`);
                 }
 
                 if (cw.wallet.error !== undefined) {
@@ -68,13 +68,13 @@ class Method {
 
                 // prefix, suffix
                 if (cw.prefixFound && cw.suffixFound) {
-                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + coinFullName + ' wallet with "' + cw.options.prefix + '" prefix and "' + cw.options.suffix + '" suffix:')}\n`);
+                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + chainFullName + ' wallet with "' + cw.options.prefix + '" prefix and "' + cw.options.suffix + '" suffix:')}\n`);
                 } else if (cw.prefixFound) {
-                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + coinFullName + ' wallet with "' + cw.options.prefix + '" prefix:')}\n`);
+                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + chainFullName + ' wallet with "' + cw.options.prefix + '" prefix:')}\n`);
                 } else if (cw.suffixFound) {
-                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + coinFullName + ' wallet with "' + cw.options.suffix + '" suffix:')}\n`);
+                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + chainFullName + ' wallet with "' + cw.options.suffix + '" suffix:')}\n`);
                 } else {
-                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + coinFullName + ' wallet:')}\n`);
+                    log(`✨  ${chalk.green('Done!')} ${chalk.blueBright('Here is your brand new ' + chainFullName + ' wallet:')}\n`);
                 }
 
                 // result
