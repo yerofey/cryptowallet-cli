@@ -94,7 +94,6 @@ class Method {
 
                         if (cw.prefixFound && cw.prefixFoundInWallets.includes(item.address) && cw.suffixFound && cw.suffixFoundInWallets.includes(item.address)) {
                             // highlight found prefix
-                            // log(`👛  ${item.address}`);
                             const addressCutPrefixLength = cw.row.startsWith.length + cw.options.prefix.length;
                             const addressFirstPart = item.address.slice(cw.row.startsWith.length, addressCutPrefixLength);
                             const addressLastPart = item.address.slice(item.address.length - cw.options.suffix.length);
