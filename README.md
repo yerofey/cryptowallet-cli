@@ -1,6 +1,6 @@
 # cryptowallet-cli
 
-> Crypto wallet generator CLI tool
+> Crypto wallet generator CLI tool (currently works only on Mac and Linux, sorry Windows users)
 
 ![Screenshot](https://i.imgur.com/KBb7NqW.png)
 
