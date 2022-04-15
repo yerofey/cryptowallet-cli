@@ -9,10 +9,10 @@ class CW {
             geek: false,
             mnemonic: '',
             number: 1,
-            prefix: options.prefixIgnorecase || '',
-            prefixIgnoreCase: options.prefixIgnorecase !== undefined,
-            suffix: options.suffixIgnorecase || '',
-            suffixIgnoreCase: options.suffixIgnorecase !== undefined,
+            prefix: options.prefixSensitive || '',
+            prefixIsCaseSensitive: options.prefixSensitive !== undefined,
+            suffix: options.suffixSensitive || '',
+            suffixIsCaseSensitive: options.suffixSensitive !== undefined,
         }
 
         for (const key of Object.keys(defaultValues)) {

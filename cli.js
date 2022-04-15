@@ -12,10 +12,10 @@ program.option('-g, --geek', 'Display some more info (geeky)');
 program.option('-l, --list', 'List all supported cryptos');
 program.option('-m, --mnemonic [mnemonic]', 'Generate wallet from mnemonic string OR just a mnemonic string');
 program.option('-n, --number <number>', 'Number of wallets to generate (if supported)');
-program.option('-p, --prefix <prefix>', 'Desired wallet prefix (case sensitive)');
-program.option('-P, --prefix-ignorecase <prefix>', 'Desired wallet prefix (case insensitive)');
-program.option('-s, --suffix <suffix>', 'Desired wallet suffix (case sensitive)');
-program.option('-S, --suffix-ignorecase <suffix>', 'Desired wallet suffix (case insensitive)');
+program.option('-p, --prefix <prefix>', 'Desired wallet prefix');
+program.option('-P, --prefix-sensitive <prefix>', 'Desired wallet prefix (case-sensitive)');
+program.option('-s, --suffix <suffix>', 'Desired wallet suffix');
+program.option('-S, --suffix-sensitive <suffix>', 'Desired wallet suffix (case-sensitive)');
 program.option('-v, --version', 'Display cryptowallet version');
 program.parse();
 

@@ -24,8 +24,8 @@ class Wallet {
         let onlySuffix = false;
         let onlyBoth = false;
 
-        const prefixFoundInAddress = (address, isIgnoringCase, prefix, symbol) => (!isIgnoringCase && address.startsWith(symbol + '' + prefix) || isIgnoringCase && (address).toUpperCase().startsWith((symbol + '' + prefix).toUpperCase()));
-        const suffixFoundInAddress = (address, isIgnoringCase, suffix) => (!isIgnoringCase && address.endsWith(suffix) || isIgnoringCase && (address).toUpperCase().endsWith(suffix));
+        const prefixFoundInAddress = (address, isCaseSensitive, prefix, symbol) => (isCaseSensitive && address.startsWith(symbol + '' + prefix) || !isCaseSensitive && (address).toUpperCase().startsWith((symbol + '' + prefix).toUpperCase()));
+        const suffixFoundInAddress = (address, isCaseSensitive, suffix) => (isCaseSensitive && address.endsWith(suffix) || !isCaseSensitive && (address).toUpperCase().endsWith(suffix));
 
         if (options.prefix && row.flags.includes('p') || options.suffix && row.flags.includes('s')) {
             if (badSymbolsArray.length === 0) {
@@ -52,34 +52,34 @@ class Wallet {
                     wallet = await this.createWallet();
                     for (let firstSymbol of startsWithSymbols) {
                         if (wallet.address !== undefined) { // one address
-                            if (onlyPrefix && prefixFoundInAddress(wallet.address, options.prefixIgnoreCase, options.prefix, firstSymbol)) {
+                            if (onlyPrefix && prefixFoundInAddress(wallet.address, options.prefixIsCaseSensitive, options.prefix, firstSymbol)) {
                                 prefixFound = true;
                                 break loop;
                             }
 
-                            if (onlySuffix && suffixFoundInAddress(wallet.address, options.suffixIgnoreCase, options.suffix)) {
+                            if (onlySuffix && suffixFoundInAddress(wallet.address, options.suffixIsCaseSensitive, options.suffix)) {
                                 suffixFound = true;
                                 break loop;
                             }
 
-                            if (onlyBoth && prefixFoundInAddress(wallet.address, options.prefixIgnoreCase, options.prefix, firstSymbol) && suffixFoundInAddress(wallet.address, options.suffixIgnoreCase, options.suffix)) {
+                            if (onlyBoth && prefixFoundInAddress(wallet.address, options.prefixIsCaseSensitive, options.prefix, firstSymbol) && suffixFoundInAddress(wallet.address, options.suffixIsCaseSensitive, options.suffix)) {
                                 prefixFound = true;
                                 suffixFound = true;
                                 break loop;
                             }
                         } else if (wallet.addresses !== undefined) { // multiple addresses
                             for (let item of wallet.addresses) {
-                                if (onlyPrefix && prefixFoundInAddress(item.address, options.prefixIgnoreCase, options.prefix, firstSymbol)) {
+                                if (onlyPrefix && prefixFoundInAddress(item.address, options.prefixIsCaseSensitive, options.prefix, firstSymbol)) {
                                     prefixFound = true;
                                     prefixFoundInWallets.push(item.address);
                                 }
 
-                                if (onlySuffix && suffixFoundInAddress(item.address, options.suffixIgnoreCase, options.suffix)) {
+                                if (onlySuffix && suffixFoundInAddress(item.address, options.suffixIsCaseSensitive, options.suffix)) {
                                     suffixFound = true;
                                     suffixFoundInWallets.push(item.address);
                                 }
 
-                                if (onlyBoth && prefixFoundInAddress(item.address, options.prefixIgnoreCase, options.prefix, firstSymbol) && suffixFoundInAddress(item.address, options.suffixIgnoreCase, options.suffix)) {
+                                if (onlyBoth && prefixFoundInAddress(item.address, options.prefixIsCaseSensitive, options.prefix, firstSymbol) && suffixFoundInAddress(item.address, options.suffixIsCaseSensitive, options.suffix)) {
                                     prefixFound = true;
                                     prefixFoundInWallets.push(item.address);
                                     suffixFound = true;
