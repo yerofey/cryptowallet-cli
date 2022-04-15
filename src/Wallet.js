@@ -11,7 +11,10 @@ class Wallet {
         const row = cw.row;
         const options = cw.options;
 
-        const badSymbolsArray = (options.prefix != '' ? options.prefix.split('').filter(char => !RegExp(row.prefixTest, 'g').test(char)) : []);
+        const desiredSymbolsArray = (options.prefix.length > 0 || options.suffix.length > 0) ? options.prefix.split('').concat(options.suffix.split('')) : [];
+        const desiredSymbolsUniqueArray = desiredSymbolsArray.filter((item, pos) => desiredSymbolsArray.indexOf(item) === pos);
+        const badSymbolsArray = desiredSymbolsUniqueArray.filter(char => !RegExp(row.prefixTest, 'g').test(char)) || [];
+        
         let wallet = {};
         let prefixFound = false;
         let prefixFoundInWallets = [];
