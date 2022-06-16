@@ -53,6 +53,9 @@ $ cw -c BNB -f BEP2 -m "radio bright pizza pluck family crawl palm flame forget 
 # generate BNB (BEP20) wallet from mnemonic string
 $ cw -c BNB -f BEP20 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
+# generate few wallets and save the output into a file
+$ cw -c btc -n 10 -o csv -F out.csv
+
 # generate just a mnemonic string (12 words) to import in any wallet app
 $ cw -m
 
