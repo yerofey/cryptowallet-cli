@@ -5,10 +5,12 @@ class CW {
     constructor(chain, options = {}) {
         const defaultValues = {
             chain: chain || options.chain || '',
+            filename: 'output',
             format: '',
             geek: false,
             mnemonic: '',
             number: 1,
+            output: undefined,
             prefix: options.prefixSensitive || '',
             prefixIsCaseSensitive: options.prefixSensitive !== undefined,
             suffix: options.suffixSensitive || '',

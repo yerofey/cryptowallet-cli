@@ -91,15 +91,25 @@ $ cw -l
 ## Options
 * `-b` or `-c` or `--chain`: Specify the blockchain ticker to generate a wallet for
 * `-f` or `--format`: Specify the blockchain wallet format (for BTC: legacy, segwit, bech32)
+* `-F` or `--filename`: Specify a filename (without extension) to output the data (works only with `-o` argument)
 * `-g` or `--geek`: Display some additional "geeky" info
 * `-l` or `--list`: List all supported blockchains
 * `-m` or `--mnemonic`: Use a bip39 mnemonic phrase (if is set) to generate wallet, or leave it empty to generate new one
 * `-n` or `--number`: Specify number of wallets to display (works for HD wallets only, like BTC/LTC/DOGE)
+* `-o` or `--output`: Specify a file format (currently only `csv` supported) to output the generated data
 * `-p` or `--prefix`: Specify desired prefix for the wallet address (**case-insensitive**)
 * `-P` or `--prefix-sensitive`: Specify desired prefix of the wallet address (**case-sensitive**)
 * `-s` or `--suffix`: Specify desired suffix for the wallet address (**case-insensitive**)
 * `-S` or `--suffix-sensitive`: Specify desired suffix for the wallet address (**case-sensitive**)
 * `-v` or `--version`: Display current version of CW tool
+
+## Tested setups
+* Node
+- [x] v16.12.0
+* NPM
+- [x] v8.1.0
+* Yarn
+- [x] v1.23.0
 
 ## Highlights
 - 24+ blockchains supported
