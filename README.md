@@ -16,6 +16,7 @@ $ npm i -g @yerofey/cryptowallet-cli
 
 # via Homebrew
 $ brew tap yerofey/cryptowallet && brew install cryptowallet
+# (it is building from scratch, so might took a while - like a minute or so)
 ```
 
 ## Usage
