@@ -11,8 +11,11 @@
 # via Yarn
 $ yarn global add @yerofey/cryptowallet-cli
 
-# or via NPM
+# via NPM
 $ npm i -g @yerofey/cryptowallet-cli
+
+# via Homebrew
+$ brew tap yerofey/cryptowallet && brew install cryptowallet
 ```
 
 ## Usage

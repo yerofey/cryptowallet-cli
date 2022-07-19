@@ -1,4 +1,7 @@
-node_modules/
+bin/
 dev/
+node_modules/
+bun.lockb
+.DS_Store
 output.csv
 yarn-error.log
