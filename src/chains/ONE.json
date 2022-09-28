@@ -1,15 +1,8 @@
 {
-    "title": "Harmony",
-    "startsWith": "one1",
-    "prefixTest": "(?![oi])[1-9a-z]",
-    "rareSymbols": "[a-z]",
-    "apps": [
-        "trustwallet",
-        "harmony-chrome-ext"
-    ],
-    "flags": [
-        "m",
-        "p",
-        "s"
-    ]
+  "title": "Harmony",
+  "startsWith": "one1",
+  "prefixTest": "(?![oi])[1-9a-z]",
+  "rareSymbols": "[a-z]",
+  "apps": ["trustwallet", "harmony-chrome-ext"],
+  "flags": ["m", "p", "s"]
 }

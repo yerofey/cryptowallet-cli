@@ -1,59 +1,29 @@
 {
-    "title": "Binance Coin",
-    "defaultFormat": "BEP20",
-    "formats": {
-        "BEP2": {
-            "format": "BEP2",
-            "startsWith": "bnb",
-            "prefixTest": "[0-9a-z]",
-            "apps": [
-                "metamask",
-                "trustwallet",
-                "binance-chain-wallet"
-            ],
-            "flags": [
-                "f",
-                "m",
-                "n",
-                "p",
-                "s"
-            ]
-        },
-        "BEP20": {
-            "format": "BEP20",
-            "network": "EVM",
-            "startsWith": "0x",
-            "prefixTest": "[0-9a-fA-F]",
-            "apps": [
-                "metamask",
-                "trustwallet",
-                "binance-chain-wallet"
-            ],
-            "flags": [
-                "f",
-                "m",
-                "n",
-                "p",
-                "s"
-            ]
-        },
-        "ERC20": {
-            "format": "ERC20",
-            "network": "EVM",
-            "startsWith": "0x",
-            "prefixTest": "[0-9a-f]",
-            "apps": [
-                "metamask",
-                "trustwallet",
-                "binance-chain-wallet"
-            ],
-            "flags": [
-                "f",
-                "m",
-                "n",
-                "p",
-                "s"
-            ]
-        }
+  "title": "Binance Coin",
+  "defaultFormat": "BEP20",
+  "formats": {
+    "BEP2": {
+      "format": "BEP2",
+      "startsWith": "bnb",
+      "prefixTest": "[0-9a-z]",
+      "apps": ["metamask", "trustwallet", "binance-chain-wallet"],
+      "flags": ["f", "m", "n", "p", "s"]
+    },
+    "BEP20": {
+      "format": "BEP20",
+      "network": "EVM",
+      "startsWith": "0x",
+      "prefixTest": "[0-9a-fA-F]",
+      "apps": ["metamask", "trustwallet", "binance-chain-wallet"],
+      "flags": ["f", "m", "n", "p", "s"]
+    },
+    "ERC20": {
+      "format": "ERC20",
+      "network": "EVM",
+      "startsWith": "0x",
+      "prefixTest": "[0-9a-f]",
+      "apps": ["metamask", "trustwallet", "binance-chain-wallet"],
+      "flags": ["f", "m", "n", "p", "s"]
     }
+  }
 }

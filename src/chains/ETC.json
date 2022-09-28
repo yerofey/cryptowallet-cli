@@ -1,22 +1,14 @@
 {
-    "title": "Ethereum Classic",
-    "defaultFormat": "ERC20",
-    "formats": {
-        "ERC20": {
-            "format": "ERC20",
-            "network": "EVM",
-            "startsWith": "0x",
-            "prefixTest": "[0-9a-fA-F]",
-            "apps": [
-                "metamask",
-                "trustwallet"
-            ],
-            "flags": [
-                "m",
-                "n",
-                "p",
-                "s"
-            ]
-        }
+  "title": "Ethereum Classic",
+  "defaultFormat": "ERC20",
+  "formats": {
+    "ERC20": {
+      "format": "ERC20",
+      "network": "EVM",
+      "startsWith": "0x",
+      "prefixTest": "[0-9a-fA-F]",
+      "apps": ["metamask", "trustwallet"],
+      "flags": ["m", "n", "p", "s"]
     }
+  }
 }

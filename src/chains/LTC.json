@@ -1,57 +1,34 @@
 {
-    "title": "Litecoin",
-    "defaultFormat": "bech32",
-    "formats": {
-        "bech32": {
-            "format": "bech32",
-            "startsWith": "ltc1q",
-            "prefixTest": "[0-9a-z]",
-            "rareSymbols": "[0-9]",
-            "path": "m/84'/2",
-            "purpose": 84,
-            "apps": [
-                "trustwallet"
-            ],
-            "flags": [
-                "f",
-                "g",
-                "m",
-                "n",
-                "p",
-                "s"
-            ]
-        },
-        "legacy": {
-            "format": "legacy",
-            "startsWith": "L",
-            "prefixTest": "(?![0OI])[1-9a-zA-Z]",
-            "rareSymbols": "[1-9]",
-            "path": "m/44'/2",
-            "purpose": 44,
-            "flags": [
-                "f",
-                "g",
-                "m",
-                "n",
-                "p",
-                "s"
-            ]
-        },
-        "segwit": {
-            "format": "segwit",
-            "startsWith": "M",
-            "prefixTest": "(?![0OI])[1-9a-zA-Z]",
-            "rareSymbols": "[1-9]",
-            "path": "m/49'/2",
-            "purpose": 49,
-            "flags": [
-                "f",
-                "g",
-                "m",
-                "n",
-                "p",
-                "s"
-            ]
-        }
+  "title": "Litecoin",
+  "defaultFormat": "bech32",
+  "formats": {
+    "bech32": {
+      "format": "bech32",
+      "startsWith": "ltc1q",
+      "prefixTest": "[0-9a-z]",
+      "rareSymbols": "[0-9]",
+      "path": "m/84'/2",
+      "purpose": 84,
+      "apps": ["trustwallet"],
+      "flags": ["f", "g", "m", "n", "p", "s"]
+    },
+    "legacy": {
+      "format": "legacy",
+      "startsWith": "L",
+      "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+      "rareSymbols": "[1-9]",
+      "path": "m/44'/2",
+      "purpose": 44,
+      "flags": ["f", "g", "m", "n", "p", "s"]
+    },
+    "segwit": {
+      "format": "segwit",
+      "startsWith": "M",
+      "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+      "rareSymbols": "[1-9]",
+      "path": "m/49'/2",
+      "purpose": 49,
+      "flags": ["f", "g", "m", "n", "p", "s"]
     }
+  }
 }

@@ -1,11 +1,8 @@
 {
-    "title": "Zcash",
-    "script": "coinkey",
-    "startsWith": "t1",
-    "prefixTest": "(?![0OI])[1-9a-zA-Z]",
-    "rareSymbols": "[1-9]",
-    "flags": [
-        "p",
-        "s"
-    ]
+  "title": "Zcash",
+  "script": "coinkey",
+  "startsWith": "t1",
+  "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+  "rareSymbols": "[1-9]",
+  "flags": ["p", "s"]
 }

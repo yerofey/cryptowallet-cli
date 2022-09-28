@@ -1,11 +1,8 @@
 {
-    "title": "BlackCoin",
-    "script": "coinkey",
-    "startsWith": "B",
-    "prefixTest": "(?![0OI])[1-9a-zA-Z]",
-    "rareSymbols": "[1-9]",
-    "flags": [
-        "p",
-        "s"
-    ]
+  "title": "BlackCoin",
+  "script": "coinkey",
+  "startsWith": "B",
+  "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+  "rareSymbols": "[1-9]",
+  "flags": ["p", "s"]
 }

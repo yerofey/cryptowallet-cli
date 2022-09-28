@@ -1,11 +1,8 @@
 {
-    "title": "Decred",
-    "script": "coinkey",
-    "startsWith": "D",
-    "prefixTest": "(?![0OI])[1-9a-zA-Z]",
-    "rareSymbols": "[1-9]",
-    "flags": [
-        "p",
-        "s"
-    ]
+  "title": "Decred",
+  "script": "coinkey",
+  "startsWith": "D",
+  "prefixTest": "(?![0OI])[1-9a-zA-Z]",
+  "rareSymbols": "[1-9]",
+  "flags": ["p", "s"]
 }
