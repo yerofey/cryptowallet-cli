@@ -1,9 +1,6 @@
 .DS_Store
-.husky
 bin/
 dev/
 node_modules/
-bun.lockb
-bunfig.toml
 output.csv
 yarn-error.log
