@@ -149,7 +149,7 @@ class Method {
 
                     // generate csv
                     if (!displayAsText) {
-                        const filename = (cw.options.filename.split('.')[0]) ?? 'output';
+                        const filename = (cw.options.filename.split('.')[0]) || 'output';
                         const createCsvWriter = require('csv-writer').createObjectCsvWriter;
                         const csvWriter = createCsvWriter({
                             path: `${filename}.csv`,
