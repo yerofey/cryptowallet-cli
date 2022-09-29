@@ -1,3 +1,4 @@
+import path from 'node:path';
 import { loadJson } from './utils.js';
 
 class Chain {
@@ -8,7 +9,7 @@ class Chain {
 
   async init() {
     // eslint-disable-next-line no-undef
-    const content = await loadJson(`${process.cwd()}/src/chains/${this.chain}.json`);
+    const content = await loadJson(`${path.dirname(import.meta.url)}/chains/${this.chain}.json`.replace('file://', ''));
     const data = (() => {
       if (content.formats !== undefined) {
         if (this.format != '' && this.format != content.defaultFormat) {

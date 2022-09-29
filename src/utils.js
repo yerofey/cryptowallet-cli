@@ -1,13 +1,12 @@
-import { readdirSync, statSync } from 'fs';
-import { readFile } from 'fs/promises';
-import {
-  join,
-} from 'path';
+import { readdirSync, statSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+
 const log = console.log;
 
 const filesList = (dir) => {
   return readdirSync(dir).reduce((list, file) => {
-    const name = join(dir, file);
+    const name = path.join(dir, file);
     const isDir = statSync(name).isDirectory();
     return list.concat(isDir ? filesList(name) : [name]);
   }, []);
@@ -35,7 +34,7 @@ const objectHasAllKeys = (obj, keysArray) =>
 
 let supportedChains = [];
 // eslint-disable-next-line no-undef
-const chainsFolder = `${process.cwd()}/src/chains/`;
+const chainsFolder = `${path.dirname(import.meta.url)}/chains/`.replace('file://', '');
 filesList(chainsFolder).forEach((item) => {
   const name = item.replace(chainsFolder, '').replace('.json', '');
   supportedChains.push(name);

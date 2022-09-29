@@ -1,3 +1,4 @@
+import path from 'node:path';
 import chalk from 'chalk';
 const {
   blue,
@@ -18,7 +19,7 @@ import {
 } from './utils.js';
 import { generateMnemonicString } from './Wallet.js';
 import CW from './CW.js';
-const pkg = await loadJson('./../package.json');
+const pkg = await loadJson(`${path.dirname(import.meta.url)}/../package.json`.replace('file://', ''));
 // eslint-disable-next-line no-undef
 const _version = pkg['version'] || 0;
 
@@ -36,7 +37,7 @@ class Method {
         let cryptos = {};
         for (const val of supportedChains) {
           // eslint-disable-next-line no-undef
-          const data = await loadJson(`${process.cwd()}/src/chains/${val}.json`);
+          const data = await loadJson(`${path.dirname(import.meta.url)}/chains/${val}.json`.replace('file://', ''));
 
           let title = data.title || '';
           if (title == '' || val == 'ERC') {
