@@ -35,7 +35,8 @@ class Method {
         log(`🔠  All supported blockchains:\n`);
         let cryptos = {};
         for (const val of supportedChains) {
-          const data = await loadJson(`./chains/${val}.json`);
+          // eslint-disable-next-line no-undef
+          const data = await loadJson(`${process.cwd()}/src/chains/${val}.json`);
 
           let title = data.title || '';
           if (title == '' || val == 'ERC') {

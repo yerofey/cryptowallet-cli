@@ -7,7 +7,8 @@ class Chain {
   }
 
   async init() {
-    const content = await loadJson(`./chains/${this.chain}.json`);
+    // eslint-disable-next-line no-undef
+    const content = await loadJson(`${process.cwd()}/src/chains/${this.chain}.json`);
     const data = (() => {
       if (content.formats !== undefined) {
         if (this.format != '' && this.format != content.defaultFormat) {
