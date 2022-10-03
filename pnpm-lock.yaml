@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@binance-chain/javascript-sdk': ^4.2.0
-  '@harmony-js/account': ^0.1.57
+  '@harmony-js/account': ^0.1.58
   '@yerofey/dogecoin-bip84': ^0.0.5
   '@yerofey/litecoin-bip84': ^0.0.5
   ava: ^4.3.3
@@ -12,7 +12,7 @@ specifiers:
   coininfo: 5.2.1
   coinkey: 3.0.0
   columnify: 1.6.0
-  commander: 9.4.0
+  commander: 9.4.1
   csv-writer: ^1.6.0
   eslint: ^8.24.0
   eth-lib: 0.1.29
@@ -23,7 +23,7 @@ specifiers:
 
 dependencies:
   '@binance-chain/javascript-sdk': 4.2.0
-  '@harmony-js/account': 0.1.57
+  '@harmony-js/account': 0.1.58
   '@yerofey/dogecoin-bip84': 0.0.5
   '@yerofey/litecoin-bip84': 0.0.5
   bip39: 3.0.4
@@ -32,7 +32,7 @@ dependencies:
   coininfo: 5.2.1
   coinkey: 3.0.0
   columnify: 1.6.0
-  commander: 9.4.0
+  commander: 9.4.1
   csv-writer: 1.6.0
   eth-lib: 0.1.29
   ethereum-bip84: 0.0.3
@@ -434,81 +434,52 @@ packages:
       '@ethersproject/strings': 5.7.0
     dev: false
 
-  /@harmony-js/account/0.1.56:
-    resolution: {integrity: sha512-VX3+NAirUxxowAc2QBuKEpHSN0XGYHqogYIf63XGFfg2BACS3RdN/tkJTzPPyIPejEKC3yDylm5c+8NzmsOjhQ==}
+  /@harmony-js/account/0.1.58:
+    resolution: {integrity: sha512-NUykYiU/Bw+UoONKhSIEJ4qwwVJxZM7SiGFPo02eUb2y13r606+rtM3jahHD42B8YPau0W5CdASkXdnvum7Jvw==}
     dependencies:
-      '@harmony-js/core': 0.1.56
-      '@harmony-js/crypto': 0.1.56
-      '@harmony-js/network': 0.1.56
-      '@harmony-js/staking': 0.1.56
-      '@harmony-js/transaction': 0.1.56
-      '@harmony-js/utils': 0.1.56
+      '@harmony-js/core': 0.1.58
+      '@harmony-js/crypto': 0.1.58
+      '@harmony-js/network': 0.1.58
+      '@harmony-js/staking': 0.1.58
+      '@harmony-js/transaction': 0.1.58
+      '@harmony-js/utils': 0.1.58
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: false
 
-  /@harmony-js/account/0.1.57:
-    resolution: {integrity: sha512-2Q0aX49m9IDDf9AvQHEgnxVBfvQ4wnXJqMo1y3g+9VuoyibNLFy/7GRwywwjrKTtfERXegTGHdZYo/CCO0PrpQ==}
+  /@harmony-js/contract/0.1.58:
+    resolution: {integrity: sha512-WLFCjyPcOaKrR2R8QOEe8bGBpIDU3cYSxb4xKDM2aIRcCsV7oGSsQ3hH78su1ht1un9FFXIJgq0awRKMWzdAAQ==}
     dependencies:
-      '@harmony-js/core': 0.1.57
-      '@harmony-js/crypto': 0.1.56
-      '@harmony-js/network': 0.1.56
-      '@harmony-js/staking': 0.1.56
-      '@harmony-js/transaction': 0.1.56
-      '@harmony-js/utils': 0.1.56
+      '@harmony-js/account': 0.1.58
+      '@harmony-js/crypto': 0.1.58
+      '@harmony-js/network': 0.1.58
+      '@harmony-js/transaction': 0.1.58
+      '@harmony-js/utils': 0.1.58
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: false
 
-  /@harmony-js/contract/0.1.56:
-    resolution: {integrity: sha512-4yKBjUtMkiaMvhwbEFps7qZV/NIWRgkJuO2yZYsqbkzdFf3eMXXrq60HpDZcWhNf+rsL0VpDso9i09mW+DDZJQ==}
+  /@harmony-js/core/0.1.58:
+    resolution: {integrity: sha512-7cUA2KigjPblgOgY5vIj33+t8SDvR79yJxUAC7NkxZt/WzPEFUVHfaVqsoL+K+jExNgQoHF2BQ12rNQvmET+ow==}
     dependencies:
-      '@harmony-js/account': 0.1.56
-      '@harmony-js/crypto': 0.1.56
-      '@harmony-js/network': 0.1.56
-      '@harmony-js/transaction': 0.1.56
-      '@harmony-js/utils': 0.1.56
+      '@harmony-js/account': 0.1.58
+      '@harmony-js/contract': 0.1.58
+      '@harmony-js/crypto': 0.1.58
+      '@harmony-js/network': 0.1.58
+      '@harmony-js/staking': 0.1.58
+      '@harmony-js/transaction': 0.1.58
+      '@harmony-js/utils': 0.1.58
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: false
 
-  /@harmony-js/core/0.1.56:
-    resolution: {integrity: sha512-mYVIewX2oL0PHZJU64HD65M/QMA756d19MosATRqbfj8MLLgdMdTuXHF525NWDRxBiYlSh6BGSNJakNbtq8g3Q==}
+  /@harmony-js/crypto/0.1.58:
+    resolution: {integrity: sha512-OyEhKXg8E8Rzx6VeU6n2YE3io/OQ+SPh/InTpLVUHe5QW+vJ7Sh5uuuZGAzvgu24bIvm0/i6VynSua4THAYTzA==}
     dependencies:
-      '@harmony-js/account': 0.1.56
-      '@harmony-js/contract': 0.1.56
-      '@harmony-js/crypto': 0.1.56
-      '@harmony-js/network': 0.1.56
-      '@harmony-js/staking': 0.1.56
-      '@harmony-js/transaction': 0.1.56
-      '@harmony-js/utils': 0.1.56
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-    dev: false
-
-  /@harmony-js/core/0.1.57:
-    resolution: {integrity: sha512-4d48MoR/3xabsoiV0fXjVwtL4u9AeNO72+UZWSZl2ZzrPvij2ucn14wvIZwCL69xJwD4bsqgy68Ju+DRLFVW3A==}
-    dependencies:
-      '@harmony-js/account': 0.1.57
-      '@harmony-js/contract': 0.1.56
-      '@harmony-js/crypto': 0.1.56
-      '@harmony-js/network': 0.1.56
-      '@harmony-js/staking': 0.1.56
-      '@harmony-js/transaction': 0.1.56
-      '@harmony-js/utils': 0.1.56
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-    dev: false
-
-  /@harmony-js/crypto/0.1.56:
-    resolution: {integrity: sha512-JMOWte8d3HXO2b038MqQpZ6al6OHsB9aZTretuzijxwrOIOdPKu9sDNHhmyJhQTIOKqG2+gErlj9AclZbXGk5g==}
-    dependencies:
-      '@harmony-js/utils': 0.1.56
+      '@harmony-js/utils': 0.1.58
       aes-js: 3.1.2
       bip39: 2.6.0
       bn.js: 4.12.0
@@ -517,14 +488,14 @@ packages:
       hmac-drbg: 1.0.1
       js-sha3: 0.8.0
       pbkdf2: 3.1.2
-      scrypt-shim: github.com/web3-js/scrypt-shim/aafdadda13e660e25e1c525d1f5b2443f5eb1ebb
+      scrypt.js: 0.3.0
       uuid: 3.4.0
     dev: false
 
-  /@harmony-js/network/0.1.56:
-    resolution: {integrity: sha512-ItwgvQPjcFyVKKa1mFAqRMno6yyp1cjM2UNIdHOHtWG+H8BgObcw2ZM4LJpAPVF/XSoaTcZZwfB2hD7zOFnnYQ==}
+  /@harmony-js/network/0.1.58:
+    resolution: {integrity: sha512-BwzHA1ujqvFPr3k4tfQd6R5XwQyvF6N/Rd3PVMkA5HrQAG1N5o/4f+qBlVTS6htcXmmt/UBudZh6vfAAlSvAGQ==}
     dependencies:
-      '@harmony-js/utils': 0.1.56
+      '@harmony-js/utils': 0.1.58
       cross-fetch: 3.1.5
       mitt: 1.2.0
       websocket: 1.0.34
@@ -533,39 +504,39 @@ packages:
       - supports-color
     dev: false
 
-  /@harmony-js/staking/0.1.56:
-    resolution: {integrity: sha512-i0tliihg/7llJNp3uMjW5NZjJzLGz9iIESA4ST/cD2yT3KeRviwmlQPVf4uZpxIlmGgtk/oR4tLPLzmZEgSTOw==}
+  /@harmony-js/staking/0.1.58:
+    resolution: {integrity: sha512-+S8v3+tKRK/hPMjLDchxsyROy4iClX3LoqPwAJS9onsOB5LWX8EPFyf9wLs4ODgt1NM8cyhL6rCAcBwkVgMjKQ==}
     dependencies:
-      '@harmony-js/crypto': 0.1.56
-      '@harmony-js/network': 0.1.56
-      '@harmony-js/transaction': 0.1.56
-      '@harmony-js/utils': 0.1.56
+      '@harmony-js/crypto': 0.1.58
+      '@harmony-js/network': 0.1.58
+      '@harmony-js/transaction': 0.1.58
+      '@harmony-js/utils': 0.1.58
       text-encoding: 0.7.0
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: false
 
-  /@harmony-js/transaction/0.1.56:
-    resolution: {integrity: sha512-+eX1+xBGsi6aGMyeZf7cvd2gncItPPifP7Hyjh9wNxbpyxpgBLvVnhD8hGaUQ6MJ9xJkFeWfkQPduEQBsCZj7A==}
+  /@harmony-js/transaction/0.1.58:
+    resolution: {integrity: sha512-+JtQ9+VDatgMDrMozA3p8BHdV/5oVl0e9drKD14yKQ0F45jCtcMI6AGmE+C2+X2Tx+QiCmXvdgriJXdsE4a8Cg==}
     dependencies:
-      '@harmony-js/crypto': 0.1.56
-      '@harmony-js/network': 0.1.56
-      '@harmony-js/utils': 0.1.56
+      '@harmony-js/crypto': 0.1.58
+      '@harmony-js/network': 0.1.58
+      '@harmony-js/utils': 0.1.58
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: false
 
-  /@harmony-js/utils/0.1.56:
-    resolution: {integrity: sha512-XoYYIMoK/mSxPkxFd25dY/wScIWWevoTrHoFdlFd8N7GWlilfdgQEF5vO+4BA6hyDJ4ryfdLnGc6W6Hz+5qs2A==}
+  /@harmony-js/utils/0.1.58:
+    resolution: {integrity: sha512-JqKWk7QichGXOE8vKpkC4FowGEKyXTkGW21CyP5FzmgAVDGLY6qutoBfK2GzGvmd2fyZy3MDOabSEMcADrAq+A==}
     dependencies:
       '@types/bn.js': 4.11.6
       bn.js: 4.12.0
     dev: false
 
-  /@humanwhocodes/config-array/0.10.6:
-    resolution: {integrity: sha512-U/piU+VwXZsIgwnl+N+nRK12jCpHdc3s0UAc6zc1+HUgiESJxClpvYao/x9JwaN7onNeVb7kTlxlAvuEoaJ3ig==}
+  /@humanwhocodes/config-array/0.10.7:
+    resolution: {integrity: sha512-MDl6D6sBsaV452/QSdX+4CXIjZhIcI0PELsxUjk4U828yd58vk3bTIvk/6w5FY+4hIy9sLW0sfrV7K7Kc++j/w==}
     engines: {node: '>=10.10.0'}
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
@@ -710,7 +681,7 @@ packages:
   /@types/bn.js/5.1.1:
     resolution: {integrity: sha512-qNrYbZqMx0uJAfKnKclPh+dTwK33KfLHYqtyODwd5HnXOjnkhc4qgn3BrK6RWyGZm5+sIFE7Q7Vz6QQtJB7w7g==}
     dependencies:
-      '@types/node': 18.7.23
+      '@types/node': 18.8.0
     dev: false
 
   /@types/crypto-js/3.1.47:
@@ -775,14 +746,14 @@ packages:
     resolution: {integrity: sha512-s3nugnZumCC//n4moGGe6tkNMyYEdaDBitVjwPxXmR5lnMG5dHePinH2EdxkG3Rh1ghFHHixAG4NJhpJW1rthQ==}
     dev: false
 
-  /@types/node/18.7.23:
-    resolution: {integrity: sha512-DWNcCHolDq0ZKGizjx2DZjR/PqsYwAcYUJmfMWqtVU2MBMG5Mo+xFZrhGId5r/O5HOuMPyQEcM6KUBp5lBZZBg==}
+  /@types/node/18.8.0:
+    resolution: {integrity: sha512-u+h43R6U8xXDt2vzUaVP3VwjjLyOJk6uEciZS8OSyziUQGOwmk+l+4drxcsDboHXwyTaqS1INebghmWMRxq3LA==}
     dev: false
 
   /@types/pbkdf2/3.1.0:
     resolution: {integrity: sha512-Cf63Rv7jCQ0LaL8tNXmEyqTHuIJxRdlS5vMh1mj5voN4+QFhVZnlZruezqpWYDiJ8UTzhP0VmeLXCmBk66YrMQ==}
     dependencies:
-      '@types/node': 18.7.23
+      '@types/node': 18.8.0
     dev: false
 
   /@types/pumpify/1.4.1:
@@ -795,7 +766,7 @@ packages:
   /@types/secp256k1/4.0.3:
     resolution: {integrity: sha512-Da66lEIFeIz9ltsdMZcpQvmrmmoqrfju8pm1BH8WbYjZSwUgCwXLb9C+9XYogwBITnbsSaMdVPb2ekf7TV+03w==}
     dependencies:
-      '@types/node': 18.7.23
+      '@types/node': 18.8.0
     dev: false
 
   /@types/tiny-secp256k1/1.0.0:
@@ -1052,7 +1023,7 @@ packages:
       supertap: 3.0.1
       temp-dir: 2.0.0
       write-file-atomic: 4.0.2
-      yargs: 17.5.1
+      yargs: 17.6.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1482,8 +1453,9 @@ packages:
       string-width: 5.1.2
     dev: true
 
-  /cliui/7.0.4:
-    resolution: {integrity: sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==}
+  /cliui/8.0.1:
+    resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
+    engines: {node: '>=12'}
     dependencies:
       string-width: 4.2.3
       strip-ansi: 6.0.1
@@ -1554,8 +1526,8 @@ packages:
       delayed-stream: 1.0.0
     dev: false
 
-  /commander/9.4.0:
-    resolution: {integrity: sha512-sRPT+umqkz90UA8M1yqYfnHlZA7fF6nSphDtxeywPZ49ysjxDQybzk13CL+mXekDRG92skbcqCLVovuCusNmFw==}
+  /commander/9.4.1:
+    resolution: {integrity: sha512-5EEkTNyHNGFPD2H+c/dXXfQZYa/scCKasxWcXJaWnNJ99pnQN9Vnmqow+p+PlFPE63Q6mThaZws1T+HxfpgtPw==}
     engines: {node: ^12.20.0 || >=14}
     dev: false
 
@@ -2053,7 +2025,7 @@ packages:
     hasBin: true
     dependencies:
       '@eslint/eslintrc': 1.3.2
-      '@humanwhocodes/config-array': 0.10.6
+      '@humanwhocodes/config-array': 0.10.7
       '@humanwhocodes/gitignore-to-minimatch': 1.0.2
       '@humanwhocodes/module-importer': 1.0.1
       ajv: 6.12.6
@@ -2079,7 +2051,7 @@ packages:
       import-fresh: 3.3.0
       imurmurhash: 0.1.4
       is-glob: 4.0.3
-      js-sdsl: 4.1.4
+      js-sdsl: 4.1.5
       js-yaml: 4.1.0
       json-stable-stringify-without-jsonify: 1.0.1
       levn: 0.4.1
@@ -2895,8 +2867,8 @@ packages:
     engines: {node: '>= 8.3'}
     dev: false
 
-  /js-sdsl/4.1.4:
-    resolution: {integrity: sha512-Y2/yD55y5jteOAmY50JbUZYwk3CP3wnLPEZnlR1w9oKhITrBEtAxwuWKebFf8hMrPMgbYwFoWK/lH2sBkErELw==}
+  /js-sdsl/4.1.5:
+    resolution: {integrity: sha512-08bOAKweV2NUC1wqTtf3qZlnpOX/R2DU9ikpjOHs0H+ibQv3zpncVQg6um4uYtRtrwIX8M4Nh3ytK4HGlYAq7Q==}
     dev: true
 
   /js-sha3/0.8.0:
@@ -3816,14 +3788,27 @@ packages:
     resolution: {integrity: sha512-cdwTTnqPu0Hyvf5in5asVdZocVDTNRmR7XEcJuIzMjJeSHybHl7vpB66AzwTaIg6CLSbtjcxc8fqcySfnTkccA==}
     dev: false
 
+  /scrypt.js/0.3.0:
+    resolution: {integrity: sha512-42LTc1nyFsyv/o0gcHtDztrn+aqpkaCNt5Qh7ATBZfhEZU7IC/0oT/qbBH+uRNoAPvs2fwiOId68FDEoSRA8/A==}
+    dependencies:
+      scryptsy: 1.2.1
+    optionalDependencies:
+      scrypt: 6.0.3
+    dev: false
+
+  /scrypt/6.0.3:
+    resolution: {integrity: sha512-NDrWb9hCm6Ev170XYVl7TSgu4R44Rjc8EVw1ce0TMN8EkfLvkhlwcfp61OVNc8EJDiHaQwVErn1fIU0RO3kSZw==}
+    engines: {node: '>= 0.10'}
+    requiresBuild: true
+    dependencies:
+      nan: 2.16.0
+    dev: false
+    optional: true
+
   /scryptsy/1.2.1:
     resolution: {integrity: sha512-aldIRgMozSJ/Gl6K6qmJZysRP82lz83Wb42vl4PWN8SaLFHIaOzLPc9nUUW2jQN88CuGm5q5HefJ9jZ3nWSmTw==}
     dependencies:
       pbkdf2: 3.1.2
-    dev: false
-
-  /scryptsy/2.1.0:
-    resolution: {integrity: sha512-1CdSqHQowJBnMAFyPEBRfqag/YP9OF394FV+4YREIJX4ljD7OxvQRDayyoyyCk+senRjSkP6VnUNQmVQqB6g7w==}
     dev: false
 
   /secp256k1/3.8.0:
@@ -3867,11 +3852,6 @@ packages:
 
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
-    hasBin: true
-    dev: false
-
-  /semver/6.3.0:
-    resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==}
     hasBin: true
     dev: false
 
@@ -4624,11 +4604,11 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /yargs/17.5.1:
-    resolution: {integrity: sha512-t6YAJcxDkNX7NFYiVtKvWUz8l+PaKTLiL63mJYWR2GnHq2gjEWISzsLp9wg3aY36dY1j+gfIEL3pIF+XlJJfbA==}
+  /yargs/17.6.0:
+    resolution: {integrity: sha512-8H/wTDqlSwoSnScvV2N/JHfLWOKuh5MVla9hqLjK3nsfyy6Y4kDSYSvkU5YCUEPOSnRXfIyx3Sq+B/IWudTo4g==}
     engines: {node: '>=12'}
     dependencies:
-      cliui: 7.0.4
+      cliui: 8.0.1
       escalade: 3.1.1
       get-caller-file: 2.0.5
       require-directory: 2.1.1
@@ -4646,13 +4626,3 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
-
-  github.com/web3-js/scrypt-shim/aafdadda13e660e25e1c525d1f5b2443f5eb1ebb:
-    resolution: {tarball: https://codeload.github.com/web3-js/scrypt-shim/tar.gz/aafdadda13e660e25e1c525d1f5b2443f5eb1ebb}
-    name: '@web3-js/scrypt-shim'
-    version: 0.1.0
-    requiresBuild: true
-    dependencies:
-      scryptsy: 2.1.0
-      semver: 6.3.0
-    dev: false

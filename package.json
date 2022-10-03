@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
@@ -60,7 +60,7 @@
   ],
   "dependencies": {
     "@binance-chain/javascript-sdk": "^4.2.0",
-    "@harmony-js/account": "^0.1.57",
+    "@harmony-js/account": "^0.1.58",
     "@yerofey/dogecoin-bip84": "^0.0.5",
     "@yerofey/litecoin-bip84": "^0.0.5",
     "bip39": "3.0.4",
@@ -69,7 +69,7 @@
     "coininfo": "5.2.1",
     "coinkey": "3.0.0",
     "columnify": "1.6.0",
-    "commander": "9.4.0",
+    "commander": "9.4.1",
     "csv-writer": "^1.6.0",
     "eth-lib": "0.1.29",
     "ethereum-bip84": "0.0.3",
