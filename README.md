@@ -2,7 +2,7 @@
 
 > Crypto wallet generator CLI tool (currently works only on Mac and Linux, sorry Windows users)
 
-![Screenshot](https://i.imgur.com/KBb7NqW.png)
+![Screenshot](https://i.imgur.com/uWuT4lF.png)
 
 ---
 
