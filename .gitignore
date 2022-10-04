@@ -1,7 +1,4 @@
 .DS_Store
 .vscode
-bin/
-dev/
+cw-output.csv
 node_modules/
-output.csv
-yarn-error.log

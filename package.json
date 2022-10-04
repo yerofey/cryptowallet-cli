@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.7.5",
+  "version": "1.8.0",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
@@ -10,10 +10,9 @@
     "cw": "cli.js"
   },
   "engines": {
-    "node": ">=14.13.1"
+    "node": ">=16.0.0 <17.0.0"
   },
   "scripts": {
-    "build:release": "./bin/generate.sh",
     "lint": "pnpm exec eslint src/*.js",
     "test": "ava"
   },
@@ -56,7 +55,10 @@
     "trust-wallet",
     "tronlink",
     "bip39",
-    "bip84"
+    "bip84",
+    "multiple wallets",
+    "crypto wallets",
+    "wallet generation"
   ],
   "dependencies": {
     "@binance-chain/javascript-sdk": "^4.2.0",

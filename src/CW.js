@@ -3,9 +3,18 @@ import { Wallet } from './Wallet.js';
 
 class CW {
   constructor(chain, options = {}) {
+    const csvFilename = 'cw-output';
+    if (options.csv !== undefined) {
+      options.output = 'csv';
+
+      if (typeof options.csv === 'string' && (options.csv).length > 0) {
+        options.filename = options.csv;
+      }
+    }
+
     const defaultValues = {
       chain: chain || options.chain || '',
-      filename: 'output',
+      filename: csvFilename,
       format: '',
       geek: false,
       mnemonic: '',

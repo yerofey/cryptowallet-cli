@@ -9,6 +9,10 @@ import Method from './src/Method.js';
 program.option('-b, --chain <ticker>', 'Wallet for specific blockchain', 'ERC');
 program.option('-c, --chain <ticker>', 'Wallet for specific blockchain', 'ERC');
 program.option(
+  '-D, --csv [filename]',
+  'Save result into CSV file'
+);
+program.option(
   '-f, --format <format>',
   'Wallet format type (for cryptos with multiple wallet formats)'
 );

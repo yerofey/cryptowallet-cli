@@ -176,8 +176,8 @@ class Method {
             linesCount += 1;
           }
           // addresses
-          for (const item of cw.wallet.addresses) {
-            if (displayAsText) {
+          if (displayAsText) {
+            for (const item of cw.wallet.addresses) {
               if (cw.wallet.addresses.length > 1) {
                 log();
                 log(`🆔  ${item.index}`);
@@ -241,22 +241,9 @@ class Method {
                 log(`👛  ${item.address}`);
               }
               log(`🔑  ${item.privateKey}`);
-            } else {
-              // const createCsvWriter = csvWriter.createObjectCsvWriter;
-              // const csvWriter = createCsvWriter({
-              //     path: 'out.csv',
-              //     header: [
-              //       {id: 'name', title: 'Name'},
-              //       {id: 'surname', title: 'Surname'},
-              //       {id: 'age', title: 'Age'},
-              //       {id: 'gender', title: 'Gender'},
-              //     ]
-              //   });
-              // // TODO: build output into file
-              // log('TODO_BUILD_OUTPUT_INTO_FILE', item.address);
+
             }
-          }
-          if (!displayAsText) {
+          } else {
             outputData.wallets = cw.wallet.addresses;
           }
 
@@ -268,7 +255,7 @@ class Method {
 
           // generate csv
           if (!displayAsText) {
-            const filename = cw.options.filename.split('.')[0] || 'output';
+            const filename = cw.options.csvOutputFilename || cw.options.filename.split('.')[0] || 'cw-output';
             // eslint-disable-next-line no-undef
             const createCsvWriter = CsvWriter.createObjectCsvWriter;
             const csvWriter = createCsvWriter({
@@ -295,7 +282,7 @@ class Method {
                   `${linesCount > 0 ? '\n' : ''}🟠  ${yellow(
                     `Don't forget to save the data above manually, because it is not in the output file`
                   )} \n✨  ${green('Done!')} ${blueBright(
-                    `The output successfully saved into "${filename}.csv" file`
+                    `The output successfully saved into "./${filename}.csv" file`
                   )}`
                 )
               )
