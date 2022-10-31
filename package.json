@@ -80,7 +80,7 @@
     "tronweb": "4.4.0"
   },
   "devDependencies": {
-    "ava": "^4.3.3",
+    "ava": "^5.0.1",
     "eslint": "^8.24.0"
   }
 }
