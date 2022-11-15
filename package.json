@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
@@ -81,6 +81,6 @@
   },
   "devDependencies": {
     "ava": "^5.1.0",
-    "eslint": "^8.24.0"
+    "eslint": "^8.27.0"
   }
 }
