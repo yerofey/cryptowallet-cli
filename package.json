@@ -67,7 +67,7 @@
     "@yerofey/litecoin-bip84": "^0.0.5",
     "bip39": "3.0.4",
     "bip84": "0.2.7",
-    "chalk": "5.1.2",
+    "chalk": "5.2.0",
     "coininfo": "5.2.1",
     "coinkey": "3.0.0",
     "columnify": "1.6.0",
