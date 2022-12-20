@@ -1,4 +1,5 @@
 # cryptowallet-cli
+
 > Crypto wallet generator CLI tool (currently works only on Mac and Linux, sorry Windows users)
 
 ![Screenshot](https://i.imgur.com/uWuT4lF.png)
@@ -6,6 +7,7 @@
 ---
 
 ## Install
+
 ```bash
 # via NPM
 $ npm i -g @yerofey/cryptowallet-cli
@@ -18,6 +20,7 @@ $ yarn global add @yerofey/cryptowallet-cli
 ```
 
 ## Usage
+
 ```bash
 # generate random ERC-like wallet (ETH, BNB, POLYGON, ...)
 $ cw
@@ -69,6 +72,7 @@ $ cw -l
 ```
 
 ## Blockchains supported
+
 - `BTC` (Bitcoin) [legacy, segwit, bech32]
 - `ETH` (Ethereum)
 - `BNB` (Binance Coin) [BEP2, BEP20, ERC20]
@@ -93,9 +97,10 @@ $ cw -l
 - `BLK` (BlackCoin)
 - `VIA` (Viacoin)
 - `NBT` (NIX Bridge Token)
-_\*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Smart Chain or Polygon and others (EVM compatible) are supported too, you just need to create ERC wallet (that is set by default)_
+    _\*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Smart Chain or Polygon and others (EVM compatible) are supported too, you just need to create ERC wallet (that is set by default)_
 
 ## Options
+
 - `-b` or `-c` or `--chain`: Specify the blockchain ticker to generate a wallet for
 - `-D` or `--csv`: Save output into CSV file with custom or default name ("`cw-output.csv`") - this is a shorthand for `-o csv -F filename`
 - `-f` or `--format`: Specify the blockchain wallet format (for BTC: legacy, segwit, bech32)
@@ -108,15 +113,17 @@ _\*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Sm
 - `-s` or `--suffix`: Specify desired suffix for the wallet address (**case-insensitive**)
 - `-S` or `--suffix-sensitive`: Specify desired suffix for the wallet address (**case-sensitive**)
 - `-v` or `--version`: Display current version of CW tool
-**Currently not necessary options:**
+    **Currently not necessary options:**
 - `-F` or `--filename`: Specify a filename (without extension) to output the data (works only with `-o` argument)
 - `-o` or `--output`: Specify a file format (currently only `csv` supported) to output the generated data
 
 ## Node.js supported versions
+
 - ✅ v16.0-v16.x
 - ⛔ v17.x-v18.x
 
 ## Highlights
+
 - 24+ blockchains supported
 - Generate wallet with desired prefix/suffix
 - Generate wallet from mnemonic
@@ -124,6 +131,7 @@ _\*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Sm
 - Works fully offline
 
 ## TODO
+
 - Windows support
 - Show SegWit Bech32 BTC change addresses with additional flag
 - SegWit Bech32 wallet address support for all Bitcoin forks
@@ -131,9 +139,11 @@ _\*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Sm
 - tests
 
 ## Author
+
 [Yerofey S.](https://github.com/yerofey)
 
-Contact me: [Email](mailto:pm@yerofey.dev), [Telegram](https://t.me/cryptofey)
+Contact me: [Email](mailto:pm@yerofey.dev), [Telegram](https://t.me/etofej)
 
 ## License
+
 [MIT](https://github.com/yerofey/cryptowallet-cli/blob/master/LICENSE)
