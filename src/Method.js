@@ -166,7 +166,7 @@ class Method {
         let outputData = {};
         if (cw.wallet.addresses !== undefined) {
           // private key
-          if (cw.wallet.privateExtendedKey) {
+          if (cw.wallet.privateExtendedKey && cw.options.geek) {
             log(`🔐  ${cw.wallet.privateExtendedKey}`);
             linesCount += 1;
           }
