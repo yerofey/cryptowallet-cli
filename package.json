@@ -71,7 +71,7 @@
     "coininfo": "5.2.1",
     "coinkey": "3.0.0",
     "columnify": "1.6.0",
-    "commander": "9.4.1",
+    "commander": "9.5.0",
     "csv-writer": "^1.6.0",
     "eth-lib": "0.1.29",
     "ethereum-bip84": "0.0.3",
