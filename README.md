@@ -138,16 +138,18 @@ $ cw -l
 - `-s` or `--suffix`: Specify desired suffix for the wallet address (**case-insensitive**)
 - `-S` or `--suffix-sensitive`: Specify desired suffix for the wallet address (**case-sensitive**)
 - `-v` or `--version`: Display current version of CW tool
-    **Currently not necessary options:**
+
+**Currently not necessary options:**
+
 - `-F` or `--filename`: Specify a filename (without extension) to output the data (works only with `-o` argument)
 - `-o` or `--output`: Specify a file format (currently only `csv` supported) to output the generated data
 
 ## Node.js supported versions
 
-- ✅ v16.x
-- ⛔ v17.x
-- ✅ v18.x
-- ✅ v19.x
+- [x] v16.x ✅
+- [ ] v17.x ⛔
+- [x] v18.x ✅
+- [x] v19.x ✅
 
 *tested on Mac M1*
 
