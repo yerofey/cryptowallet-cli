@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.8.4",
+  "version": "1.8.5",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
@@ -10,7 +10,7 @@
     "cw": "cli.js"
   },
   "engines": {
-    "node": ">=16.0.0 <17.0.0"
+    "node": ">=16.0.0 <17.0.0 >=18.0.0"
   },
   "scripts": {
     "lint": "pnpm exec eslint src/*.js",

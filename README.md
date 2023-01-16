@@ -1,10 +1,25 @@
-# cryptowallet-cli
+# cryptowallet-cli [![GitHub stars](https://img.shields.io/github/stars/yerofey/cryptowallet-cli.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/yerofey/cryptowallet-cli/stargazers/)
+
+[![NPM package yearly downloads](https://badgen.net/npm/dt/@yerofey/cryptowallet-cli)](https://npmjs.com/@yerofey/cryptowallet-cli)
+[![Minimum Node.js version](https://badgen.net/npm/node/@yerofey/cryptowallet-cli)](https://npmjs.com/@yerofey/cryptowallet-cli)
+[![NPM package version](https://badgen.net/npm/v/@yerofey/cryptowallet-cli)](https://npmjs.com/package/@yerofey/cryptowallet-cli)
 
 > Crypto wallet generator CLI tool (currently works only on Mac and Linux, sorry Windows users)
 
 ![Screenshot](https://i.imgur.com/uWuT4lF.png)
 
----
+## Features
+
+- [x] Generate new crypto wallet offline
+- [x] Generate wallet address with prefix (string at the start): [`-p`]
+- [x] Generate wallet address with suffix (string at the end): [`-s`]
+- [x] Generate wallet with different formats (for Bitcoin: Legacy, SegWit, Bech32; for BNB: BEP2, BEP20): [`-f`]
+- [x] Generate wallet from your desired mnemonic string: [`-m`]
+- [x] Generate only mnemonic string: [`-m`]
+- [x] Generate a lot of wallets at once: [`-n`]
+- [x] Save result into a CSV file: [`--csv`]
+
+*check the Options section for all supported commands*
 
 ## Install
 
@@ -25,17 +40,26 @@ $ yarn global add @yerofey/cryptowallet-cli
 # generate random ERC-like wallet (ETH, BNB, POLYGON, ...)
 $ cw
 
+# generate random BTC wallet (default format: bech32 - "bc1q...")
+$ cw -c btc
+
+# generate N random wallets (default coin is ETH/ERC-like)
+$ cw -n 10
+
 # generate random ERC-like wallet with desired prefix
 $ cw -p aaa
-
-# generate random BTC wallet (default format: bech32 - "bc1q...")
-$ cw -c BTC
 
 # generate random BTC wallet with desired prefix (case-insensitive)
 $ cw -c BTC -p ABC
 
 # generate random BTC wallet with desired prefix (case-sensitive)
 $ cw -c BTC -P abc
+
+# generate random BTC wallet with desired suffix (case-insensitive)
+$ cw -c BTC -s ABC
+
+# generate random BTC wallet with desired suffix (case-sensitive)
+$ cw -c BTC -S abc
 
 # generate BTC legacy wallet ("1...")
 $ cw -c BTC -f legacy
@@ -97,7 +121,8 @@ $ cw -l
 - `BLK` (BlackCoin)
 - `VIA` (Viacoin)
 - `NBT` (NIX Bridge Token)
-    _\*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Smart Chain or Polygon and others (EVM compatible) are supported too, you just need to create ERC wallet (that is set by default)_
+
+*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Smart Chain or Polygon and others (EVM compatible) are supported too, you just need to create ERC wallet (that is set by default)*
 
 ## Options
 
@@ -119,24 +144,19 @@ $ cw -l
 
 ## Node.js supported versions
 
-- ✅ v16.0-v16.x
-- ⛔ v17.x-v18.x
+- ✅ v16.x
+- ⛔ v17.x
+- ✅ v18.x
+- ✅ v19.x
 
-## Highlights
-
-- 24+ blockchains supported
-- Generate wallet with desired prefix/suffix
-- Generate wallet from mnemonic
-- Generate just a mnemonic
-- Works fully offline
+*tested on Mac M1*
 
 ## TODO
 
-- Windows support
-- Show SegWit Bech32 BTC change addresses with additional flag
-- SegWit Bech32 wallet address support for all Bitcoin forks
-- More EVM compatible cryptos
-- tests
+- [ ] Windows support
+- [ ] SegWit Bech32 wallet address support for all Bitcoin forks
+- [ ] More EVM compatible cryptos
+- [ ] tests
 
 ## Author
 
