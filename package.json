@@ -1,8 +1,13 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.8.5",
+  "version": "1.8.6",
+  "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yerofey/cryptowallet-cli.git"
+  },
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "license": "MIT",
   "bin": {
@@ -10,7 +15,7 @@
     "cw": "cli.js"
   },
   "engines": {
-    "node": ">=16.0.0 <17.0.0 >=18.0.0"
+    "node": ">=16.0.0"
   },
   "scripts": {
     "lint": "pnpm exec eslint src/*.js",
@@ -80,7 +85,7 @@
     "tronweb": "4.4.0"
   },
   "devDependencies": {
-    "ava": "^5.1.0",
-    "eslint": "^8.27.0"
+    "ava": "^5.1.1",
+    "eslint": "^8.32.0"
   }
 }
