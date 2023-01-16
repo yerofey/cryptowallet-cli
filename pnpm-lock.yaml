@@ -8,18 +8,18 @@ specifiers:
   ava: ^5.1.1
   bip39: 3.0.4
   bip84: 0.2.7
-  chalk: 5.1.2
+  chalk: 5.2.0
   coininfo: 5.2.1
   coinkey: 3.0.0
   columnify: 1.6.0
-  commander: 9.4.1
+  commander: 10.0.0
   csv-writer: ^1.6.0
   eslint: ^8.32.0
   eth-lib: 0.1.29
   ethereum-bip84: 0.0.3
   ethereum-mnemonic-privatekey-utils: 1.0.5
   tezos-sign: 1.4.1
-  tronweb: 4.4.0
+  tronweb: 5.0.0
 
 dependencies:
   '@binance-chain/javascript-sdk': 4.2.0
@@ -28,17 +28,17 @@ dependencies:
   '@yerofey/litecoin-bip84': 0.0.5
   bip39: 3.0.4
   bip84: 0.2.7
-  chalk: 5.1.2
+  chalk: 5.2.0
   coininfo: 5.2.1
   coinkey: 3.0.0
   columnify: 1.6.0
-  commander: 9.4.1
+  commander: 10.0.0
   csv-writer: 1.6.0
   eth-lib: 0.1.29
   ethereum-bip84: 0.0.3
   ethereum-mnemonic-privatekey-utils: 1.0.5
   tezos-sign: 1.4.1
-  tronweb: 4.4.0
+  tronweb: 5.0.0
 
 devDependencies:
   ava: 5.1.1
@@ -656,6 +656,10 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@tronweb3/google-protobuf/3.21.2:
+    resolution: {integrity: sha512-IVcT2GfWX3K6tHUVhs14NP5uzKhQt4KeDya1g9ACxuZsUzsaoGUIGzceK2Ltu7xp1YV94AaHOf4yxLAivlvEkQ==}
+    dev: false
 
   /@types/bech32/1.1.4:
     resolution: {integrity: sha512-LWSo7sw6NFc9u7HpMK6aPRa7lNw3NKYAEEQCvdFFLkMCgwzv+0/CySQeqdL9hUIsirThQJ4u6ax/0uKEN63Z2g==}
@@ -1368,15 +1372,9 @@ packages:
       supports-color: 7.2.0
     dev: true
 
-  /chalk/5.1.2:
-    resolution: {integrity: sha512-E5CkT4jWURs1Vy5qGJye+XwCkNj7Od3Af7CP6SujMetSMkLs8Do2RWJK5yx1wamHV/op8Rz+9rltjaTQWDnEFQ==}
-    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-    dev: false
-
   /chalk/5.2.0:
     resolution: {integrity: sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-    dev: true
 
   /chokidar/3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
@@ -1511,9 +1509,9 @@ packages:
       delayed-stream: 1.0.0
     dev: false
 
-  /commander/9.4.1:
-    resolution: {integrity: sha512-5EEkTNyHNGFPD2H+c/dXXfQZYa/scCKasxWcXJaWnNJ99pnQN9Vnmqow+p+PlFPE63Q6mThaZws1T+HxfpgtPw==}
-    engines: {node: ^12.20.0 || >=14}
+  /commander/10.0.0:
+    resolution: {integrity: sha512-zS5PnTI22FIRM6ylNW8G4Ap0IEOyk62fhLSD0+uHRT9McRCLGpkVNvao4bjimpK/GShynyQkFFxHhwMcETmduA==}
+    engines: {node: '>=14'}
     dev: false
 
   /common-path-prefix/3.0.0:
@@ -4213,10 +4211,11 @@ packages:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
     dev: false
 
-  /tronweb/4.4.0:
-    resolution: {integrity: sha512-0yPmjQE1drPcDtW4YCXFjtvDQmKc/utjKB2J6U5GDcWWhsGqE8yFjdIMJRa1yj1a/oFQNlthKMzw4Jd7lkWbYA==}
+  /tronweb/5.0.0:
+    resolution: {integrity: sha512-cKwYWYSGJ5ROyY2ybWSHGF38puML4pCl4Uax7sEOtJpMnjgO0RWrs6swCj/6RnM75rPL1O+RZshGXD0JuED2zg==}
     dependencies:
       '@babel/runtime': 7.20.7
+      '@tronweb3/google-protobuf': 3.21.2
       axios: 0.26.1
       bignumber.js: 9.1.1
       elliptic: 6.5.4

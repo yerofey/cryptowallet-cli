@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.8.6",
+  "version": "1.8.7",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -72,17 +72,17 @@
     "@yerofey/litecoin-bip84": "^0.0.5",
     "bip39": "3.0.4",
     "bip84": "0.2.7",
-    "chalk": "5.1.2",
+    "chalk": "5.2.0",
     "coininfo": "5.2.1",
     "coinkey": "3.0.0",
     "columnify": "1.6.0",
-    "commander": "9.4.1",
+    "commander": "10.0.0",
     "csv-writer": "^1.6.0",
     "eth-lib": "0.1.29",
     "ethereum-bip84": "0.0.3",
     "ethereum-mnemonic-privatekey-utils": "1.0.5",
     "tezos-sign": "1.4.1",
-    "tronweb": "4.4.0"
+    "tronweb": "5.0.0"
   },
   "devDependencies": {
     "ava": "^5.1.1",
