@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.8.8",
+  "version": "1.8.9",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -85,7 +85,7 @@
     "tronweb": "5.0.0"
   },
   "devDependencies": {
-    "ava": "^5.1.1",
-    "eslint": "^8.32.0"
+    "ava": "^5.2.0",
+    "eslint": "^8.34.0"
   }
 }

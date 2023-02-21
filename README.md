@@ -4,7 +4,7 @@
 [![Minimum Node.js version](https://badgen.net/npm/node/@yerofey/cryptowallet-cli)](https://npmjs.com/@yerofey/cryptowallet-cli)
 [![NPM package version](https://badgen.net/npm/v/@yerofey/cryptowallet-cli)](https://npmjs.com/package/@yerofey/cryptowallet-cli)
 
-> Crypto wallet generator CLI tool (currently works only on Mac and Linux, sorry Windows users)
+> Crypto wallet generator CLI tool
 
 ![Screenshot](https://i.imgur.com/uWuT4lF.png)
 
@@ -155,7 +155,7 @@ $ cw -l
 
 ## TODO
 
-- [ ] Windows support
+- [ ] Test if is working on Windows (should be, actually)
 - [ ] SegWit Bech32 wallet address support for all Bitcoin forks
 - [ ] More EVM compatible cryptos
 - [ ] tests
