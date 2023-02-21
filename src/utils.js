@@ -34,7 +34,7 @@ const objectHasAllKeys = (obj, keysArray) =>
 
 let supportedChains = [];
 // eslint-disable-next-line no-undef
-const chainsFolder = `${path.dirname(import.meta.url)}/chains/`.replace('file://', '');
+const chainsFolder = `${path.dirname(decodeURIComponent(import.meta.url))}/chains/`.replace('file://', '');
 filesList(chainsFolder).forEach((item) => {
   const name = item.replace(chainsFolder, '').replace('.json', '');
   supportedChains.push(name);
