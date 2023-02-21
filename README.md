@@ -164,8 +164,6 @@ $ cw -l
 
 [Yerofey S.](https://github.com/yerofey)
 
-Contact me: [Email](mailto:pm@yerofey.dev), [Telegram](https://t.me/etofej)
-
 ## License
 
 [MIT](https://github.com/yerofey/cryptowallet-cli/blob/master/LICENSE)
