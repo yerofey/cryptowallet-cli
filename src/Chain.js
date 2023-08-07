@@ -2,37 +2,42 @@ import path from 'node:path';
 import { loadJson } from './utils.js';
 
 class Chain {
-  constructor(chain, format) {
+  constructor(chain, format = '') {
     this.chain = chain;
     this.format = format;
+    this.row = null;
   }
 
   async init() {
-    // eslint-disable-next-line no-undef
-    const content = await loadJson(`${path.dirname(import.meta.url)}/chains/${this.chain}.json`.replace('file://', ''));
-    const data = (() => {
-      if (content.formats !== undefined) {
-        if (this.format != '' && this.format != content.defaultFormat) {
-          // case-insensitive format
-          for (const key of Object.keys(content.formats)) {
-            if (this.format.toLowerCase() == key.toLowerCase()) {
-              return content.formats[key];
-            }
-          }
-        }
-
-        return content.formats[content.defaultFormat];
-      }
-
-      return content;
-    })();
-
-    this.row = {
-      ...content,
-      ...data,
-    };
-
+    const content = await this._loadChainJson();
+    this.row = this._parseContent(content);
     return this;
+  }
+
+  async _loadChainJson() {
+    const filePath = `${path.dirname(import.meta.url)}/chains/${
+      this.chain
+    }.json`.replace('file://', '');
+    return await loadJson(filePath);
+  }
+
+  _parseContent(content) {
+    if (!content.formats) return content;
+
+    const formatKey = this._findFormatKey(content);
+    return { ...content, ...content.formats[formatKey] };
+  }
+
+  _findFormatKey(content) {
+    if (!this.format || this.format === content.defaultFormat)
+      return content.defaultFormat;
+
+    const normalizedFormat = this.format.toLowerCase();
+    const matchingKey = Object.keys(content.formats).find(
+      (key) => key.toLowerCase() === normalizedFormat
+    );
+
+    return matchingKey || content.defaultFormat;
   }
 }
 

@@ -150,6 +150,7 @@ $ cw -l
 - [ ] v17.x ⛔
 - [x] v18.x ✅
 - [x] v19.x ✅
+- [x] v20.x ✅
 
 *tested on Mac M1*
 

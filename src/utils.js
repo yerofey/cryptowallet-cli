@@ -21,12 +21,8 @@ const loadFile = async (filename, defaultValue = {}) => {
 };
 
 const loadJson = async (filename) => {
-  return JSON.parse(
-    await readFile(
-      new URL(filename, import.meta.url)
-    )
-  );
-}
+  return JSON.parse(await readFile(new URL(filename, import.meta.url)));
+};
 
 const objectHasAllKeys = (obj, keysArray) =>
   // eslint-disable-next-line no-prototype-builtins
@@ -34,17 +30,11 @@ const objectHasAllKeys = (obj, keysArray) =>
 
 let supportedChains = [];
 // eslint-disable-next-line no-undef
-const chainsFolder = `${path.dirname(decodeURIComponent(import.meta.url))}/chains/`.replace('file://', '');
-filesList(chainsFolder).forEach((item) => {
-  const name = item.replace(chainsFolder, '').replace('.json', '');
-  supportedChains.push(name);
-});
+const chainsFolder = `${path.dirname(
+  decodeURIComponent(import.meta.url)
+)}/chains/`.replace('file://', '');
+supportedChains = filesList(chainsFolder).map((item) =>
+  item.replace(chainsFolder, '').replace('.json', '')
+);
 
-const _log = log;
-export { _log as log };
-export { loadFile };
-export { loadJson };
-const _objectHasAllKeys = objectHasAllKeys;
-export { _objectHasAllKeys as objectHasAllKeys };
-const _supportedChains = supportedChains;
-export { _supportedChains as supportedChains };
+export { log, loadFile, loadJson, objectHasAllKeys, supportedChains };

@@ -1,35 +1,24 @@
 import { log } from './utils.js';
 import chalk from 'chalk';
-const { red } = chalk;
 import CoinKey from 'coinkey';
 import CoinInfo from 'coininfo';
 import bip39 from 'bip39';
 import bip84 from 'bip84';
-const {
-  fromMnemonic,
-  fromZPrv,
-} = bip84;
+const { fromMnemonic, fromZPrv } = bip84;
 import ethereumBip from 'ethereum-bip84';
-const {
-  fromMnemonic: fromMnemonicEthereum,
-  fromZPrv: fromZPrvEthereum,
-} = ethereumBip;
+const { fromMnemonic: fromMnemonicEthereum, fromZPrv: fromZPrvEthereum } =
+  ethereumBip;
 import dogecoinBip from '@yerofey/dogecoin-bip84';
-const {
-  fromMnemonic: fromMnemonicDoge,
-  fromZPrv: fromZPrvDoge
-} = dogecoinBip;
+const { fromMnemonic: fromMnemonicDoge, fromZPrv: fromZPrvDoge } = dogecoinBip;
 import litecoinBip from '@yerofey/litecoin-bip84';
-const {
-  fromMnemonic: fromMnemonicLite,
-  fromZPrv: fromZPrvLite,
-} = litecoinBip;
+const { fromMnemonic: fromMnemonicLite, fromZPrv: fromZPrvLite } = litecoinBip;
 import { Account } from 'eth-lib/lib/index.js';
 import { Wallet as HarmonyWallet } from '@harmony-js/account';
 import pkutils from 'ethereum-mnemonic-privatekey-utils';
 import bCrypto from '@binance-chain/javascript-sdk/lib/crypto/index.js';
 import tronWeb from 'tronweb';
 import tezos from 'tezos-sign';
+const { red } = chalk;
 
 class Wallet {
   constructor(cw) {
@@ -312,8 +301,9 @@ class Wallet {
         };
       }
 
-      const _fromMnemonic = (chain == 'DOGE') ? fromMnemonicDoge : fromMnemonicLite;
-      const _fromZPrv = (chain == 'DOGE') ? fromZPrvDoge : fromZPrvLite;
+      const _fromMnemonic =
+        chain == 'DOGE' ? fromMnemonicDoge : fromMnemonicLite;
+      const _fromZPrv = chain == 'DOGE' ? fromZPrvDoge : fromZPrvLite;
       const mnemonic = mnemonicString || bip39.generateMnemonic();
       const root = new _fromMnemonic(mnemonic, '');
       const child = root.deriveAccount(0);
@@ -487,7 +477,4 @@ function generateMnemonicString() {
   return bip39.generateMnemonic();
 }
 
-const _generateMnemonicString = generateMnemonicString;
-export { _generateMnemonicString as generateMnemonicString };
-const _Wallet = Wallet;
-export { _Wallet as Wallet };
+export { generateMnemonicString, Wallet };
