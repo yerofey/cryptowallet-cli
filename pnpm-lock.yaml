@@ -54,8 +54,8 @@ dependencies:
     specifier: 1.4.1
     version: 1.4.1
   tronweb:
-    specifier: 5.3.0
-    version: 5.3.0
+    specifier: 5.3.1
+    version: 5.3.1
 
 devDependencies:
   ava:
@@ -608,7 +608,7 @@ packages:
   /@types/bn.js@4.11.6:
     resolution: {integrity: sha512-pqr857jrp2kPuO9uRjZ3PwnJTjoQy+fcdxvBTvHm6dkmEL9q+hDD/2j/0ELOBPtPnS8LjCX0gI9nbl8lVkadpg==}
     dependencies:
-      '@types/node': 13.13.52
+      '@types/node': 20.4.8
     dev: false
 
   /@types/bn.js@5.1.1:
@@ -624,7 +624,7 @@ packages:
   /@types/duplexify@3.6.1:
     resolution: {integrity: sha512-n0zoEj/fMdMOvqbHxmqnza/kXyoGgJmEpsXjpP+gEqE1Ye4yNqc7xWipKnUoMpWhMuzJQSfK2gMrwlElly7OGQ==}
     dependencies:
-      '@types/node': 13.13.52
+      '@types/node': 20.4.8
     dev: false
 
   /@types/elliptic@6.4.14:
@@ -660,7 +660,7 @@ packages:
   /@types/ledgerhq__hw-transport@4.21.4:
     resolution: {integrity: sha512-vep+6yZnGv6owAthIY0w3f72w4dJIb4+yE5PCHveInTlZE9wukvU6Wc5Eig0OUUxcdhTazzeZx1xUaNVLqyQSg==}
     dependencies:
-      '@types/node': 13.13.52
+      '@types/node': 20.4.8
     dev: false
 
   /@types/lodash@4.14.196:
@@ -693,7 +693,7 @@ packages:
     resolution: {integrity: sha512-l7u/Dnh1OG9T7VH6TvulR0g8oE8hgIW5409mSUKi8Vxw2+JV18aTa06Sv5bvNjrD0zbsB/cuZ/iTFQgFNfzIuw==}
     dependencies:
       '@types/duplexify': 3.6.1
-      '@types/node': 13.13.52
+      '@types/node': 20.4.8
     dev: false
 
   /@types/secp256k1@4.0.3:
@@ -705,7 +705,7 @@ packages:
   /@types/tiny-secp256k1@1.0.0:
     resolution: {integrity: sha512-IW3dFGNyVkVLC1MCMogVWQaKH/ZtjPQdOW9c3X128o5lVpFYNsq/l3Qo1pV7sfTmvDzWEXR3QTxg1TMy1pyaAQ==}
     dependencies:
-      '@types/node': 13.13.52
+      '@types/node': 20.4.8
     dev: false
 
   /@types/uuid@7.0.5:
@@ -4134,8 +4134,8 @@ packages:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
     dev: false
 
-  /tronweb@5.3.0:
-    resolution: {integrity: sha512-i03+3UviQacqdrr3VgXHDL8h/2E24BeULak4w6+yRkJaCuEyxjWOtEn1dq87ulTkHzS/vKK0zIyvW7rSxuISOA==}
+  /tronweb@5.3.1:
+    resolution: {integrity: sha512-JF3HE0ab8KQWJWETCF7UqZHD4uMNNGlEPrquBoObu5bWc8A8eerBV9M2PJq+HcSYBivmEHeBqFgmpMAQP3ofpw==}
     dependencies:
       '@babel/runtime': 7.22.6
       '@ethersproject/abi': 5.7.0
