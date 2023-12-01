@@ -19,6 +19,7 @@
   },
   "scripts": {
     "lint": "pnpm exec eslint src/*.js",
+    "postinstall": "node postinstall.js",
     "test": "ava"
   },
   "files": [

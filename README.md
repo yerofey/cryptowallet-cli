@@ -152,14 +152,44 @@ $ cw -l
 - [x] v19.x ✅
 - [x] v20.x ✅
 
-*tested on Mac M1*
+*tested on Ubuntu 22.04 & Mac M1*
 
 ## TODO
 
-- [ ] Test if is working on Windows (should be, actually)
 - [ ] SegWit Bech32 wallet address support for all Bitcoin forks
-- [ ] More EVM compatible cryptos
 - [ ] tests
+
+## Contributing
+
+Contributions are welcome! If you would like to contribute to this project, please follow these guidelines:
+
+1. Fork the repository and create a new branch.
+2. Make your changes and ensure that the code is properly formatted.
+3. Write tests to cover any new functionality.
+4. Submit a pull request with a clear description of your changes.
+
+By contributing to this project, you agree to abide by the [Code of Conduct](https://github.com/yerofey/cryptowallet-cli/blob/master/CODE_OF_CONDUCT.md).
+
+Thank you for your interest in contributing!
+
+## Support the Project
+
+If you find this tool useful and would like to support its development, consider making a donation. Your support is greatly appreciated and helps me dedicate more time to maintain and improve this project.
+
+**Donate Crypto:**
+
+- Tether (USDT-TRC20): `TCW9eaRWjpivZvnZ5DwgbWxPRpoZNWbuPe`
+- Bitcoin (BTC): `bc1qcwamquntxshqsjcra6vryftrfd9z57j02g3ywq`
+- Ethereum (ETH): `0xe3e3ed78d9f8A935a9a0fCE2a7305F2f5DBabAD8`
+- BNB (BEP20): `0xe3e3ed78d9f8A935a9a0fCE2a7305F2f5DBabAD8`
+- BNB (BEP2): `bnb1gtxfz4kllltaeekw3edfd496gpa3ukpakvzncq`
+- DOGE (DOGE): `DMAkWQKx1H6ESG3beDBssn5mAAZcwkrYVh`
+
+**Other Donate Options:**
+
+- [PayPal](https://paypal.me/Jerofej)
+
+Thank you for your support!
 
 ## Author
 
