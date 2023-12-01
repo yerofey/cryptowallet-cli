@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.14.0",
+  "version": "1.14.1",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",

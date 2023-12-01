@@ -303,6 +303,7 @@ class Method {
       }
     }
 
+    // formats, network, apps
     if (displayAsText) {
       if (
         cw.row.formats !== undefined ||
@@ -313,6 +314,7 @@ class Method {
         log();
       }
 
+      // tested
       if (cw.wallet.tested !== undefined) {
         log(
           red(
@@ -321,6 +323,7 @@ class Method {
         );
       }
 
+      // formats
       if (
         cw.row.formats !== undefined &&
         Object.keys(cw.row.formats).length > 1
@@ -340,6 +343,7 @@ class Method {
         );
       }
 
+      // network
       if (cw.row.network == 'EVM' || false) {
         log(
           yellow(
@@ -370,6 +374,9 @@ class Method {
         }
         log(greenBright('ℹ️   You can import this wallet into ' + appsString));
       }
+
+      // donation
+      log(blueBright('🙏  Consider supporting the project - see donation options with: cw --donate'));
     }
   }
 
