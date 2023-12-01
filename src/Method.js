@@ -6,16 +6,8 @@ import { log, supportedChains, loadJson } from './utils.js';
 import { generateMnemonicString } from './Wallet.js';
 import CW from './CW.js';
 
-const {
-  blue,
-  green,
-  blueBright,
-  greenBright,
-  yellow,
-  red,
-  magenta,
-  white,
-} = chalk;
+const { blue, green, blueBright, greenBright, yellow, red, magenta, white } =
+  chalk;
 
 const pkg = await loadJson(
   `${path.dirname(import.meta.url)}/../package.json`.replace('file://', '')
@@ -32,6 +24,7 @@ class Method {
   _initializeMethods() {
     return {
       _: () => {},
+      donate: this._donate.bind(this),
       list: this._list.bind(this),
       mnemonic: this._mnemonic.bind(this),
       version: this._version.bind(this),
@@ -378,6 +371,28 @@ class Method {
         log(greenBright('ℹ️   You can import this wallet into ' + appsString));
       }
     }
+  }
+
+  _donate() {
+    console.log(`
+    ──────────────────────────────────────────────────────
+    Thank you for installing CW!
+
+    If you'd like to support this project, consider making
+    a donation. Your support is greatly appreciated!
+
+    Donate Crypto:
+    - USDT: TCW9eaRWjpivZvnZ5DwgbWxPRpoZNWbuPe
+    - BTC: bc1qcwamquntxshqsjcra6vryftrfd9z57j02g3ywq
+    - ETH: 0xe3e3ed78d9f8A935a9a0fCE2a7305F2f5DBabAD8
+    - DOGE: DMAkWQKx1H6ESG3beDBssn5mAAZcwkrYVh
+
+    Donate via PayPal:
+    - https://paypal.me/Jerofej
+
+    Thank you for your support!
+    ──────────────────────────────────────────────────────
+    `);
   }
 
   async init() {

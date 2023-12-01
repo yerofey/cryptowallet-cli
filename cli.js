@@ -19,6 +19,10 @@ import Method from './src/Method.js';
     return new Method('version').init();
   }
 
+  if (options.donate) {
+    return new Method('donate').init();
+  }
+
   const chain = options.chain.toUpperCase() || '';
   if (supportedChains.includes(chain)) {
     return new Method('wallet', {

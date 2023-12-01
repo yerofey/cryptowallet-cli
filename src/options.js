@@ -37,6 +37,7 @@ program.option(
   'Desired wallet suffix (case-sensitive)'
 );
 program.option('-v, --version', 'Display cryptowallet version');
+program.option('-T, --donate', 'Donate to the project');
 program.parse();
 
 export const options = program.opts();
