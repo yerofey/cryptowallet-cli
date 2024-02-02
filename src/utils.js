@@ -1,8 +1,15 @@
 import { readdirSync, statSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const log = console.log;
+
+const dirname = (metaUrl) => {
+  const __filename = fileURLToPath(metaUrl);
+  const __dirname = path.dirname(__filename);
+  return __dirname;
+};
 
 const filesList = (dir) => {
   return readdirSync(dir).reduce((list, file) => {
@@ -29,12 +36,9 @@ const objectHasAllKeys = (obj, keysArray) =>
   keysArray.every((item) => obj.hasOwnProperty(item));
 
 let supportedChains = [];
-// eslint-disable-next-line no-undef
-const chainsFolder = `${path.dirname(
-  decodeURIComponent(import.meta.url)
-)}/chains/`.replace('file://', '');
+const chainsFolder = path.join(dirname(import.meta.url), 'chains');
 supportedChains = filesList(chainsFolder).map((item) =>
-  item.replace(chainsFolder, '').replace('.json', '')
+  item.replace(chainsFolder, '').replace('.json', '').replace('/', '')
 );
 
 export { log, loadFile, loadJson, objectHasAllKeys, supportedChains };

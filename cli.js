@@ -12,7 +12,12 @@ import Method from './src/Method.js';
   }
 
   // generate mnemonic string if no argument is passed or only the mnemonic length is passed
-  if (options.mnemonic === true || options.mnemonic === '' || options.mnemonic.split(' ').length === 1) {
+  if (
+    options.mnemonic &&
+    (options.mnemonic === true ||
+      options.mnemonic === '' ||
+      options.mnemonic.split(' ').length === 1)
+  ) {
     return new Method('mnemonic').init({ mnemonic: options.mnemonic });
   }
 
