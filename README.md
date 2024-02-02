@@ -43,6 +43,16 @@ $ cw
 # generate random BTC wallet (default format: bech32 - "bc1q...")
 $ cw -c btc
 
+# generate random mnemonic string (12 words) to import in any wallet app
+$ cw -m
+
+# generate random mnemonic string of a specific length (12, 18, or 24 words)
+$ cw -m 18
+$ cw -m 24
+
+# generate a wallet from a given mnemonic string
+$ cw -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
+
 # generate N random wallets (default coin is ETH/ERC-like)
 $ cw -n 10
 
@@ -88,9 +98,6 @@ $ cw -c btc --csv
 # generate few wallets and save the output into CSV file with custom name "new.csv"
 $ cw -c btc -n 10 -D new
 
-# generate just a mnemonic string (12 words) to import in any wallet app
-$ cw -m
-
 # list all supported blockchains
 $ cw -l
 ```
@@ -133,7 +140,12 @@ $ cw -l
 - `-f` or `--format`: Specify the blockchain wallet format (for BTC: legacy, segwit, bech32)
 - `-g` or `--geek`: Display some additional "geeky" info
 - `-l` or `--list`: List all supported blockchains
-- `-m` or `--mnemonic`: Use a bip39 mnemonic phrase (if is set) to generate wallet, or leave it empty to generate new one
+- `-m` or `--mnemonic [value]`: If used without a value or with `12`, `18`, or `24`, it generates a mnemonic string of that length. If a mnemonic string is provided, it generates a wallet from the given mnemonic. For example:
+  - `$ cw -m`: Generates a default 12-word mnemonic string.
+  - `$ cw -m 12`: Generates a 12-word mnemonic string.
+  - `$ cw -m 18`: Generates an 18-word mnemonic string.
+  - `$ cw -m 24`: Generates a 24-word mnemonic string.
+  - `$ cw -m "your mnemonic phrase here"`: Generates a wallet from the provided mnemonic string.
 - `-n` or `--number`: Specify number of wallets to display (works for HD wallets only, like BTC/LTC/DOGE)
 - `-p` or `--prefix`: Specify desired prefix for the wallet address (**case-insensitive**)
 - `-P` or `--prefix-sensitive`: Specify desired prefix of the wallet address (**case-sensitive**)
