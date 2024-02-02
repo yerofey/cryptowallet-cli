@@ -159,6 +159,65 @@ $ cw -l
 - [ ] SegWit Bech32 wallet address support for all Bitcoin forks
 - [ ] tests
 
+## Adding More Chains
+
+We're always looking to support more blockchains! If you'd like to add support for a new chain, please follow these steps:
+
+1. **Create a Chain JSON File**: Create a new `.json` file in the `src/chains` directory. The name of the file should be the ticker symbol of the blockchain (e.g., `SOL.json` for Solana).
+
+2. **Define the Chain Properties**: Fill the JSON file with the necessary properties of the blockchain. Here's the structure you should follow:
+
+```json
+{
+    "title": "Readable Title of Blockchain",
+    "network": "Network Type (EVM, Bitcoin-like, etc.)",
+    "startsWith": "Starting Characters of Wallet Address",
+    "prefixTest": "Regex Pattern to Test Valid Characters in Prefix",
+    "apps": ["Array", "of", "Supported", "Wallet", "Apps"],
+    "flags": ["Array", "of", "Supported", "Features", "like", "m", "n", "p", "s"]
+}
+```
+
+3. **Add Formats (if applicable)**: If the blockchain supports multiple wallet formats (like Bitcoin with Legacy, SegWit, Bech32), you can define them under the `formats` key:
+
+```json
+"formats": {
+    "formatName": {
+    "format": "formatName",
+    "startsWith": "Starting Characters of Wallet Address",
+    "prefixTest": "Regex Pattern to Test Valid Characters in Prefix",
+    "rareSymbols": "Regex Pattern for Rarely Used Symbols",
+    "path": "Derivation Path (if applicable)",
+    "purpose": "BIP Purpose (if applicable)",
+    "apps": ["Array", "of", "Supported", "Wallet", "Apps"],
+    "flags": ["Array", "of", "Supported", "Features", "like", "m", "n", "p", "s"]
+    }
+    // ... other formats
+}
+```
+
+4. **Submit a Pull Request**: Once you've added the new chain file, please submit a pull request to the main repository. Make sure to provide a clear description of the blockchain and the properties you've set.
+
+5. **Wait for Review**: The maintainers will review your submission. They might ask for changes or additional information. Once everything is set, your contribution will be merged, and the new chain will be supported!
+
+Your contributions are greatly appreciated and help make this tool more versatile and useful for everyone!
+
+## Chain JSON File Structure Explained
+
+Each chain JSON file is structured to provide essential information about the blockchain and how the wallet addresses are generated and formatted. Here's a detailed explanation of each field:
+
+- `title`: The full, readable title of the blockchain.
+- `network`: The type of network or protocol the blockchain follows (e.g., EVM for Ethereum-compatible chains).
+- `startsWith`: The set of characters that the wallet address typically starts with.
+- `prefixTest`: A regular expression pattern that tests for valid characters that can appear in the prefix of a wallet address.
+- `apps`: An array of supported wallet applications that can be used with the generated addresses.
+- `flags`: An array of supported features for the wallet generation. Common flags include `m` for mnemonic support, `n` for generating multiple wallets, `p` for prefix support, and `s` for suffix support.
+- `formats`: (Optional) An object defining multiple wallet formats if the blockchain supports more than one format. Each format should specify its unique properties.
+
+By following this structure, the `cryptowallet-cli` tool can understand and support wallet generation for a wide array of blockchains.
+
+Feel free to contribute by adding support for more chains, and help in making `cryptowallet-cli` a more comprehensive tool for the crypto community!
+
 ## Contributing
 
 Contributions are welcome! If you would like to contribute to this project, please follow these guidelines:
