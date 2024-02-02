@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.16.2",
+  "version": "1.17.0",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -19,7 +19,6 @@
   },
   "scripts": {
     "lint": "pnpm exec eslint src/*.js",
-    "postinstall": "cw --donate",
     "test": "ava"
   },
   "files": [
