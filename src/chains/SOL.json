@@ -1,0 +1,7 @@
+{
+  "title": "Solana",
+  "network": "SVM",
+  "startsWith": "",
+  "prefixTest": "[1-9a-zA-Z]",
+  "flags": ["p", "s"]
+}

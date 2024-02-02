@@ -18,6 +18,8 @@ import pkutils from 'ethereum-mnemonic-privatekey-utils';
 import bCrypto from '@binance-chain/javascript-sdk/lib/crypto/index.js';
 import tronWeb from 'tronweb';
 import tezos from 'tezos-sign';
+import { Keypair as SolanaKeypair, PublicKey as SolanaPublickey } from '@solana/web3.js';
+import bs58 from 'bs58';
 const { red } = chalk;
 
 class Wallet {
@@ -426,6 +428,22 @@ class Wallet {
           },
         ],
         mnemonic,
+      });
+    } else if (chain == 'SOL') {
+      const wallet = SolanaKeypair.generate();
+      const publicKeyString = new SolanaPublickey(wallet.publicKey).toBase58();
+      const secretKeyString = bs58.encode(wallet.secretKey);
+
+      // TODO: add support for multiple addresses
+
+      Object.assign(result, {
+        addresses: [
+          {
+            index: 0,
+            address: publicKeyString,
+            privateKey: secretKeyString,
+          },
+        ],
       });
     } else if (chain == 'TRX') {
       try {

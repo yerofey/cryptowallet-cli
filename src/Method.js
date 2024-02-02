@@ -376,6 +376,7 @@ class Method {
       }
 
       // donation
+      log();
       log(blueBright('🙏  Consider supporting the project - see donation options with: cw --donate'));
     }
   }
