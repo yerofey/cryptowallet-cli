@@ -19,6 +19,7 @@ class Method {
     this.name = name;
     this.params = params;
     this.callMethods = this._initializeMethods();
+    this.inputOptions = {};
   }
 
   _initializeMethods() {
@@ -61,16 +62,23 @@ class Method {
   }
 
   _mnemonic() {
+    const mnemonic = this.inputOptions.mnemonic || '12';
+    const mnemonicLength = ['12', '18', '24'].includes(mnemonic)
+      ? parseInt(mnemonic, 10)
+      : 12;
+
     log(
       `✨  ${green('Done!')} ${blueBright(
-        'Here is your randomly generated 12 words mnemonic string:'
+        `Here is your randomly generated ${
+          mnemonicLength || 12
+        } words mnemonic string:`
       )}\n`
     );
-    log(`📄  ${generateMnemonicString()}`);
+    log(`📄  ${generateMnemonicString(mnemonicLength)}`);
     log();
     log(
       greenBright(
-        'ℹ️   You can import this wallet into MetaMask, Trust Wallet and many other wallet apps'
+        'ℹ️   You can import it into your favorite wallet app or use it to generate a wallet with "-m" flag'
       )
     );
   }
@@ -349,7 +357,7 @@ class Method {
       if (cw.row.network == 'EVM' || false) {
         log(
           yellow(
-            '🆒  You can use this wallet in Ethereum, Binance Smart Chain, Polygon and few more networks (EVM compatible)'
+            '🆒  You can use this wallet in Ethereum, Binance Smart Chain, Polygon and many others networks (EVM compatible)'
           )
         );
       }
@@ -381,7 +389,11 @@ class Method {
 
       // donation
       log();
-      log(blueBright('🙏  Consider supporting the project - see donation options with: cw --donate'));
+      log(
+        blueBright(
+          '🙏  Consider supporting the project - see donation options with: cw --donate'
+        )
+      );
     }
   }
 
@@ -409,7 +421,8 @@ class Method {
     `);
   }
 
-  async init() {
+  async init(inputOptions = {}) {
+    this.inputOptions = inputOptions;
     return (this.callMethods[this.name] || this.callMethods['_'])();
   }
 }

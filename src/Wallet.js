@@ -18,11 +18,19 @@ import pkutils from 'ethereum-mnemonic-privatekey-utils';
 import bCrypto from '@binance-chain/javascript-sdk/lib/crypto/index.js';
 import tronWeb from 'tronweb';
 import tezos from 'tezos-sign';
-import { Keypair as SolanaKeypair, PublicKey as SolanaPublickey } from '@solana/web3.js';
+import {
+  Keypair as SolanaKeypair,
+  PublicKey as SolanaPublickey,
+} from '@solana/web3.js';
 import bs58 from 'bs58';
-import { TonClient, WalletContractV4, internal as TonInternal } from "@ton/ton";
-import { mnemonicNew as newTonMnemonic, mnemonicToPrivateKey as TonMnemonicToPrivateKey } from "@ton/crypto";
+import { TonClient, WalletContractV4, internal as TonInternal } from '@ton/ton';
+import {
+  mnemonicNew as newTonMnemonic,
+  mnemonicToPrivateKey as TonMnemonicToPrivateKey,
+} from '@ton/crypto';
 const { red } = chalk;
+
+const supportedMnemonicLengths = [12, 18, 24];
 
 class Wallet {
   constructor(cw) {
@@ -246,7 +254,17 @@ class Wallet {
     const options = cw.options;
 
     let format = options.format || '';
-    let mnemonicString = options.mnemonic || '';
+    const mnemonic = options.mnemonic || '';
+    let mnemonicLength = 12;
+    let mnemonicString = '';
+    const mnemonicWordsCount = (mnemonic.split(' ') || []).length || 0;
+    if (mnemonicWordsCount == 1) {
+      const mnemonicInput = parseInt(mnemonic.split(' ')[0], 10);
+      mnemonicLength = supportedMnemonicLengths.includes(mnemonicInput) ? mnemonicInput : 12;
+    } else {
+      mnemonicString = mnemonic;
+      mnemonicLength = mnemonicWordsCount;
+    }
     let number = options.number || 1;
     let result = {};
 
@@ -338,7 +356,7 @@ class Wallet {
       }
 
       let addresses = [];
-      const mnemonic = mnemonicString || bip39.generateMnemonic();
+      const mnemonic = mnemonicString || generateMnemonicString(mnemonicLength);
 
       if (number == 1) {
         const privateKey = bCrypto.getPrivateKeyFromMnemonic(mnemonic, true, 0);
@@ -375,7 +393,7 @@ class Wallet {
       }
 
       let addresses = [];
-      const mnemonic = mnemonicString || bip39.generateMnemonic();
+      const mnemonic = mnemonicString || generateMnemonicString(mnemonicLength);
       const privateKey = pkutils.getPrivateKeyFromMnemonic(mnemonic);
 
       if (number == 1) {
@@ -448,22 +466,25 @@ class Wallet {
         ],
       });
     } else if (chain == 'TON') {
-      // Create a new TON client
-      // const client = new TonClient({
-      //   endpoint: 'https://toncenter.com/api/v2/jsonRPC',
-      // });
       // Generate new mnemonics and derive key pair
-      const mnemonics = await newTonMnemonic();
+      let mnemonics;
+      if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
+        mnemonics = mnemonicString.split(' ');
+      } else {
+        mnemonics = await newTonMnemonic(); // array of 24 words
+        mnemonicString = mnemonics.join(' ');
+      }
       const keyPair = await TonMnemonicToPrivateKey(mnemonics);
       // Define the workchain (usually 0)
       const workchain = 0;
       // Create a new wallet contract instance
-      const wallet = WalletContractV4.create({ workchain, publicKey: keyPair.publicKey });
-      // const contract = client.open(wallet);
+      const wallet = WalletContractV4.create({
+        workchain,
+        publicKey: keyPair.publicKey,
+      });
       // Get the wallet address
       const address = wallet.address.toString();
 
-      // TODO: add support for multiple addresses
       // TODO: add support for new UQ address format
 
       Object.assign(result, {
@@ -473,7 +494,7 @@ class Wallet {
             address,
           },
         ],
-        mnemonic: mnemonics.join(' '),
+        mnemonic: mnemonicString,
       });
     } else if (chain == 'TRX') {
       try {
@@ -521,8 +542,27 @@ class Wallet {
   }
 }
 
-function generateMnemonicString() {
-  return bip39.generateMnemonic();
+function generateMnemonicString(length = 12) {
+  let entropy;
+  switch (length) {
+    case 12:
+      entropy = 128;
+      break;
+    case 18:
+      entropy = 192;
+      break;
+    case 24:
+      entropy = 256;
+      break;
+    default:
+      throw new Error(
+        'Invalid mnemonic length. Supported lengths are 12, 18, or 24.'
+      );
+  }
+
+  // Generate the mnemonic based on the specified entropy
+  const mnemonic = bip39.generateMnemonic(entropy);
+  return mnemonic;
 }
 
 export { generateMnemonicString, Wallet };

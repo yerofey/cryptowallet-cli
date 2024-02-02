@@ -11,8 +11,9 @@ import Method from './src/Method.js';
     return new Method('list').init();
   }
 
-  if (options.mnemonic == true) {
-    return new Method('mnemonic').init();
+  // generate mnemonic string if no argument is passed or only the mnemonic length is passed
+  if (options.mnemonic === true || options.mnemonic === '' || options.mnemonic.split(' ').length === 1) {
+    return new Method('mnemonic').init({ mnemonic: options.mnemonic });
   }
 
   if (options.version) {
