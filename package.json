@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.17.7",
+  "version": "1.17.8",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -10,6 +10,36 @@
   },
   "author": "Yerofey S. <pm@yerofey.dev> (https://github.com/yerofey)",
   "license": "MIT",
+  "funding": [
+    {
+      "type": "paypal",
+      "url": "https://paypal.me/Jerofej"
+    },
+    {
+      "type": "bitcoin",
+      "url": "bitcoin:bc1qcwamquntxshqsjcra6vryftrfd9z57j02g3ywq"
+    },
+    {
+      "type": "ethereum",
+      "url": "ethereum:0xe3e3ed78d9f8A935a9a0fCE2a7305F2f5DBabAD8"
+    },
+    {
+      "type": "solana",
+      "address": "CWsbNQRxNzAasLd2zfwkEkbBZXKxfoxva14pe8wawUju"
+    },
+    {
+      "type": "usdt",
+      "address": "TCW9eaRWjpivZvnZ5DwgbWxPRpoZNWbuPe"
+    },
+    {
+      "type": "ton",
+      "url": "ton://transfer/UQCWYNjNQdRp7lfmehDWA-RgPqipbI3crX3qFN1MDLpgkyCS"
+    },
+    {
+      "type": "dogecoin",
+      "url": "dogecoin:DMAkWQKx1H6ESG3beDBssn5mAAZcwkrYVh"
+    }
+  ],
   "bin": {
     "cryptowallet": "cli.js",
     "cw": "cli.js"
