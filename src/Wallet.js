@@ -23,7 +23,7 @@ import {
   PublicKey as SolanaPublickey,
 } from '@solana/web3.js';
 import bs58 from 'bs58';
-import { TonClient, WalletContractV4, internal as TonInternal } from '@ton/ton';
+import TonWeb from 'tonweb';
 import {
   mnemonicNew as newTonMnemonic,
   mnemonicToPrivateKey as TonMnemonicToPrivateKey,
@@ -53,8 +53,10 @@ class Wallet {
       desiredSymbolsUniqueArray.filter(
         (char) => !RegExp(row.prefixTest, 'g').test(char)
       ) || [];
+    const startsWithSymbols = row.startsWith.split('|');
 
     let wallet = {};
+    let loops = 0;
     let prefixFound = false;
     let prefixFoundInWallets = [];
     let suffixFound = false;
@@ -63,13 +65,24 @@ class Wallet {
     let onlySuffix = false;
     let onlyBoth = false;
 
-    const prefixFoundInAddress = (address, isCaseSensitive, prefix, symbol) =>
-      (isCaseSensitive && address.startsWith(symbol + '' + prefix)) ||
-      (!isCaseSensitive &&
-        address.toUpperCase().startsWith((symbol + '' + prefix).toUpperCase()));
-    const suffixFoundInAddress = (address, isCaseSensitive, suffix) =>
-      (isCaseSensitive && address.endsWith(suffix)) ||
-      (!isCaseSensitive && address.toUpperCase().endsWith(suffix));
+    const prefixFoundInAddresses = (addresses, isCaseSensitive, prefix) => {
+      return addresses.filter((address) => {
+        return startsWithSymbols.some((symbol) => {
+          const fullPrefix = `${symbol}${prefix}`;
+          return isCaseSensitive
+            ? address.startsWith(fullPrefix)
+            : address.toUpperCase().startsWith(fullPrefix.toUpperCase());
+        });
+      });
+    };
+
+    const suffixFoundInAddresses = (addresses, isCaseSensitive, suffix) => {
+      return addresses.filter((address) => {
+        return isCaseSensitive
+          ? address.endsWith(suffix)
+          : address.toUpperCase().endsWith(suffix.toUpperCase());
+      });
+    };
 
     if (
       (options.prefix && row.flags.includes('p')) ||
@@ -107,114 +120,68 @@ class Wallet {
           }
         }
 
-        const startsWithSymbols = row.startsWith.split('|');
         // eslint-disable-next-line no-constant-condition
         loop: while (true) {
           wallet = await this.createWallet();
-          for (let firstSymbol of startsWithSymbols) {
-            if (wallet.address !== undefined) {
-              // one address
-              if (
-                onlyPrefix &&
-                prefixFoundInAddress(
-                  wallet.address,
-                  options.prefixIsCaseSensitive,
-                  options.prefix,
-                  firstSymbol
-                )
-              ) {
-                prefixFound = true;
-                break loop;
-              }
+          loops++;
 
-              if (
-                onlySuffix &&
-                suffixFoundInAddress(
-                  wallet.address,
-                  options.suffixIsCaseSensitive,
-                  options.suffix
-                )
-              ) {
-                suffixFound = true;
-                break loop;
-              }
-
-              if (
-                onlyBoth &&
-                prefixFoundInAddress(
-                  wallet.address,
-                  options.prefixIsCaseSensitive,
-                  options.prefix,
-                  firstSymbol
-                ) &&
-                suffixFoundInAddress(
-                  wallet.address,
-                  options.suffixIsCaseSensitive,
-                  options.suffix
-                )
-              ) {
-                prefixFound = true;
-                suffixFound = true;
-                break loop;
-              }
-            } else if (wallet.addresses !== undefined) {
-              // multiple addresses
-              for (let item of wallet.addresses) {
-                if (
-                  onlyPrefix &&
-                  prefixFoundInAddress(
-                    item.address,
-                    options.prefixIsCaseSensitive,
-                    options.prefix,
-                    firstSymbol
-                  )
-                ) {
-                  prefixFound = true;
-                  prefixFoundInWallets.push(item.address);
-                }
-
-                if (
-                  onlySuffix &&
-                  suffixFoundInAddress(
-                    item.address,
-                    options.suffixIsCaseSensitive,
-                    options.suffix
-                  )
-                ) {
-                  suffixFound = true;
-                  suffixFoundInWallets.push(item.address);
-                }
-
-                if (
-                  onlyBoth &&
-                  prefixFoundInAddress(
-                    item.address,
-                    options.prefixIsCaseSensitive,
-                    options.prefix,
-                    firstSymbol
-                  ) &&
-                  suffixFoundInAddress(
-                    item.address,
-                    options.suffixIsCaseSensitive,
-                    options.suffix
-                  )
-                ) {
-                  prefixFound = true;
-                  prefixFoundInWallets.push(item.address);
-                  suffixFound = true;
-                  suffixFoundInWallets.push(item.address);
-                }
-              }
-              if (
-                (onlyPrefix && prefixFound) ||
-                (onlySuffix && suffixFound) ||
-                (onlyBoth && prefixFound && suffixFound)
-              ) {
-                break loop;
-              }
+          if (!wallet.error) {
+            let addresses = [];
+            if (wallet.addresses === undefined) {
+              addresses.push(wallet.address);
             } else {
+              addresses = wallet.addresses.map((item) => item.address);
+            }
+
+            if (onlyPrefix) {
+              prefixFoundInWallets = prefixFoundInAddresses(
+                addresses,
+                options.prefixIsCaseSensitive,
+                options.prefix
+              );
+              if (prefixFoundInWallets.length > 0) {
+                prefixFound = true;
+              }
+            } else if (onlySuffix) {
+              suffixFoundInWallets = suffixFoundInAddresses(
+                addresses,
+                options.suffixIsCaseSensitive,
+                options.suffix
+              );
+              if (suffixFoundInWallets.length > 0) {
+                suffixFound = true;
+              }
+            } else if (onlyBoth) {
+              prefixFoundInWallets = prefixFoundInAddresses(
+                addresses,
+                options.prefixIsCaseSensitive,
+                options.prefix
+              );
+              suffixFoundInWallets = suffixFoundInAddresses(
+                addresses,
+                options.suffixIsCaseSensitive,
+                options.suffix
+              );
+              if (
+                prefixFoundInWallets.length > 0 &&
+                suffixFoundInWallets.length > 0
+              ) {
+                prefixFound = true;
+                suffixFound = true;
+              }
+            }
+
+            if (
+              (onlyPrefix && prefixFound) ||
+              (onlySuffix && suffixFound) ||
+              (onlyBoth && prefixFound && suffixFound)
+            ) {
               break loop;
             }
+          } else {
+            log(red('⛔️  Error: ' + wallet.error));
+            // eslint-disable-next-line no-undef
+            process.exit(1);
           }
         }
       } else {
@@ -244,6 +211,7 @@ class Wallet {
       prefixFoundInWallets,
       suffixFound,
       suffixFoundInWallets,
+      loops,
     };
   }
 
@@ -260,7 +228,9 @@ class Wallet {
     const mnemonicWordsCount = (mnemonic.split(' ') || []).length || 0;
     if (mnemonicWordsCount == 1) {
       const mnemonicInput = parseInt(mnemonic.split(' ')[0], 10);
-      mnemonicLength = supportedMnemonicLengths.includes(mnemonicInput) ? mnemonicInput : 12;
+      mnemonicLength = supportedMnemonicLengths.includes(mnemonicInput)
+        ? mnemonicInput
+        : 12;
     } else {
       mnemonicString = mnemonic;
       mnemonicLength = mnemonicWordsCount;
@@ -475,23 +445,21 @@ class Wallet {
         mnemonicString = mnemonics.join(' ');
       }
       const keyPair = await TonMnemonicToPrivateKey(mnemonics);
-      // Define the workchain (usually 0)
-      const workchain = 0;
-      // Create a new wallet contract instance
-      const wallet = WalletContractV4.create({
-        workchain,
-        publicKey: keyPair.publicKey,
-      });
-      // Get the wallet address
-      const address = wallet.address.toString();
-
-      // TODO: add support for new UQ address format
+      const tonweb = new TonWeb();
+      const wallet = tonweb.wallet.create({ publicKey: keyPair.publicKey });
+      const address = await wallet.getAddress();
+      const nonBounceableAddress = address.toString(true, true, false);
+      const bouncableAddress = address.toString(true, true, true);
 
       Object.assign(result, {
         addresses: [
           {
-            index: 0,
-            address,
+            title: 'UQ format (new): best for wallets, - non-bounceable',
+            address: nonBounceableAddress,
+          },
+          {
+            title: 'EQ format (old): best for smart contracts, - bounceable',
+            address: bouncableAddress,
           },
         ],
         mnemonic: mnemonicString,

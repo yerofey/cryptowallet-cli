@@ -1,5 +1,5 @@
 {
-  "name": "ERC-like",
+  "title": "ERC-like",
   "network": "EVM",
   "startsWith": "0x",
   "prefixTest": "[0-9a-fA-F]",

@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.17.4",
+  "version": "1.17.5",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -77,7 +77,6 @@
     "@solana/web3.js": "^1.89.1",
     "@ton/core": "^0.54.0",
     "@ton/crypto": "^3.2.0",
-    "@ton/ton": "^13.9.0",
     "@yerofey/dogecoin-bip84": "^0.0.5",
     "@yerofey/litecoin-bip84": "^0.0.5",
     "bip39": "3.1.0",
@@ -94,6 +93,7 @@
     "ethereum-bip84": "0.0.3",
     "ethereum-mnemonic-privatekey-utils": "1.0.5",
     "tezos-sign": "1.4.1",
+    "tonweb": "^0.0.62",
     "tronweb": "5.3.1"
   },
   "devDependencies": {

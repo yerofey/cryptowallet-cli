@@ -93,6 +93,8 @@ class Method {
 
     const cw = await new CW(chain, options).init();
 
+    const startsWithSymbols = cw.row.startsWith.split('|') || [];
+
     let chainFullName =
       (cw.row.name || chain) +
       (cw.wallet.format !== undefined && cw.wallet.format != ''
@@ -196,7 +198,16 @@ class Method {
         for (const item of cw.wallet.addresses) {
           if (cw.wallet.addresses.length > 1) {
             log();
-            log(`🆔  ${item.index}`);
+
+            // Display index
+            if (item.index !== undefined) {
+              log(`🆔  ${item.index}`);
+            }
+
+            // Display address details
+            if (item.title) {
+              log(`🏷   ${item.title}`);
+            }
           }
 
           if (
@@ -205,51 +216,61 @@ class Method {
             cw.suffixFound &&
             cw.suffixFoundInWallets.includes(item.address)
           ) {
-            // highlight found prefix
-            const addressCutPrefixLength =
-              cw.row.startsWith.length + cw.options.prefix.length;
-            const addressFirstPart = item.address.slice(
-              cw.row.startsWith.length,
-              addressCutPrefixLength
+            // highlight found prefix and suffix
+            const addressStartingSymbol = startsWithSymbols.filter((symbol) =>
+              item.address.startsWith(symbol)
+            )[0];
+            const addressCutPrefixLength = addressStartingSymbol.length;
+            const addressHighlightedPart = item.address.substring(
+              addressCutPrefixLength + cw.options.prefix.length,
+              cw.options.prefix.length + 1
             );
             const addressLastPart = item.address.slice(
+              cw.options.prefix.length + addressCutPrefixLength,
+              item.address.length - cw.options.suffix.length
+            );
+            const addressHighlightedSuffix = item.address.slice(
               item.address.length - cw.options.suffix.length
             );
             log(
-              `👛  ${cw.row.startsWith}${magenta(
-                addressFirstPart
-              )}${item.address.substring(
-                cw.row.startsWith.length + addressFirstPart.length,
-                item.address.length - addressLastPart.length
-              )}${magenta(addressLastPart)}`
+              `👛  ${addressStartingSymbol}${magenta(
+                addressHighlightedPart
+              )}${addressLastPart}${magenta(addressHighlightedSuffix)}`
             );
           } else if (
             cw.prefixFound &&
             cw.prefixFoundInWallets.includes(item.address)
           ) {
             // highlight found prefix
-            const addressCutLength =
-              cw.row.startsWith.length + cw.options.prefix.length;
+            const addressStartingSymbol = startsWithSymbols.filter((symbol) =>
+              item.address.startsWith(symbol)
+            )[0];
+            const addressCutPrefixLength = addressStartingSymbol.length;
+            const addressHighlightedPart = item.address.substring(
+              addressCutPrefixLength + cw.options.prefix.length,
+              cw.options.prefix.length + 1
+            );
+            const addressLastPart = item.address.slice(
+              cw.options.prefix.length + addressCutPrefixLength
+            );
             log(
-              `👛  ${cw.row.startsWith}${magenta(
-                item.address.slice(cw.row.startsWith.length, addressCutLength)
-              )}${item.address.slice(addressCutLength)}`
+              `👛  ${addressStartingSymbol}${magenta(
+                addressHighlightedPart
+              )}${addressLastPart}`
             );
           } else if (
             cw.suffixFound &&
             cw.suffixFoundInWallets.includes(item.address)
           ) {
             // highlight found suffix
-            log(
-              `👛  ${item.address.slice(
-                0,
-                item.address.length - cw.options.suffix.length
-              )}${magenta(
-                item.address.slice(
-                  item.address.length - cw.options.suffix.length
-                )
-              )}`
+            const addressLastPart = item.address.slice(
+              0,
+              item.address.length - cw.options.suffix.length
             );
+            const addressHighlightedSuffix = item.address.slice(
+              item.address.length - cw.options.suffix.length
+            );
+            log(`👛  ${addressLastPart}${magenta(addressHighlightedSuffix)}`);
           } else {
             log(`👛  ${item.address}`);
           }
@@ -391,7 +412,7 @@ class Method {
       log();
       log(
         blueBright(
-          '🙏  Consider supporting the project - see donation options with: cw --donate'
+          '🙏  Consider supporting this project - check donations options with: cw --donate'
         )
       );
     }

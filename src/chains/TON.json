@@ -5,7 +5,7 @@
   "formats": {
     "V4R2": {
       "format": "V4R2",
-      "startsWith": "EQ",
+      "startsWith": "EQ|UQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
       "apps": ["tonkeeper", "trustwallet"],
