@@ -47,6 +47,7 @@ $ cw -c btc
 $ cw -m
 
 # generate random mnemonic string of a specific length (12, 18, or 24 words)
+$ cw -m 12
 $ cw -m 18
 $ cw -m 24
 
