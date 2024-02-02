@@ -37,8 +37,16 @@ const objectHasAllKeys = (obj, keysArray) =>
 
 let supportedChains = [];
 const chainsFolder = path.join(dirname(import.meta.url), 'chains');
-supportedChains = filesList(chainsFolder).map((item) =>
-  item.replace(chainsFolder, '').replace('.json', '').replace('/', '')
-);
+supportedChains = filesList(chainsFolder).map((item) => {
+  // Normalize path separators to the current OS's default
+  const normalizedItemPath = item.split(path.sep).join(path.posix.sep);
+  // Remove the chains folder path and the .json extension
+  return normalizedItemPath
+    .replace(
+      chainsFolder.split(path.sep).join(path.posix.sep) + path.posix.sep,
+      ''
+    )
+    .replace('.json', '');
+});
 
 export { log, loadFile, loadJson, objectHasAllKeys, supportedChains };
