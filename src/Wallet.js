@@ -211,7 +211,7 @@ class Wallet {
       prefixFoundInWallets,
       suffixFound,
       suffixFoundInWallets,
-      loops,
+      attempts: loops,
     };
   }
 

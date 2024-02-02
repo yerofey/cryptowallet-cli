@@ -282,6 +282,7 @@ class Method {
         outputData.wallets = cw.wallet.addresses;
       }
 
+      // display path
       if (displayAsText && cw.row.path !== undefined && cw.options.geek) {
         log();
         log(`🗂   wallet address path: ${cw.row.path}'/0'/0/ID`);
@@ -345,8 +346,18 @@ class Method {
         log();
       }
 
+      // attempts
+      if (cw.attempts !== undefined && cw.attempts > 0 && cw.options.geek) {
+        log(
+          `🔍  It took ${cw.attempts} attempt${
+            cw.attempts !== 1 ? 's' : ''
+          } to generate this wallet`
+        );
+        log();
+      }
+
       // tested
-      if (cw.wallet.tested !== undefined) {
+      if (cw.wallet.tested !== undefined && cw.wallet.tested == false) {
         log(
           red(
             '‼️   This wallet generation format was not tested yet, do not use it!'
