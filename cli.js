@@ -29,7 +29,7 @@ import Method from './src/Method.js';
     return new Method('donate').init();
   }
 
-  const chain = options.chain.toUpperCase() || '';
+  const chain = options.chain.toUpperCase() || 'ETH';
   if (supportedChains.includes(chain)) {
     return new Method('wallet', {
       chain,
