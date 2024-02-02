@@ -14,6 +14,15 @@ dependencies:
   '@solana/web3.js':
     specifier: ^1.89.1
     version: 1.89.1
+  '@ton/core':
+    specifier: ^0.54.0
+    version: 0.54.0(@ton/crypto@3.2.0)
+  '@ton/crypto':
+    specifier: ^3.2.0
+    version: 3.2.0
+  '@ton/ton':
+    specifier: ^13.9.0
+    version: 13.9.0(@ton/core@0.54.0)(@ton/crypto@3.2.0)
   '@yerofey/dogecoin-bip84':
     specifier: ^0.0.5
     version: 0.0.5
@@ -29,6 +38,9 @@ dependencies:
   bs58:
     specifier: ^5.0.0
     version: 5.0.0
+  buffer:
+    specifier: ^6.0.3
+    version: 6.0.3
   chalk:
     specifier: 5.3.0
     version: 5.3.0
@@ -630,6 +642,46 @@ packages:
       - utf-8-validate
     dev: false
 
+  /@ton/core@0.54.0(@ton/crypto@3.2.0):
+    resolution: {integrity: sha512-ry3sCDq3jdjZuo7+egZ827/Y0/ajPbtrozvJryNMefUGfZQ/zYLVCmw9zBtxVsY2EX2zW7QhHQUs76/3y6HCwQ==}
+    peerDependencies:
+      '@ton/crypto': '>=3.2.0'
+    dependencies:
+      '@ton/crypto': 3.2.0
+      symbol.inspect: 1.0.1
+    dev: false
+
+  /@ton/crypto-primitives@2.0.0:
+    resolution: {integrity: sha512-wttiNClmGbI6Dfy/8oyNnsIV0b/qYkCJz4Gn4eP62lJZzMtVQ94Ko7nikDX1EfYHkLI1xpOitWpW+8ZuG6XtDg==}
+    dependencies:
+      jssha: 3.2.0
+    dev: false
+
+  /@ton/crypto@3.2.0:
+    resolution: {integrity: sha512-50RkwReEuV2FkxSZ8ht/x9+n0ZGtwRKGsJ0ay4I/HFhkYVG/awIIBQeH0W4j8d5lADdO5h01UtX8PJ8AjiejjA==}
+    dependencies:
+      '@ton/crypto-primitives': 2.0.0
+      jssha: 3.2.0
+      tweetnacl: 1.0.3
+    dev: false
+
+  /@ton/ton@13.9.0(@ton/core@0.54.0)(@ton/crypto@3.2.0):
+    resolution: {integrity: sha512-bvDn9vv0rNsN/OH84Q4DKH3N21AD0MvTxXmnS0wPEOoU38F4mltXmA7an2SjaSgd9kAlsOSHa0EirkTie+Zitw==}
+    peerDependencies:
+      '@ton/core': '>=0.53.0'
+      '@ton/crypto': '>=3.2.0'
+    dependencies:
+      '@ton/core': 0.54.0(@ton/crypto@3.2.0)
+      '@ton/crypto': 3.2.0
+      axios: 0.25.0
+      dataloader: 2.2.2
+      symbol.inspect: 1.0.1
+      teslabot: 1.5.0
+      zod: 3.22.4
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /@tronweb3/google-protobuf@3.21.2:
     resolution: {integrity: sha512-IVcT2GfWX3K6tHUVhs14NP5uzKhQt4KeDya1g9ACxuZsUzsaoGUIGzceK2Ltu7xp1YV94AaHOf4yxLAivlvEkQ==}
     dev: false
@@ -1036,6 +1088,14 @@ packages:
 
   /axios@0.24.0:
     resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
+    dependencies:
+      follow-redirects: 1.15.3
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios@0.25.0:
+    resolution: {integrity: sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==}
     dependencies:
       follow-redirects: 1.15.3
     transitivePeerDependencies:
@@ -1742,6 +1802,10 @@ packages:
     engines: {node: '>=0.10'}
     dependencies:
       assert-plus: 1.0.0
+    dev: false
+
+  /dataloader@2.2.2:
+    resolution: {integrity: sha512-8YnDaaf7N3k/q5HnTJVuzSyLETjoZjVmHc4AeKAzOvKHEFQKcn64OKBfzHYtE9zGjctNM7V9I0MfnUVLpi7M5g==}
     dev: false
 
   /date-time@3.1.0:
@@ -2996,6 +3060,10 @@ packages:
       extsprintf: 1.3.0
       json-schema: 0.4.0
       verror: 1.10.0
+    dev: false
+
+  /jssha@3.2.0:
+    resolution: {integrity: sha512-QuruyBENDWdN4tZwJbQq7/eAK85FqrI4oDbXjy5IBhYD+2pTJyBUWZe8ctWaCkrV0gy6AaelgOZZBMeswEa/6Q==}
     dev: false
 
   /keccak@3.0.1:
@@ -4278,6 +4346,10 @@ packages:
     dependencies:
       has-flag: 4.0.0
 
+  /symbol.inspect@1.0.1:
+    resolution: {integrity: sha512-YQSL4duoHmLhsTD1Pw8RW6TZ5MaTX5rXJnqacJottr2P2LZBF/Yvrc3ku4NUpMOm8aM0KOCqM+UAkMA5HWQCzQ==}
+    dev: false
+
   /tar-fs@2.1.1:
     resolution: {integrity: sha512-V0r2Y9scmbDRLCNex/+hYzvp/zyYjvFbHPNgVTKfQvVrb6guiE/fxP+XblDNR011utopbkex2nM4dHNV6GDsng==}
     requiresBuild: true
@@ -4306,6 +4378,10 @@ packages:
     resolution: {integrity: sha512-nHc6S/bwIilKHNRgK/3jlhDoIHcp45YgyiwcAk46Tr0LfEqGBVpmiAyuiuxeVE44m3mXnEeVhaipLOEWmH+Njw==}
     engines: {node: '>=14.16'}
     dev: true
+
+  /teslabot@1.5.0:
+    resolution: {integrity: sha512-e2MmELhCgrgZEGo7PQu/6bmYG36IDH+YrBI1iGm6jovXkeDIGa3pZ2WSqRjzkuw2vt1EqfkZoV5GpXgqL8QJVg==}
+    dev: false
 
   /text-encoding-utf-8@1.0.2:
     resolution: {integrity: sha512-8bw4MY9WjdsD2aMtO0OzOCY3pXGYNx2d2FfHRVUKkiCPDWjKuOlhLVASS+pD7VkLTVjW268LYJHwsnPFlBpbAg==}
@@ -4423,6 +4499,10 @@ packages:
 
   /tweetnacl@0.14.5:
     resolution: {integrity: sha512-KXXFFdAbFXY4geFIwoyNK+f5Z1b7swfXABfL7HXCmoIWMKU3dmS26672A4EeQtDzLKy7SXmfBu51JolvEKwtGA==}
+    dev: false
+
+  /tweetnacl@1.0.3:
+    resolution: {integrity: sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==}
     dev: false
 
   /type-check@0.4.0:
@@ -4792,3 +4872,7 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
+
+  /zod@3.22.4:
+    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+    dev: false

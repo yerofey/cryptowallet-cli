@@ -245,7 +245,9 @@ class Method {
           } else {
             log(`👛  ${item.address}`);
           }
-          log(`🔑  ${item.privateKey}`);
+          if (item.privateKey !== undefined) {
+            log(`🔑  ${item.privateKey}`);
+          }
         }
       } else {
         outputData.wallets = cw.wallet.addresses;
@@ -355,6 +357,7 @@ class Method {
       if (cw.row.apps !== undefined) {
         let apps = {
           metamask: 'MetaMask',
+          tonkeeper: 'Tonkeeper',
           tronlink: 'TronLink',
           trustwallet: 'Trust Wallet',
           'harmony-chrome-ext': 'Harmony Chrome Extension Wallet',

@@ -1,0 +1,15 @@
+{
+  "title": "The Open Network",
+  "network": "TON",
+  "defaultFormat": "V4R2",
+  "formats": {
+    "V4R2": {
+      "format": "V4R2",
+      "startsWith": "EQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["p", "s"]
+    }
+  }
+}

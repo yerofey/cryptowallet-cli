@@ -20,6 +20,8 @@ import tronWeb from 'tronweb';
 import tezos from 'tezos-sign';
 import { Keypair as SolanaKeypair, PublicKey as SolanaPublickey } from '@solana/web3.js';
 import bs58 from 'bs58';
+import { TonClient, WalletContractV4, internal as TonInternal } from "@ton/ton";
+import { mnemonicNew as newTonMnemonic, mnemonicToPrivateKey as TonMnemonicToPrivateKey } from "@ton/crypto";
 const { red } = chalk;
 
 class Wallet {
@@ -444,6 +446,34 @@ class Wallet {
             privateKey: secretKeyString,
           },
         ],
+      });
+    } else if (chain == 'TON') {
+      // Create a new TON client
+      // const client = new TonClient({
+      //   endpoint: 'https://toncenter.com/api/v2/jsonRPC',
+      // });
+      // Generate new mnemonics and derive key pair
+      const mnemonics = await newTonMnemonic();
+      const keyPair = await TonMnemonicToPrivateKey(mnemonics);
+      // Define the workchain (usually 0)
+      const workchain = 0;
+      // Create a new wallet contract instance
+      const wallet = WalletContractV4.create({ workchain, publicKey: keyPair.publicKey });
+      // const contract = client.open(wallet);
+      // Get the wallet address
+      const address = wallet.address.toString();
+
+      // TODO: add support for multiple addresses
+      // TODO: add support for new UQ address format
+
+      Object.assign(result, {
+        addresses: [
+          {
+            index: 0,
+            address,
+          },
+        ],
+        mnemonic: mnemonics.join(' '),
       });
     } else if (chain == 'TRX') {
       try {

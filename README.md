@@ -101,6 +101,7 @@ $ cw -l
 - `ETH` (Ethereum)
 - `BNB` (Binance Coin) [BEP2, BEP20, ERC20]
 - `SOL` (Solana)
+- `TON` (The Open Network)
 - `DOGE` (Dogecoin) [legacy, segwit, bech32]
 - `BCH` (Bitcoin Cash)
 - `LTC` (Litecoin) [legacy, segwit, bech32]
