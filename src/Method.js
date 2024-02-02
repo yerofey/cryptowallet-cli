@@ -357,6 +357,7 @@ class Method {
       if (cw.row.apps !== undefined) {
         let apps = {
           metamask: 'MetaMask',
+          phantom: 'Phantom',
           tonkeeper: 'Tonkeeper',
           tronlink: 'TronLink',
           trustwallet: 'Trust Wallet',
