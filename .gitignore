@@ -1,4 +1,5 @@
 .DS_Store
 .vscode
+.env
 cw-output.csv
 node_modules/

@@ -4,6 +4,5 @@
   "startsWith": "",
   "prefixTest": "[1-9a-zA-Z]",
   "apps": ["phantom", "trustwallet"],
-  "flags": ["p", "s"],
-  "tested": false
+  "flags": ["p", "s"]
 }

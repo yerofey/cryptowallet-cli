@@ -1,3 +1,4 @@
+import { config } from 'dotenv';
 import path from 'node:path';
 import chalk from 'chalk';
 import columnify from 'columnify';
@@ -6,9 +7,10 @@ import { log, supportedChains, loadJson } from './utils.js';
 import { generateMnemonicString } from './Wallet.js';
 import CW from './CW.js';
 
+config();
 const { blue, green, blueBright, greenBright, yellow, red, magenta, white } =
   chalk;
-
+const IS_DEV = process.env.NODE_ENV === 'development' || false;
 const pkg = await loadJson(
   `${path.dirname(import.meta.url)}/../package.json`.replace('file://', '')
 );
@@ -218,14 +220,23 @@ class Method {
             cw.suffixFoundInWallets.includes(item.address)
           ) {
             // highlight found prefix and suffix
-            const addressStartingSymbol = startsWithSymbols.filter((symbol) =>
-              item.address.startsWith(symbol)
-            )[0];
-            const addressCutPrefixLength = addressStartingSymbol.length;
-            const addressHighlightedPart = item.address.substring(
-              addressCutPrefixLength + cw.options.prefix.length,
-              cw.options.prefix.length
-            );
+            const addressStartingSymbol =
+              startsWithSymbols.filter((symbol) =>
+                item.address.startsWith(symbol)
+              )[0] || '';
+            const addressCutPrefixLength = addressStartingSymbol.length || 0;
+            let addressHighlightedPart;
+            if (addressCutPrefixLength > 0) {
+              addressHighlightedPart = item.address.substring(
+                addressCutPrefixLength + cw.options.prefix.length,
+                cw.options.prefix.length
+              );
+            } else {
+              addressHighlightedPart = item.address.substring(
+                0,
+                cw.options.prefix.length
+              );
+            }
             const addressLastPart = item.address.slice(
               cw.options.prefix.length + addressCutPrefixLength,
               item.address.length - cw.options.suffix.length
@@ -233,45 +244,94 @@ class Method {
             const addressHighlightedSuffix = item.address.slice(
               item.address.length - cw.options.suffix.length
             );
-            log(
-              `👛  ${addressStartingSymbol}${magenta(
-                addressHighlightedPart
-              )}${addressLastPart}${magenta(addressHighlightedSuffix)}`
-            );
+            const fullAddressLength =
+              addressStartingSymbol.length +
+              addressHighlightedPart.length +
+              addressLastPart.length +
+              addressHighlightedSuffix.length;
+            // show hightlighted address (only if it's length is the same as the original address length)
+            if (fullAddressLength == item.address.length || IS_DEV) {
+              log(
+                `👛  ${addressStartingSymbol}${magenta(
+                  addressHighlightedPart
+                )}${addressLastPart}${magenta(addressHighlightedSuffix)}`
+              );
+              // DEBUG
+              if (IS_DEV) {
+                log(`___ ${item.address}`);
+              }
+            } else {
+              log(`👛  ${item.address}`);
+            }
           } else if (
             cw.prefixFound &&
             cw.prefixFoundInWallets.includes(item.address)
           ) {
             // highlight found prefix
-            const addressStartingSymbol = startsWithSymbols.filter((symbol) =>
-              item.address.startsWith(symbol)
-            )[0];
+            const addressStartingSymbol =
+              startsWithSymbols.filter((symbol) =>
+                item.address.startsWith(symbol)
+              )[0] || '';
             const addressCutPrefixLength = addressStartingSymbol.length || 0;
-            const addressHighlightedPart = item.address.substring(
-              addressCutPrefixLength + cw.options.prefix.length,
-              cw.options.prefix.length
-            );
+            let addressHighlightedPart;
+            if (addressCutPrefixLength > 0) {
+              addressHighlightedPart = item.address.substring(
+                addressCutPrefixLength + cw.options.prefix.length,
+                cw.options.prefix.length
+              );
+            } else {
+              addressHighlightedPart = item.address.substring(
+                0,
+                cw.options.prefix.length
+              );
+            }
             const addressLastPart = item.address.slice(
               cw.options.prefix.length + addressCutPrefixLength
             );
-            log(
-              `👛  ${addressStartingSymbol}${magenta(
-                addressHighlightedPart
-              )}${addressLastPart}`
-            );
+            const fullAddressLength =
+              addressStartingSymbol.length +
+              addressHighlightedPart.length +
+              addressLastPart.length;
+            // show hightlighted address (only if it's length is the same as the original address length)
+            if (fullAddressLength == item.address.length || IS_DEV) {
+              log(
+                `👛  ${addressStartingSymbol}${magenta(
+                  addressHighlightedPart
+                )}${addressLastPart}`
+              );
+              // DEBUG
+              if (IS_DEV) {
+                log(`___ ${item.address}`);
+              }
+            } else {
+              log(`👛  ${item.address}`);
+            }
           } else if (
             cw.suffixFound &&
             cw.suffixFoundInWallets.includes(item.address)
           ) {
             // highlight found suffix
-            const addressLastPart = item.address.slice(
+            const addressFirstPart = item.address.slice(
               0,
               item.address.length - cw.options.suffix.length
             );
             const addressHighlightedSuffix = item.address.slice(
               item.address.length - cw.options.suffix.length
             );
-            log(`👛  ${addressLastPart}${magenta(addressHighlightedSuffix)}`);
+            const fullAddressLength =
+              addressFirstPart.length + addressHighlightedSuffix.length;
+            // show hightlighted address (only if it's length is the same as the original address length)
+            if (fullAddressLength == item.address.length || IS_DEV) {
+              log(
+                `👛  ${addressFirstPart}${magenta(addressHighlightedSuffix)}`
+              );
+              // DEBUG
+              if (IS_DEV) {
+                log(`___ ${item.address}`);
+              }
+            } else {
+              log(`👛  ${item.address}`);
+            }
           } else {
             log(`👛  ${item.address}`);
           }
