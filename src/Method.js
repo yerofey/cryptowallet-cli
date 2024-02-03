@@ -93,7 +93,7 @@ class Method {
 
     const cw = await new CW(chain, options).init();
 
-    const startsWithSymbols = cw.row.startsWith.split('|') || [];
+    const startsWithSymbols = cw.row.startsWith.split('|') || [''];
 
     let chainFullName =
       (cw.row.name || chain) +
@@ -193,8 +193,9 @@ class Method {
         log(`📄  ${cw.wallet.mnemonic}`);
         linesCount += 1;
       }
-      // addresses
+
       if (displayAsText) {
+        // display addresses
         for (const item of cw.wallet.addresses) {
           if (cw.wallet.addresses.length > 1) {
             log();
@@ -245,7 +246,7 @@ class Method {
             const addressStartingSymbol = startsWithSymbols.filter((symbol) =>
               item.address.startsWith(symbol)
             )[0];
-            const addressCutPrefixLength = addressStartingSymbol.length;
+            const addressCutPrefixLength = addressStartingSymbol.length || 0;
             const addressHighlightedPart = item.address.substring(
               addressCutPrefixLength + cw.options.prefix.length,
               cw.options.prefix.length
@@ -277,6 +278,16 @@ class Method {
           if (item.privateKey !== undefined) {
             log(`🔑  ${item.privateKey}`);
           }
+        }
+
+        // tested
+        if (cw.wallet.tested !== undefined && cw.wallet.tested == false) {
+          log();
+          log(
+            red(
+              '‼️   This wallet generation method is not tested yet, use it at your own risk'
+            )
+          );
         }
       } else {
         outputData.wallets = cw.wallet.addresses;
@@ -354,15 +365,6 @@ class Method {
           } to generate this wallet`
         );
         log();
-      }
-
-      // tested
-      if (cw.wallet.tested !== undefined && cw.wallet.tested == false) {
-        log(
-          red(
-            '‼️   This wallet generation format was not tested yet, do not use it!'
-          )
-        );
       }
 
       // formats
