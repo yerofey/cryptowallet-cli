@@ -220,16 +220,21 @@ class Method {
             cw.suffixFoundInWallets.includes(item.address)
           ) {
             // highlight found prefix and suffix
-            const addressStartingSymbol =
-              startsWithSymbols.filter((symbol) =>
-                item.address.startsWith(symbol)
-              )[0] || '';
+            let addressStartingSymbol;
+            if (startsWithSymbols.length > 1) {
+              addressStartingSymbol =
+                startsWithSymbols.filter((symbol) =>
+                  item.address.startsWith(symbol)
+                )[0] || '';
+            } else {
+              addressStartingSymbol = startsWithSymbols[0] || '';
+            }
             const addressCutPrefixLength = addressStartingSymbol.length || 0;
             let addressHighlightedPart;
             if (addressCutPrefixLength > 0) {
               addressHighlightedPart = item.address.substring(
-                addressCutPrefixLength + cw.options.prefix.length,
-                cw.options.prefix.length
+                addressCutPrefixLength,
+                addressCutPrefixLength + cw.options.prefix.length
               );
             } else {
               addressHighlightedPart = item.address.substring(
@@ -268,16 +273,22 @@ class Method {
             cw.prefixFoundInWallets.includes(item.address)
           ) {
             // highlight found prefix
-            const addressStartingSymbol =
-              startsWithSymbols.filter((symbol) =>
-                item.address.startsWith(symbol)
-              )[0] || '';
+            // startsWithSymbols could be 3 different types (empty, few symbols, or few symbols with "|" - separator for multiple symbols), adjust the address cut prefix length
+            let addressStartingSymbol;
+            if (startsWithSymbols.length > 1) {
+              addressStartingSymbol =
+                startsWithSymbols.filter((symbol) =>
+                  item.address.startsWith(symbol)
+                )[0] || '';
+            } else {
+              addressStartingSymbol = startsWithSymbols[0] || '';
+            }
             const addressCutPrefixLength = addressStartingSymbol.length || 0;
             let addressHighlightedPart;
             if (addressCutPrefixLength > 0) {
               addressHighlightedPart = item.address.substring(
-                addressCutPrefixLength + cw.options.prefix.length,
-                cw.options.prefix.length
+                addressCutPrefixLength,
+                addressCutPrefixLength + cw.options.prefix.length
               );
             } else {
               addressHighlightedPart = item.address.substring(
