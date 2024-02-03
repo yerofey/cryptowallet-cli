@@ -10,6 +10,7 @@ import CW from './CW.js';
 config();
 const { blue, green, blueBright, greenBright, yellow, red, magenta, white } =
   chalk;
+// eslint-disable-next-line no-undef
 const IS_DEV = process.env.NODE_ENV === 'development' || false;
 const pkg = await loadJson(
   `${path.dirname(import.meta.url)}/../package.json`.replace('file://', '')
