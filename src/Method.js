@@ -223,7 +223,7 @@ class Method {
             const addressCutPrefixLength = addressStartingSymbol.length;
             const addressHighlightedPart = item.address.substring(
               addressCutPrefixLength + cw.options.prefix.length,
-              cw.options.prefix.length + 1
+              cw.options.prefix.length
             );
             const addressLastPart = item.address.slice(
               cw.options.prefix.length + addressCutPrefixLength,
@@ -248,7 +248,7 @@ class Method {
             const addressCutPrefixLength = addressStartingSymbol.length;
             const addressHighlightedPart = item.address.substring(
               addressCutPrefixLength + cw.options.prefix.length,
-              cw.options.prefix.length + 1
+              cw.options.prefix.length
             );
             const addressLastPart = item.address.slice(
               cw.options.prefix.length + addressCutPrefixLength
