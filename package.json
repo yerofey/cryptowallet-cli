@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.19.0",
+  "version": "1.20.0",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -120,6 +120,7 @@
     "commander": "11.1.0",
     "csv-writer": "^1.6.0",
     "dotenv": "^16.4.1",
+    "ed25519-hd-key": "^1.3.0",
     "eth-lib": "0.1.29",
     "ethereum-bip84": "0.0.3",
     "ethereum-mnemonic-privatekey-utils": "1.0.5",

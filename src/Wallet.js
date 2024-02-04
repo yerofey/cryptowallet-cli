@@ -24,6 +24,7 @@ import {
   Keypair as SolanaKeypair,
   PublicKey as SolanaPublickey,
 } from '@solana/web3.js';
+import { derivePath } from 'ed25519-hd-key';
 import bs58 from 'bs58';
 import TonWeb from 'tonweb';
 import {
@@ -428,10 +429,21 @@ class Wallet {
         mnemonic,
       });
     } else if (chain == 'SOL') {
-      // TODO: generate wallet from mnemonic
-      const wallet = SolanaKeypair.generate();
-      const publicKeyString = new SolanaPublickey(wallet.publicKey).toBase58();
-      const secretKeyString = bs58.encode(wallet.secretKey);
+      // Validate mnemonic
+      if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
+        return {
+          error: 'mnemonic is not valid',
+        };
+      }
+
+      const mnemonic = mnemonicString || generateMnemonicString(24);
+      const seed = await bip39.mnemonicToSeed(mnemonic);
+      const derivationPath = "m/44'/501'/0'/0'";
+      const derivedSeed = derivePath(derivationPath, seed.toString('hex')).key;
+      const keypair = SolanaKeypair.fromSeed(derivedSeed);
+      const publicKey = new SolanaPublickey(keypair.publicKey);
+      const publicKeyString = publicKey.toString();
+      const secretKeyString = bs58.encode(keypair.secretKey);
 
       // TODO: add support for multiple addresses
 
@@ -443,6 +455,7 @@ class Wallet {
             privateKey: secretKeyString,
           },
         ],
+        mnemonic,
       });
     } else if (chain == 'TON') {
       // Validate mnemonic
