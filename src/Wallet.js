@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 import { log } from './utils.js';
 import chalk from 'chalk';
-const { red } = chalk;
+const { red, yellow } = chalk;
 import CoinKey from 'coinkey';
 import CoinInfo from 'coininfo';
 import bip39 from 'bip39';
@@ -93,6 +93,15 @@ class Wallet {
       (options.suffix && row.flags.includes('s'))
     ) {
       if (badSymbolsArray.length === 0) {
+        // suggest to generate multiple wallets
+        if (!options.number || options.number == 1) {
+          log(
+            yellow(
+              '💡  You can speed up the process significantly by generating multiple addresses for each wallet. Example: cw -n 10'
+            )
+          );
+        }
+
         if (options.prefix && options.suffix) {
           // prefix & suffix
           log(
@@ -442,7 +451,10 @@ class Wallet {
 
       for (let i = 0; i < number; i++) {
         const derivationPath = `m/44'/501'/${i}'/0'`;
-        const derivedSeed = derivePath(derivationPath, seed.toString('hex')).key;
+        const derivedSeed = derivePath(
+          derivationPath,
+          seed.toString('hex')
+        ).key;
         const keypair = SolanaKeypair.fromSeed(derivedSeed);
         const publicKey = new SolanaPublickey(keypair.publicKey);
         const privateKey = bs58.encode(keypair.secretKey);

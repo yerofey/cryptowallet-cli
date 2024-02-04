@@ -9,8 +9,17 @@ import { generateMnemonicString } from './Wallet.js';
 import CW from './CW.js';
 
 config();
-const { blue, green, blueBright, greenBright, yellow, red, magenta, white } =
-  chalk;
+const {
+  blue,
+  green,
+  blueBright,
+  greenBright,
+  cyan,
+  yellow,
+  red,
+  magenta,
+  white,
+} = chalk;
 // eslint-disable-next-line no-undef
 const IS_DEV = process.env.NODE_ENV === 'development' || false;
 const pkg = await loadJson(
@@ -199,6 +208,7 @@ class Method {
     }
 
     // result
+    let matchingWalletsIndexes = [];
     let outputData = {};
     if (cw.wallet.addresses !== undefined) {
       // private key
@@ -285,6 +295,7 @@ class Method {
             } else {
               log(`👛  ${item.address}`);
             }
+            matchingWalletsIndexes.push(index);
           } else if (
             cw.prefixFound &&
             cw.prefixFoundInWallets.includes(item.address)
@@ -334,6 +345,7 @@ class Method {
             } else {
               log(`👛  ${item.address}`);
             }
+            matchingWalletsIndexes.push(index);
           } else if (
             cw.suffixFound &&
             cw.suffixFoundInWallets.includes(item.address)
@@ -360,6 +372,7 @@ class Method {
             } else {
               log(`👛  ${item.address}`);
             }
+            matchingWalletsIndexes.push(index);
           } else {
             log(`👛  ${item.address}`);
           }
@@ -367,7 +380,11 @@ class Method {
             log(`🔑  ${item.privateKey}`);
           }
           // copy to clipboard if flag is set
-          if (cw.options.copy && cw.wallet.mnemonic !== undefined && index == 0) {
+          if (
+            cw.options.copy &&
+            cw.wallet.mnemonic !== undefined &&
+            index == 0
+          ) {
             clipboardy.writeSync(cw.wallet.mnemonic);
             log(`📋  ${green('Mnemonic copied to your clipboard!')}`);
           }
@@ -452,12 +469,29 @@ class Method {
         log();
       }
 
-      // attempts
-      if (cw.attempts !== undefined && cw.attempts > 0 && cw.options.geek) {
+      // matching wallets
+      if (
+        cw.options.number &&
+        cw.options.number > 1 &&
+        matchingWalletsIndexes.length > 0
+      ) {
+        const foundCount = matchingWalletsIndexes.length;
+        const foundMany = foundCount !== 1;
         log(
-          `🔍  It took ${cw.attempts} attempt${
+          cyan(
+            `🔍  Found ${foundCount} matching wallet${
+              foundMany ? 's' : ''
+            }: 🆔${matchingWalletsIndexes.join(',')}`
+          )
+        );
+      }
+
+      // attempts
+      if (cw.attempts !== undefined && cw.attempts > 1 && cw.options.geek) {
+        log(
+          `*️⃣   It took ${cw.attempts} attempt${
             cw.attempts !== 1 ? 's' : ''
-          } to generate this wallet`
+          } to generate a wallet`
         );
         log();
       }
