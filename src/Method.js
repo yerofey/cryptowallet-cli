@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 import path from 'node:path';
 import chalk from 'chalk';
+import clipboardy from 'clipboardy';
 import columnify from 'columnify';
 import CsvWriter from 'csv-writer';
 import { log, supportedChains, loadJson } from './utils.js';
@@ -69,6 +70,7 @@ class Method {
     const mnemonicLength = ['12', '18', '24'].includes(mnemonic)
       ? parseInt(mnemonic, 10)
       : 12;
+    const mnemonicString = generateMnemonicString(mnemonicLength);
 
     log(
       `✨  ${green('Done!')} ${blueBright(
@@ -77,11 +79,24 @@ class Method {
         } words mnemonic string:`
       )}\n`
     );
-    log(`📄  ${generateMnemonicString(mnemonicLength)}`);
+    log(`📄  ${mnemonicString}`);
+    // copy to clipboard if flag is set
+    if (this.inputOptions.copy) {
+      clipboardy.writeSync(mnemonicString);
+      log(`📋  ${green('Mnemonic copied to your clipboard!')}`);
+    }
     log();
     log(
       greenBright(
         'ℹ️   You can import it into your favorite wallet app or use it to generate a wallet with "-m" flag'
+      )
+    );
+
+    // donation
+    log();
+    log(
+      blueBright(
+        '🙏  Consider supporting this project - check donations options with: cw --donate'
       )
     );
   }
@@ -199,6 +214,7 @@ class Method {
 
       if (displayAsText) {
         // display addresses
+        let index = 0;
         for (const item of cw.wallet.addresses) {
           if (cw.wallet.addresses.length > 1) {
             log();
@@ -350,6 +366,13 @@ class Method {
           if (item.privateKey !== undefined) {
             log(`🔑  ${item.privateKey}`);
           }
+          // copy to clipboard if flag is set
+          if (cw.options.copy && cw.wallet.mnemonic !== undefined && index == 0) {
+            clipboardy.writeSync(cw.wallet.mnemonic);
+            log(`📋  ${green('Mnemonic copied to your clipboard!')}`);
+          }
+
+          index += 1;
         }
 
         // tested
@@ -418,7 +441,7 @@ class Method {
       }
     }
 
-    // formats, network, apps
+    // formats, network, apps, attempts, donation
     if (displayAsText) {
       if (
         cw.row.formats !== undefined ||
@@ -468,6 +491,7 @@ class Method {
         );
       }
 
+      // apps
       if (cw.row.apps !== undefined) {
         let apps = {
           metamask: 'MetaMask',

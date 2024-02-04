@@ -18,7 +18,7 @@ import Method from './src/Method.js';
       options.mnemonic === '' ||
       options.mnemonic.split(' ').length === 1)
   ) {
-    return new Method('mnemonic').init({ mnemonic: options.mnemonic });
+    return new Method('mnemonic').init({ mnemonic: options.mnemonic, copy: options?.copy || false });
   }
 
   if (options.version) {
@@ -29,7 +29,7 @@ import Method from './src/Method.js';
     return new Method('donate').init();
   }
 
-  const chain = options.chain.toUpperCase() || 'ETH';
+  const chain = options.chain.toUpperCase() || 'ERC';
   if (supportedChains.includes(chain)) {
     return new Method('wallet', {
       chain,

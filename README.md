@@ -137,6 +137,7 @@ $ cw -l
 ## Options
 
 - `-b` or `-c` or `--chain`: Specify the blockchain ticker to generate a wallet for
+- `-C` or `--copy`: Copy the generated mnemonic to the clipboard
 - `-D` or `--csv`: Save output into CSV file with custom or default name ("`cw-output.csv`") - this is a shorthand for `-o csv -F filename`
 - `-f` or `--format`: Specify the blockchain wallet format (for BTC: legacy, segwit, bech32)
 - `-g` or `--geek`: Display some additional "geeky" info
