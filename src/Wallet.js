@@ -1,5 +1,7 @@
+import { config } from 'dotenv';
 import { log } from './utils.js';
 import chalk from 'chalk';
+const { red } = chalk;
 import CoinKey from 'coinkey';
 import CoinInfo from 'coininfo';
 import bip39 from 'bip39';
@@ -25,16 +27,17 @@ import {
 import bs58 from 'bs58';
 import TonWeb from 'tonweb';
 import {
-  mnemonicNew as newTonMnemonic,
   mnemonicToPrivateKey as TonMnemonicToPrivateKey,
+  mnemonicValidate as TonValidateMnemonic,
+  mnemonicNew as newTonMnemonic,
 } from '@ton/crypto';
-const { red } = chalk;
 
-const supportedMnemonicLengths = [12, 18, 24];
+config();
 
 class Wallet {
   constructor(cw) {
     this.cw = cw;
+    this.supportedMnemonicLengths = [12, 18, 24];
   }
 
   async init() {
@@ -228,7 +231,7 @@ class Wallet {
     const mnemonicWordsCount = (mnemonic.split(' ') || []).length || 0;
     if (mnemonicWordsCount == 1) {
       const mnemonicInput = parseInt(mnemonic.split(' ')[0], 10);
-      mnemonicLength = supportedMnemonicLengths.includes(mnemonicInput)
+      mnemonicLength = this.supportedMnemonicLengths.includes(mnemonicInput)
         ? mnemonicInput
         : 12;
     } else {
@@ -258,6 +261,7 @@ class Wallet {
         ],
       });
     } else if (chain == 'BTC') {
+      // Validate mnemonic
       if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
         return {
           error: 'mnemonic is not valid',
@@ -287,6 +291,7 @@ class Wallet {
         mnemonic,
       });
     } else if (chain == 'DOGE' || chain == 'LTC') {
+      // Validate mnemonic
       if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
         return {
           error: 'mnemonic is not valid',
@@ -319,6 +324,7 @@ class Wallet {
         mnemonic,
       });
     } else if (row.format == 'BEP2') {
+      // Validate mnemonic
       if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
         return {
           error: 'mnemonic is not valid',
@@ -356,6 +362,7 @@ class Wallet {
         mnemonic,
       });
     } else if (row.network == 'EVM') {
+      // Validate mnemonic
       if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
         return {
           error: 'mnemonic is not valid',
@@ -397,6 +404,7 @@ class Wallet {
         mnemonic,
       });
     } else if (chain == 'ONE') {
+      // Validate mnemonic
       if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
         return {
           error: 'mnemonic is not valid',
@@ -420,6 +428,7 @@ class Wallet {
         mnemonic,
       });
     } else if (chain == 'SOL') {
+      // TODO: generate wallet from mnemonic
       const wallet = SolanaKeypair.generate();
       const publicKeyString = new SolanaPublickey(wallet.publicKey).toBase58();
       const secretKeyString = bs58.encode(wallet.secretKey);
@@ -436,17 +445,28 @@ class Wallet {
         ],
       });
     } else if (chain == 'TON') {
+      // Validate mnemonic
+      if (
+        mnemonicString != '' &&
+        !(await TonValidateMnemonic(mnemonicString.split(' ')))
+      ) {
+        return {
+          error: 'mnemonic is not valid',
+        };
+      }
       // Generate new mnemonics and derive key pair
       let mnemonics;
-      if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
-        mnemonics = mnemonicString.split(' ');
+      if (mnemonicString != '') {
+        mnemonics = mnemonicString.split(' '); // array of 24 words
       } else {
         mnemonics = await newTonMnemonic(); // array of 24 words
         mnemonicString = mnemonics.join(' ');
       }
       const keyPair = await TonMnemonicToPrivateKey(mnemonics);
       const tonweb = new TonWeb();
-      const wallet = tonweb.wallet.create({ publicKey: keyPair.publicKey });
+      // TODO: add support for different formats (simpleR1, simpleR2, simpleR3, v2R1, v2R2, v3R1, v3R2, v4R1, v4R2)
+      const WalletClass = tonweb.wallet.all.v4R2;
+      const wallet = new WalletClass(tonweb.provider, keyPair);
       const address = await wallet.getAddress();
       const nonBounceableAddress = address.toString(true, true, false);
       const bouncableAddress = address.toString(true, true, true);
@@ -465,6 +485,7 @@ class Wallet {
         mnemonic: mnemonicString,
       });
     } else if (chain == 'TRX') {
+      // TODO: generate wallet from mnemonic
       try {
         const wallet = await tronWeb.createAccount();
 
@@ -483,6 +504,7 @@ class Wallet {
         };
       }
     } else if (chain == 'XTZ') {
+      // TODO: generate wallet from mnemonic
       const wallet = tezos.generateKeysNoSeed();
 
       Object.assign(result, {
@@ -496,10 +518,12 @@ class Wallet {
       });
     } else {
       return {
-        error: 'your desired blockchain is not supported yet',
+        error:
+          'your desired blockchain is not supported yet, please open an issue on GitHub: https://github.com/yerofey/cryptowallet-cli/issues',
       };
     }
 
+    // Add not tested flag if needed
     if (row.tested !== undefined && row.tested == false) {
       Object.assign(result, {
         tested: false,
