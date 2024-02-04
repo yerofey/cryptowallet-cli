@@ -107,6 +107,8 @@ $ cw -c btc -n 10 -D new
 $ cw -l
 ```
 
+*don't use mnemonic from the examples, it's just an example, generate your own mnemonic string!*
+
 ## Blockchains supported
 
 - `BTC` (Bitcoin) [legacy, segwit, bech32]
