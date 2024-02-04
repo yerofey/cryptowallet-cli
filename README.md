@@ -11,8 +11,8 @@
 ## Features
 
 - [x] Generate brand new crypto wallet address (offline)
-- [x] Generate wallet address with prefix (string at the start): [`-p`] or [`-P`] (case-sensitive)
-- [x] Generate wallet address with suffix (string at the end): [`-s`] or [`-S`] (case-sensitive)
+- [x] Generate wallet address with prefix (string at the start): [`-p`] (case-insensitive) or [`-P`] (case-sensitive)
+- [x] Generate wallet address with suffix (string at the end): [`-s`] (case-insensitive) or [`-S`] (case-sensitive)
 - [x] Generate wallet with different formats (for Bitcoin: Legacy, SegWit, Bech32; for BNB: BEP2, BEP20): [`-f`]
 - [x] Generate wallet from your desired mnemonic string: [`-m`]
 - [x] Generate mnemonic string: [`-m`] or [`-m 12`] or [`-m 15`] or [`-m 18`] or [`-m 21`] or [`-m 24`]
