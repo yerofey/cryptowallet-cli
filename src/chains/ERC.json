@@ -3,6 +3,6 @@
   "network": "EVM",
   "startsWith": "0x",
   "prefixTest": "[0-9a-fA-F]",
-  "apps": ["metamask", "trustwallet", "binance-chain-wallet"],
+  "apps": ["metamask", "trustwallet"],
   "flags": ["m", "n", "p", "s"]
 }
