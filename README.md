@@ -46,9 +46,11 @@ $ cw -c btc
 # generate random mnemonic string (12 words) to import in any wallet app
 $ cw -m
 
-# generate random mnemonic string of a specific length (12, 18, or 24 words)
+# generate random mnemonic string of a specific length (12, 15, 18, 21 or 24 words)
 $ cw -m 12
+$ cw -m 15
 $ cw -m 18
+$ cw -m 21
 $ cw -m 24
 
 # generate a wallet from a given mnemonic string
@@ -145,7 +147,9 @@ $ cw -l
 - `-m` or `--mnemonic [value]`: If used without a value or with `12`, `18`, or `24`, it generates a mnemonic string of that length. If a mnemonic string is provided, it generates a wallet from the given mnemonic. For example:
   - `$ cw -m`: Generates a default 12-word mnemonic string.
   - `$ cw -m 12`: Generates a 12-word mnemonic string.
+  - `$ cw -m 15`: Generates a 15-word mnemonic string.
   - `$ cw -m 18`: Generates an 18-word mnemonic string.
+  - `$ cw -m 21`: Generates a 21-word mnemonic string.
   - `$ cw -m 24`: Generates a 24-word mnemonic string.
   - `$ cw -m "your mnemonic phrase here"`: Generates a wallet from the provided mnemonic string.
 - `-n` or `--number`: Specify number of wallets to display (works for HD wallets only, like BTC/LTC/DOGE)

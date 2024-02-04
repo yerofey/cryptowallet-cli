@@ -38,7 +38,7 @@ config();
 class Wallet {
   constructor(cw) {
     this.cw = cw;
-    this.supportedMnemonicLengths = [12, 18, 24];
+    this.supportedMnemonicLengths = [12, 15, 18, 21, 24];
   }
 
   async init() {
@@ -553,15 +553,21 @@ function generateMnemonicString(length = 12) {
     case 12:
       entropy = 128;
       break;
+    case 15:
+      entropy = 160;
+      break;
     case 18:
       entropy = 192;
+      break;
+    case 21:
+      entropy = 224;
       break;
     case 24:
       entropy = 256;
       break;
     default:
       throw new Error(
-        'Invalid mnemonic length. Supported lengths are 12, 18, or 24.'
+        'Invalid mnemonic length. Supported lengths are 12, 15, 18, 21, and 24.'
       );
   }
 

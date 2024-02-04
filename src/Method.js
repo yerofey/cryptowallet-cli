@@ -67,7 +67,7 @@ class Method {
 
   _mnemonic() {
     const mnemonic = this.inputOptions.mnemonic || '12';
-    const mnemonicLength = ['12', '18', '24'].includes(mnemonic)
+    const mnemonicLength = ['12', '15', '18', '21', '24'].includes(mnemonic)
       ? parseInt(mnemonic, 10)
       : 12;
     const mnemonicString = generateMnemonicString(mnemonicLength);
