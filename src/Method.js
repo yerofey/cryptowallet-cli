@@ -481,7 +481,7 @@ class Method {
           cyan(
             `🔍  Found ${foundCount} matching wallet${
               foundMany ? 's' : ''
-            }: 🆔${matchingWalletsIndexes.join(',')}`
+            }: 🆔 ${matchingWalletsIndexes.join(',')}`
           )
         );
       }
