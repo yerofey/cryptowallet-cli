@@ -436,25 +436,25 @@ class Wallet {
         };
       }
 
+      let addresses = [];
       const mnemonic = mnemonicString || generateMnemonicString(24);
       const seed = await bip39.mnemonicToSeed(mnemonic);
-      const derivationPath = "m/44'/501'/0'/0'";
-      const derivedSeed = derivePath(derivationPath, seed.toString('hex')).key;
-      const keypair = SolanaKeypair.fromSeed(derivedSeed);
-      const publicKey = new SolanaPublickey(keypair.publicKey);
-      const publicKeyString = publicKey.toString();
-      const secretKeyString = bs58.encode(keypair.secretKey);
 
-      // TODO: add support for multiple addresses
+      for (let i = 0; i < number; i++) {
+        const derivationPath = `m/44'/501'/${i}'/0'`;
+        const derivedSeed = derivePath(derivationPath, seed.toString('hex')).key;
+        const keypair = SolanaKeypair.fromSeed(derivedSeed);
+        const publicKey = new SolanaPublickey(keypair.publicKey);
+        const privateKey = bs58.encode(keypair.secretKey);
+        addresses.push({
+          index: i,
+          address: publicKey.toBase58(),
+          privateKey,
+        });
+      }
 
       Object.assign(result, {
-        addresses: [
-          {
-            index: 0,
-            address: publicKeyString,
-            privateKey: secretKeyString,
-          },
-        ],
+        addresses,
         mnemonic,
       });
     } else if (chain == 'TON') {
