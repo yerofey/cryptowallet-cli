@@ -10,14 +10,16 @@
 
 ## Features
 
-- [x] Generate new crypto wallet offline
-- [x] Generate wallet address with prefix (string at the start): [`-p`]
-- [x] Generate wallet address with suffix (string at the end): [`-s`]
+- [x] Generate brand new crypto wallet address (offline)
+- [x] Generate wallet address with prefix (string at the start): [`-p`] or [`-P`] (case-sensitive)
+- [x] Generate wallet address with suffix (string at the end): [`-s`] or [`-S`] (case-sensitive)
 - [x] Generate wallet with different formats (for Bitcoin: Legacy, SegWit, Bech32; for BNB: BEP2, BEP20): [`-f`]
 - [x] Generate wallet from your desired mnemonic string: [`-m`]
-- [x] Generate only mnemonic string: [`-m`]
+- [x] Generate mnemonic string: [`-m`] or [`-m 12`] or [`-m 15`] or [`-m 18`] or [`-m 21`] or [`-m 24`]
 - [x] Generate a lot of wallets at once: [`-n`]
 - [x] Save result into a CSV file: [`--csv`]
+- [x] Copy the generated mnemonic to the clipboard: [`-C` or `--copy`]
+- [x] Display some additional "geeky" info: [`-g`]
 
 *check the Options section for all supported commands*
 
@@ -37,7 +39,7 @@ $ yarn global add @yerofey/cryptowallet-cli
 ## Usage
 
 ```bash
-# generate random ERC-like wallet (ETH, BNB, POLYGON, ...)
+# generate random EVM-compatible wallet (for Ethereum, Polygon, any L1/L2 EVM-compatible chain, etc.)
 $ cw
 
 # generate random BTC wallet (default format: bech32 - "bc1q...")
