@@ -9,7 +9,7 @@
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
       "apps": ["tonkeeper", "trustwallet"],
-      "flags": ["m", "n", "p", "s"]
+      "flags": ["m", "p", "s"]
     }
   }
 }

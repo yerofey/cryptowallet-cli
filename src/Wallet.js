@@ -93,8 +93,8 @@ class Wallet {
       (options.suffix && row.flags.includes('s'))
     ) {
       if (badSymbolsArray.length === 0) {
-        // suggest to generate multiple wallets
-        if (!options.number || options.number == 1) {
+        // suggest to generate multiple wallets addresses (if it is supported by the settings)
+        if (row.flags.includes('n') && (!options.number || options.number == 1)) {
           log(
             yellow(
               '💡  You can speed up the process significantly by generating multiple addresses for each wallet. Example: cw -n 10'
