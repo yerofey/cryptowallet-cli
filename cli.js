@@ -29,7 +29,7 @@ import Method from './src/Method.js';
     return new Method('donate').init();
   }
 
-  const chain = options.chain.toUpperCase() || 'ERC';
+  const chain = options.chain.toUpperCase() || 'EVM';
   if (supportedChains.includes(chain)) {
     return new Method('wallet', {
       chain,

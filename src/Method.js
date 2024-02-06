@@ -47,7 +47,7 @@ class Method {
   }
 
   async _list() {
-    log(`🔠  All supported blockchains:\n`);
+    log(`🔠  All supported chains & tickers:\n`);
     let cryptos = {};
     for (const val of supportedChains) {
       // eslint-disable-next-line no-undef
@@ -59,7 +59,7 @@ class Method {
       );
 
       let title = data.title || '';
-      if (title == '' || val == 'ERC') {
+      if (title == '' || val == 'EVM') {
         continue;
       }
       cryptos[blue(val)] = title;
@@ -71,7 +71,7 @@ class Method {
       })
     );
     log();
-    log(`ℹ️   Use flag "-c TICKER" to select specific blockchain`);
+    log(`ℹ️   Use flag "-c TICKER" to select specific chain or ticker`);
   }
 
   _mnemonic() {
@@ -520,7 +520,7 @@ class Method {
       if (cw.row.network == 'EVM' || false) {
         log(
           yellow(
-            '🆒  You can use this wallet in Ethereum, Binance Smart Chain, Polygon and many others networks (EVM compatible)'
+            '🆒  You can use this wallet for Ethereum, BSC, Polygon, Arbitrum, Optimism and any other L2/L3 chain (EVM compatible)'
           )
         );
       }
@@ -546,7 +546,7 @@ class Method {
 
         let appsString = appsArray.join(', ');
         if (cw.row.apps || false) {
-          appsString += ' and many other wallet apps';
+          appsString += ' and any other wallet app (either using mnemonic or private key)';
         }
         log(greenBright('ℹ️   You can import this wallet into ' + appsString));
       }

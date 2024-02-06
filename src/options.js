@@ -1,8 +1,8 @@
 import { program } from 'commander';
 
 
-program.option('-b, --chain <ticker>', 'Wallet for specific blockchain', 'ERC');
-program.option('-c, --chain <ticker>', 'Wallet for specific blockchain', 'ERC');
+program.option('-b, --chain <ticker>', 'Wallet for specific blockchain', 'EVM');
+program.option('-c, --chain <ticker>', 'Wallet for specific blockchain', 'EVM');
 program.option('-C, --copy', 'Copy the result to the clipboard');
 program.option(
   '-D, --csv [filename]',

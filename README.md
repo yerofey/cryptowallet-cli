@@ -109,11 +109,16 @@ $ cw -l
 
 *don't use mnemonic from the examples, it's just an example, generate your own mnemonic string!*
 
-## Blockchains supported
+## Blockchains & tickers supported
 
+- `EVM` (Ethereum, Polygon, Arbitrum, Optimism, L2/L3, etc.)
 - `BTC` (Bitcoin) [legacy, segwit, bech32]
 - `ETH` (Ethereum)
 - `BNB` (Binance Coin) [BEP2, BEP20, ERC20]
+- `BSC` (Binance Smart Chain)
+- `ARB` (Arbitrum)
+- `OP` (Optimism)
+- `MATIC` (Polygon)
 - `SOL` (Solana)
 - `TON` (The Open Network)
 - `DOGE` (Dogecoin) [legacy, segwit, bech32]
@@ -137,8 +142,9 @@ $ cw -l
 - `BLK` (BlackCoin)
 - `VIA` (Viacoin)
 - `NBT` (NIX Bridge Token)
+- `PLS` (PulseChain)
 
-*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Smart Chain or Polygon and others (EVM compatible) are supported too, you just need to create ERC wallet (that is set by default)*
+*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Smart Chain or Polygon and others chains are supported as well (L2/L3, etc.)*
 
 ## Options
 
