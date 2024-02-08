@@ -29,6 +29,15 @@
       "path": "m/49'/0",
       "purpose": 49,
       "flags": ["f", "g", "m", "n", "p", "s"]
+    },
+    "taproot": {
+      "format": "taproot",
+      "startsWith": "bc1p",
+      "prefixTest": "[0-9a-z]",
+      "rareSymbols": "[0-9]",
+      "path": "m/86'/0",
+      "purpose": 86,
+      "flags": ["f", "g", "m", "n", "p", "s"]
     }
   }
 }

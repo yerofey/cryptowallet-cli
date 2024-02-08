@@ -7,6 +7,8 @@ import CoinInfo from 'coininfo';
 import bip39 from 'bip39';
 import bip84 from 'bip84';
 const { fromMnemonic, fromZPrv } = bip84;
+import bip86 from 'bip86';
+const { fromMnemonic: fromMnemonicBip86, fromXPrv } = bip86;
 import ethereumBip from 'ethereum-bip84';
 const { fromMnemonic: fromMnemonicEthereum, fromZPrv: fromZPrvEthereum } =
   ethereumBip;
@@ -94,7 +96,10 @@ class Wallet {
     ) {
       if (badSymbolsArray.length === 0) {
         // suggest to generate multiple wallets addresses (if it is supported by the settings)
-        if (row.flags.includes('n') && (!options.number || options.number == 1)) {
+        if (
+          row.flags.includes('n') &&
+          (!options.number || options.number == 1)
+        ) {
           log(
             yellow(
               '💡  You can speed up the process significantly by generating multiple addresses for each wallet. Example: cw -n 10'
@@ -279,9 +284,15 @@ class Wallet {
       }
 
       const mnemonic = mnemonicString || bip39.generateMnemonic();
-      const root = new fromMnemonic(mnemonic, '');
-      const child = root.deriveAccount(0);
-      const account = new fromZPrv(child);
+
+      const root =
+        row.format == 'taproot'
+          ? new fromMnemonicBip86(mnemonic, '')
+          : new fromMnemonic(mnemonic, '');
+      const child =
+        row.format == 'taproot' ? root.deriveAccount(0) : root.deriveAccount(0);
+      const account =
+        row.format == 'taproot' ? new fromXPrv(child) : new fromZPrv(child);
 
       let addresses = [];
       if (number >= 1) {
