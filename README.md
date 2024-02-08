@@ -88,6 +88,9 @@ $ cw -c BTC -f bech32 -m "radio bright pizza pluck family crawl palm flame forge
 # generate N of BTC bech32 wallets from mnemonic string
 $ cw -c BTC -f bech32 -n 10 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
+# generate BTC Taproot wallet ("bc1q...")
+$ cw -c BTC -f taproot
+
 # generate ERC-like wallet from mnemonic string
 $ cw -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
@@ -112,7 +115,7 @@ $ cw -l
 ## Blockchains & tickers supported
 
 - `EVM` (Ethereum, Polygon, Arbitrum, Optimism, L2/L3, etc.)
-- `BTC` (Bitcoin) [legacy, segwit, bech32]
+- `BTC` (Bitcoin) [legacy, segwit, bech32, taproot]
 - `ETH` (Ethereum)
 - `BNB` (Binance Coin) [BEP2, BEP20, ERC20]
 - `BSC` (Binance Smart Chain)
