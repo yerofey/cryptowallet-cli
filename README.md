@@ -272,7 +272,7 @@ If you find this tool useful and would like to support its development, consider
 - Ethereum (ETH): `0xe3e3ed78d9f8A935a9a0fCE2a7305F2f5DBabAD8`
 - BNB (BEP20): `0xe3e3ed78d9f8A935a9a0fCE2a7305F2f5DBabAD8`
 - BNB (BEP2): `bnb1gtxfz4kllltaeekw3edfd496gpa3ukpakvzncq`
-- SON: `CWsbNQRxNzAasLd2zfwkEkbBZXKxfoxva14pe8wawUju`
+- SOL: `CWsbNQRxNzAasLd2zfwkEkbBZXKxfoxva14pe8wawUju`
 - TON: `UQCWYNjNQdRp7lfmehDWA-RgPqipbI3crX3qFN1MDLpgkyCS`
 - DOGE (DOGE): `DMAkWQKx1H6ESG3beDBssn5mAAZcwkrYVh`
 
