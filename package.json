@@ -126,7 +126,7 @@
     "ethereum-bip84": "0.0.3",
     "ethereum-mnemonic-privatekey-utils": "1.0.5",
     "tezos-sign": "1.4.1",
-    "tonweb": "^0.0.62",
+    "tonweb": "^0.0.63",
     "tronweb": "5.3.1"
   },
   "devDependencies": {
