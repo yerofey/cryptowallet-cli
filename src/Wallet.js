@@ -44,9 +44,7 @@ class Wallet {
   }
 
   async init() {
-    const cw = this.cw;
-    const row = cw.row;
-    const options = cw.options;
+    const { row, options } = this.cw;
 
     const desiredSymbolsArray =
       options.prefix.length > 0 || options.suffix.length > 0
@@ -234,10 +232,7 @@ class Wallet {
   }
 
   async createWallet() {
-    const cw = this.cw;
-    const chain = cw.chain;
-    const row = cw.row;
-    const options = cw.options;
+    const { chain, options, row } = this.cw;
 
     let format = options.format || '';
     const mnemonic = options.mnemonic || '';
@@ -568,35 +563,99 @@ class Wallet {
 
     return result;
   }
+
+  // handleBTC() {
+  //   const wallet = CoinKey.createRandom(CoinInfo('BTC').versions);
+
+  //   return {
+  //     address: wallet.publicAddress,
+  //     privateKey: wallet.privateWif,
+  //   };
+  // }
+
+  // handleDOGE() {
+  //   const mnemonic = generateMnemonicString(12);
+  //   const root = fromMnemonicDoge(mnemonic, '');
+  //   const child = root.deriveAccount(0);
+  //   const account = fromZPrvDoge(child);
+
+  //   return {
+  //     mnemonic,
+  //     privateExtendedKey: account.getAccountPrivateKey(),
+  //     addresses: [
+  //       {
+  //         index: 0,
+  //         address: account.getAddress(0, false, 44),
+  //         privateKey: account.getPrivateKey(0),
+  //       },
+  //     ],
+  //   };
+  // }
+
+  // handleEVM() {
+  //   const mnemonic = bip39.generateMnemonic();
+  //   const privateKey = pkutils.getPrivateKeyFromMnemonic(mnemonic);
+  //   const account = Account.fromPrivate('0x' + privateKey);
+
+  //   return {
+  //     address: account.address,
+  //     privateKey,
+  //   };
+  // }
+
+  // handleLTC() {
+  //   const mnemonic = generateMnemonicString(12);
+  //   const root = fromMnemonicLite(mnemonic, '');
+  //   const child = root.deriveAccount(0);
+  //   const account = fromZPrvLite(child);
+
+  //   return {
+  //     mnemonic,
+  //     privateExtendedKey: account.getAccountPrivateKey(),
+  //     addresses: [
+  //       {
+  //         index: 0,
+  //         address: account.getAddress(0, false, 44),
+  //         privateKey: account.getPrivateKey(0),
+  //       },
+  //     ],
+  //   };
+  // }
+
+  // handleSOL() {
+  //   const mnemonic = generateMnemonicString(24);
+  //   const seed = bip39.mnemonicToSeedSync(mnemonic);
+  //   const keypair = SolanaKeypair.fromSeed(seed.slice(0, 32));
+  //   const publicKey = new SolanaPublickey(keypair.publicKey);
+  //   const privateKey = bs58.encode(keypair.secretKey);
+
+  //   return {
+  //     address: publicKey.toBase58(),
+  //     privateKey,
+  //   };
+  // }
+
+  // handleTON() {
+  //   const mnemonic = newTonMnemonic();
+  //   const keyPair = TonMnemonicToPrivateKey(mnemonic);
+  //   const tonweb = new TonWeb();
+  //   const WalletClass = tonweb.wallet.all.v4R2;
+  //   const wallet = new WalletClass(tonweb.provider, keyPair);
+  //   const address = wallet.getAddress();
+
+  //   return {
+  //     mnemonic,
+  //     address,
+  //   };
+  // }
 }
 
 function generateMnemonicString(length = 12) {
-  let entropy;
-  switch (length) {
-    case 12:
-      entropy = 128;
-      break;
-    case 15:
-      entropy = 160;
-      break;
-    case 18:
-      entropy = 192;
-      break;
-    case 21:
-      entropy = 224;
-      break;
-    case 24:
-      entropy = 256;
-      break;
-    default:
-      throw new Error(
-        'Invalid mnemonic length. Supported lengths are 12, 15, 18, 21, and 24.'
-      );
+  const entropy = { 12: 128, 15: 160, 18: 192, 21: 224, 24: 256 }[length] || 0;
+  if (entropy == 0) {
+    throw new Error('Invalid mnemonic length.');
   }
-
-  // Generate the mnemonic based on the specified entropy
-  const mnemonic = bip39.generateMnemonic(entropy);
-  return mnemonic;
+  return bip39.generateMnemonic(entropy);
 }
 
 export { generateMnemonicString, Wallet };
