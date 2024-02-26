@@ -21,8 +21,8 @@ dependencies:
     specifier: ^0.0.5
     version: 0.0.5
   '@yerofey/litecoin-bip84':
-    specifier: ^0.0.5
-    version: 0.0.5
+    specifier: ^0.0.6
+    version: 0.0.6
   bip39:
     specifier: 3.1.0
     version: 3.1.0
@@ -3771,8 +3771,8 @@ packages:
       bip84: 0.2.7
     dev: false
 
-  /@yerofey/litecoin-bip84@0.0.5:
-    resolution: {integrity: sha512-tNTh/OpZl+nLFv4zfQndZYAJnf96UGLTMbrC6HOoN6BaHJ6rzAsVkT3Y8HfnpWa8NMv9eDaK/7ObPZd9+USqJQ==}
+  /@yerofey/litecoin-bip84@0.0.6:
+    resolution: {integrity: sha512-5uvQMBITNEA29dnoVEZCzBGiVg0Lo5VNzROAkOw/fENlcBErSZuS2rIoa3yfaPi8qOHteMueNT2HsTCjQSi/Vw==}
     dependencies:
       bip84: 0.2.7
     dev: false
@@ -6360,7 +6360,6 @@ packages:
       is-hex-prefixed: 1.0.0
       strip-hex-prefix: 1.0.0
     dev: false
-    bundledDependencies: false
 
   /event-target-shim@5.0.1:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}

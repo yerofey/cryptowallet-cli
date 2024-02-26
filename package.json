@@ -108,7 +108,7 @@
     "@solana/web3.js": "^1.90.0",
     "@ton/crypto": "^3.2.0",
     "@yerofey/dogecoin-bip84": "^0.0.5",
-    "@yerofey/litecoin-bip84": "^0.0.5",
+    "@yerofey/litecoin-bip84": "^0.0.6",
     "bip39": "3.1.0",
     "bip84": "0.2.7",
     "bip86": "^0.0.3",
