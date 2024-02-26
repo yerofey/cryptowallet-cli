@@ -127,7 +127,7 @@
     "ethereum-mnemonic-privatekey-utils": "1.0.5",
     "tezos-sign": "1.4.1",
     "tonweb": "^0.0.62",
-    "tronweb": "5.3.1"
+    "tronweb": "5.3.2"
   },
   "devDependencies": {
     "ava": "^6.1.1",
