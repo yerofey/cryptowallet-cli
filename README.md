@@ -88,7 +88,7 @@ $ cw -c BTC -f bech32 -m "radio bright pizza pluck family crawl palm flame forge
 # generate N of BTC bech32 wallets from mnemonic string
 $ cw -c BTC -f bech32 -n 10 -m "radio bright pizza pluck family crawl palm flame forget focus stock stadium"
 
-# generate BTC Taproot wallet ("bc1q...")
+# generate BTC Taproot wallet ("bc1p...")
 $ cw -c BTC -f taproot
 
 # generate ERC-like wallet from mnemonic string
