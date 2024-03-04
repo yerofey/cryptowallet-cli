@@ -18,8 +18,8 @@ dependencies:
     specifier: ^3.2.0
     version: 3.2.0
   '@yerofey/dogecoin-bip84':
-    specifier: ^0.0.5
-    version: 0.0.5
+    specifier: ^0.0.6
+    version: 0.0.6
   '@yerofey/litecoin-bip84':
     specifier: ^0.0.5
     version: 0.0.5
@@ -3765,8 +3765,8 @@ packages:
     dev: false
     optional: true
 
-  /@yerofey/dogecoin-bip84@0.0.5:
-    resolution: {integrity: sha512-31pOi6veF/CnJPfshN/0YmurVzBpn3lEWgvdTUGEHi914NA0JU9VDZQXFhtUuL23UwXJfEbE1VEQtXzABU2z2w==}
+  /@yerofey/dogecoin-bip84@0.0.6:
+    resolution: {integrity: sha512-aTNYJ/79Q5ZzoYMN4+zuEwcUnTep6j/ZUEr+OVl6ceAtZYq01oOJ4UoClOgbHLy1DSBom2zZmbUf9mXfaN45NA==}
     dependencies:
       bip84: 0.2.7
     dev: false
@@ -6360,7 +6360,6 @@ packages:
       is-hex-prefixed: 1.0.0
       strip-hex-prefix: 1.0.0
     dev: false
-    bundledDependencies: false
 
   /event-target-shim@5.0.1:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
