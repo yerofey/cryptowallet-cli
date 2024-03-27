@@ -184,6 +184,7 @@ $ cw -l
 - [x] v18.x ✅
 - [x] v19.x ✅
 - [x] v20.x ✅
+- [x] v21.x ✅
 
 *tested on Ubuntu 22.04 & Mac M1*
 
