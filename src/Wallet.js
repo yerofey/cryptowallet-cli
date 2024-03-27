@@ -445,10 +445,14 @@ class Wallet {
       });
     } else if (chain == 'SOL') {
       // Validate mnemonic
-      if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
-        return {
-          error: 'mnemonic is not valid',
-        };
+      if (mnemonicString != '') {
+        try {
+          bip39.validateMnemonic(mnemonicString);
+        } catch (error) {
+          return {
+            error: 'mnemonic is not valid',
+          };
+        }
       }
 
       let addresses = [];
@@ -563,91 +567,6 @@ class Wallet {
 
     return result;
   }
-
-  // handleBTC() {
-  //   const wallet = CoinKey.createRandom(CoinInfo('BTC').versions);
-
-  //   return {
-  //     address: wallet.publicAddress,
-  //     privateKey: wallet.privateWif,
-  //   };
-  // }
-
-  // handleDOGE() {
-  //   const mnemonic = generateMnemonicString(12);
-  //   const root = fromMnemonicDoge(mnemonic, '');
-  //   const child = root.deriveAccount(0);
-  //   const account = fromZPrvDoge(child);
-
-  //   return {
-  //     mnemonic,
-  //     privateExtendedKey: account.getAccountPrivateKey(),
-  //     addresses: [
-  //       {
-  //         index: 0,
-  //         address: account.getAddress(0, false, 44),
-  //         privateKey: account.getPrivateKey(0),
-  //       },
-  //     ],
-  //   };
-  // }
-
-  // handleEVM() {
-  //   const mnemonic = bip39.generateMnemonic();
-  //   const privateKey = pkutils.getPrivateKeyFromMnemonic(mnemonic);
-  //   const account = Account.fromPrivate('0x' + privateKey);
-
-  //   return {
-  //     address: account.address,
-  //     privateKey,
-  //   };
-  // }
-
-  // handleLTC() {
-  //   const mnemonic = generateMnemonicString(12);
-  //   const root = fromMnemonicLite(mnemonic, '');
-  //   const child = root.deriveAccount(0);
-  //   const account = fromZPrvLite(child);
-
-  //   return {
-  //     mnemonic,
-  //     privateExtendedKey: account.getAccountPrivateKey(),
-  //     addresses: [
-  //       {
-  //         index: 0,
-  //         address: account.getAddress(0, false, 44),
-  //         privateKey: account.getPrivateKey(0),
-  //       },
-  //     ],
-  //   };
-  // }
-
-  // handleSOL() {
-  //   const mnemonic = generateMnemonicString(24);
-  //   const seed = bip39.mnemonicToSeedSync(mnemonic);
-  //   const keypair = SolanaKeypair.fromSeed(seed.slice(0, 32));
-  //   const publicKey = new SolanaPublickey(keypair.publicKey);
-  //   const privateKey = bs58.encode(keypair.secretKey);
-
-  //   return {
-  //     address: publicKey.toBase58(),
-  //     privateKey,
-  //   };
-  // }
-
-  // handleTON() {
-  //   const mnemonic = newTonMnemonic();
-  //   const keyPair = TonMnemonicToPrivateKey(mnemonic);
-  //   const tonweb = new TonWeb();
-  //   const WalletClass = tonweb.wallet.all.v4R2;
-  //   const wallet = new WalletClass(tonweb.provider, keyPair);
-  //   const address = wallet.getAddress();
-
-  //   return {
-  //     mnemonic,
-  //     address,
-  //   };
-  // }
 }
 
 function generateMnemonicString(length = 12) {
