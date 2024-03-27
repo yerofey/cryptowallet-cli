@@ -75,8 +75,8 @@ dependencies:
     specifier: 1.4.1
     version: 1.4.1
   tonweb:
-    specifier: ^0.0.62
-    version: 0.0.62(expo@50.0.6)(react-native@0.73.4)
+    specifier: ^0.0.64
+    version: 0.0.64(expo@50.0.6)(react-native@0.73.4)
   tronweb:
     specifier: 5.3.1
     version: 5.3.1
@@ -4660,6 +4660,7 @@ packages:
   /braces@3.0.2:
     resolution: {integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==}
     engines: {node: '>=8'}
+    requiresBuild: true
     dependencies:
       fill-range: 7.0.1
 
@@ -6360,7 +6361,6 @@ packages:
       is-hex-prefixed: 1.0.0
       strip-hex-prefix: 1.0.0
     dev: false
-    bundledDependencies: false
 
   /event-target-shim@5.0.1:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
@@ -6745,6 +6745,7 @@ packages:
   /fill-range@7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
     engines: {node: '>=8'}
+    requiresBuild: true
     dependencies:
       to-regex-range: 5.0.1
 
@@ -7105,6 +7106,7 @@ packages:
   /glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
+    requiresBuild: true
     dependencies:
       is-glob: 4.0.3
 
@@ -7772,6 +7774,7 @@ packages:
   /is-number@7.0.0:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
+    requiresBuild: true
 
   /is-obj@2.0.0:
     resolution: {integrity: sha512-drqDG3cbczxxEJRoOXcOjtdp1J/lyp1mNn0xaznRs8+muBhgQcrnbspox5X5fOw0HnMnbfDzvnEMEtqDEJEo8w==}
@@ -11855,6 +11858,7 @@ packages:
   /to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
+    requiresBuild: true
     dependencies:
       is-number: 7.0.0
 
@@ -11863,8 +11867,8 @@ packages:
     engines: {node: '>=0.6'}
     dev: false
 
-  /tonweb@0.0.62(expo@50.0.6)(react-native@0.73.4):
-    resolution: {integrity: sha512-Uwu2DQwmVkI85WVLzqIqUvqNk++N97e2EH3hKb+Tvq3fA6pcEP7AugcNr1xU33GmajtLT9vquMo7/kNcnS1Fuw==}
+  /tonweb@0.0.64(expo@50.0.6)(react-native@0.73.4):
+    resolution: {integrity: sha512-+4nb37k+3v8kbcrf1N0sUfydPLaCJ0EkWsaupJZZc5M8VT+N4PBlXw+Vhwpu0NpD3apv1U60ZyQ867ElQeWt/g==}
     dependencies:
       '@ledgerhq/hw-transport-web-ble': 5.48.0
       '@ledgerhq/hw-transport-webhid': 5.48.0
