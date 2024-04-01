@@ -75,8 +75,8 @@ dependencies:
     specifier: 1.4.1
     version: 1.4.1
   tonweb:
-    specifier: ^0.0.62
-    version: 0.0.62(expo@50.0.6)(react-native@0.73.4)
+    specifier: ^0.0.66
+    version: 0.0.66(expo@50.0.6)(react-native@0.73.4)
   tronweb:
     specifier: 5.3.1
     version: 5.3.1
@@ -6360,7 +6360,6 @@ packages:
       is-hex-prefixed: 1.0.0
       strip-hex-prefix: 1.0.0
     dev: false
-    bundledDependencies: false
 
   /event-target-shim@5.0.1:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
@@ -7105,6 +7104,7 @@ packages:
   /glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
+    requiresBuild: true
     dependencies:
       is-glob: 4.0.3
 
@@ -11863,8 +11863,8 @@ packages:
     engines: {node: '>=0.6'}
     dev: false
 
-  /tonweb@0.0.62(expo@50.0.6)(react-native@0.73.4):
-    resolution: {integrity: sha512-Uwu2DQwmVkI85WVLzqIqUvqNk++N97e2EH3hKb+Tvq3fA6pcEP7AugcNr1xU33GmajtLT9vquMo7/kNcnS1Fuw==}
+  /tonweb@0.0.66(expo@50.0.6)(react-native@0.73.4):
+    resolution: {integrity: sha512-ntDJU1b/kgMFvOYN09FvhdnAfwnZh8W5sONkUP+P0FQkYRa/027otRxApp5gfxZ9DR+3WTnCQgrsG/EXv8RhEA==}
     dependencies:
       '@ledgerhq/hw-transport-web-ble': 5.48.0
       '@ledgerhq/hw-transport-webhid': 5.48.0
