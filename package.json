@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.30.0",
+  "version": "1.30.1",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -33,7 +33,7 @@
     },
     {
       "type": "ton",
-      "url": "ton://transfer/UQCWYNjNQdRp7lfmehDWA-RgPqipbI3crX3qFN1MDLpgkyCS"
+      "url": "ton://transfer/UQCWDwqtvC_jml2hSf8laNQu4chYVCbHBpkbKbyDdxzM7Ma0"
     },
     {
       "type": "dogecoin",

@@ -30,7 +30,7 @@ Prefer to use cryptocurrency? I accept donations in several cryptocurrencies. Be
 
 ### Toncoin (TON)
 
-- **Wallet Address**: `UQCWYNjNQdRp7lfmehDWA-RgPqipbI3crX3qFN1MDLpgkyCS`
+- **Wallet Address**: `UQCWDwqtvC_jml2hSf8laNQu4chYVCbHBpkbKbyDdxzM7Ma0`
 
 ### Dogecoin (DOGE)
 
