@@ -514,13 +514,13 @@ class Wallet {
       });
       const v5Address = walletV5.address;
       const nonBounceableV5Address = v5Address.toString({
-        bounceable: false,
-        urlSafe: true, // (UQ)
+        bounceable: false, // (UQ)
+        urlSafe: true,
         testOnly: false,
       });
       const bouncableAddressV5 = v5Address.toString({
-        bounceable: true,
-        urlSafe: false, // (EQ)
+        bounceable: true, // (EQ)
+        urlSafe: true,
         testOnly: false,
       });
 
