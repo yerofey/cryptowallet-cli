@@ -34,6 +34,7 @@ import {
   mnemonicValidate as TonValidateMnemonic,
   mnemonicNew as newTonMnemonic,
 } from '@ton/crypto';
+import { WalletContractV5R1 } from '@ton/ton';
 
 config();
 
@@ -499,21 +500,38 @@ class Wallet {
       }
       const keyPair = await TonMnemonicToPrivateKey(mnemonics);
       const tonweb = new TonWeb();
-      // TODO: add support for different formats (simpleR1, simpleR2, simpleR3, v2R1, v2R2, v3R1, v3R2, v4R1, v4R2)
       const WalletClass = tonweb.wallet.all.v4R2;
       const wallet = new WalletClass(tonweb.provider, keyPair);
       const address = await wallet.getAddress();
       const nonBounceableAddress = address.toString(true, true, false);
       const bouncableAddress = address.toString(true, true, true);
 
+      // w5
+      const workchain = 0;
+      const walletV5 = WalletContractV5R1.create({
+        workchain,
+        publicKey: keyPair.publicKey,
+      });
+      const v5Address = walletV5.address;
+      const nonBounceableV5Address = v5Address.toString({
+        bounceable: false,
+        urlSafe: true, // (UQ)
+        testOnly: false,
+      });
+
       Object.assign(result, {
         addresses: [
           {
-            title: 'UQ format (new): best for wallets, - non-bounceable',
+            title: 'V5R1: UQ format (new): best for wallets, - non-bounceable',
+            address: nonBounceableV5Address,
+          },
+          {
+            title: 'V4R2: UQ format (new): best for wallets, - non-bounceable',
             address: nonBounceableAddress,
           },
           {
-            title: 'EQ format (old): best for smart contracts, - bounceable',
+            title:
+              'V4R2: EQ format (old): best for smart contracts, - bounceable',
             address: bouncableAddress,
           },
         ],
