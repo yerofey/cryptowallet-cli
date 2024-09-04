@@ -518,6 +518,11 @@ class Wallet {
         urlSafe: true, // (UQ)
         testOnly: false,
       });
+      const bouncableAddressV5 = v5Address.toString({
+        bounceable: true,
+        urlSafe: false, // (EQ)
+        testOnly: false,
+      });
 
       Object.assign(result, {
         addresses: [
@@ -526,12 +531,16 @@ class Wallet {
             address: nonBounceableV5Address,
           },
           {
-            title: 'V4R2: UQ format (new): best for wallets, - non-bounceable',
+            title:
+              'V5R1: EQ format (new): best for smart contracts, - bounceable',
+            address: bouncableAddressV5,
+          },
+          {
+            title: 'V4R2: UQ format: best for wallets, - non-bounceable',
             address: nonBounceableAddress,
           },
           {
-            title:
-              'V4R2: EQ format (old): best for smart contracts, - bounceable',
+            title: 'V4R2: EQ format: best for smart contracts, - bounceable',
             address: bouncableAddress,
           },
         ],
