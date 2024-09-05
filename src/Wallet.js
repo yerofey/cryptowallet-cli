@@ -499,51 +499,60 @@ class Wallet {
         mnemonicString = mnemonics.join(' ');
       }
       const keyPair = await TonMnemonicToPrivateKey(mnemonics);
-      const tonweb = new TonWeb();
-      const WalletClass = tonweb.wallet.all.v4R2;
-      const wallet = new WalletClass(tonweb.provider, keyPair);
-      const address = await wallet.getAddress();
-      const nonBounceableAddress = address.toString(true, true, false);
-      const bouncableAddress = address.toString(true, true, true);
 
-      // w5
-      const workchain = 0;
-      const walletV5 = WalletContractV5R1.create({
-        workchain,
-        publicKey: keyPair.publicKey,
-      });
-      const v5Address = walletV5.address;
-      const nonBounceableV5Address = v5Address.toString({
-        bounceable: false, // (UQ)
-        urlSafe: true,
-        testOnly: false,
-      });
-      const bouncableAddressV5 = v5Address.toString({
-        bounceable: true, // (EQ)
-        urlSafe: true,
-        testOnly: false,
-      });
+      let addresses = [];
 
-      Object.assign(result, {
-        addresses: [
-          {
-            title: 'V5R1: UQ format (new): best for wallets, - non-bounceable',
-            address: nonBounceableV5Address,
-          },
-          {
-            title:
-              'V5R1: EQ format (new): best for smart contracts, - bounceable',
-            address: bouncableAddressV5,
-          },
-          {
+      switch (format.toUpperCase()) {
+        case 'V4R2':
+          const tonweb = new TonWeb();
+          const WalletClass = tonweb.wallet.all.v4R2;
+          const wallet = new WalletClass(tonweb.provider, keyPair);
+          const address = await wallet.getAddress();
+          const nonBounceableAddress = address.toString(true, true, false);
+          addresses.push({
             title: 'V4R2: UQ format: best for wallets, - non-bounceable',
             address: nonBounceableAddress,
-          },
-          {
+          });
+          const bouncableAddress = address.toString(true, true, true);
+          addresses.push({
             title: 'V4R2: EQ format: best for smart contracts, - bounceable',
             address: bouncableAddress,
-          },
-        ],
+          });
+          break;
+
+        case 'V5R1':
+        case 'W5':
+        default:
+          const workchain = 0;
+          const walletV5 = WalletContractV5R1.create({
+            workchain,
+            publicKey: keyPair.publicKey,
+          });
+          const v5Address = walletV5.address;
+          const nonBounceableV5Address = v5Address.toString({
+            bounceable: false, // (UQ)
+            urlSafe: true,
+            testOnly: false,
+          });
+          addresses.push({
+            title: 'W5 (V5R1): UQ format: best for wallets, - non-bounceable',
+            address: nonBounceableV5Address,
+          });
+          const bouncableAddressV5 = v5Address.toString({
+            bounceable: true, // (EQ)
+            urlSafe: true,
+            testOnly: false,
+          });
+          addresses.push({
+            title:
+              'W5 (V5R1): EQ format: best for smart contracts, - bounceable',
+            address: bouncableAddressV5,
+          });
+          break;
+      }
+
+      Object.assign(result, {
+        addresses: addresses,
         mnemonic: mnemonicString,
       });
     } else if (chain == 'TRX') {

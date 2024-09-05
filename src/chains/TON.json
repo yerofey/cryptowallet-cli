@@ -1,10 +1,27 @@
 {
   "title": "The Open Network",
   "network": "TON",
-  "defaultFormat": "V4R2",
+  "defaultFormat": "W5",
   "formats": {
     "V4R2": {
       "format": "V4R2",
+      "startsWith": "EQ|UQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["m", "p", "s"]
+    },
+    "V5R1": {
+      "format": "V5R1",
+      "startsWith": "EQ|UQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["m", "p", "s"]
+    },
+    "W5": {
+      "comment": "This is the same as V5R1",
+      "format": "W5",
       "startsWith": "EQ|UQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
