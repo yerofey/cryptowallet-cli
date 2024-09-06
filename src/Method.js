@@ -97,7 +97,7 @@ class Method {
     log();
     log(
       greenBright(
-        'ℹ️   You can import it into your favorite wallet app or use it to generate a wallet with "-m" flag'
+        'ℹ️  You can import it into your favorite wallet app or use it to generate a wallet with "-m" flag'
       )
     );
 
