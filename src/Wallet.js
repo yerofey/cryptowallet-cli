@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { config } from 'dotenv';
 import { log } from './utils.js';
 import chalk from 'chalk';
@@ -501,27 +502,47 @@ class Wallet {
       const keyPair = await TonMnemonicToPrivateKey(mnemonics);
 
       let addresses = [];
+      let walletFormat = format.toLowerCase();
 
-      switch (format.toUpperCase()) {
-        case 'V4R2':
+      switch (walletFormat) {
+        // old formats
+        case 'simpler1':
+        case 'simpler2':
+        case 'simpler3':
+        case 'v2r1':
+        case 'v2r2':
+        case 'v3r1':
+        case 'v3r2':
+        case 'v4r1':
+        case 'v4r2':
           const tonweb = new TonWeb();
-          const WalletClass = tonweb.wallet.all.v4R2;
+          const _tonwebFormat = walletFormat.replace('r', 'R');
+          const WalletClass = tonweb.wallet.all[_tonwebFormat];
           const wallet = new WalletClass(tonweb.provider, keyPair);
           const address = await wallet.getAddress();
-          const nonBounceableAddress = address.toString(true, true, false);
-          addresses.push({
-            title: 'V4R2: UQ format: best for wallets, - non-bounceable',
-            address: nonBounceableAddress,
-          });
-          const bouncableAddress = address.toString(true, true, true);
-          addresses.push({
-            title: 'V4R2: EQ format: best for smart contracts, - bounceable',
-            address: bouncableAddress,
-          });
+
+          if (walletFormat == 'v4r2') {
+            // when UQ was implemented (non-bounceable addresses)
+            const nonBounceableAddress = address.toString(true, true, false);
+            addresses.push({
+              title: 'V4R2 (UQ): best for wallets, - non-bounceable',
+              address: nonBounceableAddress,
+            });
+            const bouncableAddress = address.toString(true, true, true);
+            addresses.push({
+              title: 'V4R2 (EQ): best for smart contracts, - bounceable',
+              address: bouncableAddress,
+            });
+          } else {
+            addresses.push({
+              address: address.toString(true, true, true),
+            });
+          }
           break;
 
-        case 'V5R1':
-        case 'W5':
+        // new format
+        case 'v5r1':
+        case 'w5':
         default:
           const workchain = 0;
           const walletV5 = WalletContractV5R1.create({
@@ -535,7 +556,7 @@ class Wallet {
             testOnly: false,
           });
           addresses.push({
-            title: 'W5 (V5R1): UQ format: best for wallets, - non-bounceable',
+            title: 'W5 (V5R1) [UQ]: best for wallets, - non-bounceable',
             address: nonBounceableV5Address,
           });
           const bouncableAddressV5 = v5Address.toString({
@@ -544,8 +565,7 @@ class Wallet {
             testOnly: false,
           });
           addresses.push({
-            title:
-              'W5 (V5R1): EQ format: best for smart contracts, - bounceable',
+            title: 'W5 (V5R1) [EQ]: best for smart contracts, - bounceable',
             address: bouncableAddressV5,
           });
           break;

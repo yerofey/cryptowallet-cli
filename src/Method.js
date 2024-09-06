@@ -496,6 +496,15 @@ class Method {
         log();
       }
 
+      // should be activated (only for specific chains)
+      if (cw.row.requiresActivation !== undefined && cw.row.requiresActivation) {
+        log(
+          blue(
+            `💎  ${cw.row.title} (${cw.row.network}) requires wallet activation in order to use it (just make a small value transaction to itself)`
+          )
+        );
+      }
+
       // formats
       if (
         cw.row.formats !== undefined &&
@@ -546,7 +555,8 @@ class Method {
 
         let appsString = appsArray.join(', ');
         if (cw.row.apps || false) {
-          appsString += ' and any other wallet app (either using mnemonic or private key)';
+          appsString +=
+            ' and any other wallet app (either using mnemonic or private key)';
         }
         log(greenBright('ℹ️   You can import this wallet into ' + appsString));
       }

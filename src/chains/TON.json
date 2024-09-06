@@ -3,6 +3,70 @@
   "network": "TON",
   "defaultFormat": "W5",
   "formats": {
+    "simpleR1": {
+      "format": "simpleR1",
+      "startsWith": "EQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["m", "p", "s"]
+    },
+    "simpleR2": {
+      "format": "simpleR2",
+      "startsWith": "EQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["m", "p", "s"]
+    },
+    "simpleR3": {
+      "format": "simpleR3",
+      "startsWith": "EQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["m", "p", "s"]
+    },
+    "V2R1": {
+      "format": "V2R1",
+      "startsWith": "EQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["m", "p", "s"]
+    },
+    "V2R2": {
+      "format": "V2R2",
+      "startsWith": "EQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["m", "p", "s"]
+    },
+    "V3R1": {
+      "format": "V3R1",
+      "startsWith": "EQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["m", "p", "s"]
+    },
+    "V3R2": {
+      "format": "V3R2",
+      "startsWith": "EQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["m", "p", "s"]
+    },
+    "V4R1": {
+      "format": "V4R1",
+      "startsWith": "EQ",
+      "prefixTest": "[0-9a-zA-Z-_]",
+      "rareSymbols": "[0-9]",
+      "apps": ["tonkeeper", "trustwallet"],
+      "flags": ["m", "p", "s"]
+    },
     "V4R2": {
       "format": "V4R2",
       "startsWith": "EQ|UQ",
@@ -28,5 +92,6 @@
       "apps": ["tonkeeper", "trustwallet"],
       "flags": ["m", "p", "s"]
     }
-  }
+  },
+  "requiresActivation": true
 }
