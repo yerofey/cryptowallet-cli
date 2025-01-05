@@ -594,7 +594,7 @@ class Wallet {
             testOnly: false,
           });
           addresses.push({
-            title: 'W5 (V5R1) [UQ]: best for wallets, - non-bounceable',
+            title: 'W5 (V5R1) [UQ]: best for wallets (non-bounceable)',
             address: nonBounceableV5Address,
           });
           const bouncableAddressV5 = v5Address.toString({
@@ -603,7 +603,7 @@ class Wallet {
             testOnly: false,
           });
           addresses.push({
-            title: 'W5 (V5R1) [EQ]: best for smart contracts, - bounceable',
+            title: 'W5 (V5R1) [EQ]: best for smart contracts (bounceable)',
             address: bouncableAddressV5,
           });
           break;
