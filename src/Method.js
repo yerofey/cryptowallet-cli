@@ -558,7 +558,7 @@ class Method {
           appsString +=
             ' and any other wallet app (either using mnemonic or private key)';
         }
-        log(greenBright('⬇️   You can import this wallet into ' + appsString));
+        log(greenBright('⬇️  You can import this wallet into ' + appsString));
       }
 
       // donation
