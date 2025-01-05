@@ -537,8 +537,12 @@ class Method {
       // apps
       if (cw.row.apps !== undefined) {
         let apps = {
+          coinbase: 'Coinbase Wallet',
           metamask: 'MetaMask',
           phantom: 'Phantom',
+          suiet: 'Suiet',
+          suiwallet: 'Sui Wallet',
+          tonhub: 'Tonhub',
           tonkeeper: 'Tonkeeper',
           tronlink: 'TronLink',
           trustwallet: 'Trust Wallet',

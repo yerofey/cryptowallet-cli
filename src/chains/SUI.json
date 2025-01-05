@@ -3,6 +3,6 @@
   "network": "SUI",
   "startsWith": "0x",
   "prefixTest": "^[0-9A-Fa-f]+$",
-  "apps": ["Sui Wallet"],
+  "apps": ["suiwallet", "suiet", "trustwallet"],
   "flags": ["m", "n", "p", "s", "f"]
 }

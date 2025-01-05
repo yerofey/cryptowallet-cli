@@ -8,7 +8,7 @@
       "startsWith": "EQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     },
     "simpleR2": {
@@ -16,7 +16,7 @@
       "startsWith": "EQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     },
     "simpleR3": {
@@ -24,7 +24,7 @@
       "startsWith": "EQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     },
     "V2R1": {
@@ -32,7 +32,7 @@
       "startsWith": "EQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     },
     "V2R2": {
@@ -40,7 +40,7 @@
       "startsWith": "EQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     },
     "V3R1": {
@@ -48,7 +48,7 @@
       "startsWith": "EQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     },
     "V3R2": {
@@ -56,7 +56,7 @@
       "startsWith": "EQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     },
     "V4R1": {
@@ -64,7 +64,7 @@
       "startsWith": "EQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     },
     "V4R2": {
@@ -72,7 +72,7 @@
       "startsWith": "EQ|UQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     },
     "V5R1": {
@@ -80,7 +80,7 @@
       "startsWith": "EQ|UQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     },
     "W5": {
@@ -89,7 +89,7 @@
       "startsWith": "EQ|UQ",
       "prefixTest": "[0-9a-zA-Z-_]",
       "rareSymbols": "[0-9]",
-      "apps": ["tonkeeper", "trustwallet"],
+      "apps": ["tonkeeper", "tonhub", "trustwallet"],
       "flags": ["m", "p", "s"]
     }
   },
