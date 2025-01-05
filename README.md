@@ -114,21 +114,18 @@ $ cw -l
 
 ## Blockchains & tickers supported
 
-- `EVM` (Ethereum, Polygon, Arbitrum, Optimism, L2/L3, etc.)
+- `EVM` (Ethereum, Base, Arbitrum, Optimism, Polygon, L2/L3, etc.) **default**
 - `BTC` (Bitcoin) [legacy, segwit, bech32, taproot]
 - `ETH` (Ethereum)
 - `BNB` (Binance Coin) [BEP2, BEP20, ERC20]
 - `BSC` (Binance Smart Chain)
-- `ARB` (Arbitrum)
-- `OP` (Optimism)
-- `MATIC` (Polygon)
 - `SOL` (Solana)
-- `TON` (The Open Network)
+- `TRX` (Tron)
+- `TON` (The Open Network) [W5, V2-V5, simple]
 - `DOGE` (Dogecoin) [legacy, segwit, bech32]
 - `BCH` (Bitcoin Cash)
 - `LTC` (Litecoin) [legacy, segwit, bech32]
-- `POLYGON` (Polygon)
-- `TRX` (Tron)
+- `ETC` (Ethereum Classic)
 - `XTZ` (Tezos)
 - `DASH` (Dash)
 - `DCR` (Decred)
@@ -185,6 +182,8 @@ $ cw -l
 - [x] v19.x ✅
 - [x] v20.x ✅
 - [x] v21.x ✅
+- [x] v22.x ✅
+- [x] v23.x ✅
 
 *tested on Ubuntu 22.04 & Mac M1*
 

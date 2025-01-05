@@ -1,0 +1,8 @@
+{
+  "title": "Sui",
+  "network": "SUI",
+  "startsWith": "0x",
+  "prefixTest": "^[0-9A-Fa-f]+$",
+  "apps": ["Sui Wallet"],
+  "flags": ["m", "n", "p", "s", "f"]
+}

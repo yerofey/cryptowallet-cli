@@ -36,6 +36,7 @@ import {
   mnemonicNew as newTonMnemonic,
 } from '@ton/crypto';
 import { WalletContractV5R1 } from '@ton/ton';
+import { Ed25519Keypair } from '@mysten/sui/keypairs/ed25519';
 
 config();
 
@@ -481,6 +482,43 @@ class Wallet {
         addresses,
         mnemonic,
       });
+    } else if (chain == 'SUI') {
+      // Validate mnemonic
+      if (mnemonicString !== '' && !bip39.validateMnemonic(mnemonicString)) {
+        return {
+          error: 'mnemonic is not valid',
+        };
+      }
+
+      // Generate or use provided mnemonic
+      const mnemonic = mnemonicString || bip39.generateMnemonic();
+
+      try {
+        // Derive seed from mnemonic
+        const seed = bip39.mnemonicToSeedSync(mnemonic);
+
+        // Derive keypair using Sui's standard derivation path
+        const { key } = derivePath("m/44'/784'/0'/0'/0'", seed.toString('hex'));
+        const keypair = Ed25519Keypair.fromSecretKey(Buffer.from(key, 'hex'));
+
+        // Get Sui address from public key
+        const address = keypair.getPublicKey().toSuiAddress();
+
+        Object.assign(result, {
+          addresses: [
+            {
+              index: 0,
+              address: address,
+              privateKey: keypair.getSecretKey().toString('hex'),
+            },
+          ],
+          mnemonic,
+        });
+      } catch (error) {
+        return {
+          error: `Failed to generate SUI wallet: ${error.message} (${error})`,
+        };
+      }
     } else if (chain == 'TON') {
       // Validate mnemonic
       if (
