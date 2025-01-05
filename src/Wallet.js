@@ -525,12 +525,12 @@ class Wallet {
             // when UQ was implemented (non-bounceable addresses)
             const nonBounceableAddress = address.toString(true, true, false);
             addresses.push({
-              title: 'V4R2 (UQ): best for wallets, - non-bounceable',
+              title: 'V4R2 (UQ): best for wallets (non-bounceable)',
               address: nonBounceableAddress,
             });
             const bouncableAddress = address.toString(true, true, true);
             addresses.push({
-              title: 'V4R2 (EQ): best for smart contracts, - bounceable',
+              title: 'V4R2 (EQ): best for smart contracts (bounceable)',
               address: bouncableAddress,
             });
           } else {
