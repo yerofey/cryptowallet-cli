@@ -19,6 +19,7 @@
 - [x] Generate a lot of wallets at once: [`-n`]
 - [x] Save result into a CSV file: [`--csv`]
 - [x] Copy the generated mnemonic to the clipboard: [`-C` or `--copy`]
+- [x] Display QR code with the generated wallet address: [`-q` or `--qr`]
 - [x] Display some additional "geeky" info: [`-g`]
 
 *check the Options section for all supported commands*
