@@ -21,6 +21,7 @@ import { Account } from 'eth-lib/lib/index.js';
 import { Wallet as HarmonyWallet } from '@harmony-js/account';
 import pkutils from 'ethereum-mnemonic-privatekey-utils';
 import bCrypto from '@binance-chain/javascript-sdk/lib/crypto/index.js';
+import { HDKey } from 'ethereum-cryptography/hdkey.js';
 import tronWeb from 'tronweb';
 import tezos from 'tezos-sign';
 import {
@@ -614,22 +615,32 @@ class Wallet {
         mnemonic: mnemonicString,
       });
     } else if (chain == 'TRX') {
-      // TODO: generate wallet from mnemonic
       try {
-        const wallet = await tronWeb.createAccount();
+        // Validate mnemonic
+        if (mnemonicString !== '' && !bip39.validateMnemonic(mnemonicString)) {
+          return {
+            error: 'mnemonic is not valid',
+          };
+        }
+
+        // Generate mnemonic if not provided
+        const mnemonic = mnemonicString || bip39.generateMnemonic();
+        // Generate Tron address from private key
+        const wallet = tronWeb.utils.accounts.generateAccountWithMnemonic(mnemonic);
 
         Object.assign(result, {
           addresses: [
             {
               index: 0,
-              address: wallet.address.base58,
+              address: wallet.address,
               privateKey: wallet.privateKey,
             },
           ],
+          mnemonic,
         });
       } catch (error) {
         return {
-          error,
+          error: `Failed to generate TRX wallet: ${error.message} (${error})`,
         };
       }
     } else if (chain == 'XTZ') {

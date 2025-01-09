@@ -80,6 +80,9 @@ importers:
       ethereum-bip84:
         specifier: 0.0.3
         version: 0.0.3
+      ethereum-cryptography:
+        specifier: ^3.0.0
+        version: 3.0.0
       ethereum-mnemonic-privatekey-utils:
         specifier: 1.0.5
         version: 1.0.5
@@ -1173,11 +1176,19 @@ packages:
     resolution: {integrity: sha512-cFh5LxXZrXb/ZAD1dkKeQxzhgRYFXreyFGmI7w/JQWwdl+/0FrHJBwaWyTmGxJ/6ZC9SlaOPOk63flN7DbUurg==}
     engines: {node: '>=18'}
 
+  '@noble/ciphers@1.0.0':
+    resolution: {integrity: sha512-wH5EHOmLi0rEazphPbecAzmjd12I6/Yv/SiHdkA9LSycsQk7RuuTp7am5/o62qYr0RScE7Pc9icXGBbsr6cesA==}
+    engines: {node: ^14.21.3 || >=16}
+
   '@noble/curves@1.2.0':
     resolution: {integrity: sha512-oYclrNgRaM9SsBUBVbb8M6DTV7ZHRTKugureoYEncY5c65HOmRzvSiTE3y5CYaPYJA/GVkrhXEoF0M3Ya9PMnw==}
 
   '@noble/curves@1.3.0':
     resolution: {integrity: sha512-t01iSXPuN+Eqzb4eBX0S5oubSqXbK/xXa1Ne18Hj8f9pStxztHCE2gfboSp/dZRLSqfuLpRK2nDXDK+W9puocA==}
+
+  '@noble/curves@1.6.0':
+    resolution: {integrity: sha512-TlaHRXDehJuRNR9TfZDNQ45mMEd5dwUwmicsafcIX4SsNiqnCHKjE/1alYPd/lDRVhxdhUAlv8uEhMCI5zjIJQ==}
+    engines: {node: ^14.21.3 || >=16}
 
   '@noble/curves@1.8.0':
     resolution: {integrity: sha512-j84kjAbzEnQHaSIhRPUmB3/eVXu2k3dKPl2LOrR8fSOIL+89U+7lV117EWHtq/GHM3ReGHM46iRBdZfpc4HRUQ==}
@@ -1190,6 +1201,10 @@ packages:
   '@noble/hashes@1.3.3':
     resolution: {integrity: sha512-V7/fPHgl+jsVPXqqeOzT8egNj2iBIVt+ECeMMG8TdcnTikP3oaBtUVqpT/gYCR68aEBJSF+XbYUxStjbFMqIIA==}
     engines: {node: '>= 16'}
+
+  '@noble/hashes@1.5.0':
+    resolution: {integrity: sha512-1j6kQFb7QRru7eKN3ZDvRcP13rugwdxZqCjbiAVZfIJwgj2A65UmT4TgARXGlXgnRkORLTDTrO19ZErt7+QXgA==}
+    engines: {node: ^14.21.3 || >=16}
 
   '@noble/hashes@1.7.0':
     resolution: {integrity: sha512-HXydb0DgzTpDPwbVeDGCG1gIu7X6+AuU6Zl6av/E/KG8LMsvPntvq+w17CHRpKBmN6Ybdrt1eP3k4cj8DJa78w==}
@@ -1338,17 +1353,26 @@ packages:
   '@scure/base@1.1.5':
     resolution: {integrity: sha512-Brj9FiG2W1MRQSTB212YVPRrcbjkv48FoZi/u4l/zds/ieRrqsh7aUf6CLwkAq61oKXr/ZlTzlY66gLIj3TFTQ==}
 
+  '@scure/base@1.1.9':
+    resolution: {integrity: sha512-8YKhl8GHiNI/pU2VMaofa2Tor7PJRAjwQLBBuilkJ9L5+13yVbC7JO/wS7piioAvPSwR3JKM1IJ/u4xQzbcXKg==}
+
   '@scure/base@1.2.1':
     resolution: {integrity: sha512-DGmGtC8Tt63J5GfHgfl5CuAXh96VF/LD8K9Hr/Gv0J2lAoRGlPOMpqMpMbCTOoOJMZCk2Xt+DskdDyn6dEFdzQ==}
 
   '@scure/bip32@1.3.3':
     resolution: {integrity: sha512-LJaN3HwRbfQK0X1xFSi0Q9amqOgzQnnDngIt+ZlsBC3Bm7/nE7K0kwshZHyaru79yIVRv/e1mQAjZyuZG6jOFQ==}
 
+  '@scure/bip32@1.5.0':
+    resolution: {integrity: sha512-8EnFYkqEQdnkuGBVpCzKxyIwDCBLDVj3oiX0EKUFre/tOjL/Hqba1D6n/8RcmaQy4f95qQFrO2A8Sr6ybh4NRw==}
+
   '@scure/bip32@1.6.1':
     resolution: {integrity: sha512-jSO+5Ud1E588Y+LFo8TaB8JVPNAZw/lGGao+1SepHDeTs2dFLurdNIAgUuDlwezqEjRjElkCJajVrtrZaBxvaQ==}
 
   '@scure/bip39@1.2.2':
     resolution: {integrity: sha512-HYf9TUXG80beW+hGAt3TRM8wU6pQoYur9iNypTROm42dorCGmLnFe3eWjz3gOq6G62H2WRh0FCzAR1PI+29zIA==}
+
+  '@scure/bip39@1.4.0':
+    resolution: {integrity: sha512-BEEm6p8IueV/ZTfQLp/0vhw4NPnT9oWf5+28nvmeUICjP99f4vr2d+qc7AVGDDtwRep6ifR43Yed9ERVmiITzw==}
 
   '@scure/bip39@1.5.1':
     resolution: {integrity: sha512-GnlufVSP9UdAo/H2Patfv22VTtpNTyfi+I3qCKpvuB5l1KWzEYx+l2TNpBy9Ksh4xTs3Rn06tBlpWCi/1Vz8gw==}
@@ -2749,6 +2773,10 @@ packages:
 
   ethereum-cryptography@2.1.3:
     resolution: {integrity: sha512-BlwbIL7/P45W8FGW2r7LGuvoEZ+7PWsniMvQ4p5s2xCyw9tmaDlpfsN9HjAucbF+t/qpVHwZUisgfK24TCW8aA==}
+
+  ethereum-cryptography@3.0.0:
+    resolution: {integrity: sha512-Ij7U9OgVZc4MAui8BttPCEaWUrAXy+eo2IbVfIxZyfzfFxMQrbIWXRUbrsRBqRrIhJ75T8P+KQRKpKTaG0Du8Q==}
+    engines: {node: ^14.21.3 || >=16, npm: '>=9'}
 
   ethereum-mnemonic-privatekey-utils@1.0.5:
     resolution: {integrity: sha512-C+F0TLol7fY6RDC1gTIlFTt59lngBp8RNYYIeYoWi75RpyqZnZt8EdpIzsgtyCjdUNPLe49+rL+/Fia8qtiEIg==}
@@ -7538,6 +7566,8 @@ snapshots:
       - '@gql.tada/vue-support'
       - typescript
 
+  '@noble/ciphers@1.0.0': {}
+
   '@noble/curves@1.2.0':
     dependencies:
       '@noble/hashes': 1.3.2
@@ -7546,6 +7576,10 @@ snapshots:
     dependencies:
       '@noble/hashes': 1.3.3
 
+  '@noble/curves@1.6.0':
+    dependencies:
+      '@noble/hashes': 1.5.0
+
   '@noble/curves@1.8.0':
     dependencies:
       '@noble/hashes': 1.7.0
@@ -7553,6 +7587,8 @@ snapshots:
   '@noble/hashes@1.3.2': {}
 
   '@noble/hashes@1.3.3': {}
+
+  '@noble/hashes@1.5.0': {}
 
   '@noble/hashes@1.7.0': {}
 
@@ -7910,6 +7946,8 @@ snapshots:
 
   '@scure/base@1.1.5': {}
 
+  '@scure/base@1.1.9': {}
+
   '@scure/base@1.2.1': {}
 
   '@scure/bip32@1.3.3':
@@ -7917,6 +7955,12 @@ snapshots:
       '@noble/curves': 1.3.0
       '@noble/hashes': 1.3.3
       '@scure/base': 1.1.5
+
+  '@scure/bip32@1.5.0':
+    dependencies:
+      '@noble/curves': 1.6.0
+      '@noble/hashes': 1.5.0
+      '@scure/base': 1.1.9
 
   '@scure/bip32@1.6.1':
     dependencies:
@@ -7928,6 +7972,11 @@ snapshots:
     dependencies:
       '@noble/hashes': 1.3.3
       '@scure/base': 1.1.5
+
+  '@scure/bip39@1.4.0':
+    dependencies:
+      '@noble/hashes': 1.5.0
+      '@scure/base': 1.1.9
 
   '@scure/bip39@1.5.1':
     dependencies:
@@ -8694,7 +8743,7 @@ snapshots:
 
   bitcoinjs-lib@6.1.5:
     dependencies:
-      '@noble/hashes': 1.3.3
+      '@noble/hashes': 1.7.0
       bech32: 2.0.0
       bip174: 2.1.1
       bs58check: 3.0.1
@@ -8859,7 +8908,7 @@ snapshots:
 
   bs58check@3.0.1:
     dependencies:
-      '@noble/hashes': 1.3.3
+      '@noble/hashes': 1.7.0
       bs58: 5.0.0
 
   bser@2.1.1:
@@ -9743,6 +9792,14 @@ snapshots:
       '@noble/hashes': 1.3.3
       '@scure/bip32': 1.3.3
       '@scure/bip39': 1.2.2
+
+  ethereum-cryptography@3.0.0:
+    dependencies:
+      '@noble/ciphers': 1.0.0
+      '@noble/curves': 1.6.0
+      '@noble/hashes': 1.5.0
+      '@scure/bip32': 1.5.0
+      '@scure/bip39': 1.4.0
 
   ethereum-mnemonic-privatekey-utils@1.0.5:
     dependencies:

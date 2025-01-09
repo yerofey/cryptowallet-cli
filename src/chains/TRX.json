@@ -4,5 +4,5 @@
   "prefixTest": "(?![0OI])[1-9a-zA-Z]",
   "rareSymbols": "[1-9a-z]",
   "apps": ["tronlink", "trustwallet"],
-  "flags": ["p", "s"]
+  "flags": ["m", "p", "s"]
 }
