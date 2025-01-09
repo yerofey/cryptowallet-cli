@@ -86,6 +86,9 @@ importers:
       ethereum-mnemonic-privatekey-utils:
         specifier: 1.0.5
         version: 1.0.5
+      qrcode-terminal:
+        specifier: ^0.12.0
+        version: 0.12.0
       tezos-sign:
         specifier: 1.4.1
         version: 1.4.1
@@ -4588,6 +4591,10 @@ packages:
 
   qrcode-terminal@0.11.0:
     resolution: {integrity: sha512-Uu7ii+FQy4Qf82G4xu7ShHhjhGahEpCWc3x8UavY3CTcWV+ufmmCtwkr7ZKsX42jdL0kr1B5FKUeqJvAn51jzQ==}
+    hasBin: true
+
+  qrcode-terminal@0.12.0:
+    resolution: {integrity: sha512-EXtzRZmC+YGmGlDFbXKxQiMZNwCLEO6BANKXG4iCtSIM0yqc/pappSx3RIKr4r0uh5JsBckOXeKrB3Iz7mdQpQ==}
     hasBin: true
 
   qs@6.11.0:
@@ -12052,6 +12059,8 @@ snapshots:
 
   qrcode-terminal@0.11.0:
     optional: true
+
+  qrcode-terminal@0.12.0: {}
 
   qs@6.11.0:
     dependencies:

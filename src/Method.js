@@ -4,6 +4,7 @@ import chalk from 'chalk';
 import clipboardy from 'clipboardy';
 import columnify from 'columnify';
 import CsvWriter from 'csv-writer';
+import qr from 'qrcode-terminal';
 import { log, supportedChains, loadJson } from './utils.js';
 import { generateMnemonicString } from './Wallet.js';
 import CW from './CW.js';
@@ -204,6 +205,7 @@ class Method {
           )}\n`
         );
       }
+
       linesCount += 1;
     }
 
@@ -211,6 +213,28 @@ class Method {
     let matchingWalletsIndexes = [];
     let outputData = {};
     if (cw.wallet.addresses !== undefined) {
+      // show QR code if flag is set
+      if (displayAsText && cw.options.qr) {
+        if (cw.options.number === undefined || cw.options.number == 1) {
+          log(`📷 QR code for the wallet address:`);
+          qr.generate(
+            cw.wallet.addresses[0].address,
+            { small: true },
+            (qrcode) => {
+              const paddedQRCode = qrcode
+                .split('\n') // Split QR code into lines
+                .map((line) => `    ${line}`) // Add padding to each line
+                .join('\n'); // Join lines back into a single string
+              log(paddedQRCode); // Print the padded QR code
+            }
+          );
+        } else {
+          // not supported for multiple wallets
+          log(`ℹ️   It's not supported to display QR code for multiple wallets yet`);
+          log();
+        }
+      }
+
       // private key
       if (cw.wallet.privateExtendedKey && cw.options.geek) {
         log(`🔐  ${cw.wallet.privateExtendedKey}`);
@@ -497,7 +521,10 @@ class Method {
       }
 
       // should be activated (only for specific chains)
-      if (cw.row.requiresActivation !== undefined && cw.row.requiresActivation) {
+      if (
+        cw.row.requiresActivation !== undefined &&
+        cw.row.requiresActivation
+      ) {
         log(
           blue(
             `💎  ${cw.row.title} (${cw.row.network}) requires wallet activation in order to use it (just make a small value transaction to itself)`

@@ -31,6 +31,7 @@ program.option(
   '-P, --prefix-sensitive <prefix>',
   'Desired wallet prefix (case-sensitive)'
 );
+program.option('-q, --qr', 'Display QR Code for the wallet address');
 program.option('-s, --suffix <suffix>', 'Desired wallet suffix');
 program.option(
   '-S, --suffix-sensitive <suffix>',

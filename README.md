@@ -167,6 +167,7 @@ $ cw -l
 - `-P` or `--prefix-sensitive`: Specify desired prefix of the wallet address (**case-sensitive**)
 - `-s` or `--suffix`: Specify desired suffix for the wallet address (**case-insensitive**)
 - `-S` or `--suffix-sensitive`: Specify desired suffix for the wallet address (**case-sensitive**)
+- `-q` or `--qr`: Display QR code with the generated wallet address (works only without `-n` argument)
 - `-v` or `--version`: Display current version of CW tool
 
 **Currently not necessary options:**
