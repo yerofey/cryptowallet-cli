@@ -118,14 +118,15 @@ $ cw -l
 - `EVM` (Ethereum, Base, Arbitrum, Optimism, Polygon, L2/L3, etc.) **default**
 - `BTC` (Bitcoin) [legacy, segwit, bech32, taproot]
 - `ETH` (Ethereum)
+- `SOL` (Solana)
 - `BNB` (Binance Coin) [BEP2, BEP20, ERC20]
 - `BSC` (Binance Smart Chain)
-- `SOL` (Solana)
-- `TRX` (Tron)
-- `TON` (The Open Network) [W5, V2-V5, simple]
 - `DOGE` (Dogecoin) [legacy, segwit, bech32]
-- `BCH` (Bitcoin Cash)
+- `TRX` (Tron)
+- `SUI` (Sui)
+- `TON` (The Open Network) [W5, V2-V5, simple]
 - `LTC` (Litecoin) [legacy, segwit, bech32]
+- `BCH` (Bitcoin Cash)
 - `ETC` (Ethereum Classic)
 - `XTZ` (Tezos)
 - `DASH` (Dash)
