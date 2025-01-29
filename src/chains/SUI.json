@@ -4,5 +4,5 @@
   "startsWith": "0x",
   "prefixTest": "^[0-9A-Fa-f]+$",
   "apps": ["suiwallet", "suiet", "trustwallet"],
-  "flags": ["m", "n", "p", "s", "f"]
+  "flags": ["m", "p", "s", "f"]
 }
