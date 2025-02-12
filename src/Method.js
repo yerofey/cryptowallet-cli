@@ -312,10 +312,6 @@ class Method {
                   addressHighlightedPart
                 )}${addressLastPart}${magenta(addressHighlightedSuffix)}`
               );
-              // DEBUG
-              if (IS_DEV) {
-                log(`___ ${item.address}`);
-              }
             } else {
               log(`👛  ${item.address}`);
             }
@@ -362,10 +358,6 @@ class Method {
                   addressHighlightedPart
                 )}${addressLastPart}`
               );
-              // DEBUG
-              if (IS_DEV) {
-                log(`___ ${item.address}`);
-              }
             } else {
               log(`👛  ${item.address}`);
             }
@@ -389,10 +381,6 @@ class Method {
               log(
                 `👛  ${addressFirstPart}${magenta(addressHighlightedSuffix)}`
               );
-              // DEBUG
-              if (IS_DEV) {
-                log(`___ ${item.address}`);
-              }
             } else {
               log(`👛  ${item.address}`);
             }

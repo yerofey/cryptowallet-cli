@@ -13,9 +13,10 @@
 - [x] Generate brand new crypto wallet address (offline)
 - [x] Generate wallet address with prefix (string at the start): [`-p`] (case-insensitive) or [`-P`] (case-sensitive)
 - [x] Generate wallet address with suffix (string at the end): [`-s`] (case-insensitive) or [`-S`] (case-sensitive)
-- [x] Generate wallet with different formats (for Bitcoin: Legacy, SegWit, Bech32; for BNB: BEP2, BEP20): [`-f`]
+- [x] Generate wallet with different formats (for Bitcoin: `legacy`, `segwit`, `bech32`, `taproot`; for BNB: `bep2`, `bep20`, `erc20`; for TON: `w5` and all previous ones): [`-f`]
 - [x] Generate wallet from your desired mnemonic string: [`-m`]
 - [x] Generate mnemonic string: [`-m`] or [`-m 12`] or [`-m 15`] or [`-m 18`] or [`-m 21`] or [`-m 24`]
+- [x] Use multiple threads (cores) for faster generation [`-t`]
 - [x] Generate a lot of wallets at once: [`-n`]
 - [x] Save result into a CSV file: [`--csv`]
 - [x] Copy the generated mnemonic to the clipboard: [`-C` or `--copy`]
@@ -43,11 +44,17 @@ $ yarn global add @yerofey/cryptowallet-cli
 # generate random EVM-compatible wallet (for Ethereum, Polygon, any L1/L2 EVM-compatible chain, etc.)
 $ cw
 
+# generate random wallet and copy the mnemonic to the clipboard
+$ cw -C
+
 # generate random BTC wallet (default format: bech32 - "bc1q...")
 $ cw -c btc
 
 # generate random mnemonic string (12 words) to import in any wallet app
 $ cw -m
+
+# generate random wallet faster (use all available CPU cores)
+$ cw -t 
 
 # generate random mnemonic string of a specific length (12, 15, 18, 21 or 24 words)
 $ cw -m 12
@@ -169,6 +176,7 @@ $ cw -l
 - `-P` or `--prefix-sensitive`: Specify desired prefix of the wallet address (**case-sensitive**)
 - `-s` or `--suffix`: Specify desired suffix for the wallet address (**case-insensitive**)
 - `-S` or `--suffix-sensitive`: Specify desired suffix for the wallet address (**case-sensitive**)
+- `-t` or `--threads`: Use multiple threads (cores) for faster generation (default: half of the available cores), or pass `0` to use all available cores (not recommended for laptops)
 - `-q` or `--qr`: Display QR code with the generated wallet address (works only without `-n` argument)
 - `-v` or `--version`: Display current version of CW tool
 
@@ -187,8 +195,6 @@ $ cw -l
 - [x] v21.x ✅
 - [x] v22.x ✅
 - [x] v23.x ✅
-
-*tested on Ubuntu 22.04 & Mac M1*
 
 ## TODO
 

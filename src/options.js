@@ -3,10 +3,7 @@ import { program } from 'commander';
 program.option('-b <ticker>', 'Wallet for specific blockchain', 'EVM');
 program.option('-c, --chain <ticker>', 'Wallet for specific blockchain', 'EVM');
 program.option('-C, --copy', 'Copy the result to the clipboard');
-program.option(
-  '-D, --csv [filename]',
-  'Save result into CSV file'
-);
+program.option('-D, --csv [filename]', 'Save result into CSV file');
 program.option(
   '-f, --format <format>',
   'Wallet format type (for cryptos with multiple wallet formats)'
@@ -37,8 +34,12 @@ program.option(
   '-S, --suffix-sensitive <suffix>',
   'Desired wallet suffix (case-sensitive)'
 );
+program.option(
+  '-t, --threads <threads>',
+  'Number of threads (cores) to use for wallet generation'
+);
 program.option('-v, --version', 'Display cryptowallet version');
-program.option('-T, --donate', 'Donate to the project');
+program.option('--donate', 'Donate to the project');
 program.parse();
 
 export const options = program.opts();
