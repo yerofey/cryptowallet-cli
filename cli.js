@@ -17,10 +17,13 @@ import Method from './src/Method.js';
 // get the current file path
 const __filename = fileURLToPath(import.meta.url);
 
+const exit = process.exit;
+
 if (options.list !== undefined) {
   (async () => {
     return new Method('list').init();
   })();
+  exit(0);
 }
 
 // generate mnemonic string if no argument is passed or only the mnemonic length is passed
@@ -36,18 +39,21 @@ if (
       copy: options?.copy || false,
     });
   })();
+  exit(0);
 }
 
 if (options.version) {
   (async () => {
     return new Method('version').init();
   })();
+  exit(0);
 }
 
 if (options.donate) {
   (async () => {
     return new Method('donate').init();
   })();
+  exit(0);
 }
 
 const chain = (options.chain.toUpperCase() || 'EVM').trim();
