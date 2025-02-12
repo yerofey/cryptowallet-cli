@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.37.1",
+  "version": "1.37.2",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -45,10 +45,12 @@
     "cw": "cli.js"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "scripts": {
     "dev:npm": "npm i --package-lock-only",
+    "dev:pnpm": "pnpm install --lockfile-only",
+    "dev:yarn": "yarn install --mode=skip-build --no-node-modules",
     "lint": "pnpm exec eslint src/*.js",
     "test": "ava"
   },
@@ -111,21 +113,21 @@
     "@harmony-js/account": "^0.1.58",
     "@mysten/sui": "^1.18.0",
     "@solana/web3.js": "^1.98.0",
-    "@ton/core": "^0.59.1",
+    "@ton/core": "^0.60.0",
     "@ton/crypto": "^3.3.0",
     "@ton/ton": "^15.1.0",
     "@yerofey/dogecoin-bip84": "^0.0.5",
     "@yerofey/litecoin-bip84": "^0.0.5",
     "bip39": "3.1.0",
-    "bip84": "0.2.7",
-    "bip86": "^0.0.3",
+    "bip84": "^0.2.9",
+    "bip86": "^0.0.4",
     "bs58": "^6.0.0",
     "chalk": "5.4.1",
     "clipboardy": "^4.0.0",
     "coininfo": "5.2.1",
     "coinkey": "3.0.0",
     "columnify": "1.6.0",
-    "commander": "13.0.0",
+    "commander": "^13.1.0",
     "csv-writer": "^1.6.0",
     "dotenv": "^16.4.7",
     "ed25519-hd-key": "^1.3.0",
@@ -136,7 +138,7 @@
     "qrcode-terminal": "^0.12.0",
     "tezos-sign": "1.4.1",
     "tonweb": "^0.0.66",
-    "tronweb": "6.0.0"
+    "tronweb": "^6.0.1"
   },
   "devDependencies": {
     "ava": "^6.2.0",
