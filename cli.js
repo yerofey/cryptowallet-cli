@@ -84,7 +84,7 @@ if (isMainThread) {
     );
   } else {
     console.log(
-      chalk.green(`🏎️💨 Using ${numThreads}/${allMachineThreads} threads to generate a wallet...`)
+      chalk.green(`⚡  Using ${numThreads}/${allMachineThreads} threads to generate a wallet...`)
     );
   }
 
