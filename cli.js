@@ -1,6 +1,14 @@
 #!/usr/bin/env node
 'use strict';
 
+// filter out unwanted "bigint" warning messages
+const originalStderrWrite = process.stderr.write;
+process.stderr.write = function (chunk, encoding, callback) {
+  const msg = chunk.toString();
+  if (msg.includes('bigint: Failed to load bindings')) return;
+  originalStderrWrite.apply(process.stderr, arguments);
+};
+
 import os from 'node:os';
 import {
   Worker,
@@ -84,7 +92,9 @@ if (isMainThread) {
     );
   } else {
     console.log(
-      chalk.green(`⚡  Using ${numThreads}/${allMachineThreads} threads to generate a wallet...`)
+      chalk.green(
+        `⚡  Using ${numThreads}/${allMachineThreads} threads to generate a wallet...`
+      )
     );
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.37.3",
+  "version": "1.38.0",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -50,7 +50,6 @@
   "scripts": {
     "dev:npm": "npm i --package-lock-only",
     "dev:pnpm": "pnpm install --lockfile-only",
-    "dev:yarn": "yarn install --mode=skip-build --no-node-modules",
     "lint": "pnpm exec eslint src/*.js",
     "test": "ava"
   },

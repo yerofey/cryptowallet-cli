@@ -28,14 +28,17 @@
 ## Install
 
 ```bash
-# via NPM
+# via npm
 $ npm i -g @yerofey/cryptowallet-cli
 
-# via PNPM
+# via pnpm
 $ pnpm add -g @yerofey/cryptowallet-cli
 
-# via Yarn
+# via yarn
 $ yarn global add @yerofey/cryptowallet-cli
+
+# via bun
+$ bun add -g @yerofey/cryptowallet-cli
 ```
 
 ## Usage
