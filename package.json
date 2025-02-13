@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.38.0",
+  "version": "1.38.1",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -117,6 +117,7 @@
     "@ton/ton": "^15.1.0",
     "@yerofey/dogecoin-bip84": "^0.0.5",
     "@yerofey/litecoin-bip84": "^0.0.5",
+    "bigint-buffer": "^1.1.5",
     "bip39": "3.1.0",
     "bip84": "^0.2.9",
     "bip86": "^0.0.4",

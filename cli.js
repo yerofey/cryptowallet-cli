@@ -81,6 +81,8 @@ if (inputThreads > availableThreads) {
   numThreads = defaultThreads;
 } else if (inputThreads <= 0) {
   numThreads = availableThreads;
+} else {
+  numThreads = inputThreads;
 }
 
 if (isMainThread) {
