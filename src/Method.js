@@ -5,11 +5,12 @@ import clipboardy from 'clipboardy';
 import columnify from 'columnify';
 import CsvWriter from 'csv-writer';
 import qr from 'qrcode-terminal';
-import { log, supportedChains, loadJson } from './utils.js';
-import { generateMnemonicString } from './Wallet.js';
 import CW from './CW.js';
+import { generateMnemonicString } from './Wallet.js';
+import { log, supportedChains, loadJson } from './utils.js';
 
 config();
+
 const {
   blue,
   green,
@@ -53,7 +54,7 @@ class Method {
     for (const val of supportedChains) {
       // eslint-disable-next-line no-undef
       const data = await loadJson(
-        `${path.dirname(import.meta.url)}/chains/${val}.json`.replace(
+        `${path.dirname(import.meta.url)}${path.sep}chains${path.sep}${val}.json`.replace(
           'file://',
           ''
         )

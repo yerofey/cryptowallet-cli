@@ -1,5 +1,5 @@
 {
-  "title": "TRX",
+  "title": "TRON",
   "network": "TRON",
   "startsWith": "T",
   "prefixTest": "(?![0OI])[1-9a-zA-Z]",

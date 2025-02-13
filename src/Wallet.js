@@ -2,7 +2,7 @@
 import { config } from 'dotenv';
 import { log } from './utils.js';
 import chalk from 'chalk';
-const { red, yellow } = chalk;
+const { red, yellow, gray } = chalk;
 import CoinKey from 'coinkey';
 import CoinInfo from 'coininfo';
 import bip39 from 'bip39';
@@ -21,7 +21,6 @@ import { Account } from 'eth-lib/lib/index.js';
 import { Wallet as HarmonyWallet } from '@harmony-js/account';
 import pkutils from 'ethereum-mnemonic-privatekey-utils';
 import bCrypto from '@binance-chain/javascript-sdk/lib/crypto/index.js';
-import { HDKey } from 'ethereum-cryptography/hdkey.js';
 import tronWeb from 'tronweb';
 import tezos from 'tezos-sign';
 import {
@@ -112,7 +111,9 @@ class Wallet {
         if (options.prefix && options.suffix) {
           // prefix & suffix
           log(
-            `⏳  Generating wallet with "${options.prefix}" prefix and "${options.suffix}" suffix, this for sure will take a while...`
+            gray(
+              `⏳  Generating wallet with "${options.prefix}" prefix and "${options.suffix}" suffix, this for sure will take a while...`
+            )
           );
           onlyBoth = true;
         } else {
@@ -123,7 +124,9 @@ class Wallet {
               RegExp(row.rareSymbols, 'g').test(options.prefix))
           ) {
             log(
-              `⏳  Generating wallet with "${options.prefix}" prefix, this might take a while...`
+              gray(
+                `⏳  Generating wallet with "${options.prefix}" prefix, this might take a while...`
+              )
             );
             onlyPrefix = true;
           }
@@ -134,7 +137,9 @@ class Wallet {
               RegExp(row.rareSymbols, 'g').test(options.suffix))
           ) {
             log(
-              `⏳  Generating wallet with "${options.suffix}" suffix, this might take a while...`
+              gray(
+                `⏳  Generating wallet with "${options.suffix}" suffix, this might take a while...`
+              )
             );
             onlySuffix = true;
           }
@@ -626,7 +631,8 @@ class Wallet {
         // Generate mnemonic if not provided
         const mnemonic = mnemonicString || bip39.generateMnemonic();
         // Generate Tron address from private key
-        const wallet = tronWeb.utils.accounts.generateAccountWithMnemonic(mnemonic);
+        const wallet =
+          tronWeb.utils.accounts.generateAccountWithMnemonic(mnemonic);
 
         Object.assign(result, {
           addresses: [

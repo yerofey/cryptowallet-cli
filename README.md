@@ -4,7 +4,7 @@
 [![Minimum Node.js version](https://badgen.net/npm/node/@yerofey/cryptowallet-cli)](https://npmjs.com/@yerofey/cryptowallet-cli)
 [![NPM package version](https://badgen.net/npm/v/@yerofey/cryptowallet-cli)](https://npmjs.com/package/@yerofey/cryptowallet-cli)
 
-> Crypto wallet generator CLI tool
+> CW: crypto wallet generator CLI tool
 
 ![Screenshot](https://i.imgur.com/uWuT4lF.png)
 
@@ -259,9 +259,9 @@ Each chain JSON file is structured to provide essential information about the bl
 - `flags`: An array of supported features for the wallet generation. Common flags include `m` for mnemonic support, `n` for generating multiple wallets, `p` for prefix support, and `s` for suffix support.
 - `formats`: (Optional) An object defining multiple wallet formats if the blockchain supports more than one format. Each format should specify its unique properties.
 
-By following this structure, the `cryptowallet-cli` tool can understand and support wallet generation for a wide array of blockchains.
+By following this structure, the `cw` tool can understand and support wallet generation for a wide array of blockchains.
 
-Feel free to contribute by adding support for more chains, and help in making `cryptowallet-cli` a more comprehensive tool for the crypto community!
+Feel free to contribute by adding support for more chains, and help in making `cw` a more comprehensive tool for the crypto community!
 
 ## Contributing
 

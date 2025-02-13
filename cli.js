@@ -1,14 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-// filter out unwanted "bigint" warning messages
-const originalStderrWrite = process.stderr.write;
-process.stderr.write = function (chunk, encoding, callback) {
-  const msg = chunk.toString();
-  if (msg.includes('bigint: Failed to load bindings')) return;
-  originalStderrWrite.apply(process.stderr, arguments);
-};
-
 import os from 'node:os';
 import {
   Worker,
@@ -17,24 +9,23 @@ import {
   workerData,
 } from 'node:worker_threads';
 import { fileURLToPath } from 'node:url';
-import chalk from 'chalk';
 import { options } from './src/options.js';
-import { log, supportedChains } from './src/utils.js';
+import { exit, log, supportedChains } from './src/utils.js';
 import Method from './src/Method.js';
+import chalk from 'chalk';
 
 // get the current file path
 const __filename = fileURLToPath(import.meta.url);
 
-const exit = process.exit;
-
-if (options.list !== undefined) {
+// show all supported chains
+if (options.list) {
   (async () => {
-    return new Method('list').init();
+    await new Method('list').init();
+    exit(0);
   })();
-  exit(0);
 }
 
-// generate mnemonic string if no argument is passed or only the mnemonic length is passed
+// generate mnemonic string
 if (
   options.mnemonic &&
   (options.mnemonic === true ||
@@ -42,32 +33,35 @@ if (
     options.mnemonic.split(' ').length === 1)
 ) {
   (async () => {
-    return new Method('mnemonic').init({
+    new Method('mnemonic').init({
       mnemonic: options.mnemonic,
       copy: options?.copy || false,
     });
+    exit(0);
   })();
-  exit(0);
 }
 
+// show the version number
 if (options.version) {
   (async () => {
-    return new Method('version').init();
+    new Method('version').init();
+    exit(0);
   })();
-  exit(0);
 }
 
+// show donation message
 if (options.donate) {
   (async () => {
-    return new Method('donate').init();
+    new Method('donate').init();
+    exit(0);
   })();
-  exit(0);
 }
 
+// generate a wallet
 const chain = (options.chain.toUpperCase() || 'EVM').trim();
 if (!supportedChains.includes(chain)) {
   log(chalk.red('⛔️  Error: this chain is not supported!'));
-  process.exit(1);
+  exit(1);
 }
 options.b = chain; // ensure the chain is passed to the Method class
 
@@ -75,7 +69,7 @@ options.b = chain; // ensure the chain is passed to the Method class
 const allMachineThreads = os.cpus().length;
 const availableThreads = os.cpus().length - 1; // leave 1 core for the main thread
 const defaultThreads = os.cpus().length / 2; // use half of the available threads
-const inputThreads = parseInt(options.threads || 1, 10); // default to 1 thread
+const inputThreads = parseInt(options.threads || defaultThreads, 10); // user input threads
 let numThreads = defaultThreads; // default to half of the available threads
 if (inputThreads > availableThreads) {
   numThreads = defaultThreads;
@@ -90,13 +84,15 @@ if (isMainThread) {
     console.log(
       chalk.green(
         '🐢  Using only 1 thread to generate a wallet, this might take a while...'
-      )
+      ),
+      chalk.gray(`(pass "-t ${availableThreads}" to use all available threads)`)
     );
   } else {
     console.log(
       chalk.green(
         `⚡  Using ${numThreads}/${allMachineThreads} threads to generate a wallet...`
-      )
+      ),
+      chalk.gray(`(pass "-t ${availableThreads}" to use all available threads)`)
     );
   }
 

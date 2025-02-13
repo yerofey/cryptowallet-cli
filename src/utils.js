@@ -1,9 +1,10 @@
 import { readdirSync, statSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
-import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 const log = console.log;
+const exit = process.exit;
 
 const dirname = (metaUrl) => {
   const __filename = fileURLToPath(metaUrl);
@@ -49,4 +50,4 @@ supportedChains = filesList(chainsFolder).map((item) => {
     .replace('.json', '');
 });
 
-export { log, loadFile, loadJson, objectHasAllKeys, supportedChains };
+export { exit, log, loadFile, loadJson, objectHasAllKeys, supportedChains };

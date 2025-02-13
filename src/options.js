@@ -38,7 +38,7 @@ program.option(
   '-t, --threads <threads>',
   'Number of threads (cores) to use for wallet generation'
 );
-program.option('-v, --version', 'Display cryptowallet version');
+program.option('-v, --version', 'Display package version');
 program.option('--donate', 'Donate to the project');
 program.parse();
 
