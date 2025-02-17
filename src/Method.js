@@ -544,8 +544,8 @@ class Method {
       // network
       if (cw.row.network == 'EVM' || false) {
         log(
-          yellow(
-            '🆒  You can use this wallet for Ethereum, BSC, Polygon, Arbitrum, Optimism and any other L2/L3 chain (EVM compatible)'
+          blue(
+            '🆒  You can use this wallet for Ethereum, Base or any other L1/L2/L3 chain (EVM compatible)'
           )
         );
       }

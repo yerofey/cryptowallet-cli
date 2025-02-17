@@ -398,7 +398,8 @@ class Wallet {
       const mnemonic = mnemonicString || generateMnemonicString(mnemonicLength);
       const privateKey = pkutils.getPrivateKeyFromMnemonic(mnemonic);
 
-      if (number == 1) {
+      const numberIsSupported = row.flags.includes('n') || false;
+      if (!numberIsSupported || number == 1) {
         const account = Account.fromPrivate('0x' + privateKey);
 
         addresses.push({
@@ -407,6 +408,7 @@ class Wallet {
           privateKey,
         });
       } else {
+        // ! known issue: "Cannot read properties of undefined (reading 'fromBase58')"
         // TODO: add variable for accountId
         const root = new fromMnemonicEthereum(mnemonic, '');
         const child = root.deriveAccount(0);
@@ -619,7 +621,7 @@ class Wallet {
         addresses: addresses,
         mnemonic: mnemonicString,
       });
-    } else if (chain == 'TRX') {
+    } else if (chain == 'TRX' || row.network == 'TRON') {
       try {
         // Validate mnemonic
         if (mnemonicString !== '' && !bip39.validateMnemonic(mnemonicString)) {

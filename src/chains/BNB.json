@@ -15,7 +15,7 @@
       "startsWith": "0x",
       "prefixTest": "[0-9a-fA-F]",
       "apps": ["metamask", "trustwallet", "binance-chain-wallet"],
-      "flags": ["f", "m", "n", "p", "s"]
+      "flags": ["f", "m", "p", "s"]
     },
     "ERC20": {
       "format": "ERC20",
@@ -23,7 +23,7 @@
       "startsWith": "0x",
       "prefixTest": "[0-9a-f]",
       "apps": ["metamask", "trustwallet", "binance-chain-wallet"],
-      "flags": ["f", "m", "n", "p", "s"]
+      "flags": ["f", "m", "p", "s"]
     }
   }
 }

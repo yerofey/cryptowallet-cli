@@ -4,7 +4,7 @@
 [![Minimum Node.js version](https://badgen.net/npm/node/@yerofey/cryptowallet-cli)](https://npmjs.com/@yerofey/cryptowallet-cli)
 [![NPM package version](https://badgen.net/npm/v/@yerofey/cryptowallet-cli)](https://npmjs.com/package/@yerofey/cryptowallet-cli)
 
-> CW: crypto wallet generator CLI tool
+> cw: crypto wallet generator CLI tool
 
 ![Screenshot](https://i.imgur.com/uWuT4lF.png)
 
@@ -44,7 +44,7 @@ $ bun add -g @yerofey/cryptowallet-cli
 ## Usage
 
 ```bash
-# generate random EVM-compatible wallet (for Ethereum, Polygon, any L1/L2 EVM-compatible chain, etc.)
+# generate random EVM-compatible wallet (for Ethereum, Base, and any L1/L2/L3 EVM-compatible chain, etc.)
 $ cw
 
 # generate random wallet and copy the mnemonic to the clipboard
@@ -55,9 +55,6 @@ $ cw -c btc
 
 # generate random mnemonic string (12 words) to import in any wallet app
 $ cw -m
-
-# generate random wallet faster (use all available CPU cores)
-$ cw -t 
 
 # generate random mnemonic string of a specific length (12, 15, 18, 21 or 24 words)
 $ cw -m 12
@@ -125,7 +122,7 @@ $ cw -l
 
 ## Blockchains & tickers supported
 
-- `EVM` (Ethereum, Base, Arbitrum, Optimism, Polygon, L2/L3, etc.) **default**
+- `EVM` (Ethereum, Base, or any EVM L1/L2/L3, etc.) **default**
 - `BTC` (Bitcoin) [legacy, segwit, bech32, taproot]
 - `ETH` (Ethereum)
 - `SOL` (Solana)
@@ -156,11 +153,11 @@ $ cw -l
 - `NBT` (NIX Bridge Token)
 - `PLS` (PulseChain)
 
-*all other cryptos that are tokens in the ecosystems like Ethereum, Binance Smart Chain or Polygon and others chains are supported as well (L2/L3, etc.)*
+*all other cryptos that are tokens in the ecosystems like Ethereum, Base, Binance Smart Chain and others chains are supported as well (L1/L2/L3, etc.)*
 
 ## Options
 
-- `-b` or `-c` or `--chain`: Specify the blockchain ticker to generate a wallet for
+- `-c` or `--chain`: Specify the chain/coin ticker to generate a wallet for
 - `-C` or `--copy`: Copy the generated mnemonic to the clipboard
 - `-D` or `--csv`: Save output into CSV file with custom or default name ("`cw-output.csv`") - this is a shorthand for `-o csv -F filename`
 - `-f` or `--format`: Specify the blockchain wallet format (for BTC: legacy, segwit, bech32)
@@ -181,7 +178,7 @@ $ cw -l
 - `-S` or `--suffix-sensitive`: Specify desired suffix for the wallet address (**case-sensitive**)
 - `-t` or `--threads`: Use multiple threads (cores) for faster generation (default: half of the available cores), or pass `0` to use all available cores (not recommended for laptops)
 - `-q` or `--qr`: Display QR code with the generated wallet address (works only without `-n` argument)
-- `-v` or `--version`: Display current version of CW tool
+- `-v` or `--version`: Display current version of `cw` tool
 
 **Currently not necessary options:**
 

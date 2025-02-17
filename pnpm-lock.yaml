@@ -83,6 +83,9 @@ importers:
       ethereum-bip84:
         specifier: 0.0.3
         version: 0.0.3
+      ethereum-cryptography:
+        specifier: ^3.1.0
+        version: 3.1.0
       ethereum-mnemonic-privatekey-utils:
         specifier: 1.0.5
         version: 1.0.5
@@ -1140,6 +1143,10 @@ packages:
   '@mysten/sui@1.21.2':
     resolution: {integrity: sha512-8AesvczokAUv796XiOo8af2+1IYA9bRon11Ra+rwehvqhz+sMRT8A+Cw5sDnlSc9/aQwM51JQKUnvMczNbpfYA==}
     engines: {node: '>=18'}
+
+  '@noble/ciphers@1.2.1':
+    resolution: {integrity: sha512-rONPWMC7PeExE077uLE4oqWrZ1IvAfz3oH9LibVAcVCopJiA9R62uavnbEzdkVmJYI6M6Zgkbeb07+tWjlq2XA==}
+    engines: {node: ^14.21.3 || >=16}
 
   '@noble/curves@1.2.0':
     resolution: {integrity: sha512-oYclrNgRaM9SsBUBVbb8M6DTV7ZHRTKugureoYEncY5c65HOmRzvSiTE3y5CYaPYJA/GVkrhXEoF0M3Ya9PMnw==}
@@ -2678,6 +2685,10 @@ packages:
 
   ethereum-cryptography@2.2.1:
     resolution: {integrity: sha512-r/W8lkHSiTLxUxW8Rf3u4HGB0xQweG2RyETjywylKZSzLWoWAijRz8WCuOtJ6wah+avllXBqZuk29HCCvhEIRg==}
+
+  ethereum-cryptography@3.1.0:
+    resolution: {integrity: sha512-ZqHd92eOIH9RExpBUOgzpAgflyFv9/+Ca39G8V+oCjJPGjJUihQcG/Gl67I/Xn2HGS87dgnrCG3kb1jNClLi6g==}
+    engines: {node: ^14.21.3 || >=16, npm: '>=9'}
 
   ethereum-mnemonic-privatekey-utils@1.0.5:
     resolution: {integrity: sha512-C+F0TLol7fY6RDC1gTIlFTt59lngBp8RNYYIeYoWi75RpyqZnZt8EdpIzsgtyCjdUNPLe49+rL+/Fia8qtiEIg==}
@@ -7318,6 +7329,8 @@ snapshots:
       - '@gql.tada/vue-support'
       - typescript
 
+  '@noble/ciphers@1.2.1': {}
+
   '@noble/curves@1.2.0':
     dependencies:
       '@noble/hashes': 1.3.2
@@ -9424,6 +9437,14 @@ snapshots:
       '@noble/hashes': 1.4.0
       '@scure/bip32': 1.4.0
       '@scure/bip39': 1.3.0
+
+  ethereum-cryptography@3.1.0:
+    dependencies:
+      '@noble/ciphers': 1.2.1
+      '@noble/curves': 1.8.1
+      '@noble/hashes': 1.7.1
+      '@scure/bip32': 1.6.2
+      '@scure/bip39': 1.5.4
 
   ethereum-mnemonic-privatekey-utils@1.0.5:
     dependencies:

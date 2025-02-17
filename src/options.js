@@ -1,6 +1,5 @@
 import { program } from 'commander';
 
-program.option('-b <ticker>', 'Wallet for specific blockchain', 'EVM');
 program.option('-c, --chain <ticker>', 'Wallet for specific blockchain', 'EVM');
 program.option('-C, --copy', 'Copy the result to the clipboard');
 program.option('-D, --csv [filename]', 'Save result into CSV file');
