@@ -99,7 +99,7 @@ class Method {
     log();
     log(
       greenBright(
-        '⬇️   You can import it into your favorite wallet app or use it to generate a wallet with "-m" flag'
+        '💾  You can import it into your favorite wallet app or use it to generate a wallet with "-m" flag'
       )
     );
 
@@ -159,7 +159,7 @@ class Method {
       return;
     }
 
-    let linesCount = 0;
+    let linesCount = 0; // count of lines to add empty line before the next message
     const outputFormats = ['csv'];
     const displayAsText =
       cw.options.output === undefined ||
@@ -247,24 +247,45 @@ class Method {
         linesCount += 1;
       }
 
+      // wallets
       if (displayAsText) {
+        // show all addresses if flag is set or if prefix or suffix is not found
+        let showAllAddresses = cw.options.number !== undefined;
+        if (cw.suffixFound) {
+          showAllAddresses = false;
+        }
+        if (cw.prefixFound) {
+          showAllAddresses = false;
+        }
+        // show private key only for the first wallet or the one that matches the prefix or/and suffix
+        let showPrivateKey = false;
+        // add empty line before the next message
+        let emptyLineAdded = false;
         // display addresses
         let index = 0;
         for (const item of cw.wallet.addresses) {
           if (cw.wallet.addresses.length > 1) {
-            log();
-
             // Display index
-            if (item.index !== undefined) {
+            if (item.index !== undefined && (showAllAddresses || !showAllAddresses && index == 0 || (cw.prefixFoundInWallets.includes(item.address) || cw.suffixFoundInWallets.includes(item.address)))) {
+              log();
               log(`🆔  ${item.index}`);
+              emptyLineAdded = true;
             }
 
             // Display address details
             if (item.title) {
+              if (!emptyLineAdded) {
+                log();
+                emptyLineAdded = true;
+              }
               log(`🏷   ${item.title}`);
             }
           }
 
+          // in multi-wallets mode, hide private key for all wallets except the first one and the one that matches the prefix or/and suffix
+          showPrivateKey = false;
+
+          // highlight prefix and suffix
           if (
             cw.prefixFound &&
             cw.prefixFoundInWallets.includes(item.address) &&
@@ -317,6 +338,7 @@ class Method {
               log(`👛  ${item.address}`);
             }
             matchingWalletsIndexes.push(index);
+            showPrivateKey = true;
           } else if (
             cw.prefixFound &&
             cw.prefixFoundInWallets.includes(item.address)
@@ -363,6 +385,7 @@ class Method {
               log(`👛  ${item.address}`);
             }
             matchingWalletsIndexes.push(index);
+            showPrivateKey = true;
           } else if (
             cw.suffixFound &&
             cw.suffixFoundInWallets.includes(item.address)
@@ -386,10 +409,14 @@ class Method {
               log(`👛  ${item.address}`);
             }
             matchingWalletsIndexes.push(index);
+            showPrivateKey = true;
           } else {
-            log(`👛  ${item.address}`);
+            if (showAllAddresses || !showAllAddresses && index == 0) {
+              log(`👛  ${item.address}`);
+            }
           }
-          if (item.privateKey !== undefined) {
+          // display private key
+          if (item.privateKey !== undefined && (showAllAddresses || !showAllAddresses && index == 0 || showPrivateKey)) {
             log(`🔑  ${item.privateKey}`);
           }
           // copy to clipboard if flag is set
@@ -483,21 +510,21 @@ class Method {
       }
 
       // matching wallets
-      if (
-        cw.options.number &&
-        cw.options.number > 1 &&
-        matchingWalletsIndexes.length > 0
-      ) {
-        const foundCount = matchingWalletsIndexes.length;
-        const foundMany = foundCount !== 1;
-        log(
-          cyan(
-            `🔍  Found ${foundCount} matching wallet${
-              foundMany ? 's' : ''
-            }: 🆔 ${matchingWalletsIndexes.join(',')}`
-          )
-        );
-      }
+      // if (
+      //   cw.options.number &&
+      //   cw.options.number > 1 &&
+      //   matchingWalletsIndexes.length > 0
+      // ) {
+      //   const foundCount = matchingWalletsIndexes.length;
+      //   const foundMany = foundCount !== 1;
+      //   log(
+      //     cyan(
+      //       `🔍  Found ${foundCount} matching wallet${
+      //         foundMany ? 's' : ''
+      //       }: 🆔 ${matchingWalletsIndexes.join(',')}`
+      //     )
+      //   );
+      // }
 
       // attempts
       if (cw.attempts !== undefined && cw.attempts > 1 && cw.options.geek) {
@@ -578,7 +605,7 @@ class Method {
           appsString +=
             ' and any other wallet app (either using mnemonic or private key)';
         }
-        log(greenBright('⬇️   You can import this wallet into ' + appsString));
+        log(greenBright('💾  You can import this wallet into ' + appsString));
       }
 
       // donation
@@ -604,6 +631,7 @@ class Method {
     - BTC: bc1qcwamquntxshqsjcra6vryftrfd9z57j02g3ywq
     - ETH: 0xe3e3ed78d9f8A935a9a0fCE2a7305F2f5DBabAD8
     - SOL: CWsbNQRxNzAasLd2zfwkEkbBZXKxfoxva14pe8wawUju
+    - SUI: 0x1b27883fefacd14a19df37f2fc2e9fa1ccbf03823413f5edc315c164ef90a4f3
     - TON: UQCWDwqtvC_jml2hSf8laNQu4chYVCbHBpkbKbyDdxzM7Ma0
     - DOGE: DMAkWQKx1H6ESG3beDBssn5mAAZcwkrYVh
 
