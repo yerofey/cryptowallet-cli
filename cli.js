@@ -26,6 +26,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 // check if there is a need for multi-threading
 const isMultiThreaded =
+  !options.mnemonic ||
   options.prefix ||
   options.suffix ||
   options['suffix-sensitive'] ||

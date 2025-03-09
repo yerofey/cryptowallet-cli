@@ -1,7 +1,8 @@
 .DS_Store
 .vscode
 .env
+_/
 bun.lock
 cw-output.csv
 node_modules/
-TODO.md
+npm-debug.log

@@ -37,6 +37,14 @@ import {
 } from '@ton/crypto';
 import { WalletContractV5R1 } from '@ton/ton';
 import { Ed25519Keypair } from '@mysten/sui/keypairs/ed25519';
+import rippleKeypairs from 'ripple-keypairs';
+import {
+  Wallet as RippleWallet,
+  classicAddressToXAddress as RippleClassicAddressToXAddress,
+} from 'xrpl';
+import StellarHDWallet from 'stellar-hd-wallet';
+import { Seed as CardanoSeed } from 'cardano-wallet-js';
+import CardanoWasm from '@emurgo/cardano-serialization-lib-nodejs';
 
 config();
 
@@ -262,7 +270,7 @@ class Wallet {
 
     if (row.length == 0) {
       return {
-        error: 'this blockchain is not found',
+        error: 'this coin or chain is not found',
       };
     }
 
@@ -279,6 +287,119 @@ class Wallet {
           },
         ],
       });
+    } else if (chain == 'ADA') {
+      try {
+        // Validate mnemonic
+        if (mnemonicString !== '' && !bip39.validateMnemonic(mnemonicString)) {
+          return {
+            error: 'mnemonic is not valid',
+          };
+        }
+
+        // Generate a 24-word mnemonic (recommended for Shelley wallets)
+        const mnemonic = mnemonicString || CardanoSeed.generateRecoveryPhrase();
+
+        // Convert mnemonic to a 512-bit seed
+        const entropy = bip39.mnemonicToEntropy(mnemonic);
+
+        // Generate root key from entropy
+        const rootKey = CardanoWasm.Bip32PrivateKey.from_bip39_entropy(
+          Buffer.from(entropy, 'hex'), // correct entropy input
+          Buffer.from('') // empty password
+        );
+
+        // Derive the account key (BIP44: m/1852'/1815'/0')
+        const accountKey = rootKey
+          .derive(1852 | 0x80000000) // Purpose
+          .derive(1815 | 0x80000000) // Coin type (ADA)
+          .derive(0 | 0x80000000); // First account
+
+        const generateCardanoAddress = (chainType, index) => {
+          const addressKey = accountKey
+            .derive(chainType)
+            .derive(index)
+            .to_public()
+            .to_raw_key()
+            .hash();
+          const paymentCredential =
+            CardanoWasm.Credential.from_keyhash(addressKey);
+          const stakeKey = accountKey
+            .derive(2)
+            .derive(0)
+            .to_public()
+            .to_raw_key()
+            .hash();
+          const stakeCredential = CardanoWasm.Credential.from_keyhash(stakeKey);
+          return CardanoWasm.BaseAddress.new(
+            CardanoWasm.NetworkInfo.mainnet().network_id(),
+            paymentCredential,
+            stakeCredential
+          )
+            .to_address()
+            .to_bech32();
+        };
+
+        const utxoPubKey = accountKey
+          .derive(0) // external
+          .derive(0)
+          .to_public();
+        const stakeKey = accountKey
+          .derive(2) // chimeric
+          .derive(0)
+          .to_public();
+
+        const baseAddr = CardanoWasm.BaseAddress.new(
+          CardanoWasm.NetworkInfo.mainnet().network_id(),
+          CardanoWasm.Credential.from_keyhash(utxoPubKey.to_raw_key().hash()),
+          CardanoWasm.Credential.from_keyhash(stakeKey.to_raw_key().hash())
+        );
+
+        // bootstrap address - byron-era addresses with no staking rights
+        const byronAddr = CardanoWasm.ByronAddress.icarus_from_key(
+          utxoPubKey, // Ae2* style icarus address
+          CardanoWasm.NetworkInfo.mainnet().protocol_magic()
+        );
+
+        // Generate Staking Key Hash (BIP44: m/1852'/1815'/0'/2/0)
+        const stakingKey = accountKey
+          .derive(2)
+          .derive(0)
+          .to_public()
+          .to_raw_key()
+          .hash();
+        const stakingKeyHash = Buffer.from(stakingKey.to_bytes()).toString(
+          'hex'
+        );
+
+        // Return wallet details
+        Object.assign(result, {
+          addresses: [
+            {
+              title: 'Shelley-era base address',
+              address: baseAddr.to_address().to_bech32(),
+              // publicKey: utxoPubKey.to_bech32(),
+              privateKey: rootKey.to_bech32(),
+            },
+            {
+              title: 'Byron-era bootstrap address (old style)',
+              address: byronAddr.to_base58(),
+              breakLine: true,
+              show: true,
+            },
+            {
+              title: 'Staking key hash',
+              address: stakingKeyHash,
+              breakLine: true,
+              show: true,
+            },
+          ],
+          mnemonic,
+        });
+      } catch (error) {
+        return {
+          error: `Failed to generate ADA wallet: ${error.message} (${error})`,
+        };
+      }
     } else if (chain == 'BTC') {
       // Validate mnemonic
       if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
@@ -578,6 +699,8 @@ class Wallet {
             addresses.push({
               title: 'v4R2 (EQ): best for smart contracts (bounceable)',
               address: bouncableAddress,
+              breakLine: true,
+              show: true,
             });
           } else {
             addresses.push({
@@ -614,6 +737,8 @@ class Wallet {
           addresses.push({
             title: 'W5 - v5R1 (EQ): best for smart contracts (bounceable)',
             address: bouncableAddressV5,
+            breakLine: true,
+            show: true,
           });
           break;
       }
@@ -652,6 +777,105 @@ class Wallet {
           error: `Failed to generate TRX wallet: ${error.message} (${error})`,
         };
       }
+    } else if (chain == 'XLM') {
+      try {
+        // Validate mnemonic
+        if (mnemonicString !== '' && !bip39.validateMnemonic(mnemonicString)) {
+          return {
+            error: 'mnemonic is not valid',
+          };
+        }
+
+        // Generate mnemonic if not provided
+        const mnemonic =
+          mnemonicString ||
+          StellarHDWallet.generateMnemonic({ entropyBits: 128 });
+        // Create a Stellar HD Wallet from the mnemonic
+        const wallet = StellarHDWallet.fromMnemonic(mnemonic);
+
+        // Get the first account (Trust Wallet, Ledger, etc. use `m/44'/148'/0'`)
+        const publicKey = wallet.getPublicKey(0);
+        const secretKey = wallet.getSecret(0);
+        // const keypair = wallet.getKeypair(0); // Full keypair object
+        // const rawKey = wallet.derive(`m/44'/148'/0'`).toString('hex');
+
+        // Return wallet details
+        Object.assign(result, {
+          addresses: [
+            {
+              index: 0,
+              address: publicKey,
+              privateKey: secretKey,
+            },
+          ],
+          mnemonic,
+        });
+      } catch (error) {
+        return {
+          error: `Failed to generate XLM wallet: ${error.message} (${error})`,
+        };
+      }
+    } else if (chain == 'XRP') {
+      try {
+        // Validate mnemonic
+        if (mnemonicString !== '' && !bip39.validateMnemonic(mnemonicString)) {
+          return {
+            error: 'mnemonic is not valid',
+          };
+        }
+
+        // Generate a 12-word mnemonic (or use provided one)
+        const mnemonic = mnemonicString || bip39.generateMnemonic(128);
+
+        // Convert mnemonic to a 512-bit seed
+        const seed = bip39.mnemonicToSeedSync(mnemonic, '');
+
+        // Extract 16 bytes from the seed (XRP entropy requirement)
+        const entropy = seed.slice(0, 16);
+
+        // Encode the entropy as a Base58-encoded XRP seed
+        const base58Seed = rippleKeypairs.generateSeed({
+          entropy,
+          algorithm: 'ecdsa-secp256k1',
+        });
+
+        // Generate a wallet from the seed
+        const wallet = RippleWallet.fromSeed(base58Seed, {
+          algorithm: 'secp256k1',
+        });
+        // console.log('wallet', wallet);
+
+        // dev
+        // const masterKey = rippleKeypairs.deriveKeypair(base58Seed, {
+        //   algorithm: 'ecdsa-secp256k1',
+        //   accountIndex: 0,
+        // });
+        // const address = rippleKeypairs.deriveAddress(masterKey.publicKey);
+        // console.log('masterKey', masterKey);
+        // console.log('address', address);
+
+        // Return wallet details
+        Object.assign(result, {
+          addresses: [
+            {
+              title: 'Classic',
+              address: wallet.address,
+              privateKey: wallet.privateKey,
+            },
+            {
+              title: 'X-address',
+              address: RippleClassicAddressToXAddress(wallet.address, false, false),
+              breakLine: true,
+              show: true,
+            },
+          ],
+          mnemonic,
+        });
+      } catch (error) {
+        return {
+          error: `Failed to generate XRP wallet: ${error.message} (${error})`,
+        };
+      }
     } else if (chain == 'XTZ') {
       // TODO: generate wallet from mnemonic
       const wallet = tezos.generateKeysNoSeed();
@@ -668,7 +892,7 @@ class Wallet {
     } else {
       return {
         error:
-          'your desired blockchain is not supported yet, please open an issue on GitHub: https://github.com/yerofey/cryptowallet-cli/issues',
+          'your desired coin/chain is not supported yet, please open an issue on GitHub: https://github.com/yerofey/cryptowallet-cli/issues',
       };
     }
 
@@ -676,6 +900,13 @@ class Wallet {
     if (row.tested !== undefined && row.tested == false) {
       Object.assign(result, {
         tested: false,
+      });
+    }
+
+    // Add beta flag if needed
+    if (row.beta !== undefined && row.beta == true) {
+      Object.assign(result, {
+        beta: true,
       });
     }
 

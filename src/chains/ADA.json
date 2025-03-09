@@ -1,0 +1,10 @@
+{
+  "title": "Cardano",
+  "startsWith": "addr1q",
+  "prefixTest": "[a-z0-9]",
+  "rareSymbols": "[a-z]",
+  "path": "m/1852'/1815'/0'/0/0",
+  "purpose": "1852'",
+  "apps": ["trustwallet", "vespr", "eternl", "nami", "yoroi", "daedalus", "ledger"],
+  "flags": ["m", "p", "s"]
+}

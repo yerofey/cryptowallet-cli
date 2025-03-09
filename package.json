@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.40.0",
+  "version": "1.41.0",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -28,7 +28,7 @@
       "address": "CWsbNQRxNzAasLd2zfwkEkbBZXKxfoxva14pe8wawUju"
     },
     {
-      "type": "usdt",
+      "type": "trx",
       "address": "TCW9eaRWjpivZvnZ5DwgbWxPRpoZNWbuPe"
     },
     {
@@ -86,6 +86,9 @@
     "sui-wallet",
     "ton",
     "the-open-network",
+    "cardano",
+    "ripple",
+    "stellar",
     "base",
     "litecoin",
     "ltc",
@@ -109,6 +112,7 @@
   ],
   "dependencies": {
     "@binance-chain/javascript-sdk": "^4.2.2",
+    "@emurgo/cardano-serialization-lib-nodejs": "^14.1.1",
     "@harmony-js/account": "^0.1.58",
     "@mysten/sui": "^1.18.0",
     "@solana/web3.js": "^1.98.0",
@@ -118,10 +122,11 @@
     "@yerofey/dogecoin-bip84": "^0.0.5",
     "@yerofey/litecoin-bip84": "^0.0.5",
     "bigint-buffer": "^1.1.5",
-    "bip39": "3.1.0",
+    "bip39": "^3.1.0",
     "bip84": "^0.2.9",
     "bip86": "^0.0.4",
     "bs58": "^6.0.0",
+    "cardano-wallet-js": "^1.4.0",
     "chalk": "5.4.1",
     "clipboardy": "^4.0.0",
     "coininfo": "5.2.1",
@@ -136,9 +141,12 @@
     "ethereum-cryptography": "^3.1.0",
     "ethereum-mnemonic-privatekey-utils": "1.0.5",
     "qrcode-terminal": "^0.12.0",
+    "ripple-keypairs": "^2.0.0",
+    "stellar-hd-wallet": "^0.0.10",
     "tezos-sign": "1.4.1",
     "tonweb": "^0.0.66",
-    "tronweb": "^6.0.1"
+    "tronweb": "^6.0.1",
+    "xrpl": "^4.2.0"
   },
   "devDependencies": {
     "ava": "^6.2.0",

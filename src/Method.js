@@ -54,10 +54,9 @@ class Method {
     for (const val of supportedChains) {
       // eslint-disable-next-line no-undef
       const data = await loadJson(
-        `${path.dirname(import.meta.url)}${path.sep}chains${path.sep}${val}.json`.replace(
-          'file://',
-          ''
-        )
+        `${path.dirname(import.meta.url)}${path.sep}chains${
+          path.sep
+        }${val}.json`.replace('file://', '')
       );
 
       let title = data.title || '';
@@ -231,7 +230,9 @@ class Method {
           );
         } else {
           // not supported for multiple wallets
-          log(`ℹ️   It's not supported to display QR code for multiple wallets yet`);
+          log(
+            `ℹ️   It's not supported to display QR code for multiple wallets yet`
+          );
           log();
         }
       }
@@ -266,11 +267,24 @@ class Method {
         for (const item of cw.wallet.addresses) {
           if (cw.wallet.addresses.length > 1) {
             // Display index
-            if (item.index !== undefined && (showAllAddresses || !showAllAddresses && index == 0 || (cw.prefixFoundInWallets.includes(item.address) || cw.suffixFoundInWallets.includes(item.address)))) {
+            if (
+              item.index !== undefined &&
+              (showAllAddresses ||
+                (!showAllAddresses && index == 0) ||
+                cw.prefixFoundInWallets.includes(item.address) ||
+                cw.suffixFoundInWallets.includes(item.address))
+            ) {
               log();
               log(`🆔  ${item.index}`);
               emptyLineAdded = true;
             }
+
+            if (item.breakLine !== undefined && item.breakLine) {
+              log();
+              emptyLineAdded = true;
+            }
+
+            // TODO: fix situation with TON and multiple wallets labels (there are no spaces between them)
 
             // Display address details
             if (item.title) {
@@ -411,12 +425,21 @@ class Method {
             matchingWalletsIndexes.push(index);
             showPrivateKey = true;
           } else {
-            if (showAllAddresses || !showAllAddresses && index == 0) {
+            if (showAllAddresses || (!showAllAddresses && index == 0) || item.show !== undefined && item.show) {
               log(`👛  ${item.address}`);
             }
           }
+          // display public key or xpubkey (if exists)
+          if (item.publicKey !== undefined || item.xpubKey !== undefined) {
+            log(`🗝️   ${item.publicKey ?? item.xpubKey}`);
+          }
           // display private key
-          if (item.privateKey !== undefined && (showAllAddresses || !showAllAddresses && index == 0 || showPrivateKey)) {
+          if (
+            item.privateKey !== undefined &&
+            (showAllAddresses ||
+              (!showAllAddresses && index == 0) ||
+              showPrivateKey)
+          ) {
             log(`🔑  ${item.privateKey}`);
           }
           // copy to clipboard if flag is set
@@ -438,6 +461,16 @@ class Method {
           log(
             red(
               '‼️   This wallet generation method is not tested yet, use it at your own risk'
+            )
+          );
+        }
+
+        // beta
+        if (cw.row.beta !== undefined && cw.row.beta) {
+          log();
+          log(
+            yellow(
+              '🔶  This wallet generation method is in Beta - not all features are available and not everything was tested yet'
             )
           );
         }
@@ -580,15 +613,37 @@ class Method {
       // apps
       if (cw.row.apps !== undefined) {
         let apps = {
+          backpack: 'Backpack',
+          bitget: 'Bitget Wallet',
           coinbase: 'Coinbase Wallet',
+          daedalus: 'Daedalus',
+          eternl: 'Eternl',
+          jupiter: 'Jupiter',
+          keplr: 'Keplr',
+          ledger: 'Ledger',
+          lobstr: 'Lobstr',
+          magiceden: 'Magic Eden',
           metamask: 'MetaMask',
+          mytonwallet: 'MyTonWallet',
+          nami: 'Nami Wallet',
+          okx: 'OKX Wallet',
+          osmwallet: 'OsmWallet',
           phantom: 'Phantom',
+          plug: 'Plug',
+          rabet: 'Rabet',
+          rainbow: 'Rainbow',
+          solar: 'Solar',
+          stellarx: 'StellarX',
           suiet: 'Suiet',
           suiwallet: 'Sui Wallet',
           tonhub: 'Tonhub',
           tonkeeper: 'Tonkeeper',
           tronlink: 'TronLink',
           trustwallet: 'Trust Wallet',
+          uniswap: 'Uniswap',
+          vespr: 'VESPR',
+          xumm: 'Xumm',
+          yoroi: 'Yoroi',
           'harmony-chrome-ext': 'Harmony Chrome Extension Wallet',
           'binance-chain-wallet': 'Binance Chain Wallet',
         };

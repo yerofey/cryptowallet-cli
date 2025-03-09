@@ -41,6 +41,20 @@ $ yarn global add @yerofey/cryptowallet-cli
 $ bun add -g @yerofey/cryptowallet-cli
 ```
 
+## Install (on a server)
+
+> Recommended for generating a wallet with long prefixes/suffixes or generating a lot of wallets at once
+
+You can rent a VDS/VPS on [aeza.net](https://aeza.net/?ref=439099) for an hour or a day and run [this](https://gist.github.com/yerofey/c1cbf80bdfacfad668f53d595f890c44) one-liner to install `cw` tool:
+
+```bash
+# install `cw` tool on a server with all dependencies
+bash <(curl -sL https://gist.githubusercontent.com/yerofey/c1cbf80bdfacfad668f53d595f890c44/raw/376e310ed260ca54fec83b04d4d78d7587b83d78/install-cw.sh)
+
+# run `cw` tool
+cw
+```
+
 ## Usage
 
 ```bash
@@ -125,11 +139,13 @@ $ cw -l
 - `EVM` (Ethereum, Base, or any EVM L1/L2/L3, etc.) **default**
 - `BTC` (Bitcoin) [legacy, segwit, bech32, taproot]
 - `ETH` (Ethereum)
+- `XRP` (Ripple) **Beta**
+- `BNB` (BNB) [BEP2, BEP20, ERC20]
 - `SOL` (Solana)
-- `BNB` (Binance Coin) [BEP2, BEP20, ERC20]
-- `BSC` (Binance Smart Chain)
+- `ADA` (Cardano)
 - `DOGE` (Dogecoin) [legacy, segwit, bech32]
 - `TRX` (Tron)
+- `XLM` (Stellar)
 - `SUI` (Sui)
 - `TON` (The Open Network) [W5, V2-V5, simple]
 - `LTC` (Litecoin) [legacy, segwit, bech32]
@@ -252,9 +268,11 @@ Each chain JSON file is structured to provide essential information about the bl
 - `network`: The type of network or protocol the blockchain follows (e.g., EVM for Ethereum-compatible chains).
 - `startsWith`: The set of characters that the wallet address typically starts with.
 - `prefixTest`: A regular expression pattern that tests for valid characters that can appear in the prefix of a wallet address.
+- `rareSymbols`: (Optional) A regular expression pattern that tests for rare symbols that can appear in the wallet address.
 - `apps`: An array of supported wallet applications that can be used with the generated addresses.
 - `flags`: An array of supported features for the wallet generation. Common flags include `m` for mnemonic support, `n` for generating multiple wallets, `p` for prefix support, and `s` for suffix support.
 - `formats`: (Optional) An object defining multiple wallet formats if the blockchain supports more than one format. Each format should specify its unique properties.
+- `beta`: (Optional) A boolean value indicating if the chain is in beta testing. If set to `true`, the chain will be marked as beta in the list of supported chains.
 
 By following this structure, the `cw` tool can understand and support wallet generation for a wide array of blockchains.
 

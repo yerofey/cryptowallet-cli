@@ -3,6 +3,6 @@
   "network": "SVM",
   "startsWith": "",
   "prefixTest": "[1-9a-zA-Z]",
-  "apps": ["phantom", "trustwallet"],
+  "apps": ["phantom", "jupiter", "trustwallet"],
   "flags": ["m", "n", "p", "s"]
 }

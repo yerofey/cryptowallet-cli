@@ -1,0 +1,10 @@
+{
+  "title": "XRP Ledger: Ripple",
+  "startsWith": "r",
+  "prefixTest": "[a-km-zA-HJ-NP-Z1-9]",
+  "path": "m/44'/144'/0'/0/0",
+  "purpose": "44'",
+  "apps": ["xumm", "osmwallet", "ledger"],
+  "flags": ["m", "p", "s"],
+  "beta": true
+}

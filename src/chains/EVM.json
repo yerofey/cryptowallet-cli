@@ -3,6 +3,6 @@
   "network": "EVM",
   "startsWith": "0x",
   "prefixTest": "[0-9a-fA-F]",
-  "apps": ["metamask", "trustwallet"],
+  "apps": ["metamask", "trustwallet", "phantom", "ledger"],
   "flags": ["m", "p", "s"]
 }

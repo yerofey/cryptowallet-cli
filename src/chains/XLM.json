@@ -1,0 +1,9 @@
+{
+  "title": "Stellar",
+  "startsWith": "G",
+  "prefixTest": "[A-Z2-7]",
+  "strictCase": "upper",
+  "addressChars": 56,
+  "apps": ["trustwallet", "rabet", "lobstr", "solar", "stellarx", "ledger"],
+  "flags": ["m", "p", "s"]
+}
