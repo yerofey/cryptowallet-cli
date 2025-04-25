@@ -303,6 +303,7 @@ If you find this tool useful and would like to support its development, consider
 - BNB (BEP20): `0xe3e3ed78d9f8A935a9a0fCE2a7305F2f5DBabAD8`
 - BNB (BEP2): `bnb1gtxfz4kllltaeekw3edfd496gpa3ukpakvzncq`
 - SOL: `CWsbNQRxNzAasLd2zfwkEkbBZXKxfoxva14pe8wawUju`
+- SUI: `0x1b27883fefacd14a19df37f2fc2e9fa1ccbf03823413f5edc315c164ef90a4f3`
 - TON: `UQCWDwqtvC_jml2hSf8laNQu4chYVCbHBpkbKbyDdxzM7Ma0`
 - DOGE (DOGE): `DMAkWQKx1H6ESG3beDBssn5mAAZcwkrYVh`
 
