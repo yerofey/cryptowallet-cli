@@ -147,7 +147,7 @@
     "qrcode-terminal": "^0.12.0",
     "ripple-address-codec": "^5.0.0",
     "ripple-keypairs": "^2.0.0",
-    "stellar-hd-wallet": "^0.0.10",
+    "stellar-hd-wallet": "^1.0.2",
     "tezos-sign": "1.4.1",
     "tonweb": "^0.0.66",
     "tronweb": "^6.0.1",
