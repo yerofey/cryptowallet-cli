@@ -309,7 +309,7 @@ If you find this tool useful and would like to support its development, consider
 
 **Other Donate Options:**
 
-- [PayPal](https://paypal.me/Jerofej)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/yerofey)
 
 Thank you for your support!
 

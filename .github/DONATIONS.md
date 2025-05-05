@@ -2,9 +2,15 @@
 
 I'm thrilled you're considering supporting my project! Your donations will help me dedicate more time to development, cover operational costs, and ensure project remains free and open source.
 
+## Ko-fi
+
+If you enjoy my work and want to support me, consider buying me a coffee! Ko-fi is a platform that allows you to make small donations to creators like me. It's simple, quick, and every little bit helps.
+
+[Donate via Ko-fi](https://ko-fi.com/yerofey)
+
 ## PayPal
 
-For direct donations, you can use our PayPal link. Every little bit helps us keep the project alive and kicking.
+For direct donations, you can use our PayPal link. Every little bit helps me keep the project alive and kicking.
 
 [Donate via PayPal](https://paypal.me/Jerofej)
 

@@ -690,6 +690,9 @@ class Method {
     - TON: UQCWDwqtvC_jml2hSf8laNQu4chYVCbHBpkbKbyDdxzM7Ma0
     - DOGE: DMAkWQKx1H6ESG3beDBssn5mAAZcwkrYVh
 
+    Donate via Ko-fi:
+    - https://ko-fi.com/yerofey
+
     Donate via PayPal:
     - https://paypal.me/Jerofej
 
