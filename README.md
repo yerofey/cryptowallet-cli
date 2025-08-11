@@ -8,6 +8,15 @@
 
 ![Screenshot](https://i.imgur.com/uWuT4lF.png)
 
+<p align=center>
+  <a href="https://paypal.me/Jerofej">
+    <img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" alt="Donate with PayPal" width="145" />
+  </a>
+  <a href="https://ko-fi.com/yerofey">
+    <img src="https://img.shields.io/badge/Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-Fi" width="126" />
+  </a>
+</p>
+
 ## Features
 
 - [x] Generate brand new crypto wallet address (offline)
