@@ -46,7 +46,9 @@ import StellarHDWallet from 'stellar-hd-wallet';
 import { Seed as CardanoSeed } from 'cardano-wallet-js';
 import CardanoWasm from '@emurgo/cardano-serialization-lib-nodejs';
 
-config();
+config({
+  quiet: true,
+});
 
 class Wallet {
   constructor(cw) {

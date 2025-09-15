@@ -16,7 +16,9 @@ import Method from './src/Method.js';
 import chalk from 'chalk';
 
 // load environment variables
-config();
+config({
+  quiet: true,
+});
 
 // get the current file path
 const __filename = fileURLToPath(import.meta.url);

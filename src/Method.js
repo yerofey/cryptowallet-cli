@@ -9,7 +9,9 @@ import CW from './CW.js';
 import { generateMnemonicString } from './Wallet.js';
 import { log, supportedChains, loadJson } from './utils.js';
 
-config();
+config({
+  quiet: true,
+});
 
 const {
   blue,
