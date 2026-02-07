@@ -6,6 +6,8 @@ const { red, yellow, gray } = chalk;
 import CoinKey from 'coinkey';
 import CoinInfo from 'coininfo';
 import bip39 from 'bip39';
+import { BIP32Factory } from 'bip32';
+import * as ecc from 'tiny-secp256k1';
 import bip84 from 'bip84';
 const { fromMnemonic, fromZPrv } = bip84;
 import bip86 from 'bip86';
@@ -45,6 +47,8 @@ import {
 import StellarHDWallet from 'stellar-hd-wallet';
 import { Seed as CardanoSeed } from 'cardano-wallet-js';
 import CardanoWasm from '@emurgo/cardano-serialization-lib-nodejs';
+
+const bip32 = BIP32Factory(ecc);
 
 config({
   quiet: true,
@@ -412,32 +416,64 @@ class Wallet {
 
       const mnemonic = mnemonicString || bip39.generateMnemonic();
 
-      const root =
-        row.format == 'taproot'
-          ? new fromMnemonicBip86(mnemonic, '')
-          : new fromMnemonic(mnemonic, '');
-      const child =
-        row.format == 'taproot' ? root.deriveAccount(0) : root.deriveAccount(0);
-      const account =
-        row.format == 'taproot' ? new fromXPrv(child) : new fromZPrv(child);
+      if (row.format == 'legacy') {
+        const seed = bip39.mnemonicToSeedSync(mnemonic);
+        const root = bip32.fromSeed(seed);
+        const coinPath = normalizeLegacyPath(row.path, "m/44'/0'");
+        const accountNode = root.derivePath(`${coinPath}/0'`);
+        const changeNode = accountNode.derive(0);
+        const coinInfo = CoinInfo(chain).versions;
 
-      let addresses = [];
-      if (number >= 1) {
-        for (let i = 0; i < number; i++) {
-          addresses.push({
-            index: i,
-            address: account.getAddress(i, false, row.purpose),
-            privateKey: account.getPrivateKey(i),
-          });
+        let addresses = [];
+        if (number >= 1) {
+          for (let i = 0; i < number; i++) {
+            const child = changeNode.derive(i);
+            const key = new CoinKey(child.privateKey, coinInfo);
+            key.compressed = true;
+            addresses.push({
+              index: i,
+              address: key.publicAddress,
+              privateKey: key.privateWif,
+            });
+          }
         }
-      }
 
-      Object.assign(result, {
-        format: row.format,
-        addresses,
-        privateExtendedKey: account.getAccountPrivateKey(),
-        mnemonic,
-      });
+        Object.assign(result, {
+          format: row.format,
+          addresses,
+          privateExtendedKey: accountNode.toBase58(),
+          mnemonic,
+        });
+      } else {
+        const root =
+          row.format == 'taproot'
+            ? new fromMnemonicBip86(mnemonic, '')
+            : new fromMnemonic(mnemonic, '');
+        const child =
+          row.format == 'taproot'
+            ? root.deriveAccount(0)
+            : root.deriveAccount(0);
+        const account =
+          row.format == 'taproot' ? new fromXPrv(child) : new fromZPrv(child);
+
+        let addresses = [];
+        if (number >= 1) {
+          for (let i = 0; i < number; i++) {
+            addresses.push({
+              index: i,
+              address: account.getAddress(i, false, row.purpose),
+              privateKey: account.getPrivateKey(i),
+            });
+          }
+        }
+
+        Object.assign(result, {
+          format: row.format,
+          addresses,
+          privateExtendedKey: account.getAccountPrivateKey(),
+          mnemonic,
+        });
+      }
     } else if (chain == 'DOGE' || chain == 'LTC') {
       // Validate mnemonic
       if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
@@ -446,31 +482,62 @@ class Wallet {
         };
       }
 
-      const _fromMnemonic =
-        chain == 'DOGE' ? fromMnemonicDoge : fromMnemonicLite;
-      const _fromZPrv = chain == 'DOGE' ? fromZPrvDoge : fromZPrvLite;
       const mnemonic = mnemonicString || bip39.generateMnemonic();
-      const root = new _fromMnemonic(mnemonic, '');
-      const child = root.deriveAccount(0);
-      const account = new _fromZPrv(child);
+      if (row.format == 'legacy') {
+        const seed = bip39.mnemonicToSeedSync(mnemonic);
+        const root = bip32.fromSeed(seed);
+        const fallbackPath = chain == 'DOGE' ? "m/44'/3'" : "m/44'/2'";
+        const coinPath = normalizeLegacyPath(row.path, fallbackPath);
+        const accountNode = root.derivePath(`${coinPath}/0'`);
+        const changeNode = accountNode.derive(0);
+        const coinInfo = CoinInfo(chain).versions;
 
-      let addresses = [];
-      if (number >= 1) {
-        for (let i = 0; i < number; i++) {
-          addresses.push({
-            index: i,
-            address: account.getAddress(i, false, row.purpose),
-            privateKey: account.getPrivateKey(i),
-          });
+        let addresses = [];
+        if (number >= 1) {
+          for (let i = 0; i < number; i++) {
+            const child = changeNode.derive(i);
+            const key = new CoinKey(child.privateKey, coinInfo);
+            key.compressed = true;
+            addresses.push({
+              index: i,
+              address: key.publicAddress,
+              privateKey: key.privateWif,
+            });
+          }
         }
-      }
 
-      Object.assign(result, {
-        format: row.format,
-        addresses,
-        privateExtendedKey: account.getAccountPrivateKey(),
-        mnemonic,
-      });
+        Object.assign(result, {
+          format: row.format,
+          addresses,
+          privateExtendedKey: accountNode.toBase58(),
+          mnemonic,
+        });
+      } else {
+        const _fromMnemonic =
+          chain == 'DOGE' ? fromMnemonicDoge : fromMnemonicLite;
+        const _fromZPrv = chain == 'DOGE' ? fromZPrvDoge : fromZPrvLite;
+        const root = new _fromMnemonic(mnemonic, '');
+        const child = root.deriveAccount(0);
+        const account = new _fromZPrv(child);
+
+        let addresses = [];
+        if (number >= 1) {
+          for (let i = 0; i < number; i++) {
+            addresses.push({
+              index: i,
+              address: account.getAddress(i, false, row.purpose),
+              privateKey: account.getPrivateKey(i),
+            });
+          }
+        }
+
+        Object.assign(result, {
+          format: row.format,
+          addresses,
+          privateExtendedKey: account.getAccountPrivateKey(),
+          mnemonic,
+        });
+      }
     } else if (row.format == 'BEP2') {
       // Validate mnemonic
       if (mnemonicString != '' && !bip39.validateMnemonic(mnemonicString)) {
@@ -922,6 +989,13 @@ function generateMnemonicString(length = 12) {
     throw new Error('Invalid mnemonic length.');
   }
   return bip39.generateMnemonic(entropy);
+}
+
+function normalizeLegacyPath(pathValue, fallbackPath) {
+  const basePath = (pathValue && pathValue.trim()) || fallbackPath || '';
+  if (basePath === '') return basePath;
+  if (basePath.endsWith("'")) return basePath;
+  return basePath.replace(/\/(\d+)$/, "/$1'");
 }
 
 export { generateMnemonicString, Wallet };

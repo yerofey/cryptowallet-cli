@@ -1,6 +1,6 @@
 {
   "name": "@yerofey/cryptowallet-cli",
-  "version": "1.42.0",
+  "version": "1.43.0",
   "description": "Crypto wallet generator CLI tool",
   "type": "module",
   "homepage": "https://github.com/yerofey/cryptowallet-cli",
@@ -126,6 +126,7 @@
     "@yerofey/dogecoin-bip84": "^0.0.5",
     "@yerofey/litecoin-bip84": "^0.0.5",
     "bigint-buffer": "^1.1.5",
+    "bip32": "^5.0.0",
     "bip39": "^3.1.0",
     "bip84": "^0.2.9",
     "bip86": "^0.0.4",
@@ -149,6 +150,7 @@
     "ripple-keypairs": "^2.0.0",
     "stellar-hd-wallet": "^1.0.2",
     "tezos-sign": "1.4.1",
+    "tiny-secp256k1": "^2.2.4",
     "tonweb": "^0.0.66",
     "tronweb": "^6.0.4",
     "xrpl": "^4.2.0"
