@@ -1,0 +1,55 @@
+{
+  "_onlySet": true,
+  "_mnemonics": {
+    "SOL": "path grape section approve craft harbor divide tiny eagle carpet orient merge month cube crazy diamond lady goat idle lift curious shoulder toast spin",
+    "SUI": "barely loyal rookie dice excite diesel evil live daring silk circle faith river choice artist forward scene marine have jeans process junk side dismiss"
+  },
+  "BNB": {
+    "BEP2": "bnb1p6l4gq2886cphe3cjy3d9pcm2qcrqgww7f2cw0",
+    "BEP20": "0xD4566A7CC4476016505b226Fbe3B29ceDed652E1",
+    "ERC20": "0xD4566A7CC4476016505b226Fbe3B29ceDed652E1"
+  },
+  "BTC": {
+    "bech32": "bc1qc07ktfqyexqgknpmd4trq5ksf6p24pc44hdl8f",
+    "legacy": "1G3du7EEjY5EMJtsLtFzUo9thvekhw9sn8",
+    "segwit": "3Gp6XYWHwEFdDrLkDwzhSjFEZ5hXH8t6zK",
+    "taproot": "bc1pv0v7jqmhsjswf5lw9c4x5h0jevrttre86v9n0ex48wnqd9q6erwq77mqg9"
+  },
+  "DOGE": {
+    "bech32": "dc1qqyqaqg2c2wx5df2uqrnyjw38uwme20fdvvaral",
+    "legacy": "DJFs38LvLyDfE2F1JGj9YvFjWHHq5bPFTz",
+    "segwit": "A6yoyFa5ALvHNfTqrJfsEsZsBrHYcfop5w"
+  },
+  "ETC": {
+    "ERC20": "0xD4566A7CC4476016505b226Fbe3B29ceDed652E1"
+  },
+  "ETH": {
+    "default": "0xD4566A7CC4476016505b226Fbe3B29ceDed652E1"
+  },
+  "EVM": {
+    "default": "0xD4566A7CC4476016505b226Fbe3B29ceDed652E1"
+  },
+  "LTC": {
+    "bech32": "ltc1qj3szd898gu3pzpxf8zfuawrmss9mshtudnds82",
+    "legacy": "LSQGPweZweShNXUPy5ZMQNp8eSnaTdXhMj",
+    "segwit": "MHZng3isvHMT9RzbqfZ1wtZeLtjFt3UhQV"
+  },
+  "SOL": {
+    "default": "4ZYcxX6cEy5WniHvgs9ja6sJSU9uhm3e1ahfGhn6GDEC"
+  },
+  "SUI": {
+    "default": "0x9a6986fccd6c3807bc21a9f886227a95cce5b5d7cc1eebd48b621191fcadbb8c"
+  },
+  "TRON": {
+    "default": "TCGwsyRXy8oj8j7bN6KoGSYLRif8NmobN9"
+  },
+  "TRX": {
+    "default": "TCGwsyRXy8oj8j7bN6KoGSYLRif8NmobN9"
+  },
+  "XLM": {
+    "default": "GB42JYIQ234D4OESMFTATLFWXZBTABHGRYNLOGTEJNRRKYHLFXPNCJXE"
+  },
+  "XRP": {
+    "default": "rstLQ5t9d7w3p8BGEcr4k5ZSQTVZ2CpKUB"
+  }
+}
