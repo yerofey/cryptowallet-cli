@@ -730,9 +730,10 @@ class Wallet {
       // Generate new mnemonics and derive key pair
       let mnemonics;
       if (mnemonicString != '') {
-        mnemonics = mnemonicString.split(' '); // array of 24 words
+        mnemonics = mnemonicString.split(' ');
       } else {
-        mnemonics = await newTonMnemonic(); // array of 24 words
+        const tonMnemonicLength = mnemonicLength === 12 ? 12 : 24;
+        mnemonics = await newTonMnemonic(tonMnemonicLength);
         mnemonicString = mnemonics.join(' ');
       }
       const keyPair = await TonMnemonicToPrivateKey(mnemonics);

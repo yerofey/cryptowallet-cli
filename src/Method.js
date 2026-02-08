@@ -36,8 +36,12 @@ class Method {
   static mnemonicGenerators = {
     TON: {
       defaultLength: 24,
-      resolveLength: () => 24,
-      generate: async () => (await newTonMnemonic()).join(' '),
+      allowedLengths: ['12', '24'],
+      resolveLength: (mnemonicValue) => {
+        const mnemonic = mnemonicValue || '24';
+        return mnemonic === '12' ? 12 : 24;
+      },
+      generate: async (length) => (await newTonMnemonic(length)).join(' '),
     },
     DEFAULT: {
       defaultLength: 12,
