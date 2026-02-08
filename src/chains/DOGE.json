@@ -22,7 +22,7 @@
     },
     "segwit": {
       "format": "segwit",
-      "startsWith": "A",
+      "startsWith": "A|9",
       "prefixTest": "(?![0OI])[1-9a-zA-Z]",
       "rareSymbols": "[1-9]",
       "path": "m/49'/3",
