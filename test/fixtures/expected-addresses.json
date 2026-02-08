@@ -2,7 +2,8 @@
   "_onlySet": true,
   "_mnemonics": {
     "SOL": "path grape section approve craft harbor divide tiny eagle carpet orient merge month cube crazy diamond lady goat idle lift curious shoulder toast spin",
-    "SUI": "barely loyal rookie dice excite diesel evil live daring silk circle faith river choice artist forward scene marine have jeans process junk side dismiss"
+    "SUI": "barely loyal rookie dice excite diesel evil live daring silk circle faith river choice artist forward scene marine have jeans process junk side dismiss",
+    "TON": "cup baby canoe away blue palace movie kiwi ozone pond explain found sting shallow tiny morning uniform account category diagram fringe apart movie gift"
   },
   "BNB": {
     "BEP2": "bnb1p6l4gq2886cphe3cjy3d9pcm2qcrqgww7f2cw0",
@@ -39,6 +40,19 @@
   },
   "SUI": {
     "default": "0x9a6986fccd6c3807bc21a9f886227a95cce5b5d7cc1eebd48b621191fcadbb8c"
+  },
+  "TON": {
+    "simpleR1": "EQAJs9kVkrE8o8k_8F7GNKPHhRpjzzS04knmZk2yB34vMaDl",
+    "simpleR2": "EQDC28YFxYTlkDFcmhRQqtloNynKT-hOwk6MdjZCdRFw81-G",
+    "simpleR3": "EQA2ZMQO0_iR_gINu1eVPvtu5ogWw2F07zufZm32CMHgaE5X",
+    "V2R1": "EQACeqQMVriUPLFFFcskB39EcU2D3fkZAGyUJnwaNdIKOHDZ",
+    "V2R2": "EQCP8JVB_SYDz9NgfLCQqX62wMWO5fVvT_e3k1oDTX8OdUWC",
+    "V3R1": "EQABzH3ZAJ10B00GTjUryui-0qdZaEA1u6a33Q0VgecpNZxq",
+    "V3R2": "EQAR2nmxrCHEtNJzPolPhRbp9vvmfhRoYTE9IAL9EJDDVU2f",
+    "V4R1": "EQDIXKJ44ARN1u7izJlz2xDsl6XynRz67zdYtaRbSXP89zpD",
+    "V4R2": "UQA1rTnY7APdPi2wwj4UT6O-sjjtx46oftTeLd0yMT-W2nMQ",
+    "V5R1": "UQAgPOMdFf28BXs3kXDz-S5dFvUsjIKmOjRjAYtwEx6wsw53",
+    "W5": "UQAgPOMdFf28BXs3kXDz-S5dFvUsjIKmOjRjAYtwEx6wsw53"
   },
   "TRON": {
     "default": "TCGwsyRXy8oj8j7bN6KoGSYLRif8NmobN9"
