@@ -60,9 +60,10 @@ if (options.list) {
 // generate mnemonic string (12/15/18/21/24 words)
 if (isMnemonicString) {
   (async () => {
-    new Method('mnemonic').init({
+    await new Method('mnemonic').init({
       mnemonic: options.mnemonic,
       copy: options?.copy || false,
+      chain: options.chain,
     });
     exit(0);
   })();

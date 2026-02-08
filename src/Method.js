@@ -6,6 +6,7 @@ import columnify from 'columnify';
 import CsvWriter from 'csv-writer';
 import qr from 'qrcode-terminal';
 import CW from './CW.js';
+import { mnemonicNew as newTonMnemonic } from '@ton/crypto';
 import { generateMnemonicString } from './Wallet.js';
 import { log, supportedChains, loadJson } from './utils.js';
 
@@ -32,6 +33,19 @@ const pkg = await loadJson(
 const _version = pkg['version'] || 0;
 
 class Method {
+  static mnemonicGenerators = {
+    TON: {
+      defaultLength: 24,
+      resolveLength: () => 24,
+      generate: async () => (await newTonMnemonic()).join(' '),
+    },
+    DEFAULT: {
+      defaultLength: 12,
+      allowedLengths: ['12', '15', '18', '21', '24'],
+      generate: async (length) => generateMnemonicString(length),
+    },
+  };
+
   constructor(name, params = {}) {
     this.name = name;
     this.params = params;
@@ -48,6 +62,30 @@ class Method {
       version: this._version.bind(this),
       wallet: this._wallet.bind(this),
     };
+  }
+
+  _getMnemonicGenerator(chain) {
+    return Method.mnemonicGenerators[chain] || Method.mnemonicGenerators.DEFAULT;
+  }
+
+  _resolveMnemonicLength(chain, mnemonicValue) {
+    const generator = this._getMnemonicGenerator(chain);
+    if (typeof generator.resolveLength === 'function') {
+      return generator.resolveLength(mnemonicValue);
+    }
+    const mnemonic = mnemonicValue || `${generator.defaultLength || 12}`;
+    const allowed =
+      generator.allowedLengths || ['12', '15', '18', '21', '24'];
+    return allowed.includes(mnemonic)
+      ? parseInt(mnemonic, 10)
+      : generator.defaultLength || 12;
+  }
+
+  async _generateMnemonic(chain, mnemonicValue) {
+    const generator = this._getMnemonicGenerator(chain);
+    const length = this._resolveMnemonicLength(chain, mnemonicValue);
+    const mnemonicString = await generator.generate(length);
+    return { length, mnemonicString };
   }
 
   async _list() {
@@ -77,12 +115,10 @@ class Method {
     log(`ℹ️   Use flag "-c TICKER" to select specific chain or ticker`);
   }
 
-  _mnemonic() {
-    const mnemonic = this.inputOptions.mnemonic || '12';
-    const mnemonicLength = ['12', '15', '18', '21', '24'].includes(mnemonic)
-      ? parseInt(mnemonic, 10)
-      : 12;
-    const mnemonicString = generateMnemonicString(mnemonicLength);
+  async _mnemonic() {
+    const chain = (this.inputOptions.chain || '').toString().toUpperCase();
+    const { length: mnemonicLength, mnemonicString } =
+      await this._generateMnemonic(chain, this.inputOptions.mnemonic);
 
     log(
       `✨  ${green('Done!')} ${blueBright(
@@ -147,7 +183,11 @@ class Method {
       );
     }
 
-    if (cw.options.mnemonic != '' && cw.wallet.mnemonic == undefined) {
+    if (
+      cw.options.mnemonic != '' &&
+      cw.wallet.mnemonic == undefined &&
+      cw.wallet.error === undefined
+    ) {
       log(
         `😢  ${yellow(
           'Sorry, ' + chainFullName + ' does not support mnemonic yet...'
