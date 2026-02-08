@@ -18,6 +18,7 @@ const EXPECTED_PATH = path.join(
 
 const expected = JSON.parse(fs.readFileSync(EXPECTED_PATH, 'utf8'));
 const mnemonicsByChain = expected._mnemonics || {};
+const mnemonicsByChain12 = expected._mnemonics12 || {};
 const onlySet = expected._onlySet === true;
 
 const cases = [];
@@ -108,3 +109,30 @@ for (const { chain, formatKey, startsWith } of cases) {
     }
   });
 }
+
+test('wallet address matches expected: TON W5 (12 words)', async (t) => {
+  const mnemonic = mnemonicsByChain12.TON;
+  const expectedAddress = expected.TON_12?.W5;
+  if (!assertExpectedSet(t, expectedAddress, 'TON_12 W5')) {
+    t.pass();
+    return;
+  }
+  if (!mnemonic || mnemonic.startsWith('TODO_SET_')) {
+    if (!onlySet) {
+      t.fail(
+        'Set 12-word TON mnemonic in test/fixtures/expected-addresses.json'
+      );
+    }
+    t.pass();
+    return;
+  }
+
+  const cw = await new CW('TON', {
+    format: 'W5',
+    mnemonic,
+    number: 1,
+  }).init();
+
+  t.is(cw.wallet.mnemonic.split(' ').length, 12);
+  t.is(cw.wallet.addresses[0].address, expectedAddress);
+});
